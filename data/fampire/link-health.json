@@ -1,0 +1,885 @@
+{
+  "checked_at": "2026-08-11T08:25:18.312Z",
+  "health": {
+    "entry:brand-logos-registered": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-plus-logos": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-lolli-logos": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-lower-third": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-intro-30s": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-bts-lolli": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-celebrity-cast": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-doc-covers-all": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-doc-covers-awards": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:brand-doc-collage": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-anthony-bio": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-tereza-bio": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-love-legend-bio": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-tereza-headshot-single": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-legend-headshots": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-love-legend-headshots": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:person-anthony-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:family-photoshoots": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:family-mansion": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:family-engagement": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:bodybuilding-stage": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-master-2": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-trailer": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-full-parts": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-covers": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-logos": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-cast-headshots": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-onset": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-biohack-yourself-bts": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-fat-lolli-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-fat-lolli-trailer": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-fat-lolli-photos": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-fat-lolli-covers": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-super-lollis-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-super-lollis-trailer": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-super-lollis-podcast": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-super-lollis-covers": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-skin-deep-covers": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-guru-covers": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-skin-deep-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-guru-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-guru-premiere": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-guru-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-shealed-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-shealed-bts": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-shealed-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-shealed-sandiego": {
+      "status": "login-required",
+      "detail": "/home/ path resolves only for the account owner",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-shealed-atlanta": {
+      "status": "login-required",
+      "detail": "/home/ path resolves only for the account owner",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-bye-ol-dentistry-master": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-bye-ol-dentistry-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-bye-ol-dentistry-poster": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:film-new-woo": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-maha-footage": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-maha-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-maha-interviews": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-maha-recaps": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-a4m-premiere": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-a4m-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-miami-swim-week": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-sas-turning-point": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-ufc-aires": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-zenos": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-andrew-tate": {
+      "status": "gone",
+      "detail": "folder id not found",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-bryan-johnson": {
+      "status": "login-required",
+      "detail": "Drive asks for sign-in",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-hack-your-health": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-lara-trump-gallery": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-lara-trump-cover": {
+      "status": "gone",
+      "detail": "folder id not found",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-cold-collective": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-vibe-conference": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-ultimate-wellness": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-sunscreen-festival": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-bloom-tv": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-phil-daru": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-blue-scorpion": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-bbc": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-gabrielle-lyon-signing": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-amy-shah-signing": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-flip-and-fix": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-robert-whitfield": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:event-mar-a-lago": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-legend-pushups": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-love-magazine-cover": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-maha-ball": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-miami-fashion-week": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-de-niro": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:kids-real-estate-awards": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-1-amen": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-2-brecka": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-3-lara-trump": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-4-lyon": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-5-tate": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-issue-8-ashton-hall": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "entry:mag-all-galleries": {
+      "status": "password",
+      "detail": "gallery root is pass-protected",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Biohack Yourself:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Biohack Yourself:Apple TV": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Biohack Yourself:Roku": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Biohack Yourself:Plex": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Biohack Yourself:Fawesome": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:From Fat Lolli to 6 Pack Lolli:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:From Fat Lolli to 6 Pack Lolli:Apple TV": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:From Fat Lolli to 6 Pack Lolli:Tubi": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:From Fat Lolli to 6 Pack Lolli:YouTube": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:From Fat Lolli to 6 Pack Lolli:Google Play": {
+      "status": "blocked",
+      "detail": "http 403 — host blocks automated checks",
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Super Lollis:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Super Lollis:Apple TV": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Super Lollis:Tubi": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Super Lollis:Roku": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Super Lollis:Hoopla": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Skin Deep:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:Skin Deep:Tubi": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Guru:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Guru:Tubi": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Guru:Plex": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Guru:Roku": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:The Guru:Hoopla": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:sHEALed:Amazon Prime": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:sHEALed:Plex": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "watch:sHEALed:HNN": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://youtu.be/RjF-BISYXM8": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://youtu.be/Q4U1-pFyLo8": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://youtu.be/8xPSvv6t9xs": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=cdwDnRsS_1Q": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=e0nmLbR_J5U": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://drive.google.com/file/d/1WfJKVKiM6_k9Jk4hK6bhcOWLGH0rgm2F/view?usp=drivesdk": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=24Cqvn-LlXg": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://youtu.be/9azBTl3plm4?si=FaVwakIUi0LlfI_e": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://podcasts.apple.com/us/podcast/lights-camera-longevity-the-lollis-on-health-wellness/id1169016854?i=1000711718398": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://podcasts.apple.com/us/podcast/inside-the-lolli-wellness-empire-biohacking-coaching/id1294421391?i=1000712650407": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=jUVoCJ-CYRY": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=wVrlCeji-BI": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=141Rc5CYnIQ": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:http://youtube.com/watch?v=wWhTazpyZN0": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=CCEQ5YlFlgE": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=96GsCwqsI3g": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://podcasts.apple.com/us/podcast/how-losing-over-100-pounds-led-to-changing-the-world/id1138596023?i=1000723602655": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=FdIRx8_ezJ8": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=EcJXHwCFnAQ": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=On7frXJaU94": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=Ax9UjyeamCo": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=UVfvSWM-1i0": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=LU9-sCsvcFg": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=L5ccTw_3q78": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=K2p3KtOKTIQ": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=301u-8HwWHs": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=y4nj6kot2Lc": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=9DfI0RVrGtM": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=BGaNlhhBIWU": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=o2wbSeZKt2s": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=LEUp2JjXPnE": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=3RmRKvf4ZcY": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=X2Rme1XfMYw": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=V7Wm-W50BuI": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=fuq8vtWCTwQ": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=6rz3AF9MQgw": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=ng7lAobuxqU": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=FaEhcgvFAWo": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=ZHoNuogDePM": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.fitfatherproject.com/biohacking-for-busy-parents-episode-238/": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.fitmotherproject.com/captivate-podcast/biohacking-for-busy-parents-with-anthony-lolli-and-tereza-hakobyan-lolli/": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://podcasts.apple.com/us/podcast/family-biohacking-revolution-with-anthony-lolli-ceo/id1509452847?i=1000719732889": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=sjQYNfuDl94": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=KdwFHyzlRZ0": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://open.spotify.com/episode/6E0jMOUhL38GKoA3nmQXyO": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=_KdlWxGoVzw": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=qptAvvCbHmc": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=J2ya8Q7PbgA": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=dKE3iclwQ_g": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=LcbjVpW75QY": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=smnwXRCAFF0": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=ImKZNba58kk": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://drive.google.com/drive/folders/1ynHDBJsfx8PDscV1ebianNPaTEKc1_Xf?usp=drive_link": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=OvHcGAlxkNw": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=rPjbPCgkC60": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=LsvIPt4_hYE": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    },
+    "press:https://www.youtube.com/watch?v=R8UpcC90gIE": {
+      "status": "ok",
+      "detail": null,
+      "last_checked": "2026-08-11T08:25:18.312Z"
+    }
+  }
+}

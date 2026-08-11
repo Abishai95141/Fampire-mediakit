@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+:root {
+  /* ── FAMPIRE Media Center ────────────────────────────────────────────
+     A separate product inside the same install. Its own visual language:
+     white ground, black type, warm-neutral hairlines, no colour system at
+     all. Nothing below is referenced by any HNN surface — the two palettes
+     never meet, which is the point. */
+  --fam-paper: #ffffff;
+  --fam-ink: #0a0a0a;
+  /* A THREE-STEP text ramp, not an opacity slider. Percentage opacities are
+     how a page ends up uniformly pale: every level reads as "slightly greyer
+     than the last" and nothing leads. These are picked so body copy is fully
+     readable at 16px and only genuinely tertiary numerals ever go light. */
+  --fam-body: #26251f; /* paragraphs — near-black, not grey */
+  --fam-muted: #57544e; /* captions, metadata, secondary links */
+  --fam-faint: #8b877f; /* counts and timestamps only */
+  /* Alternating bands are BLACK or WHITE — there is no third surface. A
+     near-white band is the thing that makes a page look unfinished rather than
+     restrained, so the rhythm comes from inversion instead of tint. */
+  --fam-rule: #dcdcdc;
+  --fam-rule-strong: #0a0a0a;
+  /* The one non-neutral, used only where an editorial mark is needed
+     (in-production tags, the minor-flag). Never as decoration. */
+  --fam-accent: #8a6a3f;
+}
+
+@theme inline {
+  /* FAMPIRE type: Plus Jakarta Sans primary, Poppins secondary. Both load in
+     app/(fampire)/fampire/layout.tsx, not the root layout, so the HNN portal
+     pays for neither. `--font-poppins-fam` rather than `--font-poppins`
+     because the root layout already defines the latter at a single weight for
+     the brand-book specimen pages; overwriting it would change HNN. */
+  --font-jakarta: var(--font-jakarta);
+  --font-poppins-fam: var(--font-poppins-fam);
+
+  --color-fam-paper: var(--fam-paper);
+  --color-fam-ink: var(--fam-ink);
+  --color-fam-body: var(--fam-body);
+  --color-fam-muted: var(--fam-muted);
+  --color-fam-faint: var(--fam-faint);
+  --color-fam-rule: var(--fam-rule);
+  --color-fam-rule-strong: var(--fam-rule-strong);
+  --color-fam-accent: var(--fam-accent);
+}
+
+/* ── FAMPIRE Media Center ─────────────────────────────────────────────
+   Scoped utilities. Every rule below is nested under .fam, which only the
+   FAMPIRE layout sets — so none of it can reach an HNN surface.
+
+   Two typefaces, no third. Plus Jakarta Sans is primary and carries every
+   heading, every paragraph and every number. Poppins is secondary and is
+   confined to the small letter-spaced furniture — eyebrows, labels, buttons,
+   metadata — where its rounder, wider shapes read as a different voice at
+   11–13px without competing with the primary at display sizes. */
+
+.fam {
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every COLOUR default lives in @layer base, and that is load-bearing.
+   Tailwind v4 emits its utilities inside `@layer utilities`, and in the CSS
+   cascade an UNLAYERED rule beats a layered one no matter how low its
+   specificity — so a plain `.fam .fam-display { color: … }` here silently
+   defeats `text-white` on the same element, and the masthead and the hero
+   statistics render near-black against the black video and disappear.
+   Specificity is not the lever; layering is. Inside `base` these are defaults
+   that any utility can override, which is what lets the same components
+   invert over the hero footage. */
+@layer base {
+  :where(.fam) {
+    color: var(--fam-body);
+  }
+  :where(.fam) :where(.fam-display, .fam-display-sm) {
+    color: var(--fam-ink);
+  }
+  :where(.fam) :where(.fam-eyebrow) {
+    color: var(--fam-ink);
+  }
+  :where(.fam) :where(.fam-eyebrow-muted) {
+    color: var(--fam-muted);
+  }
+}
+
+/* Display. Plus Jakarta Sans at 700/800 with tight optical tracking — at
+   64px+ the default tracking opens up badly, which is what makes a big
+   sans headline look like a slide deck rather than a masthead. */
+/* `line-height` is a FLOOR here, not a suggestion. Plus Jakarta Sans has deep
+   descenders, and a display heading set at `leading-none` (1.0) clips the tail
+   of every y, g, p and j — "The Library" loses the leg of its y, "People" the
+   bowl of its p. 1.06 is the tightest value at which the face's own descender
+   still clears. Any utility can still raise it; none should lower it, so the
+   utilities that used to set `leading-none` on display type have been removed
+   rather than left to fight this. */
+.fam .fam-display {
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+.fam .fam-display-sm {
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
+}
+
+/* Secondary voice. Poppins, only ever small and letter-spaced. */
+.fam .fam-eyebrow,
+.fam .fam-eyebrow-muted,
+.fam .fam-btn,
+.fam .fam-btn-ghost {
+  font-family: var(--font-poppins-fam), var(--font-jakarta), sans-serif;
+}
+.fam .fam-eyebrow,
+.fam .fam-eyebrow-muted {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.fam .fam-eyebrow { font-weight: 600; }
+.fam .fam-eyebrow-muted { font-weight: 500; }
+/* The secondary face also carries running metadata — dates, counts, credits —
+   so the distinction is audible in body copy, not only in labels. */
+.fam .fam-meta {
+  font-family: var(--font-poppins-fam), var(--font-jakarta), sans-serif;
+  font-weight: 400;
+}
+
+/* A section opens on a 2px black rule, not a hairline. This is the single
+   biggest thing keeping the page from reading as one flat wash: the eye can
+   find where each section starts without reading a word. */
+.fam .fam-section-rule {
+  border-top: 2px solid var(--fam-ink);
+}
+
+/* Type set under a mask that the glyphs rise into. */
+.fam .fam-rise {
+  display: block;
+  /* The mask is the point, but a mask sized to the line box also shears the
+     descenders off the finished text. The negative margin restores the extra
+     room without shifting the baseline. */
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.fam .fam-rise > span {
+  display: block;
+  transform: translateY(110%);
+  /* Stagger comes from --fam-delay set on the WRAPPER: animation-delay does
+     not inherit, but custom properties do, so a delay written once on the
+     masking element reaches the animated child. */
+  animation: fam-rise-in 1.05s cubic-bezier(0.16, 1, 0.3, 1) var(--fam-delay, 0s) forwards;
+}
+@keyframes fam-rise-in {
+  to { transform: translateY(0); }
+}
+
+/* Cards are hairline-bounded, never shadowed. The hover darkens the rule to
+   full ink — no lift, no scale, no shadow. */
+.fam .fam-card {
+  border-top: 1px solid var(--fam-rule);
+  transition: border-color 0.3s ease;
+}
+.fam .fam-card:hover {
+  border-color: var(--fam-ink);
+}
+
+/* Underline that grows from the left on hover — the only link affordance
+   used anywhere in FAMPIRE. */
+.fam .fam-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fam .fam-underline:hover,
+.fam .fam-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+.fam .fam-btn,
+.fam .fam-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.7rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.fam .fam-btn {
+  background: var(--fam-ink);
+  color: var(--fam-paper);
+  transition: opacity 0.2s ease;
+}
+.fam .fam-btn:hover { opacity: 0.82; }
+.fam .fam-btn-ghost {
+  border: 1px solid var(--fam-ink);
+  color: var(--fam-ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.fam .fam-btn-ghost:hover { background: var(--fam-ink); color: var(--fam-paper); }
+
+/* On the video hero the same two controls invert: white fill and white
+   outline, because everything behind them is moving footage. */
+.fam .fam-btn-on-dark {
+  background: var(--fam-paper);
+  color: var(--fam-ink);
+}
+.fam .fam-btn-on-dark:hover { opacity: 0.88; }
+.fam .fam-btn-ghost-on-dark {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--fam-paper);
+}
+.fam .fam-btn-ghost-on-dark:hover {
+  background: var(--fam-paper);
+  color: var(--fam-ink);
+  border-color: var(--fam-paper);
+}
+
+/* Media wells sit on BLACK, not on a grey. Photography reads as photography
+   against black; against a near-white tint it reads as a placeholder that
+   failed to load. It also means a transparent logo PNG is visible instead of
+   disappearing into the page. */
+.fam .fam-well {
+  background: var(--fam-ink);
+  overflow: hidden;
+}
+.fam .fam-zoom {
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fam .group:hover .fam-zoom { transform: scale(1.035); }
+
+.fam ::selection {
+  background: var(--fam-ink);
+  color: var(--fam-paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fam .fam-rise > span {
+    animation: none;
+    transform: none;
+  }
+  .fam .fam-zoom,
+  .fam .group:hover .fam-zoom { transition: none; transform: none; }
+}

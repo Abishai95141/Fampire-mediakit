@@ -1,0 +1,486 @@
+{
+  "appearances": [
+    {
+      "title": "On The PRST+ Podcast",
+      "url": "https://youtu.be/RjF-BISYXM8",
+      "host": "Brendan Boyd",
+      "aired": "February 2, 2025",
+      "views": 38000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "A Healthy Point of View",
+      "url": "https://youtu.be/Q4U1-pFyLo8",
+      "host": "Sam Tejada",
+      "aired": "December 12, 2024",
+      "views": 52000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "Digital Social Hour Podcast",
+      "url": "https://youtu.be/8xPSvv6t9xs",
+      "host": "Sean Kelly",
+      "aired": "January 28, 2025",
+      "views": 400000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "Peak Performance Podcast",
+      "url": "https://www.youtube.com/watch?v=cdwDnRsS_1Q",
+      "host": null,
+      "aired": "December 20, 2025",
+      "views": 29000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "That1 Podcast",
+      "url": "https://www.youtube.com/watch?v=e0nmLbR_J5U",
+      "host": "Mike C-Roc",
+      "aired": "February 11, 2025",
+      "views": 262000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "Ultimate Human Podcast",
+      "url": "https://drive.google.com/file/d/1WfJKVKiM6_k9Jk4hK6bhcOWLGH0rgm2F/view?usp=drivesdk",
+      "host": "Gary Brecka",
+      "aired": "February 25, 2025",
+      "views": 506000,
+      "parts": [],
+      "views_as_of": "as of March 3, 2025"
+    },
+    {
+      "title": "Man or War Podcast",
+      "url": "https://www.youtube.com/watch?v=24Cqvn-LlXg",
+      "host": "Rafa J. Conde",
+      "aired": "April 9, 2025",
+      "views": 32000,
+      "parts": [],
+      "views_as_of": "first 24 hours"
+    },
+    {
+      "title": "Beyond Biohacking Brothers",
+      "url": "https://youtu.be/9azBTl3plm4?si=FaVwakIUi0LlfI_e",
+      "host": "Miguel & Carlos Bertonatti",
+      "aired": "May 28, 2025",
+      "views": 14500,
+      "parts": [
+        {
+          "label": "Part 1",
+          "url": "https://youtu.be/9azBTl3plm4?si=FaVwakIUi0LlfI_e"
+        },
+        {
+          "label": "Part 2",
+          "url": "https://youtu.be/HdOee4fLGbc"
+        }
+      ],
+      "views_as_of": "first 6 days"
+    },
+    {
+      "title": "Finding Genius Podcast",
+      "url": "https://podcasts.apple.com/us/podcast/lights-camera-longevity-the-lollis-on-health-wellness/id1169016854?i=1000711718398",
+      "host": null,
+      "aired": "June 5, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Health Coach Academy",
+      "url": "https://podcasts.apple.com/us/podcast/inside-the-lolli-wellness-empire-biohacking-coaching/id1294421391?i=1000712650407",
+      "host": null,
+      "aired": "June 12, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Ross Mandell Live in Studio",
+      "url": "https://www.youtube.com/watch?v=jUVoCJ-CYRY",
+      "host": null,
+      "aired": "June 19, 2025",
+      "views": 3200,
+      "parts": [],
+      "views_as_of": "as of July 1"
+    },
+    {
+      "title": "Date Your Wife Podcast",
+      "url": "https://www.youtube.com/watch?v=wVrlCeji-BI",
+      "host": null,
+      "aired": "June 24, 2025",
+      "views": 35000,
+      "parts": [],
+      "views_as_of": "first 7 days"
+    },
+    {
+      "title": "Brian Keane Fitness",
+      "url": "https://www.youtube.com/watch?v=141Rc5CYnIQ",
+      "host": null,
+      "aired": "June 23, 2025",
+      "views": 11000,
+      "parts": [],
+      "views_as_of": "first 1 month"
+    },
+    {
+      "title": "Open Up with Catalina Magee",
+      "url": "http://youtube.com/watch?v=wWhTazpyZN0",
+      "host": null,
+      "aired": "July 15, 2025",
+      "views": 5800,
+      "parts": [],
+      "views_as_of": "first 6 days"
+    },
+    {
+      "title": "Adversity Kings with Tristan Dlabik",
+      "url": "https://www.youtube.com/watch?v=CCEQ5YlFlgE",
+      "host": null,
+      "aired": "July 21, 2025",
+      "views": 17000,
+      "parts": [],
+      "views_as_of": "on the first day"
+    },
+    {
+      "title": "Keto Savage",
+      "url": "https://www.youtube.com/watch?v=96GsCwqsI3g",
+      "host": null,
+      "aired": "Aug 20, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Unlocking Your Inner Strength",
+      "url": "https://podcasts.apple.com/us/podcast/how-losing-over-100-pounds-led-to-changing-the-world/id1138596023?i=1000723602655",
+      "host": null,
+      "aired": "Aug 26, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Bloom Health Club with Gayle Guyardo",
+      "url": "https://www.youtube.com/watch?v=FdIRx8_ezJ8",
+      "host": null,
+      "aired": "Aug 30, 2025",
+      "views": 2700,
+      "parts": [],
+      "views_as_of": "first 2 days"
+    },
+    {
+      "title": "The Danielle K White Show",
+      "url": "https://www.youtube.com/watch?v=EcJXHwCFnAQ",
+      "host": null,
+      "aired": "Sept 25, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Growisely Podcast",
+      "url": "https://www.youtube.com/watch?v=On7frXJaU94",
+      "host": null,
+      "aired": "Oct 21, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Value Talks Podcast",
+      "url": "https://www.youtube.com/watch?v=Ax9UjyeamCo",
+      "host": null,
+      "aired": "Oct 7, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Passionate Few",
+      "url": "https://www.youtube.com/watch?v=UVfvSWM-1i0",
+      "host": null,
+      "aired": null,
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Out of the System: Leo Climaco Podcast",
+      "url": "https://www.youtube.com/watch?v=LU9-sCsvcFg",
+      "host": null,
+      "aired": "Nov 8, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Challenge Your Norm Podcast",
+      "url": "https://www.youtube.com/watch?v=L5ccTw_3q78",
+      "host": null,
+      "aired": "Nov 10, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Experts Podcast with Dr. Janelle Kim",
+      "url": "https://www.youtube.com/watch?v=K2p3KtOKTIQ",
+      "host": null,
+      "aired": "Dec 12, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "A Wilder Life",
+      "url": "https://www.youtube.com/watch?v=301u-8HwWHs",
+      "host": null,
+      "aired": "Dec 24, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Be Unmessablewith Podcast",
+      "url": "https://www.youtube.com/watch?v=y4nj6kot2Lc",
+      "host": null,
+      "aired": "Dec 25, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "A Healthy Point of View: Lolli Kids",
+      "url": "https://www.youtube.com/watch?v=9DfI0RVrGtM",
+      "host": null,
+      "aired": "Jan 23, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Out of the System with Leo Climaco (with Love and Legend)",
+      "url": "https://www.youtube.com/watch?v=BGaNlhhBIWU",
+      "host": null,
+      "aired": "Dec 24, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "I am an Artist Not a Salesman Podcast",
+      "url": "https://www.youtube.com/watch?v=o2wbSeZKt2s",
+      "host": null,
+      "aired": "Jan 24, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Seasons Podcast: Raising Conscious Children in a Sick Culture (Teresa & Love Lolli_",
+      "url": "https://www.youtube.com/watch?v=LEUp2JjXPnE",
+      "host": null,
+      "aired": "Jan 29, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Talk Shop Podcast",
+      "url": "https://www.youtube.com/watch?v=3RmRKvf4ZcY",
+      "host": null,
+      "aired": "July 27, 2022",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "How Good Can It Get Podcast",
+      "url": "https://www.youtube.com/watch?v=X2Rme1XfMYw",
+      "host": null,
+      "aired": "April 4, 2024",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "C3 Podcast",
+      "url": "https://www.youtube.com/watch?v=V7Wm-W50BuI",
+      "host": null,
+      "aired": "Oct 14, 2024",
+      "views": 83000,
+      "parts": [],
+      "views_as_of": "as of April 17, 2026"
+    },
+    {
+      "title": "Gladden Longevity Podcast",
+      "url": "https://www.youtube.com/watch?v=fuq8vtWCTwQ",
+      "host": null,
+      "aired": "Dec 3, 2024",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Holistic Kids Show",
+      "url": "https://www.youtube.com/watch?v=6rz3AF9MQgw",
+      "host": null,
+      "aired": "Mar 13, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Financial Dad",
+      "url": "https://www.youtube.com/watch?v=ng7lAobuxqU",
+      "host": null,
+      "aired": "Mar 13, 2025",
+      "views": 99000,
+      "parts": [],
+      "views_as_of": "as of April 17, 2026"
+    },
+    {
+      "title": "Mastering the Inner and Outer Wealth",
+      "url": "https://www.youtube.com/watch?v=FaEhcgvFAWo",
+      "host": null,
+      "aired": "Mar 20, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Ageless and Timeless Podcast",
+      "url": "https://www.youtube.com/watch?v=ZHoNuogDePM",
+      "host": null,
+      "aired": "Apr 12, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "FitFather Project",
+      "url": "https://www.fitfatherproject.com/biohacking-for-busy-parents-episode-238/",
+      "host": null,
+      "aired": "Apr 14, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Fit Mother Project Podcast",
+      "url": "https://www.fitmotherproject.com/captivate-podcast/biohacking-for-busy-parents-with-anthony-lolli-and-tereza-hakobyan-lolli/",
+      "host": null,
+      "aired": "Apr 15, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Made to Thrive Podcast",
+      "url": "https://podcasts.apple.com/us/podcast/family-biohacking-revolution-with-anthony-lolli-ceo/id1509452847?i=1000719732889",
+      "host": null,
+      "aired": "July 30, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Seek Your Summit Podcast",
+      "url": "https://www.youtube.com/watch?v=sjQYNfuDl94",
+      "host": null,
+      "aired": "Nov 27, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Level Up Podcast",
+      "url": "https://www.youtube.com/watch?v=KdwFHyzlRZ0",
+      "host": null,
+      "aired": "Dec 3, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Brian Keane Podcast 2025",
+      "url": "https://open.spotify.com/episode/6E0jMOUhL38GKoA3nmQXyO",
+      "host": null,
+      "aired": "Dec 29, 2025",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Santana Effect Podcast",
+      "url": "https://www.youtube.com/watch?v=_KdlWxGoVzw",
+      "host": null,
+      "aired": "Mar 9, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "BBC News/ BBC Business Daily",
+      "url": "https://www.youtube.com/watch?v=qptAvvCbHmc",
+      "host": null,
+      "aired": "Feb 12, 2026",
+      "views": 18000,
+      "parts": [],
+      "views_as_of": "as of April 17, 2026"
+    },
+    {
+      "title": "The Strong New York Podcast",
+      "url": "https://www.youtube.com/watch?v=J2ya8Q7PbgA",
+      "host": null,
+      "aired": "Feb 11, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Mastering the Inner and Outer Wealth with Jarek Tadla",
+      "url": "https://www.youtube.com/watch?v=dKE3iclwQ_g",
+      "host": null,
+      "aired": "Feb 11, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "The Strong New York (Bonus Episode: Legend and Love Lolli)",
+      "url": "https://www.youtube.com/watch?v=LcbjVpW75QY",
+      "host": null,
+      "aired": "Feb 15, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Transforming Business & Life Advice From Powerhouse Duo TereZa and Anthony Lolli",
+      "url": "https://www.youtube.com/watch?v=smnwXRCAFF0",
+      "host": null,
+      "aired": "Feb 5, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Biohack Yourself - Business and Life Advice From Powerhouse Duo TereZa & Anthony Lolli - Part 1",
+      "url": "https://www.youtube.com/watch?v=ImKZNba58kk",
+      "host": null,
+      "aired": "Feb 5, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "LA Tribune Leadership Week",
+      "url": "https://drive.google.com/drive/folders/1ynHDBJsfx8PDscV1ebianNPaTEKc1_Xf?usp=drive_link",
+      "host": null,
+      "aired": "May 6, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "From Broke to Millions: Anthony & TereZa Lolli on Health, Wealth, and Rebuilding Everything",
+      "url": "https://www.youtube.com/watch?v=OvHcGAlxkNw",
+      "host": null,
+      "aired": "May 11, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Marriage, Muscle, and Mold: Anthony & Tereza Lolli on Taking Back Your Health",
+      "url": "https://www.youtube.com/watch?v=rPjbPCgkC60",
+      "host": null,
+      "aired": "Feb 24, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Light Up Your Life: Biohack Yourself with Anthony & TereZa Lolli",
+      "url": "https://www.youtube.com/watch?v=LsvIPt4_hYE",
+      "host": null,
+      "aired": "May 14, 2026",
+      "views": null,
+      "parts": []
+    },
+    {
+      "title": "Anthony Lolli Gets a Haircut: Biohacking, Near Death, and Building a Media Empire Around Health",
+      "url": "https://www.youtube.com/watch?v=R8UpcC90gIE",
+      "host": null,
+      "aired": "May 18, 2026",
+      "views": null,
+      "parts": []
+    }
+  ]
+}
