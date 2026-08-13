@@ -14,20 +14,33 @@ import Preloader from "@/components/fampire/Preloader";
  * between the two products and it is intentional.
  */
 
-const NAV = [
-  { href: "/fampire/library", label: "The Library" },
-  { href: "/fampire/films", label: "Films" },
-  { href: "/fampire/people", label: "People" },
-  { href: "/fampire/press", label: "Press" },
-];
+/**
+ * Navigation and footer come from the CMS.
+ *
+ * These were a constant here, which meant the client could not add, rename or
+ * reorder a single nav item without a developer — the first thing anyone asks
+ * to change. Edited at /admin → Settings → Navigation & Footer.
+ */
+type NavItem = { label: string; href: string };
 
 export default function Shell({
   children,
   total,
   signedIn,
+  nav,
+  footer,
 }: {
+  nav: NavItem[];
+  footer?: {
+    blurb?: string | null;
+    links?: NavItem[] | null;
+    trademarkNote?: string | null;
+  };
   children: React.ReactNode;
   total: number;
+  /** Required on purpose. Defaulting this to "fampire" emitted links to a
+   *  route that does not exist — FAMPIRE is the umbrella above the eight
+   *  worlds (§10), not one of them. */
   signedIn: boolean;
 }) {
   const pathname = usePathname();
@@ -35,7 +48,7 @@ export default function Shell({
   // link from a Slack message wants the asset, not an overture — and a
   // preloader on every route is the single fastest way to make a fast site
   // feel slow.
-  const withPreloader = pathname === "/fampire";
+  const withPreloader = pathname === "/";
   const [revealed, setRevealed] = useState(!withPreloader);
   const [scrolled, setScrolled] = useState(false);
 
@@ -73,7 +86,7 @@ export default function Shell({
           }`}
         >
           <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-8 px-6 py-5 sm:px-10 lg:px-12">
-            <Link href="/fampire" className="group flex items-baseline gap-3">
+            <Link href={"/"} className="group flex items-baseline gap-3">
               <span className="fam-display-sm text-[20px] leading-[1.3] tracking-[-0.02em]">
                 FAMPIRE
               </span>
@@ -83,7 +96,7 @@ export default function Shell({
             </Link>
 
             <nav className="flex items-center gap-6 sm:gap-9">
-              {NAV.map((n) => {
+              {nav.map((n) => {
                 const active = pathname === n.href || pathname.startsWith(`${n.href}/`);
                 return (
                   <Link
@@ -99,7 +112,7 @@ export default function Shell({
                 );
               })}
               <Link
-                href="/fampire/library"
+                href={`/library`}
                 className="text-[13.5px] font-semibold text-fam-muted transition-colors hover:text-fam-ink sm:hidden"
               >
                 Search
@@ -111,7 +124,7 @@ export default function Shell({
                 </span>
               ) : (
                 <Link
-                  href="/fampire/login"
+                  href={`/login`}
                   className="fam-meta border border-fam-ink px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-fam-ink transition-colors hover:bg-fam-ink hover:text-white"
                 >
                   Sign in
@@ -130,17 +143,38 @@ export default function Shell({
                 <p className="fam-display text-3xl leading-[1.05] text-white sm:text-4xl">
                   FAMPIRE
                 </p>
+                {/* Editable: /admin -> Settings -> Navigation & Footer -> Footer blurb.
+                    The written fallback keeps a fresh database from rendering an
+                    empty footer. */}
                 <p className="mt-4 max-w-sm text-[14.5px] leading-relaxed text-white/70">
-                  The umbrella above the worlds of The Lolli Family Institution.
-                  A catalog over the archive, not a copy of it — every entry
-                  points at the original.
+                  {footer?.blurb ??
+                    "The umbrella above the worlds of The Lolli Family Institution. A catalog over the archive, not a copy of it — every entry points at the original."}
                 </p>
+                {footer?.links?.length ? (
+                  <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+                    {footer.links.map((l) => (
+                      <li key={l.href}>
+                        <Link
+                          href={l.href}
+                          className="fam-meta text-[11px] uppercase tracking-[0.12em] text-white/70 hover:text-white"
+                        >
+                          {l.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {footer?.trademarkNote ? (
+                  <p className="mt-6 text-[11px] leading-relaxed text-white/40">
+                    {footer.trademarkNote}
+                  </p>
+                ) : null}
               </div>
 
               <div>
                 <p className="fam-eyebrow text-white/55">Center</p>
                 <ul className="mt-4 space-y-2.5">
-                  {NAV.map((n) => (
+                  {nav.map((n) => (
                     <li key={n.href}>
                       <Link
                         href={n.href}

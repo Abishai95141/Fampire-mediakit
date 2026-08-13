@@ -1,0 +1,492 @@
+import Link from "next/link";
+
+import { ImageWell } from "@/components/fampire/Preview";
+import {
+  loadEntries,
+  loadFilms,
+  loadWatchLinks,
+  previewForFilm,
+  previewsForSubjects,
+  SUBJECT_LABEL,
+  type Entry,
+  type FilmRecord,
+  type PersonRecord,
+} from "@/lib/fampire/catalog";
+
+/**
+ * The narrative surfaces, as blocks.
+ *
+ * Each of these was a hardcoded route file. The markup is carried over
+ * unchanged — the point of the move is not a redesign, it is that the film
+ * slate, the family profiles, the press log and the magazine shelf are now
+ * things an editor places on a page, in whatever order the page needs, rather
+ * than fixed furniture that only a developer can reorder.
+ *
+ * They all read live from the catalog, so §4.5 rule 3 still holds: a narrative
+ * section embeds real records and cannot drift out of date relative to them.
+ */
+
+const fmt = new Intl.NumberFormat("en-US");
+
+// ── Films ───────────────────────────────────────────────────────────────
+
+export async function FilmProfiles({
+  films,
+  layout = "list",
+  showWatchLinks = true,
+}: {
+  films: FilmRecord[];
+  layout?: string;
+  showWatchLinks?: boolean;
+}) {
+  const entries = await loadEntries();
+  const watchLinks = await loadWatchLinks();
+
+  if (layout === "grid") {
+    return (
+      <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {films.map((f) => {
+          const art = previewForFilm(entries, f.title);
+          return (
+            <li key={f.slug}>
+              <Link href={`/library?film=${encodeURIComponent(f.title)}`} className="group block">
+                <ImageWell
+                  src={art?.image ?? null}
+                  alt={f.title}
+                  label={f.title}
+                  shape="tall"
+                  width={700}
+                />
+                <h3 className="fam-display-sm mt-4 text-[19px] leading-snug">{f.title}</h3>
+                {f.note ? <p className="mt-1.5 text-[14px] text-fam-muted">{f.note}</p> : null}
+                <p className="mt-1 text-[13px] font-semibold tabular-nums text-fam-ink">
+                  {(f.awards ?? 0) > 0 ? `${f.awards} awards` : "In production"} · {f.year}
+                </p>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
+  if (layout === "profiles") {
+    return (
+      <div className="space-y-20 sm:space-y-28">
+        {films.map((f) => {
+          const assets = entries.filter((e) => e.film === f.title);
+          const watch = watchLinks.filter((w) => w.film === f.title);
+          const hero = previewForFilm(entries, f.title);
+
+          return (
+            <article key={f.slug} className="fam-section-rule pt-10">
+              <div className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
+                <div>
+                  <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                    <h2 className="fam-display text-[2.6rem] leading-[1.06] sm:text-[3.4rem]">
+                      {f.title}
+                    </h2>
+                    <span className="fam-eyebrow-muted">
+                      {f.year} ·{" "}
+                      {(f.awards ?? 0) > 0 ? `${f.awards} awards` : "In production"}
+                    </span>
+                  </div>
+
+                  {/* Synopses live in Who & What → Films now. They were a
+                      hardcoded map keyed by title, which meant editing one
+                      needed a developer and a rename silently blanked it. */}
+                  {f.synopsis ? (
+                    <p className="mt-6 max-w-2xl text-[16.5px] leading-[1.7] text-fam-body">
+                      {f.synopsis}
+                    </p>
+                  ) : null}
+
+                  <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                    <Link
+                      href={`/library?film=${encodeURIComponent(f.title)}`}
+                      className="fam-underline text-[14px] font-semibold text-fam-ink"
+                    >
+                      {assets.length} collection{assets.length === 1 ? "" : "s"} →
+                    </Link>
+                    {showWatchLinks && watch.length > 0 ? (
+                      <span className="text-[14px] text-fam-muted">
+                        Watch on{" "}
+                        {watch.map((w, i) => (
+                          <span key={w.url}>
+                            {i > 0 ? ", " : ""}
+                            <a
+                              href={w.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="fam-underline font-medium text-fam-body hover:text-fam-ink"
+                            >
+                              {w.platform}
+                            </a>
+                          </span>
+                        ))}
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+
+                <ImageWell
+                  src={hero?.image ?? null}
+                  alt={hero?.title ?? f.title}
+                  label={f.title}
+                  shape="wide"
+                  width={880}
+                />
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Compact list.
+  return (
+    <ul className="divide-y divide-fam-rule border-y border-fam-rule">
+      {films.map((f) => (
+        <li key={f.slug} className="flex flex-wrap items-baseline justify-between gap-4 py-5">
+          <Link
+            href={`/library?film=${encodeURIComponent(f.title)}`}
+            className="fam-display text-[1.4rem]"
+          >
+            {f.title}
+          </Link>
+          <span className="fam-meta text-[10px] uppercase tracking-[0.14em] text-fam-muted">
+            {f.year ?? ""}
+            {f.awards ? ` · ${f.awards} awards` : ""}
+            {f.note ? ` · ${f.note}` : ""}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// ── People ──────────────────────────────────────────────────────────────
+
+export async function PeopleProfiles({
+  people,
+  layout = "portraits",
+  showBios = true,
+}: {
+  people: PersonRecord[];
+  layout?: string;
+  showBios?: boolean;
+}) {
+  const publicEntries = await loadEntries();
+  const shots = previewsForSubjects(publicEntries, people.map((p) => p.slug));
+
+  if (layout === "names") {
+    return (
+      <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {people.map((p) => (
+          <li key={p.slug}>
+            <Link href={`/library?subject=${p.slug}`} className="fam-display text-[1.2rem]">
+              {p.name}
+            </Link>
+            {p.role ? (
+              <p className="fam-meta mt-1 text-[10px] uppercase tracking-[0.14em] text-fam-muted">
+                {p.role}
+              </p>
+            ) : null}
+            {showBios && p.bio ? (
+              <p className="mt-3 text-[13.5px] leading-[1.6] text-fam-body">{p.bio}</p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  if (layout === "profiles") {
+    /**
+     * Held-for-review counts, so a child's row can tell the truth.
+     *
+     * Love and Legend render "0 collections" to the public, which reads as "we
+     * have nothing of them". What is actually true is that every collection
+     * featuring them is flagged and waiting on an approver (§9.1) — the gate
+     * working, not an empty archive. Saying so is more honest than a zero.
+     */
+    const held = await loadEntries({ includeDrafts: true });
+    return (
+      <div className="space-y-16">
+        {people.map((p) => {
+          const collections = publicEntries.filter((e) => e.subjects.includes(p.slug));
+          const awaiting = held.filter(
+            (e) => e.subjects.includes(p.slug) && e.visibility !== "public",
+          ).length;
+
+          return (
+            <article
+              key={p.slug}
+              className="fam-section-rule grid gap-x-14 gap-y-7 pt-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,20rem)_1fr]"
+            >
+              <ImageWell
+                src={shots[p.slug] ?? null}
+                alt={SUBJECT_LABEL[p.slug] ?? p.name}
+                label={SUBJECT_LABEL[p.slug] ?? p.name}
+                shape="tall"
+                width={700}
+              />
+              <div>
+                <h2 className="fam-display text-[2.4rem] leading-[1.06]">
+                  {SUBJECT_LABEL[p.slug] ?? p.name}
+                </h2>
+                {p.role ? <p className="fam-eyebrow-muted mt-3">{p.role}</p> : null}
+                <Link
+                  href={`/library?subject=${p.slug}`}
+                  className="fam-underline mt-5 inline-block text-[14px] font-semibold text-fam-ink"
+                >
+                  {collections.length} collection{collections.length === 1 ? "" : "s"} →
+                </Link>
+                {awaiting > 0 ? (
+                  <p className="fam-meta mt-2 text-[10px] uppercase tracking-[0.12em] text-fam-muted">
+                    {awaiting} more awaiting review
+                  </p>
+                ) : null}
+              </div>
+              <div className="max-w-2xl">
+                {p.bio ? (
+                  <p className="text-[16.5px] leading-[1.72] text-fam-body">{p.bio}</p>
+                ) : null}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Portrait grid.
+  return (
+    <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {people.map((p) => (
+        <li key={p.slug}>
+          <Link href={`/library?subject=${p.slug}`} className="group block">
+            <ImageWell
+              src={shots[p.slug] ?? null}
+              alt={SUBJECT_LABEL[p.slug] ?? p.name}
+              label={SUBJECT_LABEL[p.slug] ?? p.name}
+              shape="tall"
+              width={700}
+            />
+            <h3 className="fam-display-sm mt-4 text-[19px] leading-snug">
+              {SUBJECT_LABEL[p.slug] ?? p.name}
+            </h3>
+            {p.role ? <p className="fam-eyebrow-muted mt-1.5">{p.role}</p> : null}
+            {showBios && p.bio ? (
+              <p className="mt-3 text-[14px] leading-[1.65] text-fam-body">{p.bio}</p>
+            ) : null}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// ── The magazine ────────────────────────────────────────────────────────
+
+export function MagazineShelf({ issues }: { issues: Entry[] }) {
+  return (
+    <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {issues.map((m) => (
+        <li key={m.id} className="border-t border-fam-rule pt-6">
+          <h3 className="fam-display-sm text-[18px] leading-snug">
+            {m.title.replace("Biohack Yourself Magazine — ", "")}
+          </h3>
+          {m.description ? (
+            <p className="mt-2 text-[14px] leading-relaxed text-fam-body">{m.description}</p>
+          ) : null}
+          <div className="mt-4 flex gap-5">
+            {m.preview ? (
+              <a
+                href={m.preview}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fam-underline text-[13px] font-semibold text-fam-ink"
+              >
+                Read the issue ↗
+              </a>
+            ) : null}
+            <a
+              href={m.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="fam-underline text-[13px] text-fam-muted hover:text-fam-ink"
+            >
+              Assets ↗
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// ── Where to watch ──────────────────────────────────────────────────────
+
+export async function WatchGrid() {
+  const films = await loadFilms();
+  const links = await loadWatchLinks();
+
+  return (
+    <div className="grid gap-x-14 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
+      {films.map((f) => {
+        const forFilm = links.filter((w) => w.film === f.title);
+        if (!forFilm.length) return null;
+        return (
+          <div key={f.slug} className="border-t border-fam-rule pt-5">
+            <h3 className="fam-display-sm text-[17px]">{f.title}</h3>
+            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
+              {forFilm.map((w) => (
+                <li key={w.url}>
+                  <a
+                    href={w.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fam-underline text-[13px] font-medium text-fam-body hover:text-fam-ink"
+                  >
+                    {w.platform}
+                    {w.free ? <span className="text-fam-faint"> · free</span> : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Press ───────────────────────────────────────────────────────────────
+
+export type AppearanceRecord = {
+  title: string;
+  url?: string | null;
+  outlet?: string | null;
+  aired?: string | null;
+  views?: number | null;
+  thumbnail?: string | null;
+  parts?: { label: string; url: string }[] | null;
+};
+
+export function PressLog({
+  appearances,
+  featuredCount = 3,
+}: {
+  appearances: AppearanceRecord[];
+  featuredCount?: number;
+}) {
+  /** Dates arrive as prose ("Feb 24, 2026"), so parse leniently and push
+   *  anything unparseable to the end rather than guessing a position. */
+  const airedTime = (a: AppearanceRecord) => {
+    if (!a.aired) return -Infinity;
+    const t = Date.parse(a.aired);
+    return Number.isNaN(t) ? -Infinity : t;
+  };
+  const sorted = [...appearances].sort((a, b) => airedTime(b) - airedTime(a));
+
+  /** The most-watched appearances lead the page — a booker scanning for reach
+   *  should not have to read 57 rows to find the 506,000-view one. */
+  const featured =
+    featuredCount > 0
+      ? [...appearances]
+          .filter((a) => a.views && a.thumbnail)
+          .sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+          .slice(0, featuredCount)
+      : [];
+  const featuredUrls = new Set(featured.map((a) => a.url));
+
+  return (
+    <>
+      {featured.length > 0 ? (
+        <section className="fam-section-rule pt-6">
+          <h2 className="fam-eyebrow">Most watched</h2>
+          <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-3">
+            {featured.map((a) => (
+              <li key={a.url ?? a.title}>
+                <a
+                  href={a.url ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <ImageWell
+                    src={a.thumbnail ?? null}
+                    alt={a.title}
+                    label={a.title}
+                    shape="cinema"
+                    width={800}
+                  />
+                  <p className="fam-eyebrow-muted mt-4">
+                    {a.aired} · {fmt.format(a.views ?? 0)} views
+                  </p>
+                  <h3 className="fam-display-sm mt-2 text-[18px] leading-snug">{a.title}</h3>
+                  {a.outlet ? (
+                    <p className="mt-1 text-[14px] text-fam-muted">with {a.outlet}</p>
+                  ) : null}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section className={`fam-section-rule pt-6 ${featured.length ? "mt-20" : ""}`}>
+        <h2 className="fam-eyebrow">The full log</h2>
+        <ul className="mt-6">
+          {sorted.map((a) => (
+            <li key={a.url ?? a.title}>
+              <a
+                href={a.url ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fam-card group grid items-center gap-x-6 gap-y-2 py-5 sm:grid-cols-[5.5rem_1fr_9rem_7rem]"
+              >
+                {/* An 88px still per row: enough to recognise a show at a
+                    glance, not enough to turn a 57-row log into a gallery. */}
+                <div className="w-[5.5rem] shrink-0">
+                  <ImageWell
+                    src={a.thumbnail ?? null}
+                    alt={a.title}
+                    label={a.title.slice(0, 2)}
+                    shape="cinema"
+                    width={220}
+                  />
+                </div>
+                <span>
+                  <span className="fam-display-sm text-[17px] leading-snug">{a.title}</span>
+                  {a.outlet ? (
+                    <span className="ml-2 text-[14px] text-fam-muted">with {a.outlet}</span>
+                  ) : null}
+                  {(a.parts?.length ?? 0) > 1 ? (
+                    <span className="ml-2 text-[11px] font-bold uppercase tracking-[0.1em] text-fam-faint">
+                      {a.parts!.length} parts
+                    </span>
+                  ) : null}
+                  {featuredUrls.has(a.url) ? (
+                    <span className="ml-2 border border-fam-ink px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.1em] text-fam-ink">
+                      Top
+                    </span>
+                  ) : null}
+                </span>
+                <span className="text-[13px] font-medium tabular-nums text-fam-muted sm:text-right">
+                  {a.aired ?? "—"}
+                </span>
+                <span className="text-[13px] tabular-nums text-fam-faint sm:text-right">
+                  {a.views ? `${fmt.format(a.views)} views` : ""}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="border-t border-fam-rule" />
+      </section>
+    </>
+  );
+}

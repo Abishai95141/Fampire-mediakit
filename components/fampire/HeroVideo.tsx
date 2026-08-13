@@ -59,11 +59,21 @@ export default function HeroVideo({
   title,
   /** Seconds to skip — the trailer opens on a burned-in title card. */
   startAt = 0,
+  /**
+   * Whether the server confirmed the player will actually serve this embed.
+   *
+   * A cross-origin iframe never tells the page it got a 401, so without this
+   * the component could only infer failure from silence — it sat on a dead
+   * frame for eleven seconds before falling back. Checked once on the server
+   * (lib/fampire/hero.ts), the still renders immediately instead.
+   */
+  embeddable = true,
 }: {
   videoId: string;
   poster: string;
   title: string;
   startAt?: number;
+  embeddable?: boolean;
 }) {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const playingRef = useRef(false);
@@ -77,7 +87,7 @@ export default function HeroVideo({
   const audibleRef = useRef(false);
 
   const reduceMotion = useReducedMotion();
-  const showStill = failed || reduceMotion === true;
+  const showStill = failed || reduceMotion === true || !embeddable;
 
   const send = useCallback((method: string, value?: unknown) => {
     frameRef.current?.contentWindow?.postMessage(JSON.stringify({ method, value }), ORIGIN);
@@ -96,11 +106,26 @@ export default function HeroVideo({
    * the start point counts as running.
    */
   useEffect(() => {
-    // Two separate concerns, and conflating them is a bug worth naming: the
-    // preloader must lift on a deadline no matter what, but the iframe must
-    // only be REVEALED on real playback. Fading it in on the deadline shows
-    // whatever the frame actually contains — including Vimeo's "we couldn't
-    // verify the security of your connection" page.
+    /**
+     * Declared FIRST, above every early return.
+     *
+     * `releasePreloader` is a function declaration, so it hoists — but the
+     * `released` flag it closes over is a `let`, which does not. Calling the
+     * function above this line therefore threw `Cannot access 'released'
+     * before initialization` and killed the whole effect, so the curtain never
+     * lifted at all.
+     *
+     * It only fired on the `!embeddable` path, which is the path this site is
+     * actually on: Vimeo returns 401 for the hero video until the client
+     * allowlists the domain. The failure mode was invisible to server-side
+     * checks — the HTML was perfect and the page was broken.
+     *
+     * Two separate concerns, and conflating them is a bug worth naming: the
+     * preloader must lift on a deadline no matter what, but the iframe must
+     * only be REVEALED on real playback. Fading it in on the deadline shows
+     * whatever the frame actually contains — including Vimeo's "we couldn't
+     * verify the security of your connection" page.
+     */
     let released = false;
     function releasePreloader() {
       if (released) return;
@@ -116,7 +141,10 @@ export default function HeroVideo({
       unmute();
     }
 
-    if (reduceMotion === true) {
+    // Nothing to wait for when the embed is known-refused, or when the visitor
+    // has asked for less motion: lift the curtain at once rather than making
+    // them sit through the watchdog.
+    if (!embeddable || reduceMotion === true) {
       releasePreloader();
       return;
     }
@@ -294,7 +322,7 @@ export default function HeroVideo({
       // A curtain that never lifts is worse than an unplayed video.
       releasePreloader();
     };
-  }, [reduceMotion, startAt, send, unmute]);
+  }, [reduceMotion, startAt, send, unmute, embeddable]);
 
   const src =
     `${ORIGIN}/video/${videoId}` +

@@ -16,7 +16,13 @@ import {
  *  - present a collection flagged as containing a minor without saying so.
  * Both states are on the card, not discovered on click.
  */
-export default function EntryCard({ entry, signedIn }: { entry: Entry; signedIn: boolean }) {
+export default function EntryCard({
+  entry,
+  signedIn,
+}: {
+  entry: Entry;
+  signedIn: boolean;
+}) {
   const locked = entry.visibility === "private" && !signedIn;
   // Measured by the nightly sweep, not guessed from the URL. A card must never
   // offer a click that lands on a 404 or a sign-in wall — the reader has
@@ -93,12 +99,30 @@ export default function EntryCard({ entry, signedIn }: { entry: Entry; signedIn:
 
   const shell = "fam-card group block py-8";
 
+  /**
+   * The way from a card to its record.
+   *
+   * Only for someone already signed in, so a press contact never sees it. It
+   * sits OUTSIDE the card's own `<Link>` — nesting an anchor inside an anchor
+   * is invalid HTML and the browser silently drops one of them, which here
+   * would mean either the card or the edit link stops working.
+   */
+  const editLink = signedIn ? (
+    <Link
+      href={`/admin/collections/entries/${entry.id}`}
+      className="fam-underline mt-2 inline-block text-[11px] font-semibold text-fam-muted hover:text-fam-ink"
+    >
+      Edit this collection →
+    </Link>
+  ) : null;
+
   if (locked) {
     return (
       <article className={shell}>
-        <Link href="/fampire/login?next=/fampire/library" className="block">
+        <Link href={"/login?next=/library"} className="block">
           {body}
         </Link>
+        {editLink}
       </article>
     );
   }
@@ -106,14 +130,31 @@ export default function EntryCard({ entry, signedIn }: { entry: Entry; signedIn:
   if (dead || needsAccount) {
     // Rendering this as a live link would send a journalist to a 404 or to a
     // page only the account owner can load. Flag it instead of pretending.
-    return <article className={`${shell} opacity-75`}>{body}</article>;
+    return (
+      <article className={`${shell} opacity-75`}>
+        {body}
+        {editLink}
+      </article>
+    );
   }
 
+  /**
+   * Points at the collection's own page rather than straight out to Drive.
+   *
+   * The outbound link still exists — it is the primary action on that page —
+   * but routing through it means every collection has an address a journalist
+   * can paste into an email, and one that unfurls with a title, description
+   * and image (§8). Linking a card directly to storage gave the reader
+   * somewhere to go and nothing to share.
+   *
+   * Still two clicks to the material, so §4.5 rule 1 holds.
+   */
   return (
     <article className={shell}>
-      <a href={entry.url} target="_blank" rel="noopener noreferrer" className="block">
+      <Link href={`/collections/${entry.slug ?? entry.id}`} className="block">
         {body}
-      </a>
+      </Link>
+      {editLink}
     </article>
   );
 }

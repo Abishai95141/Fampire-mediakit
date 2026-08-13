@@ -1,0 +1,6626 @@
+{
+ "per": 5,
+ "sampled": {
+  "1RTDDbHnhfSgDXduTivqZivHWis2u8ptI": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16gH0lTpOIGjBevIAZt5LX0HHUW04ag6g"
+  },
+  "1-aB8lCKQOhB70mek7O-0ICw4uu1V5yxx": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10VgWrR7igAt5eUrUk16z-52vyvoZspOm"
+  },
+  "1MNUitn_TZM8TyeaABr9dzqugA0z4aEhm": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19VrtUG313POEgjR7Pn3fs70GpJRI70ap"
+  },
+  "1xVQB9orEiWxlXRZaSOpkVOzWsL_A9yB9": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18nff9hFMUADoaxWF6NT0SnLefA_jtPR9"
+  },
+  "1Ihmi8sR2CsEV4g9tjtTx-ngArZgfMWIp": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1LbwTJPq0vmNCadSFDmDHp92dBp8aoixA"
+  },
+  "1OE9AjYk-tl9038pC0B4ual4NAsZuEOQK": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1AjTB2emnvugB-b8vei5DvD4R-g54OvUI"
+  },
+  "1p-tAMu0pk3rDlqVr6p9-wbrzUCdX7OBv": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1dbq6Kvz86mu8JTEwkvgo9ABQEz__hp_C"
+  },
+  "101jH-a4hba3eRrayqL053MAsJq3Hk8QT": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1p163HbZky-4WSAnsgzJO2i8ljNIfk-jz"
+  },
+  "1fRV4iAWS6qeIiX4X6eXrFjzSFoJTGqO4": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1Z7ydCGy7mURJQ4Dn44Ys95fHrufMw3AF"
+  },
+  "1hASHG85tgTa9MANS_r--ihaSgVI_M-ct": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "109XtZKFLAGnoGyF3-9Yn1wv25RBH1OVf"
+  },
+  "1gBCFFHTeYOB8oUcwaxPhN-SN_dK-fzSZ": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Xi033RPlDh0s0wiqiHY0CI538FUzMkfw"
+  },
+  "1at3oJG_Ta-oCdScQ4pckiTgyY2T8eNyB": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1X5W2ZbtXKpSAazkn4vEcXHqd4pbEnUR2"
+  },
+  "14UZCCYWHbmgDSXreJMDHYDQ9O0sFEvXB": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1axwtHdMs1_p4XiGouaqjGRsG0G5Ok2fb"
+  },
+  "1c6Qi5taSobqHtom6775fomUskUHlbeVy": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1sBG06IdCcEnjzaDkO7lgubhuq6-bgVrv"
+  },
+  "1h8PnX6AHJ40vKSdsbdPVpwSTz61SAANx": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1sqBZkSBpksLsjfnNAtf68l275KyLJLMK"
+  },
+  "15O4cjI47qAOdCm1m8nmi8UZWPkKBkLlk": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ryY6_k38wwg7-YcN_8Xa0PWATZk2zfxf"
+  },
+  "1noWOGRf-YdQlucThw1E9um-l2fnhwDNo": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zkPRkViuk6atrOzPQrdNUTSIZDVBPd88"
+  },
+  "1x9qAdBbsXqUcsjhDSP4Y9eIHaPjNzNHd": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16V_wW31nPGZAU6OX3N5Y22RzJQ3caonb"
+  },
+  "1bM4Xjo5Kv3kLQ7zDrmP0C6uLDQoIExpx": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1v-6jrhXEFpdVkOce4sLliMGxnRXLB-GN"
+  },
+  "1bSuQqjGNOVcfUqwYQjP__Z0hdSbkQ3sz": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zkPRkViuk6atrOzPQrdNUTSIZDVBPd88"
+  },
+  "1SENPFZpxEPaG-JhTrrCSvIRD3D2jEbTl": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1x5IK4ymhSFgtWvlSt0y2EbTIyPqakXkS"
+  },
+  "15v8JKu8FM6btQMO_BvbL-qVLvDuyw7Tj": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1dPBuyyqFPbF1L0nUmwcpYP-d6MLJ8rIj"
+  },
+  "10Z2jCJij9Gg4ZHyuIJ-vMBqPjHUsHsqT": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1TtSpoDy_5pxohm4NHLKZeFt66W5TMfJH": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1LtDtQx8T1nsNhYZpO_eaAuU9eIgEj92z"
+  },
+  "1hqbQgxFdz6KxcpnRfi9WZENChGd8iUqS": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1FAS12g_Fchysn6kqsV0rn3dosqyKtteo"
+  },
+  "1PibHhZeunm1YK--M3F5-hGFBgkYkShk8": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1DFS2ceQZBa1hke7zj1Jd2lKiOGIc1S7y"
+  },
+  "1lVZ0XmMHxrClnmga1DfJ49QNHBzRM9D9": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1H_rKolLd8G2EeTS7qaOXJhGmOd2o1OrV"
+  },
+  "19KWF7xM_LJeldERy35ZWO6OsMPEeZVsG": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1XfkQjzUX0G9a3Kk-7C5J-pkp08LqcP6f"
+  },
+  "149KZxQB0gobo15X7ltaxJ46SXTAnYlV-": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qnqloxwxYwERR0g_r25LXGtQDpt4JjS-"
+  },
+  "1rAxlRoj-cTeksxzLvEl4B0r0Z75t7rFr": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1O4axNL8RW5oAsM9gGTx9fofE8-PYCz7L"
+  },
+  "1ll32MwGuLnuroDKfkGxWR57kI-Ait59L": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1TkV3m24q6_ZSndxUtyNMIxNpLHf6xT1l"
+  },
+  "1wKkrBDg5AlX9XiubZ71iNYskh1pUydFF": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1eJB5lRzb6ttyOk0DFUp6as_zUu4VLPdV"
+  },
+  "1YfvgzgkvxgA_yWBDU6WuIb8scerLX3Ft": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18CUIohBgktt29mrbFArFVTEwEcttWao7"
+  },
+  "1rm4-yqEE3FlWfi0IXNNO0HHazY5GIwus": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1e_85j0LbVeuwxBWO43Ei4NReJjFR7NqU"
+  },
+  "1yaY1wpMi6BaZ0a0vj-A9qN0j7_ML3r27": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nt7VeEzA485SP24QltF6rNMNTp_vkXRI"
+  },
+  "1HYLT5Y1BDLqUaqyXgtJ3mXMiR7IYxkhZ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1l5BlVRWO87lM1Wb9zse4kq9qoYNhtCbv"
+  },
+  "1FPWrygrCWRMALWMsg2VGWonN74ELsSTj": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1lYB273ato5K_22KEgunzorJ5L2ukolQh"
+  },
+  "1QwhP1bPCxDKIt6zg3pndAoaHoq_6I20O": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xbVJV8M5MujzKg-iKLqfH0qoDuLpUwrm"
+  },
+  "1xxJvXFhI_bz8GCLnXtgVbK2k20C3xcKh": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1871VsqG-zvurBJJAd9FS7hAE2lJau7JV"
+  },
+  "1aQ91RF83qtk8VwFoYrgzpy3nx0UACWi3": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qG0Waiz7opjFdqe176SSGFu9PVR6X3S-"
+  },
+  "1_-GFiLsWNE2QNihoHsCu-nhUzTICapDW": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1-AurD487Coe3GtYEnvIpotenf2-mwXAf"
+  },
+  "1QaBs9sgPlAMwl1Y3Ezg9XJwThsmibWRl": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1IZ8QOyXTriaJrXVo2u23r0Rwy44Vmi5Q"
+  },
+  "1yLgrJaLQ1ywyACsoNJ9pszfJIHpTwEU3": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ADLFJppKFKIAFgnSyHIFT1nJcM99_gQh": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hWQncWUklnU0wDClDIiF5cnxE45vzHxw"
+  },
+  "13kqFZkDSl-8bnc1mZz9g4jhttzizX69E": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 0,
+    "square": 2
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1IQMu2rFbxYHzbSGjqCPttepAtFSCNQiV"
+  },
+  "1xCO8XrQdcyAtXrsge9a9WxSse1C255LC": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1GBNkAIPmKjx7kPlx8pC_hhM_y1IvNinu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "19imt5yoiTbxb7KZzPjTkztyM_hyJ_4vC"
+  },
+  "1UmuwF1x8lqdQljgYOxFB8JhqTcYhbwo0": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Nq6HVfCC7f139-uD2C0lbcEDDWhjrzZd": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1iVtqQYQYJuepcIUlp97zAsJnS70qDFo6": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1W0kvX2slkABzugnPSGnQH5dVpClumvGX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1eAq6kHo3mrQu0FG5nacsaHX4OKcEPGcY"
+  },
+  "14IPmkNp2ndYu7e0VI8k01BlNVo8UKcLn": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1P3rCoptYkz_EfO5WSrw2zW0pERt5yqp_"
+  },
+  "1YEchsAqAJBqVL5-zLldvDEC_CpT9hB9G": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "14qV8LXTRYnXuwUWLfDw7c6oHCVR8FClx"
+  },
+  "1ZSKwwI-oGnt5s0G9C5Nwg-Z9YE9ho45x": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1TzdE3cXAtJiRShfgTAjA5D0xiaO5FmVG"
+  },
+  "1um7-I7jxK02zqrRsYJh-8D_9vVjtFS-I": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qbNgz1fLb_Em529gRQeKtiIWcH7LZ5fr"
+  },
+  "1waR0KAI4o6VcoxNO6SLTUhRL01hXSx40": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1v9QEJoL8KiV5ld_MqaYN4gJl40yh8wbq"
+  },
+  "1YOzx0QgnObSg_15pIo6ILQUsLXiBj8Nb": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1OFarZUu4ezArlYzzFCblkWN3Iik35e-m"
+  },
+  "1iFGVNAKCsznkPBRcRSPD5CGm8HzXskg1": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1sD8247Q8nyXc-wTCmWe9nIczmWN7XLkf"
+  },
+  "1sFb6tlszDm6RO8zHbjl-nhgc-8i4wLtf": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16pBRmSyTPtuo02-k3PMDNAC9yNJKiPhY"
+  },
+  "1V_Jqegpb7PSYKGjTQZixzlWnZ3TjToDs": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1riCa5jI5mNzkuAOOKwlIl1Zsi0LrYf4D"
+  },
+  "1YX6M-fGp9i28rYtffk8t5egAecVvxGCM": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1pZqK-8BZD5TS-u-UdG3amfKkdE9iUpMO"
+  },
+  "1LAMuHm2zLxyzzX6PRXNbqd-b6zaFGyXl": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18KuMJ6Cr_29G6O60yuDmjLwk9YTvaZFi"
+  },
+  "1TuzErhX7IQN_txcTs198inxI7uLMy2OI": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zkgZGGma-mzLRyPBTj_CCGtWc5iNyRcM"
+  },
+  "1uGea1xIQJBsshywg-rKOAKshSCqxXGcQ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1-8GBa8a5a8KMpTtARLpb6sOxwR8JrT4o"
+  },
+  "1aFQ7GqIhGUFslpBab2xTeSW4cXOUnq1I": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1G02Lmtf-SnfDDlanTS3-sowu_96RaNzL": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1QPzUs0TOKYVB12-29nMvcTmm9E2AijK_": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ffx5LVSKbV-TG8w46Vt2jH4uWQhvDBYU": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tdTjF-cudgjPCPySCAQ6Oei8r2YtbEez"
+  },
+  "1tkyo00wY7MF8EH8sVFCLnMHZdihf0cDN": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": "1AMrBevKfu-u_OdMdWFuSh_Alz5YsgOic"
+  },
+  "17Q3pO8qf5T7hqM-kqt0USac2gtPLQPBt": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1FhiZFSiZcZNBcZmnIPABVxHfi5TNyM0r"
+  },
+  "1Aus58E4VMH6G55J8dr9SoqkLQwAXa2aQ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19M6BMP8ViqrlgGF27NoCF0VCXr_WWI7A"
+  },
+  "18MKYxAInorH5DQytIjslVjDx7d3Oesmb": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qRhHuvdU_Q09Bzq3aIlpT7LdvltNdJbG"
+  },
+  "1fYnFYPUENhYm8MmLVnXmKov9ZrWHoFeN": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1vvGuZG67Z3fyDOsXREnQltqmnegt8cFO"
+  },
+  "13MKeHHA1PayPABVkl5b7eFyGMdUaYsIO": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1uHYqkFHkanJYaPfX_4ddSEBayw4mod-5"
+  },
+  "17Kgf00_SC9ma1HeM5wXHOrk2GFAm85GM": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1SAaWm2fo2Knwv1r6_5kOIbLrmdFYyWdh": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "14SPqPp0EwcnlizmnZBZnWCs1mcB90x_8"
+  },
+  "1OM437fqnZmHN85-3dOQ4KJt6slcUH372": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1J_lVAbFMEvOWfFcA4BISvjganZQNGVmk"
+  },
+  "1k7B1TDHoycWXLUlJbGah8ff97Y1sUOT5": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1cneoVt2JswOcaj_ELp8AWUhmLdfGxP6F"
+  },
+  "1dy5XZr73-wByfFctfspsA91ipdP8Dodb": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hzt2eAtgnFZTod9DPcmajEL6T5NByL5O"
+  },
+  "1u2_gXlb8-zRChd-zhndT8iswc4DElrSZ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1uNU6D1c9UPAi2SN9H1vc4vLiPJManeuo"
+  },
+  "1OFA-v2EyIETyy-PoBnJFU7TzRwIcE3e6": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_6MP45h8gQ-TG9OCG0T9O_GnzItIU7Q8"
+  },
+  "1Syih0Bd03tExdEttryeiE6Vc5o9q_3sL": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1mhN785OXRcbrAlC8S4adGxvP9P21teN5"
+  },
+  "1SyhKIf-uEiuHgSw9kFJxrNPvJ0aFP7mb": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xCdIpHeZlqHuvL9hrSvgXU09JBtaX8yM"
+  },
+  "1KCGjZeV40oWltZRrxg-DCLojfSxafoij": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nlYdaoVvk9_rMaPyOz-YePwg4h22MRHv"
+  },
+  "12OdU-3T0f6HQl1XBF4jIUsGEgvjObGi0": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17vEaHE7iZSuH4QPVchXFjsjF9c9oPu-j"
+  },
+  "1Wvhh18uno_orHBkaOD_CXfZOpJHGlMPf": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1iCkuV4iqIHmNjznfN_LNB_aPPGnvx3nn"
+  },
+  "1J1_GzgsJTmAWLnyb-WKECIKNz2w3TqCN": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18Orcew8kKzd4wxWBmeDbVAtCij5UGv1B"
+  },
+  "1WTIwUD4GKndAAJfK8h5mnefoCMdRAhwd": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19Gn9FVLUVfADxMnOhzTNyyhUukWU5Ln8"
+  },
+  "1_dZDpSvW9xE2I9xa90qTCL7lk7bJRt2_": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16BWnbfMGfTcOrKOrW5sWBpet2Ig09JcJ"
+  },
+  "105ShORu9Wcy1emPPs0fYmzDv-On1W4U8": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1aiJXgHDPzuVr38hdco2PJd9VM85CwvY6"
+  },
+  "1CQsVYNtn0u-Jg3-5aLxAQRdH2wu1QNQO": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1KkvTcty9eSjob38EdEiWyimSY6flbClu"
+  },
+  "1O8Aaba9Cf8JWUsOZrcGvSi4JHPIa2fQW": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1yPDxtKfhYXF8RTTBkLWDtBgWfw5C4lLe"
+  },
+  "17aBJuH52B5ci8Gvp1MoBrsY9qlxdZIUz": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RmhfXHHlJTYdkhXD-vwlBvg0ApBOYNy7"
+  },
+  "1fjZGPhmPWIIWADLtA1YjeXflH5GmSNl6": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1G0pxV78GrtA5YK_HYP9EKTkVm7VmeqDE"
+  },
+  "17XFN4LiG-soKZNSPj4uu_t-tU4mNGCGj": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "13IL1KKlKmYuaT95JArJpxXMe6hHaH5ga"
+  },
+  "1-KjOLp77ggOTf_U6A5q5p5-YQ0C0pwxC": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 1,
+    "square": 1
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1N6yCR0PJkegYg_VkzArGVg9mC8G8y-KG"
+  },
+  "1uzfvydL-vo7wvj9QPSYhlCqMG6-7HssA": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1rkkEIhQMQaiX6fZfZHUnM8xRvRqphQwm"
+  },
+  "1Tr1a-GTLU_Z_VZ6ZxtVl33pzgZPcS9dE": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qEfDG-KiN4S2FpBozSOUXNEhxDuur3p8"
+  },
+  "1ooyumOmHkoKjAR-g-dW-ydbRZhRVg54v": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10GX_8wmMDNAx5raXPAy-zEK7HgMG_WLt"
+  },
+  "1CR1Ut0xk8FONJgnLJlSptWbUCvExvdCV": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1trHXwz5nCjKLRBiaaQXe9-xfHr-dUmPK": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tO3qre7SN04-5ytjP51VOranud4KpfQg"
+  },
+  "1ACfL4ajXBCB5aFhoZkZsUBlrUYDgBPy_": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1WLeUz8XUxMO-_tPW3q8m0Yi6z3gsb-4W"
+  },
+  "1p3C2rg9150qibHDWLGe-BTqAZ32c9lDq": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1jQu5kq84vGTQk3eIiIIraroYNaFbFHPl"
+  },
+  "15czfvY6_WoFwvNJMKXCW_HoUaVV97nRS": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Z-NsYJ9zXB_Bz2ZDjxPTx3hGqyPqwBVW"
+  },
+  "1hpkTB64RKMt-2p3xuBsNckaigsZQH19z": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1N7_uFP9_-gUdWFEueDuUWdlB8BtHB3jT"
+  },
+  "1Jjz2KRka9jisA8AeWi0x3ObPt7D6ObxV": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16pBRmSyTPtuo02-k3PMDNAC9yNJKiPhY"
+  },
+  "1WYcr2CkQi6P5EkXCoQaIQzfk47-5pJMJ": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 1,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1BwhG-r0FJyryr3eR6Mvvw8H5VabRCg4Z": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1oCleryTJQ9XoSkxmEkNckXkXqgod92PS"
+  },
+  "158qE9sqDfyA1yisjaE_SzTeeOj5ZZB2c": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1FwjSaoPv2qeJ0hjzVUGDaJmP9OhRrgg-"
+  },
+  "1qIenUrBNa-57K-fn1r6g7cKrSpQ_QlN1": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10KEDbUq7ZrUL0ZD6tK9-dk9G2sAJ604L"
+  },
+  "1l5hN5AxkltYuQyibjYUdB54-gZzQCP-g": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1QEDkFeGdvhe0pNQwx0r2PjCegRjZhlX3"
+  },
+  "1LGl15_x9WELqoh-NtpSHS9yAspzw61c4": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1uiK91QndVsbYHo_JjZF0xa8arbi-lxL8"
+  },
+  "1f1veM2TJzkAN3XF54q_6RktUmKNEqspG": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1mKk04bnl_vxu7fRvf79X-xz8CJo3umc7"
+  },
+  "1-M6L71lPuExlHAHNg1PPkvrINgcV8EXA": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xZTj9KszELLlfskAkkLZNcn4NZSrfdx9"
+  },
+  "1buS2ZPjlNeaRbjAcRha_LDiM7TedOOwa": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nBUzERrgXcvCFbwEyvgsenLSXTKTCSOK"
+  },
+  "18UhhiRLk_drrAMwyaplmQckQDqJX4e6o": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1KRt76yIxoLksw8flKePCRusR5K9v_JV0"
+  },
+  "1eG_8nAiKXOqrfNgi25mPSwF4XTxc15sj": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 1,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1y_iSz_dUFG0NsxRIO4HNv82gDRcRgrRP": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10GiNBj4DLN0H93ZULaVJDAUNWgXLs-fg"
+  },
+  "1Nav-r0U9pnvLV5sPp9RZ2zugFPNciWe2": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1fkIO-P-FTXnPpmYxYxSb9XqERLuFkDwc"
+  },
+  "1B6kiLuFSVrRVb4cqvTZ67aBA1x5qsJRU": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1kC1WS3Vm_FNbGlSwtDIW1UoQR3TK4gSq": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1J2Wzp4mkezpuZGz2s1CPgHfKg-9ZEvgZ"
+  },
+  "1LUJVc96dVRhlAwknzHqO6jhLvja5WCem": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": "1OPrm3H3ZHT-apVV1ZdZBA99BCHqhWxer"
+  },
+  "1nmU3U3A3Y9wTop49heHW-E73ywUFlZ67": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zo1c3WqhyRqfPvhrRZVddNUs3Qm0Ccch"
+  },
+  "1_QOOzFI3Ll0fD0wGF3SKlk-XeWjOF7rk": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hcr8Dl9tqkNObAinnVvsUF6XhCvKzDCj"
+  },
+  "1wUp0sswxbcQiuii-Ec1GLOeb3GMrGukX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1EOzwjR26KSU0zG6TYA-0WwGheEtd-alB"
+  },
+  "1UjgtVrqat13n7ql2e94g9fK7WY7iUtht": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1lGtiMTtdMJ6YUN7LLPzgbbGPD03E3a7E"
+  },
+  "1Lcl5XIUP6QWDNx_uWvBpjKinaeeHaGFG": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1aWPnfcf50VvaIU4KguSVIiNeHTGNHgP-"
+  },
+  "1oufOfRUKiUXN7W3alYc9uGVKK7YKrcTd": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1cydBKdIvqEtiwDpFTN6X8ziAnRQDl6li"
+  },
+  "1ttujdlSlulzR-hlde8drjKNG6zMSkqiF": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1IZcppDxBb5_KCd5w23pFNdjsR92nvxzV"
+  },
+  "10-_BBvC3qTVkFJ86g4ZmMo0hCzaevDIY": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "11SQf8v7GklTF_GM06ZQrU0vuuxrL51Vl"
+  },
+  "1oGUpQynQvfATtffGHiAg3ybR1KQk7DNC": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zwzz6Nis9iBIh9BnqEXEmlQvQ8GZHZUt"
+  },
+  "1t9C2ZgQ2zVzJ3amGEGNUlRoYvS89U2fj": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1BW98VZPQlRTZ0fKwgJbooX6BqD4AXq53"
+  },
+  "18IjyaO0W6YrsvFXIMBdSjv8jJkntNmZY": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Xus8pZJiQ7TdGr55ahIXpaM6yVlW1-61"
+  },
+  "1vgwRKOtXTZa4w9q6LeSizFvhz-mSqQbZ": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1gkPmCM83fEShQubS7wqCinJFKQNnMe6L"
+  },
+  "1eouWpIDL02Qit3assYtiIN-LPuQNfDAG": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "14Rdf23E6-19Z7skHDrgipBXgSTL6lDJ5"
+  },
+  "1me2RSr8Z8Qb6FiZZi8H1q7pMg7W5q0Uw": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 10,
+   "unresolved": 0,
+   "previewFileId": "1doNaCugMRX2nKIHS7m8nUmUd2izuL3M0"
+  },
+  "1jITRauRMCGNDLWgxasU3iGaETosKKbWP": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1GwrG6JruJQXGnFvVj_cyp0Bj5mhNEFqH"
+  },
+  "16xuGzrgscj17sjAWC7wiYX-fa_qg4dX8": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "12NQjTiX8vtLPxVcVpSwepmlAeqiI33hH"
+  },
+  "1bTmTkCxizxGTlV7iPQbSbZyO4AyL835o": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Gt2efKNeXjd6wtECp_ECWOV2i8A-lvdd"
+  },
+  "14a_0xDMauoo66Y4wGGCTvpcte0pGKHvL": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hkrFc1hPnevSm-TGRyRM9ckDAEzu3Usl"
+  },
+  "1f23BAnPI1zlZtri2KULYF1ajFS9ZlyO7": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17201ZpOXmP4xun8DtpDvxGX_0HwrS9_M"
+  },
+  "1Y0ue3amQJiFvXvah_GVo47TIauKgKmEN": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1u0ox2jWFRJQP9WehFCCQMKOytOgFj0Bn"
+  },
+  "1PGJvy-0zJPysR095Uux6_1E5dgKBv3oC": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Vo51c1jPXNyXs3KVCeZp79tIPA7mLPcH": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16zKJJDorgCaEUL7SzoqsAf1fyQUTrcAI"
+  },
+  "10ME8FO2Wca6-1P-6V9iPYQah5-8QQHdh": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "10Lo2ygh5hq5wWhXLsZpxF4k0khkRlqQD": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1AFkQbIHQubDiPrhdNlrY-bbLqKQ1cabu"
+  },
+  "1UNogUL0PdjPvpN25FsEWuNU_ED9NcZjF": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1k0w4ANivW_O0uzj1b0cNs-3gfuqlNbYN"
+  },
+  "1ObKEfQXmQT6-wjczYJpuQEN9UI35G6nR": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1UIZYqTTP2WniGAWfKvAhz_-gjgBX9DkT"
+  },
+  "1LpLCflBG-4BaJExL6W5JPkRBO3YgasaJ": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 15,
+   "unresolved": 0,
+   "previewFileId": "1uwqnuG2nPCNUr1mRKNWDs-J6vJVcHrxI"
+  },
+  "1XnJ9DixPgg_vnlecri2Etmh-X8WLq9zu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "15lPISZksdfmYuQWH2v_Cm3YsrIOVu0nE"
+  },
+  "1e3n-QSknSY3FqenFMqSfp4zcP5AolQ2V": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1rNKn_xvfqHncnnVM5K0ugDhONz2oaxxf"
+  },
+  "1RMXZBV0Rz32bBeF2iF4hmK5SzL7ucj-_": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17JkmRGH65XoDDy6ad12jQp3PGjUjE1Mb"
+  },
+  "1AXHrbRT_NrIGkcIMqXpkROaTNBYuHwFy": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1E5vML7BTbHFcbGE_pSslr-twpnZxp2ob"
+  },
+  "1P7yU770PLI-oHnbZha2YN0CGxE0gh2_u": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nGmkghq_lmEnNKWqVm5Z3AOdt-XAKfjv"
+  },
+  "15nnqMvEOefWJAkGsxX8xidmNSpeTy557": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Jf7gBg68drvKpIDbcDAhZqfDzhW1HSs5"
+  },
+  "1WsdBVIhvS4FjOiitQAkEcUShD3zbiOrX": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1oZvhBLzHQFaUUozqf-8KSFv-xysQhY8P"
+  },
+  "1MBDDXoImwSwrsdG0S5s9i-m7dWPSxit5": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hKjr_PGo43EwCQFEmPezLXhjSKz57RxF"
+  },
+  "11ny-uBQTDDrrbWnfdzsUlLWIu5zvEk7J": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1a0Jp3GO6XhQd99527kfjHSmA0Z5QZJNJ"
+  },
+  "1Kx33rz5lbBwlElIxF3nfjCTztTMA5UzW": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1D9E2cznVn2j_K_3ZegwssmIxSfeFevY_"
+  },
+  "1pmojuZHY__jRVeCpQFSpzqclkVWTWgE4": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19ux_MWm1J-BDLufj7TwmPC-ZHznrf8Op"
+  },
+  "1jRMpvTvRQdGzhy-Dbok26isUlh33hMbn": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 8,
+   "unresolved": 0,
+   "previewFileId": "1X2_nc6N_CXNU2xzTe3Qvry9LnlZpnqbT"
+  },
+  "1jHbEnlbCgY1KuVnkSl2e5WJ4Aw2t_o8k": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1eOFt4AjNl-j2cqtKBdeh4Bl32dW2ToHN"
+  },
+  "1KTzryMbkrWWFUt045z2_5iEfkCZtofxz": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ZZj-ezKTVPrRT4Pnu4zUyJkdA-uoNYWb"
+  },
+  "1pZ318Mpr-jlr4X4P7bYf0T0qGB1q0y_z": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1c7pR2TMu04vFdvRHir3AfgIhr12EJkz-"
+  },
+  "1h2E5KvI0KSqNa6HUi5B0oh4_hEF1jC_7": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1BxjN6BBKeSvQgt_U00Dxc4C3xJzbEX8Z"
+  },
+  "1nyyl_zQQ6jhx_gCyuBZNa1O49CTsRIF8": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ypRu7yHpmT3rcrG4T59w6bGBiOf4_hJM"
+  },
+  "14NdJeDnEXhQ7Z62sy2o30arHpJxNYbkA": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 15,
+   "unresolved": 0,
+   "previewFileId": "1-4DL8hoeg_AjzYjdPL1REXrRyXr7zjUw"
+  },
+  "1MRI8dDq1ZEjoyEQLZ9TQkJdISqMXyYMT": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": "14-zBx8eeWELPnxv-uYSH7uxmab2mijO6"
+  },
+  "1hjTe5t6DrtP2wEQGjwZ5ShyqWyfJ3NOn": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 10,
+   "unresolved": 0,
+   "previewFileId": "172xnBDMDJOWS1Jzo-S2wOM5EdhOq2hlV"
+  },
+  "1SD4x1tpqw7_K2tJZM7cqkqK_v_2G4BAR": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ym5mMIEeI1xnj44OqnDkCCYT89bcsXa_"
+  },
+  "1ElrKLMpSqR8JPppsbPk1lXx1cBVYNiue": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1cwUWY8mH3cKAH53yagfjFKfXpgvYYfCC": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 10,
+   "unresolved": 0,
+   "previewFileId": "1aPH-96WzdYyy2-DinvEtd43XtoZ3tgaA"
+  },
+  "1ktEa8M3OIVHCz4VjK64RNi3NueGOHlSW": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1JJ0IP_AY0aBq3QWAgbE2RmsXtLixFVL-": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 3,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1uRuZpyoV7wkyZe1C_sf3TIlnbm_EhAwH"
+  },
+  "10KwzRs0wO3m2TIYnOG9IPBpOu4TZUjHC": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1-ulLxnnqxOdTPmTo6Ogu6RcTDHfN2H6I"
+  },
+  "1lmBTP2bdabYpRZVWs1vVNYR3DicbFrR8": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_bLROzKzbMU_LL4UkEmuX975xD0M2hn_"
+  },
+  "11eSFrM9lrKJUl3hDzdJEIBtOo4qJ1FxR": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "15kIzKHn42LeLM0z-gd-TFyOAoSfq2CpE"
+  },
+  "1xHoMN2hrUEQFI4S2wwkgirj82pTVj1cf": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1LxvMfQOjEhB9kimYuFi_ScmeWeYUG8Ya"
+  },
+  "1ez7U55MzGJTA0rKYAx1w2BaV4RBbPx0B": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1F_7u3VEVggHbcx_R4_KQzEDW85ELDddb"
+  },
+  "1V6MDOKEo2AnRuMZrze7IhLswBDaPRbeu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1A1kYVU6A94etNkZqKVF0i4fEtr2s_TA1"
+  },
+  "1j4wlO9am6lOVWz2hkkuCBZXZhirciqRz": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1T1_a161Nq2CUvjsiL-UsUBt1_IQgxCM_"
+  },
+  "18bR5Nr_OwkDINNabNPApCMmeAzY7_4gN": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1O64Thf1kujwG8kT5XW9gW4qF3TRF0U85"
+  },
+  "1aeNEnUnJpGZyeon4mktWRzWOH40V_wlB": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1roFSk4LSOPB1TlHDT2MUdmezlHupdVN_"
+  },
+  "1r2X1SHgeiOaJavUjeuU8Sh2xsST6Sf20": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1p4GQf066TgLggiPB-HIEKzuK3GhQDa99"
+  },
+  "1BxA5sicNy2JpFFVZyv7Hya48e1UcQdT1": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Ir_o2oqYDatNSjMIGfCU6dE35NaG1dbd"
+  },
+  "1paei87Lw5ZSPuMrvG34sTE45x9D_4qBu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1g8y6noLM3fG3oIArzpZ2lPFXqldwTfgg"
+  },
+  "1zeyLBFBEy1jJ0WyoGnVnG98FrxRytWM6": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1uh3zrJq_6DBrjFHamBWQnh1fC5QO4PKY"
+  },
+  "1jaqvMenKHCYIYHOaC1RnWKHNpjko9XbP": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Vn-kGI0Ynf8Hz6gARp9sR5RTyHAONjP5"
+  },
+  "1toT3YTFvUFUDXLqoIBom0Y6gPXe5-kAu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": "1oykwS-04S62F8g_pPx7WVrSxCc3NrWlR"
+  },
+  "1vtENhpNk8ZVH7MZEbDopmksGET3mxD9b": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Y5o705xRWWmHI7_MonfkOS8PwFOo5095"
+  },
+  "1jaLgZhhl3slrY6kFpu1F7fpEv2MXm_R-": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1l9hwtP57J48bJxI-6IGJMr1LAWaOeTht"
+  },
+  "1--NBQcuC-hK9SADH-FouhVwZGTfU2aiz": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1asvlQ0dqb8u7oJpRPo6NKY681H4x_183"
+  },
+  "1CZzPdSeL3zVFAU1pU-iFM67NJTXzCHWo": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1bxbOoKY7HIlnjwwmaR9Iy3CvO2M2cYmc": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1byXvS_WmiqiytS94y1PaN5Irsx3-FP9D"
+  },
+  "1w7ScezRKRSuy1xUFQbSpzq6iy0rmRUJC": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1oXbkm15ECCvZkFb7PEx6_9aguEBL0tb2"
+  },
+  "1eRjwBawoSNOdsI4csyli4ViE06SwErEO": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 17,
+   "unresolved": 0,
+   "previewFileId": "1AXGoOIzb3qQNtMwaKN_oDCcqGDf4gYZr"
+  },
+  "1bwXoc6yuvWZuF5GalHZu8BEA9Zg20nHJ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1dyJ1zjQt75vOpuN1F4Syl6lSXifwvcFy"
+  },
+  "1DTmunTpKMBxs4uOX1olvVgEo3NUidcax": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1Iq2ppH2phjyuq2v3xdKJxp0g1Q5Rm48H"
+  },
+  "1bWtyLNrbktq-RC5FpJxRbKjfU_PxlcfZ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1jthooNFuUz-TUq_x5p8-QFO8cPb5CwTG"
+  },
+  "1OF9u8iGep11FoI6dNUIytlUZWQ2i70KT": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": "1YSYJMlsr1M3c349LTd-4mDIK9n9n5FhR"
+  },
+  "1Si00um1uIlw6qpBYLoITdK6MuMMFi-aN": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1HSpU3vrpgKZQRki4OhaiVhqt985EaI0Z"
+  },
+  "1GIULf4jd0yUBCdhT0BdWnLpriXxJ_FeJ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1yuN0_L3PVaJykqRDcMbY0OH0dhL1TC_M"
+  },
+  "19Iuf6_aM7OK-W-Kbg61O8eDJQCZXJtJb": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1pbDrNszkdmJO4h5s1EDhTVhLD55ryeLS"
+  },
+  "184z2b26zWR87cRUm_FcMWFXOEQT7Nbzb": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RvanXIY44wRvvUiMTBdfj0Fm1wrbNS24"
+  },
+  "1HmHyHVjXMShJJRJ2SS69gqaQrirfXlD6": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ZL92E0Cmu6QNBmIhmkAJ02SHyxmOtl_O"
+  },
+  "1WCU-l1e0blhy7M6wDD-K1cgEegjMuzdP": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1MxIrViS1emECPfX8iOffyBDiaz8684sD"
+  },
+  "1OwDWGIO6dtJfTxebxY1R4_F3yWQdEQxG": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 1,
+    "landscape": 3,
+    "square": 1
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "15CuaLSdIMbBPCIuV5zYCeLiwbziOLKdS"
+  },
+  "1Jfd9k1fKMZWgeY0PxMn_PNXbEvuqYAQj": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1iFZkuDY05B_zm6Kv0GiSDyasBLa1zv5A"
+  },
+  "1pzCEceW7AYbJ5TvsgoJV8Je6xE9JkTBv": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 7,
+   "unresolved": 0,
+   "previewFileId": "1xy3ptpwG68QwNF3v2nA4nFghwu3OvMbl"
+  },
+  "1qvK22bIhcQ3vJFThXiYSMmaXm0OGJiZk": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1olEs4JYMM4Y8RWDvoxX7-KJnogvVZVv_"
+  },
+  "1mXVE6KTw_tCR8g3buznAl4B-qg7kwNP-": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ne_zvFtUXlh7uWW9A3p6HRl6W4bCws2E"
+  },
+  "1Q_gnrp0UPVrMs30s0Xsul9VVOc1MHTVy": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1h2nwB94Jg8wlp-0lbiRYdwGS8pTTGGWa"
+  },
+  "1EZ9cDrgn2KPJAZoiE_ym003s61uYsjwC": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_AKAq0-5QzCL_0a_OdH_WlPHqoVjjsuE"
+  },
+  "1hgAhk61UcsbgYMp-zDxMmkoptLUIcvgw": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 15,
+   "unresolved": 0,
+   "previewFileId": "1PYJNXBz5od-uKGC6XzCM_6Wx3Y1VSYeS"
+  },
+  "1GLQTmKTSZgQrhb1_Ia5RXYJ3-fQtDoHw": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1kYLQTV_Ddn7chNPBCqxndDrL0P1WcwdC": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1bRnB3NJxqONZ168rn4xSEATGoSa54Rn1"
+  },
+  "1a0FRc3uyERxaMFWBKiHADPBa3DB90xau": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1G2uLzMQZa3OMUia8I3x_uKw86hfclono": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1yEiPTC-PlHgJ5df7CY6LmE9gU68KFVfw"
+  },
+  "1-tcSY6oLh3mRC_lHazTVCu-MYyZhdiLI": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "15HLhWed-clX4eGse6LgGDook46NBhxry"
+  },
+  "1UHG6Exk9M6xNmTIV5sW6pU3BWPmw668r": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 15,
+   "unresolved": 0,
+   "previewFileId": "18zZVHiNVpviP0IybKUMiFmZwdYOnU04y"
+  },
+  "1ZxwztGi0rWZD79UpvpkSv2yQ7r46yt_i": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1woZjMpEi61IFpzCrgQx31OVdDF1Vdh2-"
+  },
+  "1Hwd6kd3IHw-XeFthAYXMMEhfuRKzho5M": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Khgr4KjPwgLqQwfPTOcOcUbb6UkEu3dW": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1u-7dSib_a91QklAHnN4MT1VjciM8jDPP"
+  },
+  "1PkEpjd4N1M9B-QiRaAOxcckAgJX_xgx-": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 4,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "12wEOIsPknjFxuAeTQiO_3pkQPrjwru4J"
+  },
+  "1Xdtmg1C5MGDWvefdvpMtv9iNp2yu0bbB": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": "1cFVM-WfQIcQ4PW8UATI8Bj-KX_ec6MLE"
+  },
+  "1pyhVpIZdRhmiznKZimTR1Y0dpKDM4PrY": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ZIbW3HFzZoTSYJC8KhG-cgzV33xIyAhA"
+  },
+  "161KWCAKeKgiNRZ-CYLHi7xSFTRu3iTCv": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Y-MT2QFp9nTJU_1d9JgXGbH1k7UM1pmP"
+  },
+  "1tx8NeP-142pOWYKAddMqjGDoxnrdhngF": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 0,
+    "landscape": 4,
+    "square": 1
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1i4WQ9BDdupheeD8VwfZmvC76sgp8uux1"
+  },
+  "1t2tdZikw7gALA_88wTmGmNXVIhHrreWQ": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1csLogpISIEpV5yquDek0V8sgKdEXX6lK"
+  },
+  "1yMFXd-TV8YnCNiRIbJbLEmkpQTuCNjHr": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1dK87tX6g4qIlyvt9KE198StS21hxbzxs"
+  },
+  "1nqhafV4vv7nQxl5kynQXFCdVjfenSCZ2": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1OcIjxOGtNnQ7UWKv-ME9TNJzQbOJNOpn"
+  },
+  "1ENcgfFxPa9gSlM3U3VnIn5zH1UioVode": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1HSaYAQM3u-6mXALCg3VHDikCHXjcfGoZ"
+  },
+  "1EF3WkNrNu56FZhTTi8q3mxdFivK36-5p": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Hsp8IzJS1pXXMosC84XHzXnnI4gJWSmz": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ZLdtQSjuAG3NqBh1JOQ-N1mrx2IlbsFX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tgMq1M2ZOVX9ftsr1wyoBuihkh2In9BC"
+  },
+  "18aqorqHG57HoDUgeKuvOkPMWUgNMWiZY": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1wmuVRFg9Wp7EBP6AP77LdsRbzwV7sjAk": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1w94QTQp2cOSTUF35eLyau7cGXXIBty7i"
+  },
+  "1CaVaGnArXvaK4alDlZo0N--XNqmm7cED": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ql0dqaRQXf0EKDHukIr6ZJ_4wTW7LbGw": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 4,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1i0wDlJ_0xmU8uWZEDEgdGCVUUJwF8kjX"
+  },
+  "1g1Iu5r-fC_sdEJCRexDrchbOsrLnVJ1v": {
+   "orientation": "mixed",
+   "confidence": 0.5,
+   "counts": {
+    "portrait": 1,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1LOAHtUSYuQ56nUBQ99t0c1ODEqlk8VS0"
+  },
+  "1Zzl7L0DuCFXBxX6IwEBklzNXnWTobyKP": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ESm1xa2X6vl3uuAzqWbQcZ5Vk2jtUMEr"
+  },
+  "1IcsZyDPyObMWssqSqA40ISVxh6C4w1jP": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1r88zYrXF0InFzA-QTpj1UE3TM18a1JGA"
+  },
+  "1xEbIHIsAXQeShLZEUElwXQQdTLguT7xA": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xKZJ1yqnCqCL-kB3Zn9tx9YLXgUoHyNu"
+  },
+  "1sakuA3lM6gHxCe7RvEgBM3obM52nlJDV": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16hW9mgl_kqezTq1i1ANUUiwf4LRHuXDZ"
+  },
+  "1grNIpJOSddt1rdH8-HF0eMLSOBYjfOyS": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RtEFKG9BdBLd2piM0A0D8nIwaUCqOvSI"
+  },
+  "1nSgfSNGkcmRRg-KCcGwLv4jMggrFeYJi": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1SdKDXEy_WG_Tt4yZJb08yEJDoSrqQjRb": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1P1i1wG66S-SW43gfdDR-PM07kcR6x0Ho": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1oreRDX941G--FicoLxVIlhIzyyvC7Dn_": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1-8Cdlw_x3EVvUJ4kOwLaRjbtLXXy9hrK"
+  },
+  "17x-I-4Ps-2bku5Ol5X4pOlX_RKKbDheP": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1JaDKinPLYb-h6fyqDc8F12Y3XZKvFX1o": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1CmfaT78c3HkeFHgGAHkfpy_VvEpeb3EE"
+  },
+  "1u-0_qQjwMUR9rz638JToR3daCNerGusC": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1g-QSw6i5tH-bcbbkJ_ochPlejL5tLylD"
+  },
+  "1cSTNDQaoJgUsGJt9Cx8Zaf6UowoDrUzy": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1NjDIidcD5JkpYUz-nws3ijKde5w3yCWL"
+  },
+  "1iRIVHXfAVJmNxMSd6IMcNgk_cl5UwA34": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1yELN5ZXu_WGKKNgxdwnZiYXwYrYfUxTp"
+  },
+  "1ZG0XCr73Dgsk_UMVwmIXMTwwNmN46X4Y": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_Z_c1LXJanxEid9INsKyjDntJo62VUnJ"
+  },
+  "1PuGZmpk-WKzBB88X1H8cL7_EtfrIIk8e": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1OD6xm2hCgVWELeIMFTuBTGMVzSKAOgC0"
+  },
+  "1QjzTp0F50ckoIkMPhXXqDug8XNwfehiP": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1VZUXm1oV0lSl4DTh5LolNO6xv0PCLu3t"
+  },
+  "1vehWP5Prj_AVJDD26kcukpvh_JywMpPB": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": "1wfoSSFvJVPn6gCK_rfwPK3Bt6e_YefR2"
+  },
+  "1-6t1Us2i4LYlk42upI28itkz68g7dKW3": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1KBBVZHmtJMSRdyLRUHeORkI9TyY84zBu"
+  },
+  "1E6-dthOpv7LPzAf1SXGYEUG4oBOUFeqt": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1mNCydCCTnGaKsCoRhLHJOzaX4VSZjP2c"
+  },
+  "1-yk0_qUWYf6u5LCC1TO2GUQU9TnhBlJx": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hC-UOTCY3ZvgFSIN3qNK84ZMOouJ1xqr"
+  },
+  "19oTIH-9dVzZr1nBmfqFbL0YYMkWVpx5Y": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "11TBfKHqwjU_1EnKh2NggDXfg2CsjJ6lo"
+  },
+  "1YeN6MyGLyVuZ7Tuu1mKtIDqvLWRxESzj": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1OA-MJLUJIfxsMWTMMfOmXkeKzrBFvFzN"
+  },
+  "1b6l4qsQPFWdK4sgLLEaO-5-iKuDwdGyR": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1SfhmzaOgiqo9nHv3yYnRmG2gdtVGCpH0": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1Q3oYTEzkcNrLyajIA18pbed3CH17ETf4"
+  },
+  "1oXWwBGA4Sf3LsLUTQHAoRPpUf36dCMvV": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1Cs7676xBL2i9GjbTgmOYp01LcsRYShZK"
+  },
+  "1aLsp9qT8eNFB11xLmEMFh45AscuxwGSf": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1bCMMtnfoMrhDpGzLPrNmjQ89oW963IkS": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1EQAfqOk-FEFktccTNjr_m8Hja13ydo7b"
+  },
+  "1sdO_LSTbUJQ38_eIQ09nsO0jLF4X2-GL": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 3,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1otbPgzSDAR44NS90rF9GTwKzvj8xTEM4"
+  },
+  "1kqr-xjYo4cC4vbB4SytJ8la2FwTSyCSv": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1_ghC_szhQ7LPwBHWWkJn9MuJ_MUJtPTC": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1BB-3zaQlIbvOCHF62d5NpTJFRCXRuXes"
+  },
+  "1j-yTzqXbo4OGgktJXa8I49XR_39D900E": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1FYv6jrmWeNrbhZxVGllO_WnfjmjE2csw": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "13x-y5wRbLjPBbzSvlff8FTYPYvNXBwI1": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1bqzkmAQK327xze8314aBum0HBwx7KAL0"
+  },
+  "1xS85J_ulYzcI290qrIiSI2WNutAAf8UK": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1sCb98PuYOGa7byzG5P04h7PX4yR9cAdZ": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1u44f32_dn_mSs7FjAg_ISv8pNRN5omtk"
+  },
+  "1gb3ZfQ6Ji0DmGgGGi0OhDWFncx9DI13i": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1spy1pRk1oFewOidfiyYuRJKrV5KAq_51"
+  },
+  "1LpLfWbfndhQo_n6_bENU3lzfjeu7zTSG": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1JvskFCy3tw1qBrdk0ab8DkB8PVkc-SCq"
+  },
+  "1x_fOXt8J2p6Gm4J8LV50KRM9clx0DVB-": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1AxWRMtZYrHE_UkNFaOzD2OEe1DWpgwug"
+  },
+  "1f_uJMjqmlbTq-PNCmGtdVovz-nCduhIt": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1m3poFMm44nbaJMwhEIlEweSDa3VUUZll"
+  },
+  "14K0w1fNCpvPXRVtkkmzP1naRy3fIc0-2": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1CyZ--ttIwnDBhmn25ZPJViq6RPuBGNKg"
+  },
+  "1BLrLwCcXUyLqCLs80IzF31ZfQpoJqn36": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1EO3zAlJEGQivoVD8VhjFmzXQefXi-_RV"
+  },
+  "1kwCH2BmGkVHzOp-TttEC_cfDTnfFDfhu": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10SErjWBVx2qr-T0FKJ2DK2dW0LVtpAKG"
+  },
+  "1yjZb8mJmUGRezHFqD5SEYXZ67CaYEo-U": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xldh9ZLh9pGUdIs3FB6OET0qvv73Edam"
+  },
+  "176BSPgV9F5TDGE8K1OBb5HGKYRUOs4_s": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "14iXAKZaGsUr1EGAzrqMu-ZxmYfic02Jx": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1NcksTBjlngaNBvVDgkh3iPDKHgut5yzS": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1SDpAnMiUpFUSpqRbdO9bh3pPJB3anKya": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1BX3ooKAlLG9iiTseFKOPPyFfeTi7SlsX": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "15jroAKAT8F9SZkMeWoxejWONE5veT-x-": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1xOI5zABnTKs-LUt_Ntopi1r8lXRwrb4f": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "12sb1L2-dlsh1wmMrwJgl6-CA-K61E_aB"
+  },
+  "1zxQBwDh2FDUqpGVLXzzn35Pb4PKjNC0u": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1DKIEZZHV4wS8dYXVIlLcusWQc52aHHkP"
+  },
+  "1sItegzpZPkCIQp4OoQVjlt8soB5kAQaH": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Hw65yPuUiTeG5wWHMRXvTeSwEH3pOBi9"
+  },
+  "1qsex2Ad9nlPlKdf-lAzrdVJTUP_K3zmC": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 8,
+   "unresolved": 0,
+   "previewFileId": "1DBkBLu8gQXJcIREN4uOGB5KGXXXQLGwI"
+  },
+  "1n_7U1sPkIn749F0AMHSqVY3Qmos44vG9": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1GsWNLDaq-mkmhWd_Sj7_Zfp-Lfdj3Y3D"
+  },
+  "1BAePdpv1UeW2FMh_oufXy3VShgPWrqUa": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "11iOrqDrwjaw_VuSYxUEn9yto9NUuCee0": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1Trzu4oX9qYZBXbDGq0IbNFjTW06kpoe5"
+  },
+  "1K3Azb0TU6_zkVZFWB_v0siBkC7A8LcDo": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1zm2ytEEYeAjgszpeC-QKKrqQftgQRfpx": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1KOIdgxXAFYkKZJt2-b1nKddqg-mD3PzN": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Vfs4SyCpCsrWivqwwJA5QMtUpoUd78gd": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19w1IR24IIx2q6jvajYanzvmuR8T9YxJX"
+  },
+  "1gBkK6OClu3ELnBS81I4WsAnLF0erghDf": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1jCsbqcEc8uSBRmrwwOnKe8ya1sLsUD8f"
+  },
+  "1w2auNG5_wIsZS0usPts7WSepK7VEK2Wk": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "12khoXD9iYhG-GnHKTrID14HS2oF2Szcz"
+  },
+  "1idB7b6suiQusoPUHRMTiGSCqSaM3HTXl": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 0,
+    "landscape": 4,
+    "square": 1
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "11GurD4hKKQcGCHcMj_OXEzWBQrs8zuXF"
+  },
+  "1tM0D6O6hdAJlt9KFwfnwCGlTXjXWJctE": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1B-Tcgx-ZvDYFLZXT1DkGUmSTGIPYcFno"
+  },
+  "1OrJAOwT5s9Pya6rotfAYFNqkcy6XJA7G": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1N731qCBpiVQETVHcg4yHlQd8FXMXYJ00"
+  },
+  "1n_XxHs4_qlWl8isPhVGHeFJLAD2pLPYH": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1mzwjsBVzQ1XWLthQEgYAgpDw7xGmcM8r"
+  },
+  "1JGjEzucCYFuGH3TYxwf4XIrzAA0JIgA7": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zeqI-HwQXO2qNCgFyUP0HU5ik480eMpt"
+  },
+  "1feQ6_wGjR48v3YexZqhoK87uB9gFuCL-": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ROUg4mNXLG1QZ7JOB2oQ31JKtWEkb8jR"
+  },
+  "1G61u8qdjV0BRRY-TZF1AHxaR6uivyCzX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1G6aJLSiy6Jxwqp1MYGfR708qzSS-Ug7l"
+  },
+  "1Et3FxqycEiSVeE7DFlQqypuIfLl2qZnX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Q4zX9mDCV69wWCVhXwMO9wczwtLdMMTp"
+  },
+  "18pKOWdoQ7R6n9qxcbETMrM1gJAMXDIJr": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nGOMTtRnaeuDqJnTTeb10xQ-pukFGbbw"
+  },
+  "1rxTMcxL0d8EbSofPajP-rs69gF_h8wWQ": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1U9juatfN3pRtsUFgVFNDk_OzM7WIUytj"
+  },
+  "1Z1wjV7RQh-AzElizC577ullcbYvE_6bU": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1szJr1XkcH1WEO6lCHkFXi_PNrxdRAOJc"
+  },
+  "19IFe05bT1XXZ5o91-2m-40XoqU1KeEZ8": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1jTsNSGNaTlu7gCuwdJkwoeogwy077C2t"
+  },
+  "1wsa1RiCLntMM9bESjQbDyOA6pzP80IKl": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1xm9eNUyRP41PqMCxFDzDyJ0qz3zRme_X": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1w8gzkhV6PjBMdcUMlf2wSgn_0LBgiFU6": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1vOYOd6zEp0-I2nhHXHr4VqoJYkw8v6da": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1iF0eX0Bp_POYhFzM1160A3e-ETZIQAyz"
+  },
+  "1Wgw3bCgGPrhCuJ-p3OVIVLcYtGL_gJkB": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1S35XONDDhvb-hxfrfslQAOQ9C6kNi7SI"
+  },
+  "17ONM0KwTvYQLLFIsAZIOXCGekKGZu6--": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17Rp3EE-ehCXEwrHxvPVmNrMcBTUURFrd"
+  },
+  "1YZa6X9Hwyq86_AJupeIczwEgJgKcr_rN": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Pu5ufU2KCLMVUl5Ry9QMxOJsaWyqr4oJ": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1v1vy_eIyCHQx8ruDS4RJdQHJTRyqmpol": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1WXVYxW8icoqoIN5Px5_vn8sxjtHlMKgv": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 14,
+   "unresolved": 0,
+   "previewFileId": "1uCPgJ_klB-4bBwp3SmwMi7uimKn8KU2G"
+  },
+  "1fSWBkX6qM_9JG5LK_vrWwgLtPc4sXfaA": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1OC432WZ6rCr_Ygx3QZQ_72YowWChUe_p"
+  },
+  "1FM97RoOMuISavHKDy8J15Lyn9xsqon7e": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1SiU_5plOr5g7lJ4obKGnEt4BCR45ousZ"
+  },
+  "1Er9BfQs32qbi8o9ss58WHpwZK4O5tC_x": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18nff9hFMUADoaxWF6NT0SnLefA_jtPR9"
+  },
+  "1KCBzL-VimL-jdskfsxDnpyzrWD2Uvjg7": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10AfU441z0-6sCiocQzJNf4z69amC6g1D"
+  },
+  "1e3eiTtkRy5FZjrzVo74E8JAGAGbueunz": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1upZY7kc3WCnwbDwtegoFlbBUMp4uqeLz"
+  },
+  "14RPQVn9Hxfa6DQQLhmbWV_IYszrZMeX6": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ix4UA3UJgjoZquj7yxncUhWyBVhg79-S"
+  },
+  "10fvbMNZqGdPor8w4NtfWWxzTuJN3XzL-": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Po9u92KoOs-osQ_t4b76PosQuksZOeeJ"
+  },
+  "1Qr5lnF1l-HMgUnlPe_Ws5ho5HhBvPcsy": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1DU1IeepV3HX3EH93EMLLpjPJXkTICtGa"
+  },
+  "1pY1ZsqJ9ZzOvcQyN-xjS3vH_w_6hw4F5": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1gK40sODQBCFn-bXc-o62A5EXSViS-mjN"
+  },
+  "1nyrnDylXwRP4GAiMgyDaYiufg6YGFV3c": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1t3-P3hJyl-brfckxgd0HsB1BTawyG8v_"
+  },
+  "1iWw_alXY-m25RuVEUCxAE0N70N1pMyES": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1B7mL6DCTkzTfWC0iI6BVXyyMvfyOWyBk"
+  },
+  "1r7Ea8OJYcy9FnxOmpx9uIXiZ-r-xCvN3": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ayWUZ2x_SDWecM7y9pJP5iatQ8Mcbalk"
+  },
+  "1prmYpFdl2RWIsG6TQyFSe-xFtaKz8quX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1s53GP7XLYqunR0Ot0f48S7yDv35BMd8-"
+  },
+  "1wePwkAjT-ISucCepRPHyCE-9OnQ8hhRL": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1F0XzU87x1LvIjKcJqjWyAd6BtExx4-Ed"
+  },
+  "1LSPQrJFUOiyIGInmwSFjm6Jj5ervszLx": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1VKrMGoPNIiUo8fd_Mrn7NMg6LnZMgZgo": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1mPb2c6svmznsWZBzpvwjE0Bc_l5aLSbM": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 4,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 4,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1jXaalV6ps2FwT6l52G2iR_uhHYgw_McD"
+  },
+  "10_ga1CkCPngIuRr-HqbXmykjH6G2G8uN": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nNXY_UZz5akfRRgMGXdfynvlDfFhuUBP"
+  },
+  "18VWNI7-S1YVzBOYzZwa_RoGy61K6Ap54": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1VKK0AztSYHBnGiHVoCE8xoTvCqUBd342"
+  },
+  "1LKSIDBaJB0AlxH81LqhofI9ppSaRDbQt": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1MNa4E6PoDW9rBST7wUS37wZVkzxFB4Es"
+  },
+  "1eluLZH3yMlTk9qr5nhvBRBVe7JE5AVEQ": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1BYQACi_fXoxDKfBJQOVfZoh3Y6R9F6UI"
+  },
+  "1izvnOBMaRzHKrmqXESIez-oAG2_4gmho": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 14,
+   "unresolved": 0,
+   "previewFileId": "1BJDvD6Pb7mPLqLZX4RQiC9JpzyrPpE6A"
+  },
+  "1mMer413_MuDR8Fz-uxH1Cmukno5OKJ1E": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 13,
+   "unresolved": 0,
+   "previewFileId": "1oqvUu3ovI4C7R0XP_OhGvwJATNnAlIwA"
+  },
+  "19dLW8ftvvUuYOEJ2ZTGlWtKUt_lIe1OQ": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Hsw2UkAxPF7moarB3AXtqnR4YIp-JDZi": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1Zf59TX6J724jm_Qs5vFMbup7ijWUd9hl"
+  },
+  "1E40AIRLZdiK44sg0sCh97YMgUkY275j0": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hXQWaypyYNAmeR-NsEk7lqgbSZzCaM9_"
+  },
+  "1yiz2sx3DkOViMfoFbIrCMhUDg41xgKRl": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1q8tacq6eOThr2so8X2j2BrNN3rmP1WHM"
+  },
+  "173ZfbbXXz8g0PqUP1d7o6lp0XgYDIuHf": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1KLinbR2p2eFtmpze1nJpL2TkNIK3zPe7"
+  },
+  "18x4vlmYe_c09gZJWDyGbhx1bLMWf_C0j": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1rE0wFJmwuKOFrum_4dkGqhi1d_822M5w"
+  },
+  "1S42r9SG9wby-XHXHc-_WL84po_bBUjMt": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "11-NPp3FTLi31FKFGA96y3Fz_WTxpjXmS"
+  },
+  "1qaUTvxjafgOeisrc-jaI_vkXuxUip_Uk": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1SIyPNNHiOdIQ4yywFM_dWCU8gLsC9nIL"
+  },
+  "1IR2_dHLgq7j1pFOFkqpI8ZN7ZvqLzZ1G": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1k3kqTAQg6egiAo9U0Y6FlXkpUYi5gnkF"
+  },
+  "18Nw6j84k3fMHEo_8CDdDd982kJS6V_NU": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1VZ2hi95mEmiwM5E5-OgWtiYEuWrecU7e"
+  },
+  "1czI7sjZUhSjJN3MXSOx46cFjiajaLwSp": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xsh69wAhZntOKS71vfIWX_JoaYmJ8umO"
+  },
+  "1-R07ltcOFmdc32Ewvsh6h8WVA_fIBssA": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1rok_Cj_MWzhJtPLXZXEhO7whdtu2GYbG"
+  },
+  "1tJpmNp_63d9igvU4xJym3jVwxZInwFc5": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1a2u0IL17Du9b-_c8GK9qi483TDsMe9JI"
+  },
+  "1XPt1lDzae8G_ReS1626FWmem1cwbdUQI": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1aFarVmHuieJ2Lu_DfRDKPBBDFHXsXZ6X"
+  },
+  "1zlhchOvQfL7Q6rWnj5NjKnDPNgSs49y_": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1B7h9kNXuyTE5ZaS6KQRba-NwQZqLCT6_"
+  },
+  "1AQmHfrK0KckAOu3-QkzXsPd6FIH58bzQ": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ptGvlfOvX47eXgLIXTA5BvG2-0NjGGpe"
+  },
+  "15S6VLuw5NGmb6K3h_afcs6i5S-h6ylKp": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1MUDISxUMLKyzcyZGXXG1b8WmJzHiEmfY"
+  },
+  "1aXVvC0SeVCiuZtJs4_l0V83lDsLKSkIM": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1A-tnkR39yww-FBwU2ArZUEQkjrQwbiUy"
+  },
+  "1QmYR4mfN2UqSR9wOKrRyVhGVXKGLUy0A": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1hzixYBG2QTl1EI0yqj6PqItWr-Xu9jho": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": "1bqzkmAQK327xze8314aBum0HBwx7KAL0"
+  },
+  "1b0M7P7zAzY9OH0Tp71jVvLelz4hF84wn": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 13,
+   "unresolved": 0,
+   "previewFileId": "15OWhET95Cuv4tjSeN_T9jk0jNIdDwoR1"
+  },
+  "1F2ak-9OTEAjk_d0rZN-j6cdSUdalmTWe": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 17,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "12clWvHfIfurU0KyPiGehv-WIPAEFAIot": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1yfU4xgnnmU7q1glbUE3tATFvieu3ysDw": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1VGQOotHQHh7NqtLaDIGqR8-r57SUNcgG": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ogRG7L6owe2AeVVjSKIP7JyBZfCr9jZ4": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ACzNYbyWDakv3mEmC2hDreyO_-Pcsluu": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1CJk2ZSo5k1x7dooam8CGBc76SOD4xooq": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1I8dUoVPLNGJDSk1yYy0GZpaA6J5Z_OmV"
+  },
+  "1PHTUrCNWNZ3QbXKVHnmX0mP_VfqbOtg0": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_fSq_SnDidBmRrJ4Xm2plEqpQgp9OXNp"
+  },
+  "1aXw5YEGoTMG-IcZqjmt2YukSO-zt6qm6": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Ee7EYjWP6pjzkCZtJTUSXy-5F2Qvpq14"
+  },
+  "1fqKTTk3caBc9cmF5P9RCtNmJvcdSxrpU": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1JY6Uh6OKwNzV7QPQqU3UVdaVUxlwPutR"
+  },
+  "1bxw0rzOk5W7EmltkZY5VYf0HmpgZmwgG": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16KtbLdoA0QSs9oPAOhd-sYrLvB7lwgYb"
+  },
+  "13y5KY21q1eNvskrzSAZc_q4Mo8qiFZeD": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1DZdawaFM0wyZD27iz5VovqOaEGMLymUp"
+  },
+  "1UQeC53s7T44MSsLf95orMTB556qt6dfv": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1PAzqEMsTMNHmR2u4s0lERsFwZBSk_Alv"
+  },
+  "19Fze3Vp1AvyKEFqaCPuN3lUXaCXKfK7K": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1DY3dj84wVUgh4DkEcnJvtQgqxRyqY8dF"
+  },
+  "1Io8XlmEeIr6aOanzRBm9cu_H_8O1Gl_7": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17cLS8QIK2mxRRnq_ZMQJaYDlfaQr-WMB"
+  },
+  "1SqeSetUcJy-xL5rH6-mtJH1FvapcVYgI": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Mp_W4LaMR54Am_DgKnJUpOktzNDhQJHa"
+  },
+  "1hVuX6l1S-zy9n7T2V65TNQUhtiOXrhcP": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Qn6E_qDyIqMm503uAor-2wFp8SRNGjQx"
+  },
+  "1wFfTFuyIWENMm6FoNTjsFIUFqH1BLM68": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1P4qPgDCnc1uhJeK36UtPNVWXfA60ee0R"
+  },
+  "1qg7CwkyndrRButFWEhDQIE-S53rze40A": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "13WvKAi1STHxFwGGA-2JulsvRdMLT8uX2"
+  },
+  "1hziyTCeJ5fkPy5FCB85hya3ao5Af9sAH": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "12E3i979RKNBOe2rhNjrHlLOyLsPEcdVp"
+  },
+  "1Lzd7tLAfotvtnEbOR5v0mQcHjmgcZk8m": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1donW9ae2EX6Dmg1aj2hJLK89n1NZCyxd": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1frceiq8Q_772L0Z2MuqriNNroj9K1is1": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RgX3Hvk7z6PJ0i-0Wu-pMRkKwYnTep-8"
+  },
+  "1B4ONrOFKCwoAwr_l98PLmBze7XkIF6AV": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "16M23lCFSA3oHdT7HQ2w48Rss-VYeEhkf": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 16,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1oduAB8qUOcac7STU-qj0fRYxbumR3l4N": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1YgSRFx8XaAxl7GMHZE7Mu3rxfVqhS3nk"
+  },
+  "14v98CYAPBCqDmAEN5CHk5LNzbywJPEsd": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1pv2gqWl3XALLKv54Y_CU1SRQwu4HQJwb"
+  },
+  "1SoGihjYdBzRaKbjuovyxAwbvpMYGR45d": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1YgSRFx8XaAxl7GMHZE7Mu3rxfVqhS3nk"
+  },
+  "15I1fso-ikzNIcxaPCxYznH9yZ9-kgrZG": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ayWUZ2x_SDWecM7y9pJP5iatQ8Mcbalk"
+  },
+  "1GlkWYsvBns7aTzsge5LD4mfktW_J_CLY": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1nkslGiF-8MiqvkrW1P95AjPHJT4KChYe"
+  },
+  "1aRiDhUpsmWvEYJD3VCZiwYb_RQqIRYl9": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 17,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1jh6NcMq78qlRA16yZRdyzQTZFJ9UTE0f": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tSNbYwKGApPKbq48fk84f2Bl57_laK30"
+  },
+  "1JE_8oN_nkGYfsr8jsYQXDr-hvIfEitkc": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1J3JL0oC3Q--DbC-sHubOk2ElFx89u6TN"
+  },
+  "14B1ATs4QbGGbfuRf3o3ScmQICXBV52Ia": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1muW14TUEO8AXsBopO1q89acSWhYyPs02"
+  },
+  "1sTz28z1yFGHeZoNZQZ3EReCQMQEa8NgQ": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1SF2gWgqd2W9QGp6UHvB8LbL-AyztRa39"
+  },
+  "13xpdse10Iz4yYE9I91fpcElClX9z4nzJ": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16NRdrcNhCwVzDwJMQCm95V_TFfvD3OSv"
+  },
+  "1w8aIkSg3uRKicyWLjhczHs-ZKhxM3lOb": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1IqMzcRkYMv5VEagC_-9q8WMdUkBooVuD"
+  },
+  "1qsIdjWtEI3VewLW436NYBvYj-ry5n31q": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1NzHlHO23rmLRJ_BJApq9Ri9W9ML6pXxk"
+  },
+  "1NeTxvCIC5biGTrI9WZFwi9Nq9JkYIADx": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1xrlbdNL-Tg9piKh-y3iIP0_mQNd77iwq"
+  },
+  "142tNjNDBu5lhbuieH6TRtOnoVv6PJdjD": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_2fsf18KyBBB8knP1MUE4RyfxjmxVNH-"
+  },
+  "1x0mBVVlvYW7q0BJwUKKd1bozQdtZNlqB": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 7,
+   "unresolved": 0,
+   "previewFileId": "1ixwZDgD0wyYImXLXxhFxLCrr-0KATxFR"
+  },
+  "1rzOWWYd8E6Sqe8UJP96RGEEEIZ-CJyEM": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1NOYQheQ6BErXwDPyQCWeVp_0s8UTOCy_"
+  },
+  "18Li4Y_Uo5xqXO-C0RluXozrjCslS6cr1": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RP-_r4Qo2WZQ8c23HKyGvS_H--AiCsjv"
+  },
+  "1UfoLD9NOuczb-f7NAxOOVEy5_-4RxkTH": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1mhNmPEBynv6b3ib3CboUvWM2Vg34Yut6"
+  },
+  "1AJch6Metv7YfqpgYNt2785UVksIIJJV-": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1AvmdzZSir8hKzY-ZChd-rWQkreNiZz6y"
+  },
+  "1c07hvd4neDFzlgL38KFmajVvwOBjHX0d": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "10VgWrR7igAt5eUrUk16z-52vyvoZspOm"
+  },
+  "1hJq2X4rIybmv-cIRUesmP84aeuUhuuDN": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Y0OqVG00jg296NZ8bBka0QFd8opEwdsf"
+  },
+  "16vNEr7NV0IjLlt8Iuc9y4KWyq8l7ho6z": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "12xgrcerw0vKQDroRIQlM4xml7v4Lwfen"
+  },
+  "1ee6mwm-XQT4OXhnqUOOEKTPYBgjLPRci": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ruhz2ZyPqhGGif90AtnnKWmVAlEUC1tz": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Dhiw1qVGoSXyiWtSdI9TswEw1JlnfvrE": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1O0WEdv9228p4e7UFJQZ15FfVL7sIHHjr"
+  },
+  "1G2N3FvjHiD_iMKRy9ShnQ4MrRYSMkOAp": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 13,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1qXovOEe14z-BiCmbzyEDlzJkyRpoBKc2": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1U3q1Gz7LbmudqEs64mI0hnhGmnmrpLch"
+  },
+  "1xEPOMLvKIQHaAnZgm3K2WMx-sWCbCQ0Z": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 13,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1X0t_fOe-u1OqCAeEx2xvv9I9wHmjDQJ0": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 2,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": "1XbmE1i2lBGZNSFlGM3H_Mk0f6sW8dkJ3"
+  },
+  "1G9dBOb_-Kp9B6HQj9AYbzvvX9TwBJCdK": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1v6bpcMlJxe-d2ER7Hb-k7M0zzZf4xbPj"
+  },
+  "1TQPmAs4hMP1BHfGaiwj2-YY8ya41Fkwc": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1gyHu7ZpYSRxAXaYCWRX6uUQxSbjFlf4m"
+  },
+  "11xXP0WxZzAUQZIza_pGc1CNf7cmZdtQI": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1TG_46qw_eX7tcbXXSTvClY00AzCqUdWX"
+  },
+  "1UN5VHAKcGf8FV0ie6Q9LGmThvPABH3L1": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1vZXLVRkeOrtYIPpRu9dlO-aHm-6gPKg0"
+  },
+  "15C78K5YuFFPS-cHrQaHPdHdXbv5-HDMB": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 0,
+    "landscape": 4,
+    "square": 1
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ChvbZWksb9nEXZAjAZat49Mn3Ra-CVhX"
+  },
+  "1KTRhsmb24BvwIoBieDNeluLsflMVKTtt": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1dQJEGJsHnOtNvflTWXbDEljwuEi5PR5J"
+  },
+  "12cFYq6H4z69S3UsxbA2dgKirvhcnFJBm": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1oRChv3ugsxv2I2AFIeKXsFrBV6iadHJs"
+  },
+  "1N2MUaql2lnj25q4_LslgfmxhUWHU_VZK": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1XB8elhvdnuFEvA1RKFNIvn5mu1nDB-hG"
+  },
+  "14pND88IqK3th3LJc2JRFxCd9wRE6GTJd": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_IZ7eV64jXr7fuY4vSa0D3MV-MeZeej_"
+  },
+  "1TnKO9_7jJWzICIJF2l3O98KrKoE3Bev6": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1MqfHvoJAflN-rbC8gRON8GULBhqRcMr0"
+  },
+  "1ylP9bMKf-rFUzYluDonl9v5YHkIXhV-V": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1M7RVVPV7DxaOPuLiZbuN1h3NbldMcn_R"
+  },
+  "1x9PoM8YeNo2X2f3LVwPOGAPCrsAzpsQh": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Dppzy_-sfsfjXKRyR5Xvd9bYwmuysvbg"
+  },
+  "1xYClu1B5FwOV0ToUEX0QRRjXvDHQ9TuR": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 7,
+   "unresolved": 0,
+   "previewFileId": "19uUiYoUzkGZ43__L0dOnA98dnyne04xY"
+  },
+  "1PLd2o8EMFklh4z3DaObjucg-fLSVZeFn": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16uGLhL1wi8FPY08-HWk5pJ1Ykn_gBdNi"
+  },
+  "1qhTEDZUApnn0F449ydTN9pDO89ZoY8kH": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17gqr84HOjN0tbhnUwal-yG25c0-jOfUb"
+  },
+  "1gUA-RTwAvQOiKq2WUHYxf0pFafVMz7q7": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1JFoNvjm2-Mr8MR9EGkcStJjcokSbuhTx"
+  },
+  "1_N9AIjrXkSIEaba05AcnEPFaWVZ2g1P8": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_9_ZJ1wSqH9KIuP9ExwQKEUzE3tb9AbV"
+  },
+  "1IcjRFP5VnXT2CbyOq44SVpT4i70z2ugX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1A1wh9egBkPYQNmWOz9wrk3eNoraSkiGh"
+  },
+  "1fWxW9jDUrRUuf_5tUpQs-jAZBnXuKNYk": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1iFL6VnDBItvGoSYxcPdgUHYzT6pFMlJB"
+  },
+  "1nKhhMoq-DTdPWcoNGKq7nBWdoOF7YIxS": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "19_6E_oYqp8JJgAVfWENeFmOclQV9PQhG"
+  },
+  "1Vw_mSgF-63ppnxpA7Nkp1d1E-mnvC2B9": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1-rJ-NvHZO9TdG8aSDoyyAShDjSnLolot"
+  },
+  "1IClyzCdt3EgvEaGEfT2ejUr_RiAfKba1": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1BztcP9MkRWOc4Y7dd20pQPewzoRDGvOY"
+  },
+  "1ulVDmNzt84PhyAOYuYt_BJAnVC9hsUTS": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18vy44ahZsgzpPg5iMRtGAsITsgCqsJlW"
+  },
+  "1p8v5sdhasqkElzS3txPFoWlOpE9-U7lb": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1RsgSZwwrM4OCLXt6tebGkq75q8R2g8xZ"
+  },
+  "1lUlFxtKlr9Gr465dloBRTRO9LSggrsVi": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1wEPXCwSKvrAagN-J75AGBTf4KAixXJhp"
+  },
+  "1tyAIuA55O0fI5syTckED7F0zbzN6GUyD": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1CnybUcdlzKvhe0ZZgQVrL-0l-EDDxlei"
+  },
+  "13vq6VT6PPttPCORN9aho-0oqu1ZWAqXo": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1BSOXbwOCHHM7wpvGePXpZlFTeitF5FBT"
+  },
+  "1VvMIVPduSErPjhiAM5guKKAZEVIZvTZI": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "127_bDuNuGi91rqglCwRhDbT02x6kWXK1"
+  },
+  "1GvK4wYYSzAgFvs9O-YYXbNCF4ljKS0G7": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1G_d8IKxV8B89ue7jDK8XxCA3jZAYrl-K"
+  },
+  "1tyOyvocKle8s8WimONgSq2BwmeQ2sCc_": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1w5TjAu48WkqJm1uU0aO-FRxvdBjOqnwn"
+  },
+  "1aMdtB42GjxrkabGsVD-FrJnO0PkScj1P": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1B5SGQaII_iwhGshfdxI2avQPi2hyxqRG"
+  },
+  "1uBCGM5ITzrHZaG6BQhYt6Ws7KgmZCxDt": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1IElfU7CweQaaQqs1B9A3VxUwMAiVp_jS"
+  },
+  "1FQqKvXrOmhaoTu_F5S1wPFKhhoGPPJQr": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1wH-4eschHhOwm5PWhzwQrxzL6hgMbTnS"
+  },
+  "1zC4KZLVQsaKFj8NEkmfjjpSwCGNqRUIO": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1w2B2-iDhkQpwpXxa1qoD6MvJnXEAPTYp"
+  },
+  "1TdeiOKTXsoHOlCg9zsI-mP1afixhmk3P": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Ijk3LuGHtGihfvlZNDc7SxqBpcS4hMPR"
+  },
+  "1ocCbiqTDtmtdZStzWy7YktCi_Hfj91PX": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 9,
+   "unresolved": 0,
+   "previewFileId": "1thv0C3YSQznE22kuM0pQqn46repbzCOK"
+  },
+  "1ebCONDGuVvMWeGTjJy-QlmNQ5lnXPk-i": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1ZhqOeMfcyZruv4h4eSxFrRDZ6O7WSPqd": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1wttqs_KG_8COS87Uhvrg6LxYbd0IWIJO"
+  },
+  "1UkrtxeQZLeqsURCo2ti6o_wTR4GMbhl8": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1EEX_PnlrgSUyj2GDAuZoe6uH9KDgE1dq"
+  },
+  "1hPNq0F-bCCXtzGKHbS5fk2g2kqqsBa8O": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1MW9v-jtQ_bDb20G3xlHNxXbywDcD7SVW"
+  },
+  "19PW48SMZzwZy4J_Zt13Kq7d3w9kS3_Y_": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16myYJlC3vKTqVPhSi5T39JDL8G4CZOps"
+  },
+  "1aA_TFDnZjq9rToREeM0NPLt2fxRTZqXX": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1W83O3u6qHD-CKvtkSOOjGORC4cm5Ybw6"
+  },
+  "171LKP47HpdPKPW27E7dqfEno40zxiKU4": {
+   "orientation": "mixed",
+   "confidence": 0.5,
+   "counts": {
+    "portrait": 2,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 4,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": "1io5JhiCOW51Vqcho3PAsVd2HKSZl89IL"
+  },
+  "1WaMWgTS1E_3UdAhMDC86JCsPS2zV7Tl2": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16H1ncllASx2gIscu1hNKUuKDz-BRzkaq"
+  },
+  "18-HUuUegSWvcU_f1yu6d4Z-nHgQD3SZ3": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1TStzFhXTZezhf0C2VJvHaHxhFgdnVWIL": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1HU2MoQ6rmCp5z2hFkHp7MbX2YjpGZjcu": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1-AfZ6nK_sVuO3RnkuW4g93hVHg6xFp3J"
+  },
+  "1YxMy4yL-TTo2nP5XoUS2H97oQgpw2nkQ": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1E1SdMOe301zygih8EK07Bb4fLehYwBLi"
+  },
+  "1xnsowqSTraXhJDK4jEx0nhbCrBJW8PdE": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "17JYrERWZq0c4WgzT_kM7HOoIZma-SB6O": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 12,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1hndw9KabARbd8ZrrYfgM4drfyKMsrP2A": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 18,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Ehs_tdB2mGr2XHE-rwUtwB36zbao64pA": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Ir_o2oqYDatNSjMIGfCU6dE35NaG1dbd"
+  },
+  "18MLfztg52nz0ba7VXdRtpC1EEYhHV5Tf": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ffb8Dqr3j4v2PaxmYyUflBMF1da98oTZ"
+  },
+  "1I_y69UG7hjww9EQoYw4Av83qac-MSGdq": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1NYnTIag2FAtJ1UYIPXnuvJeUuKpepkte"
+  },
+  "1PayBx42IiGFyvF1uFWCnt3ojU0FhgGpL": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "16qYCAoJZjjey1uO_ecQ_b2v3nLGNk3HU"
+  },
+  "1J677117f1QSSRISKIODAdBPq6xu3bXJb": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "11EQ60-xjfoyEA02I4Q8vfcD2EzbiFKQF"
+  },
+  "1wIDbHV8BAjfXnM1nTAaCPTpRtdEkKA7b": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Gs-76aFiG9c7HBqb9CRWDPxY9QLzGNTr"
+  },
+  "1aOBzof68zHNfAg1mO4JIOd9GkHip0mTV": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1jVWSI7GuSx5Dht66BznYRI6LdIMOPf86"
+  },
+  "1vU6IMbRHRdErJgejpGpaaZPF8pH-sV-Q": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1XANjPLnmoyCrYhFzmjFt8pH-hSzRFniV"
+  },
+  "1sBMHCLPKp1FhOnuWbk17a09immBDj1oj": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1aNr6t5ZF0s_yM3QUpiIkFHPHG_sTBRIK"
+  },
+  "10HxbEAuYwo-g316Sdo2L81h54K_1hxoc": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1VIhmqzvimNaU-y88RIp9H7cVnSEqWJey"
+  },
+  "1wTe0fnVjhsUVZeag4S-Hn5MrCzj_qmpc": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1lAsDt0SFfJM246i7w_hkcyr-zwL46iih"
+  },
+  "11salTNOw_stzDuCJKzULOLF2DOhl2Cmp": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1FztWbuzeu12w_BAwgugLTq-2_U9Fjfwh"
+  },
+  "1eCMHdO0W5eEtupQGChyORi_VEuTALPsx": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1zE-tP2e-kZhkAJAd0VS7mj9yquEzFPc3"
+  },
+  "1nZTdTsLkpMjQ8kVaxmwZJjlwe4Fnlnio": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1j4cQxKqqMlH1JfZQ10uPZMEF29-MFh_N"
+  },
+  "14rCBzQ1ItVLIOg336BWiH_fnVRQRRoPG": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "14Y0BuJ4D0e217TtnuroJspnDSNNEan-M"
+  },
+  "1pZigKvXem3vkwuchQa-GUlROIamSv9pW": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Rit2mY4Rm2NFgSSAJz5DIeSvEoHr2n4-"
+  },
+  "16V0MMHLQXABgzh77ugPjeXdW78kXXVES": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Kiw2G4AOPbC-agBszXGhhCBKiOhBITVE"
+  },
+  "1RHRbYeDyfCFdSrM1Hn02ZIaa_--CFGeG": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 8,
+   "unresolved": 0,
+   "previewFileId": "1rUFDqAl7S9gK5gYW4qi2x8FmV6vMxoGs"
+  },
+  "1PUVUn9zsQJI0Sqwq09vN9kl0NKQ0B13J": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 1,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 1,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": "1h0MfoJy4AxhJgGN3tbUT9nCmgp3l-_oG"
+  },
+  "1N6EQr0ksAN4kCtUKHRKFrKvZ8bmf2-QZ": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1RG82UinSjLEdTQWKHz8m2IBkfOmesAMF": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1cRu7hoA5MaNPaQoEhj0onV410ZPSVXNr": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "18Iy96MSpYZOIk8OgrDVn2r-ysiXm8MW2": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1gX9zPqpZeFT4CTtxXXJ01l8i03a-9Cr9": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1zlT1mKJn2temI8cKQuNvybMzoWazva1J": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Vg80xp4KXLJgn4tv0TVXZur364QmCRUq": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1L1hy4lrbycCPfXjvuNFoOg2wYP5xx1YW"
+  },
+  "1O9E7oxiCmSyzzq84OQ7_9hvTiXaW0cYn": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tO3qre7SN04-5ytjP51VOranud4KpfQg"
+  },
+  "10Qn5YupIy9_uEKn5YSwCuep02jUxY6WF": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "15l0Gofasc4f_62RY76KwxevwsPrx71Nd"
+  },
+  "1Nnpmm13voqVa__uO5mxHDKLLeU1Q1v6I": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1epLenUEa400_GU_a-eJPbxnmWzhk3INw"
+  },
+  "1uofdY1lzG0Qn5nrfYf659GKJZByUjog-": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "17PPHNbLF6hnuR8H83ungS1MJBT81q9d0"
+  },
+  "1z7LxN877ZGLn2D1jR0oFYzPZR9hwYdT3": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1dUAXM5j5CaSOS68PFvw3_sgWNJkt_sii"
+  },
+  "1hWwxGnX3cEcb_YqZURIk1Gmjs_gEa7zO": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 7,
+   "unresolved": 0,
+   "previewFileId": "1yKc63Ll7Ay2KAS9YKDYJwgQOjsF2WQtH"
+  },
+  "1WwG9na_ZFmMYqPdAdw2wuE8P_vFJNwvs": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "14DHJ0Z8Ryb5h_gt3j0Ujpz9jbgTHF1aS"
+  },
+  "1cqxkrFLMLeC84FR51U5C7F0ZF3Jl-fpE": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1bw5f7cp0TsB3IJA2JtK_Dg2twXhmR_05"
+  },
+  "1xo11x8Cq-HT07_B0oD0Drxg-E5Ctwy8K": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1CE8BIGU5d0M8EAClrmtol7ELvQLlozQE"
+  },
+  "1CmEhGuYi7fI86j0Iewd7qXp8Nw2KXdN9": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1hBuih9enV8RXOQ3PH5RjITqgmKp8DXpK"
+  },
+  "1zUE7_QxhxU6ZzefqUxvofxFLVfx2d2iN": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1GvQ23BJAfOh85DE_1p_LIqdhF7RiL7Jt"
+  },
+  "1pHBdcFIrFsY3XVWYPmc7MIcIIPJZy2qh": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1jICfwnYpiEYTvrgApy3e5hHanvl4kUsz"
+  },
+  "1COsmA0IFEehI6rzLNqSbkOvu4ca_BY5l": {
+   "orientation": "portrait",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 4,
+    "landscape": 1,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1vx2pGlNcjnkOr-6q_hlkgM9KApqF-1zw"
+  },
+  "1Ww5I5JBZwOpgIY3IezjycW5fkJuxSuOh": {
+   "orientation": "landscape",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 2,
+    "landscape": 3,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Muvd_leUpALSXdRaSZvfx-QSjBA-gSlv"
+  },
+  "199lzitB1yyzAc9n6p1cL80RHsXqWQmww": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "18N7V8To_jCWJmQJ9z2UmmrLFqtxEhlsh"
+  },
+  "1GDHf51rINdPpWPcXf2qOTLjUxP-0AJxv": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1CcTmliQhK332g24FalC6CsQcn2wGA2Mn"
+  },
+  "1RNvOwXzn0HxJS4hZt1XcFPPPu4Pzgavo": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1cDWZ8oqOltidkgu-zEd2YdZNO3DMVrzv"
+  },
+  "1U4GhnrDhG0icZyUIKvkDipwd4flb8saU": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1qsyg5x01W45bZF3B77IXIsGUBVrv-m3k"
+  },
+  "1sRzfvnGUNJ4uID4B4a61ZiKpQAKczykQ": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1z4GB8dxn5hq6_nDHRaF3iNo4dGPEyA67"
+  },
+  "1U-5BAwEvsdGrn7f_dm0zJGrmJ0w-0daC": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1fn7cbFFEf9nmIWEmP-GP9xdUyJ5mfoBk"
+  },
+  "1hfg-LSv8nOnuxD3U6OMJqYPXPLBd8JQa": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1kdASBlW9YG8YNzzcv1Jylpyj1LPC8OUL"
+  },
+  "1LsW89ytTFe76gqJLMDVmK9lDJ1z0Rq8u": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1_fKjSuodwoK1uXaZpkvWdbdnFy-zSxQl"
+  },
+  "1akl3L1bccXJ28UEtxZVOl1vyDhLZo9uo": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 6,
+   "unresolved": 0,
+   "previewFileId": "1FEuy7PiOjyHP_iMHqZU0QkL7Gwm0NfHG"
+  },
+  "1MCiQn8wUQ_UvDIWH9Zj_WRwiT5B1hOko": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1eJfrhba6FGmDg7LVg0lw2oKZQ7TMS1uB"
+  },
+  "1AfoMuiaTlrhBVG2tHubjj08K13BZ5p6E": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1GK08GrWCZ268UHTciKjf_W-pue-tyWKD"
+  },
+  "1xT0n0zHhXEp7vsS-oHoj44HdJOXLWDhy": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1HCAjYHlea7xZdfandRDQ-lRyVkqJ27El"
+  },
+  "1BuS9lCU_jHS06ctcPQw8yLrMbNM2q8sF": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1tVttQ0gGo7CwnTBbsmx8ZvNhvi5MeJKe"
+  },
+  "1BnjIkOAIfXogqOal9XOGS_OC_NSH8Z3w": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1eo8XfnwqFlDHwdUYZiEANQQqKHX9xzr5"
+  },
+  "1wQebfxSZmmm6CDb0HICVxxefXkTW3rqG": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1AmG-c_5QaaX3tzx7pM7OqX8otv0_3vqw"
+  },
+  "1wTV5KXaTpcRG2XIfC_4QRAwH9x3uQ_Og": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Brq68-UV0DNJ6JuUaGwjY5D-jouzfR3N"
+  },
+  "1wb8iQJ64YwLsBWTwPOLYjqk7G-cfQey8": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1D48nYilsbqC7-3eb_Y1I_j_9sKie00rz"
+  },
+  "1urpNTrZUf93S6lqgR-giaWm5cg2Nov3m": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1u1hFbRh18d0HpHhHluD57XFIDFm3JynA"
+  },
+  "19TXD8TdfxqqhqbzmPtXpEh24wi9FbL7R": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1YWU7qC7xey_yT2gc1pA3RR6Z_wT0tH91"
+  },
+  "1x4iyt8zhdIKaDO2mK7UxuiE_0tS-HIhT": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1K3rwUWHjHMS39XpIAYUp2OGuCkE64L0z"
+  },
+  "1xEhs15IR5gMrLHCX2uzX9DOoWOLubtaE": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Km4NAwtx30Mu7tOT9kikyzhwwRha_HQD"
+  },
+  "15xUQ-TT08jS_A6w3Dtt5IYnUrenXV9wF": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 10,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1Rg7pbPR8lnL5G6ulOdd_LtjznNfeP4eV": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 11,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1uAXAMtbO3EwUfdcmHxHvSAX0JxYnI3d5": {
+   "orientation": null,
+   "confidence": 0,
+   "attempted": 10,
+   "unresolved": 0,
+   "previewFileId": null
+  },
+  "1rYNy96vxoKI0gF9xZ-HOfMp9-R9BN2r_": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1gW5LL9DytKBeMOCkrDZF9TXIuYnTtVVt"
+  },
+  "1ZVUmHCi39p-KhGBcpbnnMJob2iwiwfix": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ioFag3qrxlbuOF51kAVDEdAughZUFL3f"
+  },
+  "1iMxlh2VCmI9IzM21NqyIRnoAu82Nysgx": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1KB78t-qAVUgB3cVdEixKdslkijlQpVcW"
+  },
+  "1xNMZ2iACV0kL5K80a_Uhg1P_kB4iWJlN": {
+   "orientation": "landscape",
+   "confidence": 0.8,
+   "counts": {
+    "portrait": 1,
+    "landscape": 4,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1quqyKJKFEV-kY-OZdLmlCIUTP3ywrpGB"
+  },
+  "1ZtJ-vGg5dS9o_KhWQlqaZbyRzPWVIdO2": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1Y006au1sxmkTjtWK5p_gqRztnrxhJtX_"
+  },
+  "1mQB16Me3wkyS_QC9tajcEK_0I5y7_S8e": {
+   "orientation": "square",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 0,
+    "square": 5
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1skKiL05FpxyBb9uTqFF6CjPbyZenh3x-"
+  },
+  "1Vg6zefPl0DPwFdvH_zYNIQ2Xt7SQ0Mhy": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1ecOJp20AK3H_wn4ZJVrXpex45dj2kX6t"
+  },
+  "1UilddWXb3_etn9PmYn5WZQOJ69MHhEzM": {
+   "orientation": "portrait",
+   "confidence": 0.6,
+   "counts": {
+    "portrait": 3,
+    "landscape": 2,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1l5L5yaFT3otzP_p1DXLS3eQePwCYSYrZ"
+  },
+  "1wCBGh0RfwJhYWrXP48wyHOWPG_4vbumV": {
+   "orientation": "landscape",
+   "confidence": 1,
+   "counts": {
+    "portrait": 0,
+    "landscape": 5,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1WrV8Td9mUlRrOC1wRDlK5Rdg6S6izJMv"
+  },
+  "1OU4UBaUC8_wBhlwlloCJXRXTqCQ12N2t": {
+   "orientation": "portrait",
+   "confidence": 1,
+   "counts": {
+    "portrait": 5,
+    "landscape": 0,
+    "square": 0
+   },
+   "samples": 5,
+   "attempted": 5,
+   "unresolved": 0,
+   "previewFileId": "1x7uZavATMBi7EkUm7yVcDD6LAFf23h6-"
+  }
+ }
+}

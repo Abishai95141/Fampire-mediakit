@@ -44,7 +44,7 @@ export default function SearchBar({
       const qs = next.toString();
       // replace, not push — typing should not fill the back button with a
       // history entry per keystroke.
-      router.replace(qs ? `/fampire/library?${qs}` : "/fampire/library", { scroll: false });
+      router.replace(qs ? `/library?${qs}` : `/library`, { scroll: false });
     }, 140);
     return () => clearTimeout(t);
     // `params` identity changes on every navigation; including it would
@@ -55,7 +55,7 @@ export default function SearchBar({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (live) return;
-    router.push(value ? `/fampire/library?q=${encodeURIComponent(value)}` : "/fampire/library");
+    router.push(value ? `/library?q=${encodeURIComponent(value)}` : `/library`);
   }
 
   return (

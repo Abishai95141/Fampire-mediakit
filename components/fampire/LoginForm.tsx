@@ -33,7 +33,7 @@ export default function FampireLoginForm({ next }: { next?: string }) {
         throw new Error(data.error ?? "Sign-in failed");
       }
       // Land inside FAMPIRE by default.
-      router.push(safeNextPath(next ?? "/fampire"));
+      router.push(safeNextPath(next ?? "/"));
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign-in failed");
