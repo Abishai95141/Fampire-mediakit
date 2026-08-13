@@ -211,13 +211,29 @@ export async function PeopleProfiles({
      * featuring them is flagged and waiting on an approver (§9.1) — the gate
      * working, not an empty archive. Saying so is more honest than a zero.
      */
+    /**
+     * "Awaiting review" must mean awaiting review — nothing else.
+     *
+     * This counted every unpublished entry, which was right only while the
+     * child-safety holds were the only drafts. They have been reviewed and
+     * released, and what remains unpublished is rejected material: Lightroom
+     * sidecars, `.fcpbundle` project files, `XDROOT` camera directories and
+     * merged duplicates. Counting those made TereZa's row read "13 more
+     * awaiting review" when nothing was queued and nothing ever would be —
+     * a promise of material that does not exist.
+     */
     const held = await loadEntries({ includeDrafts: true });
     return (
       <div className="space-y-16">
         {people.map((p) => {
           const collections = publicEntries.filter((e) => e.subjects.includes(p.slug));
           const awaiting = held.filter(
-            (e) => e.subjects.includes(p.slug) && e.visibility !== "public",
+            (e) =>
+              e.subjects.includes(p.slug) &&
+              e.visibility !== "public" &&
+              // Held BY the safety gate specifically, not merely unpublished.
+              e.contains_minor &&
+              !e.contains_minor_confirmed,
           ).length;
 
           return (

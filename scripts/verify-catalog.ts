@@ -23,37 +23,86 @@ const ok = (name: string, cond: boolean, detail = "") => {
 
 console.log("\n§9.1  Child safety");
 
-const flagged = await payload.find({
+/**
+ * The gate is tested against a fixture this script creates, not against
+ * whatever happens to be held in the corpus.
+ *
+ * It used to require that a real flagged-and-unconfirmed entry existed, and
+ * skip both gate assertions when none did. The day the family reviewed and
+ * released all 17 held collections, that check went red for the wrong reason
+ * AND silently stopped testing the gate at all — the exact moment the corpus
+ * stops holding anything is the moment you most want proof the gate still
+ * bites. A test whose coverage depends on production data is not coverage.
+ *
+ * The fixture is created as a draft, so nothing is ever exposed by testing.
+ */
+const fixture = await payload.create({
   collection: "entries",
-  where: { containsMinor: { equals: true }, containsMinorConfirmed: { equals: false } },
-  limit: 1,
-  depth: 0,
+  data: {
+    title: "ZZ Child-safety gate fixture",
+    slug: "zz-child-safety-gate-fixture",
+    description: "Created and deleted by verify-catalog. Never published.",
+    url: "https://drive.google.com/drive/folders/zz-gate-fixture",
+    kind: "b-roll",
+    sourcePlatform: "drive",
+    access: "public",
+    tenant: (await payload.find({ collection: "brands", limit: 1, depth: 0 })).docs[0]!.id,
+    containsMinor: true,
+    containsMinorConfirmed: false,
+    _status: "draft",
+  } as never,
+  draft: true,
+  overrideAccess: true,
 });
-ok("flagged-but-unconfirmed entries exist to test against", flagged.docs.length > 0,
-  `${flagged.totalDocs} flagged`);
 
-if (flagged.docs.length) {
-  const victim = flagged.docs[0]!;
-  let refused = false;
-  let message = "";
-  try {
-    await payload.update({
-      collection: "entries",
-      id: victim.id,
-      data: { _status: "published" },
-      // An admin, i.e. the most privileged caller there is.
-      overrideAccess: true,
-      depth: 0,
-    });
-  } catch (err) {
-    refused = true;
-    message = (err as Error).message.slice(0, 80);
-  }
-  ok("publishing a flagged, unconfirmed entry is REFUSED", refused, message);
-
-  const after = await payload.findByID({ collection: "entries", id: victim.id, depth: 0 });
-  ok("…and it is still not published", after._status !== "published", `_status=${after._status}`);
+let refused = false;
+let message = "";
+try {
+  await payload.update({
+    collection: "entries",
+    id: fixture.id,
+    data: { _status: "published" },
+    // An admin, i.e. the most privileged caller there is.
+    overrideAccess: true,
+    depth: 0,
+  });
+} catch (err) {
+  refused = true;
+  message = (err as Error).message.slice(0, 80);
 }
+ok("publishing a flagged, unconfirmed entry is REFUSED", refused, message);
+
+const after = await payload.findByID({
+  collection: "entries",
+  id: fixture.id,
+  depth: 0,
+  draft: true,
+});
+ok("…and it is still not published", after._status !== "published", `_status=${after._status}`);
+
+await payload.delete({ collection: "entries", id: fixture.id, overrideAccess: true });
+
+/**
+ * The corpus-side half: whatever IS flagged must either be confirmed by a
+ * person or not public. Zero held entries is a valid state — it means every
+ * one of them has been reviewed — so this asserts the rule, not a population.
+ */
+const leaked = await payload.find({
+  collection: "entries",
+  where: {
+    containsMinor: { equals: true },
+    containsMinorConfirmed: { equals: false },
+    _status: { equals: "published" },
+  },
+  limit: 5,
+  depth: 0,
+  overrideAccess: true,
+});
+ok(
+  "no flagged entry is public without a person confirming it",
+  leaked.totalDocs === 0,
+  `${leaked.totalDocs} unconfirmed-but-public`,
+);
 
 const published = await payload.find({
   collection: "entries",
