@@ -9,6 +9,7 @@ import * as migration_20260813_080826_occasion_unspecified from './20260813_0808
 import * as migration_20260813_083202_attribution_roles from './20260813_083202_attribution_roles';
 import * as migration_20260813_090803_surfaces_as_blocks from './20260813_090803_surfaces_as_blocks';
 import * as migration_20260813_091516_editor_thumbnails from './20260813_091516_editor_thumbnails';
+import * as migration_20260814_153025_drop_multitenancy from './20260814_153025_drop_multitenancy';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20260813_091516_editor_thumbnails.up,
     down: migration_20260813_091516_editor_thumbnails.down,
-    name: '20260813_091516_editor_thumbnails'
+    name: '20260813_091516_editor_thumbnails',
+  },
+  {
+    up: migration_20260814_153025_drop_multitenancy.up,
+    down: migration_20260814_153025_drop_multitenancy.down,
+    name: '20260814_153025_drop_multitenancy'
   },
 ];

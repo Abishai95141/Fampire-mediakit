@@ -2,7 +2,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { multiTenantPlugin } from "@payloadcms/plugin-multi-tenant";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -92,34 +91,35 @@ export default buildConfig({
   // not for processing the client's library.
   sharp,
 
-  plugins: [
-    multiTenantPlugin({
-      tenantsSlug: Brands.slug,
-      /**
-       * Content is tenant-scoped; taxonomy is not.
-       *
-       * Entries and Pages belong to exactly one of the eight worlds, so a
-       * contributor assigned to Biohack Yourself sees only its catalog.
-       *
-       * People, Films, Events and Locations are deliberately shared: TereZa
-       * appears across brands, and duplicating her per-tenant would break
-       * "one entry, many lenses" (§4.5 rule 2) and make a rename a
-       * find-and-replace across worlds.
-       */
-      collections: {
-        entries: {},
-        pages: {},
-        articles: {},
-        "magazine-issues": {},
-        appearances: {},
-        "site-settings": { isGlobal: true },
-        // Media is deliberately NOT tenant-scoped: a brand mark or a portrait
-        // is used across worlds, and duplicating an upload per tenant is how a
-        // media library becomes six copies of the same photograph.
-      },
-      // Admins see every world; contributors see the ones they are assigned.
-      userHasAccessToAllTenants: (user) =>
-        (user as { role?: string } | null)?.role === "admin",
-    }),
-  ],
+  /**
+   * No multi-tenancy. This is deliberate, and it is a REMOVAL.
+   *
+   * `multiTenantPlugin` used to scope entries, pages, articles, magazine
+   * issues, appearances and site settings by brand. It added a "Filter by
+   * Tenant" selector to the admin sidebar that silently scoped EVERYTHING
+   * behind it — and because the selection persists, an editor who once picked
+   * a brand kept that filter forever without any indication on the screens it
+   * was hiding things from.
+   *
+   * The damage was not theoretical. With it set to Biohack Yourself:
+   *   - Pages listed 3 records instead of 11, hiding all five real surfaces,
+   *     because those belong to Lolli Brands Entertainment.
+   *   - Searching a collection by its exact title returned "No Results" for
+   *     any of the 411 collections in the other brand.
+   * Both read as "the CMS is broken" rather than "a filter is set", which is
+   * exactly what a hidden global filter always looks like from the inside.
+   *
+   * It was never earning that cost. There is one client, one media team and
+   * ONE library; brands are a lens on that library, not a boundary around it
+   * — the same conclusion the routing reached when brands stopped being a URL
+   * segment. So `tenant` is now an ordinary optional relationship declared on
+   * each collection (see `brandField` in collections/brand.ts), keeping the
+   * exact same `tenant_id` column and every existing value, with no migration
+   * and no data change. What is gone is the invisible filter.
+   *
+   * If per-brand editing permissions are ever genuinely needed, the honest
+   * shape is access control on the role — not a UI filter that hides records
+   * from the person looking straight at them.
+   */
+  plugins: [],
 });

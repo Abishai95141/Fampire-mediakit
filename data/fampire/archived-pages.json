@@ -1,0 +1,847 @@
+[
+  {
+    "id": 6,
+    "title": "Biohack Yourself",
+    "slug": "/films/biohack-yourself",
+    "tenant": {
+      "id": 1,
+      "name": "Biohack Yourself",
+      "slug": "biohack-yourself",
+      "tagline": "The flagship documentary strand and its live events.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.001Z",
+      "createdAt": "2026-08-12T08:00:00.630Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67cf448164f310d5aa97",
+        "eyebrow": "Documentary · five parts",
+        "heading": "Biohack Yourself",
+        "intro": "The Lolli family's exploration of biohacking, in five parts.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa98",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "\"Biohack Yourself\" is a documentary from Lolli Brands Entertainment, unfolding across five compelling parts that chronicle the explorative journey of the Lolli family, led by parents Anthony and TereZa, into the realm of biohacking. Confronted with life-altering symptoms and disillusioned by the limitations of Western medicine, the Lollis embark on an extraordinary exploration, weaving a narrative of resilience and hope for audiences globally seeking health solutions and improvements.\n\nFeaturing unprecedented access to global experts, the documentary incorporates insights from over 40 world-leading doctors, professors, and inventors, breaking down barriers to biohacking.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa99",
+        "eyebrow": null,
+        "heading": "From the production",
+        "intro": null,
+        "layout": "grid",
+        "limit": 9,
+        "sort": "-fileCount",
+        "viewAll": "/library?film=Biohack+Yourself",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [],
+          "occasion": [],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "Biohack Yourself — the five-part documentary from Lolli Brands Entertainment. Synopsis, awards and the material behind it.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:53.975Z",
+    "createdAt": "2026-08-12T14:21:59.717Z",
+    "_status": "draft"
+  },
+  {
+    "id": 5,
+    "title": "Clip Them",
+    "slug": "/clip-them",
+    "tenant": {
+      "id": 2,
+      "name": "Lolli Brands Entertainment",
+      "slug": "lolli-brands",
+      "tagline": "The production house behind the slate.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.022Z",
+      "createdAt": "2026-08-12T08:00:00.685Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67cf448164f310d5aa93",
+        "eyebrow": "For editors",
+        "heading": "Clip Them",
+        "intro": "B-roll, trailers and behind-the-scenes footage. Every collection links straight into the folder it lives in — nothing is re-hosted, so what you open is the original.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [
+          {
+            "id": "6a7d67cf448164f310d5aa91",
+            "label": "Vertical b-roll",
+            "href": "/library?kind=b-roll&orientation=portrait",
+            "emphasis": "primary"
+          },
+          {
+            "id": "6a7d67cf448164f310d5aa92",
+            "label": "All b-roll",
+            "href": "/library?kind=b-roll",
+            "emphasis": "secondary"
+          }
+        ],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa94",
+        "eyebrow": null,
+        "heading": "Vertical — for social",
+        "intro": "Orientation measured by sampling the actual frames, not guessed from a filename.",
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=b-roll&orientation=portrait",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "b-roll"
+          ],
+          "occasion": [],
+          "orientation": [
+            "portrait"
+          ],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa95",
+        "eyebrow": null,
+        "heading": "Horizontal — for broadcast and long form",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=b-roll&orientation=landscape",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "b-roll"
+          ],
+          "occasion": [],
+          "orientation": [
+            "landscape"
+          ],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa96",
+        "eyebrow": null,
+        "heading": "Behind the scenes",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=BTS",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "BTS"
+          ],
+          "occasion": [],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "B-roll, trailers and behind-the-scenes footage — filterable by orientation, so vertical cuts are one click away.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:54.080Z",
+    "createdAt": "2026-08-12T14:21:59.669Z",
+    "_status": "draft"
+  },
+  {
+    "id": 4,
+    "title": "The Room",
+    "slug": "/the-room",
+    "tenant": {
+      "id": 1,
+      "name": "Biohack Yourself",
+      "slug": "biohack-yourself",
+      "tagline": "The flagship documentary strand and its live events.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.001Z",
+      "createdAt": "2026-08-12T08:00:00.630Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67cf448164f310d5aa8c",
+        "eyebrow": "Events",
+        "heading": "The Room",
+        "intro": "Premieres, red carpets, summits and book signings — and the photography and footage from each.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa8d",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "In 2024, Biohack Yourself Media was selected as the exclusive health press at RFK Jr.'s MAHA Inaugural Ball.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa8e",
+        "eyebrow": null,
+        "heading": "Premieres and red carpets",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?occasion=premiere",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [],
+          "occasion": [
+            "premiere"
+          ],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa8f",
+        "eyebrow": null,
+        "heading": "Conferences and summits",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?occasion=conference",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [],
+          "occasion": [
+            "conference"
+          ],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa90",
+        "eyebrow": null,
+        "heading": "Book signings",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-dateStart",
+        "viewAll": "/library?occasion=book-signing",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [],
+          "occasion": [
+            "book-signing"
+          ],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "Premieres, red carpets, summits and signings — the events, and the photography and footage from each.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:54.169Z",
+    "createdAt": "2026-08-12T14:21:59.618Z",
+    "_status": "draft"
+  },
+  {
+    "id": 3,
+    "title": "The Magazine",
+    "slug": "/magazine",
+    "tenant": {
+      "id": 1,
+      "name": "Biohack Yourself",
+      "slug": "biohack-yourself",
+      "tagline": "The flagship documentary strand and its live events.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.001Z",
+      "createdAt": "2026-08-12T08:00:00.630Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67cf448164f310d5aa89",
+        "eyebrow": "Biohack Yourself Media",
+        "heading": "The Magazine",
+        "intro": "The Future of Wellness Media.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa8a",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Following the success of the globally launched \"Biohack Yourself\" documentary series—an immersive deep dive into the forefront of health, longevity, and biohacking—Biohack Yourself Media is taking the movement to the next level. Enter Biohack Yourself Magazine, a cutting-edge publication designed to empower wellness enthusiasts with actionable, science-backed insights and revolutionary innovations.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      },
+      {
+        "id": "6a7d67cf448164f310d5aa8b",
+        "eyebrow": null,
+        "heading": "Issues and cover shoots",
+        "intro": "Production files, cover shoots and deliverables for each issue, straight from the archive.",
+        "layout": "grid",
+        "limit": 12,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=magazine",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "magazine"
+          ],
+          "occasion": [],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "Biohack Yourself Magazine — the issues, their cover subjects, and the production files behind them.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:54.314Z",
+    "createdAt": "2026-08-12T14:21:59.563Z",
+    "_status": "draft"
+  },
+  {
+    "id": 2,
+    "title": "Book Them",
+    "slug": "/book",
+    "tenant": {
+      "id": 2,
+      "name": "Lolli Brands Entertainment",
+      "slug": "lolli-brands",
+      "tagline": "The production house behind the slate.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.022Z",
+      "createdAt": "2026-08-12T08:00:00.685Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67ce448164f310d5aa82",
+        "eyebrow": "For bookers, producers and MCs",
+        "heading": "Book Anthony and TereZa",
+        "intro": "The introduction to read on air, the full host read, and the headshots — all of it free to use, no login and no form.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [
+          {
+            "id": "6a7d67ce448164f310d5aa80",
+            "label": "Headshots and bios",
+            "href": "/library?kind=headshots",
+            "emphasis": "primary"
+          },
+          {
+            "id": "6a7d67ce448164f310d5aa81",
+            "label": "The people",
+            "href": "/people",
+            "emphasis": "secondary"
+          }
+        ],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa85",
+        "eyebrow": null,
+        "heading": "Read this out loud",
+        "intro": "Written by the family. Copy it as it stands — it is already approved copy.",
+        "blockName": null,
+        "variants": [
+          {
+            "id": "6a7d67ce448164f310d5aa83",
+            "label": ":30 introduction",
+            "text": "Anthony and TereZa Lolli are the couple behind Biohack Yourself Media — an independent health and wellness news platform reaching millions with expert-driven journalism and award-winning storytelling.\n\nAnthony is a real estate mogul and best-selling author who documented his own 125-pound transformation on camera. TereZa is an Armenian-born actress, recording artist and editor-in-chief who turned postpartum hormonal collapse into a wellness revolution.\n\nTogether they founded Lolli Brands Entertainment, producing more than a dozen health and transformation documentaries — and in 2024 Biohack Yourself Media was the exclusive health press at RFK Jr.'s MAHA Inaugural Ball.\n\nPlease welcome Anthony and TereZa Lolli."
+          },
+          {
+            "id": "6a7d67ce448164f310d5aa84",
+            "label": "Full host read — also usable as a show description",
+            "text": "Today's guests are a couple who didn't just survive the system — they rebuilt it.\n\nAnthony and TereZa Lolli are the power couple behind Biohack Yourself Media — the fastest-growing independent health and wellness news platform in the world — reaching millions with expert-driven journalism, science-backed content, and award-winning storytelling. But before they became health media disruptors… they were in survival mode.\n\nAnthony Lolli is a real estate mogul and the best-selling author of The Heart of the Deal, who built a multimillion-dollar empire from scratch. But at 315 pounds, facing major health decline, he made the radical decision to document his 125-pound transformation on camera — launching the now-viral documentary Fat Lolli to Six Pack Lolli, which became a global phenomenon on Prime Video and Apple TV.\n\nTereZa Hakobyan-Lolli is an Armenian-born actress, recording artist, mother, and editor-in-chief who turned postpartum hormonal collapse into a wellness revolution — winning two bikini world titles and documenting it all through films like The Super Lollis, Skin Deep, and sHEALed.\n\nTogether, they've co-founded Lolli Brands Entertainment — producing more than a dozen acclaimed health and transformation documentaries. And they're raising two young trailblazers, Love and Legend Lolli, who are already reporting on health news, building media projects, and investing in real estate — all before age 10.\n\nIn 2024, their influence reached national heights when Biohack Yourself Media was selected as the exclusive health press at RFK Jr.'s MAHA Inaugural Ball.\n\nThey're not just content creators — they're immersive documentarians, performance marketers, and media entrepreneurs turning pain into purpose… and purpose into platforms. This is what it looks like when you combine hustle, healing, and a whole lot of heart.\n\nLet's welcome Anthony and TereZa Lolli."
+          }
+        ],
+        "blockType": "copyBlock"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa86",
+        "eyebrow": null,
+        "heading": "Headshots and portraits",
+        "intro": null,
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=headshots",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "headshots",
+            "event photography"
+          ],
+          "occasion": [],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": true
+        }
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa88",
+        "eyebrow": null,
+        "heading": "Something not here?",
+        "intro": "The library is the whole archive. If what you need is not in it, the media team can point you at it.",
+        "note": "No gate: every asset on this site opens without an account.",
+        "blockName": null,
+        "actions": [
+          {
+            "id": "6a7d67ce448164f310d5aa87",
+            "label": "Open the Library",
+            "href": "/library"
+          }
+        ],
+        "blockType": "cta"
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "Everything a booker or an MC needs: a thirty-second introduction to read out loud, the full host read, bios and headshots.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:54.502Z",
+    "createdAt": "2026-08-12T14:21:59.454Z",
+    "_status": "draft"
+  },
+  {
+    "id": 1,
+    "title": "The Institution",
+    "slug": "/institution",
+    "tenant": {
+      "id": 2,
+      "name": "Lolli Brands Entertainment",
+      "slug": "lolli-brands",
+      "tagline": "The production house behind the slate.",
+      "hasAssets": true,
+      "updatedAt": "2026-08-12T09:03:20.022Z",
+      "createdAt": "2026-08-12T08:00:00.685Z"
+    },
+    "layout": [
+      {
+        "id": "6a7d67ce448164f310d5aa77",
+        "eyebrow": "The Lolli Family Institution",
+        "heading": "The Institution",
+        "intro": "A production house and an independent health media platform, and the family behind both.",
+        "media": "none",
+        "mediaUrl": null,
+        "blockName": null,
+        "actions": [],
+        "blockType": "hero"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa78",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Lolli Brands Entertainment",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Lolli Brands Entertainment is a media and production company focused on developing original documentary films and long-form content centered on health, longevity, and human performance. The company produces award-winning projects across areas, including preventative health, women's health, biohacking, pet wellness, and more, working with clinicians, researchers, and subject-matter experts to translate complex topics into accessible, culturally relevant storytelling—redefining storytelling in the health and wellness space. Lolli Brands prioritizes factual accuracy, real-world impact, and long-term relevance over trend-driven content.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa79",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Biohack Yourself Media",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Biohack Yourself Media is an independent omni-media health and lifestyle platform delivering science-backed health insights, unbiased reporting, and original storytelling. It operates across publishing, documentary film, digital media, live events, performance marketing, children's content, sports, and physical merchandise, with a focus on longevity, wellness, and human performance. Guided by principles of truth, transparency, and editorial integrity, Biohack Yourself Media combines expert-driven journalism with culturally relevant storytelling to highlight the clinicians, researchers, innovators, and thought leaders shaping the future of health.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa7d",
+        "eyebrow": null,
+        "heading": "By the numbers",
+        "intro": null,
+        "blockName": null,
+        "stats": [
+          {
+            "id": "6a7d67ce448164f310d5aa7a",
+            "value": "0",
+            "label": "collections indexed",
+            "source": "entryCount"
+          },
+          {
+            "id": "6a7d67ce448164f310d5aa7b",
+            "value": "0",
+            "label": "documentary films",
+            "source": "filmCount"
+          },
+          {
+            "id": "6a7d67ce448164f310d5aa7c",
+            "value": "0",
+            "label": "documentary awards",
+            "source": "awardTotal"
+          }
+        ],
+        "blockType": "stats"
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa7e",
+        "eyebrow": null,
+        "heading": "Logos and wordmarks",
+        "intro": "Brand marks for both companies, ready to place.",
+        "layout": "grid",
+        "limit": 6,
+        "sort": "-fileCount",
+        "viewAll": "/library?kind=logo",
+        "blockName": null,
+        "blockType": "entryQuery",
+        "filters": {
+          "kind": [
+            "logo"
+          ],
+          "occasion": [],
+          "orientation": [],
+          "brand": null,
+          "people": [],
+          "film": null,
+          "event": null,
+          "location": null,
+          "year": null,
+          "excludeMinors": false
+        }
+      },
+      {
+        "id": "6a7d67ce448164f310d5aa7f",
+        "content": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Using these materials",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "We invite PR companies, press, and creatives to utilize these assets freely for the creation of news, articles, graphics, flyers, and other promotional or creative projects. Feel free to adapt and incorporate these materials as needed.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "While these assets are provided for unrestricted use, we kindly request attribution to Biohack Yourself Media and Lolli Brands Entertainment where applicable. These assets may not be used in any way that misrepresents, defames, or causes harm to Biohack Yourself Media, Lolli Brands Entertainment or any associated individuals or entities. All intellectual property rights to these assets remain with Biohack Yourself Media LLC & Lolli Brands Entertainment LLC. Permission is granted for usage as outlined, but ownership is not transferred.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "width": "prose",
+        "blockName": null,
+        "blockType": "richText"
+      }
+    ],
+    "seoTitle": null,
+    "seoDescription": "Lolli Brands Entertainment and Biohack Yourself Media — who they are, what they make, and how to use these materials.",
+    "seoImage": null,
+    "noIndex": false,
+    "seoNote": null,
+    "updatedAt": "2026-08-13T09:10:54.691Z",
+    "createdAt": "2026-08-12T14:21:58.733Z",
+    "_status": "draft"
+  }
+]

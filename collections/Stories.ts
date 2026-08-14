@@ -1,5 +1,7 @@
 import type { CollectionConfig } from "payload";
 
+import { brandField } from "./brand";
+
 /**
  * The three things a media team writes, as opposed to catalogs.
  *
@@ -84,6 +86,7 @@ export const Articles: CollectionConfig = {
           fields: [
             { name: "title", type: "text", required: true },
             slugField,
+            brandField,
             {
               name: "type",
               type: "select",
@@ -176,6 +179,7 @@ export const MagazineIssues: CollectionConfig = {
               ],
             },
             slugField,
+            brandField,
             { name: "coverSubject", type: "relationship", relationTo: "people", index: true },
             { name: "coverImage", type: "relationship", relationTo: "media" },
             { name: "publishedAt", type: "date" },
@@ -226,6 +230,7 @@ export const Appearances: CollectionConfig = {
   defaultSort: "-date",
   fields: [
     { name: "title", type: "text", required: true },
+    brandField,
     {
       type: "row",
       fields: [

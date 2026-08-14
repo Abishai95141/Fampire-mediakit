@@ -147,12 +147,6 @@ export interface User {
   id: number;
   name?: string | null;
   role: 'admin' | 'approver' | 'contributor';
-  tenants?:
-    | {
-        tenant: number | Brand;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -204,7 +198,6 @@ export interface Brand {
  */
 export interface Entry {
   id: number;
-  tenant?: (number | null) | Brand;
   /**
    * Renamed for strangers. '6. 6/26/2025 - UFC/ Aires Tech RoundTable - Vegas' becomes 'UFC × Aires Tech Roundtable — Las Vegas, June 2025'. This renaming IS the product.
    */
@@ -282,6 +275,10 @@ export interface Entry {
         | 'unspecified'
       )
     | null;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   /**
    * Everyone who APPEARS in the material. Crew and rights holders go in their own fields.
    */
@@ -569,12 +566,15 @@ export interface Location {
  */
 export interface Article {
   id: number;
-  tenant?: (number | null) | Brand;
   title: string;
   /**
    * URL segment.
    */
   slug: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   type?: ('press-release' | 'announcement' | 'feature' | 'statement' | 'coverage') | null;
   publishedAt?: string | null;
   /**
@@ -623,13 +623,16 @@ export interface Article {
  */
 export interface MagazineIssue {
   id: number;
-  tenant?: (number | null) | Brand;
   issueNumber: number;
   title: string;
   /**
    * URL segment.
    */
   slug: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   coverSubject?: (number | null) | Person;
   coverImage?: (number | null) | Media;
   publishedAt?: string | null;
@@ -657,8 +660,11 @@ export interface MagazineIssue {
  */
 export interface Appearance {
   id: number;
-  tenant?: (number | null) | Brand;
   title: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   /**
    * Show, publication or venue.
    */
@@ -708,12 +714,15 @@ export interface Appearance {
  */
 export interface Page {
   id: number;
-  tenant?: (number | null) | Brand;
   title: string;
   /**
    * The URL path, e.g. /fampire/press. Leading slash is added for you.
    */
   slug: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   /**
    * Narrative sections embed real collection cards rather than describing them in prose — so a page can never drift out of date relative to the catalog.
    */
@@ -1254,8 +1263,11 @@ export interface Page {
  */
 export interface SiteSetting {
   id: number;
-  tenant?: (number | null) | Brand;
   label: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
   nav?:
     | {
         label: string;
@@ -1413,12 +1425,6 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1453,7 +1459,6 @@ export interface BrandsSelect<T extends boolean = true> {
  * via the `definition` "entries_select".
  */
 export interface EntriesSelect<T extends boolean = true> {
-  tenant?: T;
   title?: T;
   slug?: T;
   description?: T;
@@ -1470,6 +1475,7 @@ export interface EntriesSelect<T extends boolean = true> {
   altText?: T;
   kind?: T;
   occasion?: T;
+  tenant?: T;
   people?: T;
   crew?: T;
   rightsHolder?: T;
@@ -1593,9 +1599,9 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
-  tenant?: T;
   title?: T;
   slug?: T;
+  tenant?: T;
   type?: T;
   publishedAt?: T;
   excerpt?: T;
@@ -1618,10 +1624,10 @@ export interface ArticlesSelect<T extends boolean = true> {
  * via the `definition` "magazine-issues_select".
  */
 export interface MagazineIssuesSelect<T extends boolean = true> {
-  tenant?: T;
   issueNumber?: T;
   title?: T;
   slug?: T;
+  tenant?: T;
   coverSubject?: T;
   coverImage?: T;
   publishedAt?: T;
@@ -1640,8 +1646,8 @@ export interface MagazineIssuesSelect<T extends boolean = true> {
  * via the `definition` "appearances_select".
  */
 export interface AppearancesSelect<T extends boolean = true> {
-  tenant?: T;
   title?: T;
+  tenant?: T;
   outlet?: T;
   date?: T;
   people?: T;
@@ -1667,9 +1673,9 @@ export interface AppearancesSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  tenant?: T;
   title?: T;
   slug?: T;
+  tenant?: T;
   layout?:
     | T
     | {
@@ -2007,8 +2013,8 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  tenant?: T;
   label?: T;
+  tenant?: T;
   nav?:
     | T
     | {

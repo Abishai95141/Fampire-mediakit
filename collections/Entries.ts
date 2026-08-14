@@ -1,5 +1,7 @@
 import type { CollectionConfig } from "payload";
 
+import { brandField } from "./brand";
+
 /** Which storage service a link points at, read off the URL. */
 function platformOf(url: string): string {
   const u = url.toLowerCase();
@@ -286,10 +288,7 @@ export const Entries: CollectionConfig = {
                 },
               ],
             },
-            // Which of the eight worlds this belongs to is the multi-tenant
-            // plugin's `tenant` field — injected automatically, and the thing
-            // that scopes a contributor's view. Declaring a second `brand`
-            // relationship here would be the same fact stored twice.
+            brandField,
             {
               name: "people",
               type: "relationship",
