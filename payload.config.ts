@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { s3Storage } from "@payloadcms/storage-s3";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -15,6 +16,9 @@ import { Events, Films, Locations, People } from "./collections/Taxonomy";
 import { Users } from "./collections/Users";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/** Set in production to move uploads off the container's ephemeral disk. */
+const S3_BUCKET = process.env.S3_BUCKET;
 
 /**
  * FAMPIRE Media Center — Payload configuration.
@@ -49,6 +53,36 @@ export default buildConfig({
     api: "/payload-api",
   },
 
+  /**
+   * No multi-tenancy. This is deliberate, and it is a REMOVAL.
+   *
+   * `multiTenantPlugin` used to scope entries, pages, articles, magazine
+   * issues, appearances and site settings by brand. It added a "Filter by
+   * Tenant" selector to the admin sidebar that silently scoped EVERYTHING
+   * behind it — and because the selection persists, an editor who once picked
+   * a brand kept that filter forever without any indication on the screens it
+   * was hiding things from.
+   *
+   * The damage was not theoretical. With it set to Biohack Yourself:
+   *   - Pages listed 3 records instead of 11, hiding all five real surfaces,
+   *     because those belong to Lolli Brands Entertainment.
+   *   - Searching a collection by its exact title returned "No Results" for
+   *     any of the 411 collections in the other brand.
+   * Both read as "the CMS is broken" rather than "a filter is set", which is
+   * exactly what a hidden global filter always looks like from the inside.
+   *
+   * It was never earning that cost. There is one client, one media team and
+   * ONE library; brands are a lens on that library, not a boundary around it
+   * — the same conclusion the routing reached when brands stopped being a URL
+   * segment. So `tenant` is now an ordinary optional relationship declared on
+   * each collection (see `brandField` in collections/brand.ts), keeping the
+   * exact same `tenant_id` column and every existing value, with no migration
+   * and no data change. What is gone is the invisible filter.
+   *
+   * If per-brand editing permissions are ever genuinely needed, the honest
+   * shape is access control on the role — not a UI filter that hides records
+   * from the person looking straight at them.
+   */
   collections: [
     Users, Brands,
     Entries, Media,
@@ -92,34 +126,36 @@ export default buildConfig({
   sharp,
 
   /**
-   * No multi-tenancy. This is deliberate, and it is a REMOVAL.
+   * Uploads go to S3 in production, and to disk everywhere else.
    *
-   * `multiTenantPlugin` used to scope entries, pages, articles, magazine
-   * issues, appearances and site settings by brand. It added a "Filter by
-   * Tenant" selector to the admin sidebar that silently scoped EVERYTHING
-   * behind it — and because the selection persists, an editor who once picked
-   * a brand kept that filter forever without any indication on the screens it
-   * was hiding things from.
+   * The Media collection writes to `public/media`, which is correct on a
+   * laptop and silently destructive on a container: App Runner, ECS and every
+   * other managed runtime give each task an EPHEMERAL filesystem, so a brand
+   * mark uploaded on Tuesday is gone at Thursday's deploy, leaving a database
+   * row pointing at a 404. Nothing has been uploaded yet — `media` has zero
+   * rows — so this is being fixed before it can cost anyone a file rather than
+   * after.
    *
-   * The damage was not theoretical. With it set to Biohack Yourself:
-   *   - Pages listed 3 records instead of 11, hiding all five real surfaces,
-   *     because those belong to Lolli Brands Entertainment.
-   *   - Searching a collection by its exact title returned "No Results" for
-   *     any of the 411 collections in the other brand.
-   * Both read as "the CMS is broken" rather than "a filter is set", which is
-   * exactly what a hidden global filter always looks like from the inside.
-   *
-   * It was never earning that cost. There is one client, one media team and
-   * ONE library; brands are a lens on that library, not a boundary around it
-   * — the same conclusion the routing reached when brands stopped being a URL
-   * segment. So `tenant` is now an ordinary optional relationship declared on
-   * each collection (see `brandField` in collections/brand.ts), keeping the
-   * exact same `tenant_id` column and every existing value, with no migration
-   * and no data change. What is gone is the invisible filter.
-   *
-   * If per-brand editing permissions are ever genuinely needed, the honest
-   * shape is access control on the role — not a UI filter that hides records
-   * from the person looking straight at them.
+   * Enabled only when a bucket is actually configured. That keeps local
+   * development on disk with no AWS account, no credentials and no network,
+   * and means a missing variable degrades to the old behaviour instead of
+   * crashing the boot.
    */
-  plugins: [],
+  plugins: S3_BUCKET
+    ? [
+        s3Storage({
+          collections: { media: true },
+          bucket: S3_BUCKET,
+          config: {
+            region: process.env.AWS_REGION ?? "ap-south-1",
+            /**
+             * No credentials block. On App Runner, ECS and EC2 the SDK picks
+             * up the task's IAM role automatically — passing keys here would
+             * mean putting long-lived secrets in the environment when the
+             * platform already offers rotating ones.
+             */
+          },
+        }),
+      ]
+    : [],
 });

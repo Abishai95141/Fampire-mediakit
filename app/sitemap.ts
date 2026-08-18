@@ -15,7 +15,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.SITE_URL ?? "http://localhost:3200";
   const entries = await loadEntries();
 
-  const fixed = ["", "/library", "/films", "/people", "/press", "/institution", "/book", "/magazine", "/the-room", "/clip-them"];
+  /**
+   * The five surfaces, and only those.
+   *
+   * This listed ten paths, five of which are the narrative pages that were
+   * archived and deleted — so the sitemap was actively telling search engines
+   * to crawl URLs that now return 404. A sitemap is a set of promises about
+   * what exists; stale entries in it are worse than a shorter file.
+   */
+  const fixed = ["", "/library", "/films", "/people", "/press"];
 
   return [
     ...fixed.map((path) => ({

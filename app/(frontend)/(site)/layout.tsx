@@ -17,6 +17,23 @@ import { isSignedIn } from "@/lib/fampire/auth";
  * `.fam` and brings its own two faces.
  */
 
+/**
+ * Rendered per request, never prerendered.
+ *
+ * This layout reads the catalog and the navigation from the database, so a
+ * build that prerenders anything underneath it needs a live Postgres. Next
+ * prerenders exactly one thing here — the 404 page — and that was enough to
+ * make `next build` fail with ECONNREFUSED inside a container, where no
+ * database exists or should.
+ *
+ * A build must not depend on a running database. It is the difference between
+ * "deploy from any CI runner" and "give the build server credentials and a
+ * network path to production data", and the second is both harder to operate
+ * and worse for security. Every page under here is already request-time; this
+ * says so at the layout, which is the level that actually decides it.
+ */
+export const dynamic = "force-dynamic";
+
 export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
