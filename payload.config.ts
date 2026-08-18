@@ -17,6 +17,16 @@ import { Users } from "./collections/Users";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Managed Postgres requires TLS; a local one does not have it. Opt in with
+ * DATABASE_SSL=true rather than sniffing the hostname, so the behaviour is
+ * declared by the deployment rather than guessed from a string.
+ */
+function withSsl(uri: string): string {
+  if (process.env.DATABASE_SSL !== "true" || !uri || uri.includes("sslmode=")) return uri;
+  return uri + (uri.includes("?") ? "&" : "?") + "sslmode=no-verify";
+}
+
 /** Set in production to move uploads off the container's ephemeral disk. */
 const S3_BUCKET = process.env.S3_BUCKET;
 
@@ -95,7 +105,22 @@ export default buildConfig({
 
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI ?? "",
+      /**
+       * TLS is appended when the target requires it.
+       *
+       * AWS-managed Postgres (Lightsail and RDS both) rejects unencrypted
+       * connections outright — `no pg_hba.conf entry for host …, no
+       * encryption` — while Payload's adapter opens a plain socket by default.
+       * The first deploy therefore reached the database, authenticated, and
+       * was refused at the TLS layer, surfacing only as an unhandled rejection
+       * with the reason "undefined".
+       *
+       * `no-verify` encrypts the connection without validating the server
+       * certificate. The traffic never leaves AWS's private network here, but
+       * to verify properly, hand the RDS CA bundle to the pool instead and
+       * drop this. Local Postgres has no TLS and is left alone.
+       */
+      connectionString: withSsl(process.env.DATABASE_URI ?? ""),
     },
     /**
      * Migrations are the source of truth for schema — never dev-mode push.
@@ -141,21 +166,37 @@ export default buildConfig({
    * and means a missing variable degrades to the old behaviour instead of
    * crashing the boot.
    */
-  plugins: S3_BUCKET
-    ? [
-        s3Storage({
-          collections: { media: true },
-          bucket: S3_BUCKET,
-          config: {
-            region: process.env.AWS_REGION ?? "ap-south-1",
-            /**
-             * No credentials block. On App Runner, ECS and EC2 the SDK picks
-             * up the task's IAM role automatically — passing keys here would
-             * mean putting long-lived secrets in the environment when the
-             * platform already offers rotating ones.
-             */
-          },
-        }),
-      ]
-    : [],
+  /**
+   * ALWAYS registered, and only its behaviour is conditional.
+   *
+   * This was `S3_BUCKET ? [s3Storage(...)] : []`, which looks equivalent and
+   * is not: Payload bakes an importMap of admin components at BUILD time from
+   * the plugin list. Building without S3_BUCKET produced a map with no S3
+   * entry; running with S3_BUCKET then activated the plugin, which asked for
+   * `@payloadcms/storage-s3/client#S3ClientUploadHandler`, could not find it,
+   * and rendered the entire admin panel as a blank page — server logs saying
+   * "PayloadComponent not found in importMap", browser console saying nothing
+   * at all. The public site was completely unaffected, which made it look like
+   * an admin bug rather than a config one.
+   *
+   * The rule this encodes: the plugin LIST must be identical at build and at
+   * runtime. Anything environment-dependent belongs inside a plugin's options,
+   * where `enabled` is designed for exactly this.
+   */
+  plugins: [
+    s3Storage({
+      enabled: Boolean(S3_BUCKET),
+      collections: { media: true },
+      bucket: S3_BUCKET ?? "unset",
+      config: {
+        region: process.env.AWS_REGION ?? "ap-south-1",
+        /**
+         * No credentials block. On EC2, Lightsail, ECS and App Runner the SDK
+         * picks up the instance or task role automatically — passing keys here
+         * would mean long-lived secrets in the environment when the platform
+         * already offers rotating ones.
+         */
+      },
+    }),
+  ],
 });

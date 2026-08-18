@@ -1,5 +1,7 @@
-# syntax=docker/dockerfile:1
-
+# No `# syntax=` directive: it makes every build pull the dockerfile frontend
+# from Docker Hub, which is an avoidable network dependency and the thing that
+# intermittently failed here. Nothing in this file needs a newer frontend than
+# the one built into the daemon.
 # FAMPIRE Media Center — production image.
 #
 # Three stages so the runtime image carries neither the build toolchain nor the
@@ -10,9 +12,16 @@
 # ── deps ────────────────────────────────────────────────────────────────
 FROM node:22-bookworm-slim AS deps
 WORKDIR /app
+# No apt-get anywhere in this file, deliberately. The base image has no
+# `openssl` binary and no /etc/ssl/certs bundle, but nothing here needs either:
+# Node ships its own CA store and does its own TLS (verified: `require("tls")`
+# loads and Postgres connects over TLS), pg is pure JS, and sharp ships
+# prebuilt with libvips bundled.
+#
+# It also removes a build-time dependency on Debian's mirrors — which is what
+# broke the cross-architecture build, where DNS inside the emulated container
+# could not resolve deb.debian.org at all.
 # libc6/openssl are what sharp and node-postgres link against on slim images.
-RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 # `npm ci` builds exactly the lockfile — a deploy must never resolve a
 # different tree than the one that was tested.
@@ -40,16 +49,12 @@ RUN npm ci --ignore-scripts --no-audit --no-fund
 # need.
 FROM node:22-bookworm-slim AS prod-deps
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 
 # ── builder ─────────────────────────────────────────────────────────────
 FROM node:22-bookworm-slim AS builder
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -64,8 +69,6 @@ RUN npm run build
 # ── runner ──────────────────────────────────────────────────────────────
 FROM node:22-bookworm-slim AS runner
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
