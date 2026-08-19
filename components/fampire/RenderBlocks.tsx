@@ -3,7 +3,7 @@ import { RichText as LexicalRichText } from "@payloadcms/richtext-lexical/react"
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 import EntryCard from "@/components/fampire/EntryCard";
-import HeroVideo, { parseVideo } from "@/components/fampire/HeroVideo";
+import HeroVideo from "@/components/fampire/HeroVideo";
 import Section from "@/components/fampire/Section";
 import SearchBar from "@/components/fampire/SearchBar";
 import LibraryBrowser from "@/components/fampire/LibraryBrowser";
@@ -27,6 +27,7 @@ import {
   type Facets,
 } from "@/lib/fampire/catalog";
 import { HERO, heroSkeleton } from "@/lib/fampire/media";
+import { parseVideo } from "@/lib/fampire/video";
 import { heroEmbedStatus } from "@/lib/fampire/hero";
 
 /**

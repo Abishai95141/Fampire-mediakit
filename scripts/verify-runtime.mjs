@@ -38,7 +38,7 @@ const PATHS = [
 
 /** Third-party hosts whose failures are not this repo's regressions. */
 const THIRD_PARTY =
-  /drive\.google\.com|player\.vimeo\.com|i\.ytimg\.com|vumbnail|challenges\.cloudflare\.com/;
+  /drive\.google\.com|player\.vimeo\.com|youtube(-nocookie)?\.com|i\.ytimg\.com|vumbnail|challenges\.cloudflare\.com/;
 
 /**
  * Console noise the dev overlay itself emits while rendering an error, plus
@@ -69,6 +69,15 @@ for (const path of PATHS) {
   page.on("requestfailed", (req) => {
     const url = req.url();
     if (THIRD_PARTY.test(url)) return;
+    /**
+     * An abort is the BROWSER's decision, not a server failure.
+     *
+     * Next speculatively prefetches every linked route as `?_rsc=…`, and
+     * cancels those in flight when the page closes. Counting them made all
+     * eight pages "fail" while every one of them was serving 200 — a check
+     * that cries wolf gets ignored, which is worse than not having it.
+     */
+    if (req.failure()?.errorText === "net::ERR_ABORTED") return;
     problems.push(`request failed: ${url} (${req.failure()?.errorText})`);
   });
 

@@ -3,6 +3,8 @@
 import { useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { parseVideo } from "@/lib/fampire/video";
+
 /**
  * The hero's moving image.
  *
@@ -52,26 +54,6 @@ const ORIGIN = "https://player.vimeo.com";
  * exactly as long as the activation it is tracking.
  */
 let documentHasHadSound = false;
-
-/**
- * Which service a hero URL points at, and its id.
- *
- * The hero could only ever be a Vimeo id, which became a hard block: the
- * client's trailer has embedding disabled in its Vimeo privacy settings, the
- * player answers 401 to every site, and no code here can override that. With
- * no second Vimeo video in the catalog there was literally nothing to swap in.
- * YouTube embeds freely, and the client has a film and 57 appearances there.
- */
-export function parseVideo(input?: string | null): { kind: "vimeo" | "youtube"; id: string } | null {
-  const v = (input ?? "").trim();
-  if (!v) return null;
-  if (/^\d+$/.test(v)) return { kind: "vimeo", id: v };            // bare Vimeo id, as before
-  const yt = v.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{6,})/i);
-  if (yt) return { kind: "youtube", id: yt[1]! };
-  const vm = v.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
-  if (vm) return { kind: "vimeo", id: vm[1]! };
-  return null;
-}
 
 export default function HeroVideo({
   videoId,
