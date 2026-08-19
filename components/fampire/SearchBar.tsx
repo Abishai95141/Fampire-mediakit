@@ -67,11 +67,21 @@ export default function SearchBar({
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
         aria-label="Search the FAMPIRE library"
-        className="fam-display-sm w-full border-b-2 border-fam-ink/30 bg-transparent pb-4 pr-10 text-[22px] text-fam-ink outline-none transition-colors placeholder:text-fam-muted focus:border-fam-ink sm:text-[28px] lg:text-[32px]"
+        /**
+         * The placeholder has to FIT.
+         *
+         * At 22px on a 375px screen, "Search — a person, a film, an event, a
+         * year" ran straight under the ↵ glyph and was clipped mid-word, on
+         * both the home page and the Library. The type ramp now starts at
+         * 16px, and `text-ellipsis` means any placeholder an editor writes
+         * degrades to a clean truncation instead of colliding with the
+         * affordance next to it.
+         */
+        className="fam-display-sm w-full overflow-hidden text-ellipsis border-b-2 border-fam-ink/30 bg-transparent pb-4 pr-9 text-[16px] text-fam-ink outline-none transition-colors placeholder:text-fam-muted focus:border-fam-ink sm:pr-10 sm:text-[24px] md:text-[28px] lg:text-[32px]"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-5 right-0 text-fam-muted transition-colors group-focus-within:text-fam-ink"
+        className="pointer-events-none absolute bottom-4 right-0 text-[14px] text-fam-muted transition-colors group-focus-within:text-fam-ink sm:bottom-5 sm:text-[inherit]"
       >
         ↵
       </span>

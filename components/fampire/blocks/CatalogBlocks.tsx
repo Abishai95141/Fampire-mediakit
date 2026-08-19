@@ -28,6 +28,19 @@ import {
 
 const fmt = new Intl.NumberFormat("en-US");
 
+/**
+ * A hand-set image wins over one borrowed from the catalog.
+ *
+ * Borrowing is a good default and a bad guarantee: a film with no indexed
+ * collections, or a person whose collections are all held for review, ends up
+ * with nothing to show and no way to fix it from the CMS.
+ */
+const chosen = (url?: string | null, upload?: { url?: string } | string | null): string | null => {
+  if (typeof url === "string" && url.trim()) return url.trim();
+  if (upload && typeof upload === "object" && upload.url) return upload.url;
+  return null;
+};
+
 // ── Films ───────────────────────────────────────────────────────────────
 
 export async function FilmProfiles({
@@ -47,11 +60,12 @@ export async function FilmProfiles({
       <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         {films.map((f) => {
           const art = previewForFilm(entries, f.title);
+          const src = chosen(f.posterUrl, f.posterImage) ?? art?.image ?? null;
           return (
             <li key={f.slug}>
               <Link href={`/library?film=${encodeURIComponent(f.title)}`} className="group block">
                 <ImageWell
-                  src={art?.image ?? null}
+                  src={src}
                   alt={f.title}
                   label={f.title}
                   shape="tall"
@@ -77,6 +91,7 @@ export async function FilmProfiles({
           const assets = entries.filter((e) => e.film === f.title);
           const watch = watchLinks.filter((w) => w.film === f.title);
           const hero = previewForFilm(entries, f.title);
+          const heroSrc = chosen(f.posterUrl, f.posterImage) ?? hero?.image ?? null;
 
           return (
             <article key={f.slug} className="fam-section-rule pt-10">
@@ -130,7 +145,7 @@ export async function FilmProfiles({
                 </div>
 
                 <ImageWell
-                  src={hero?.image ?? null}
+                  src={heroSrc}
                   alt={hero?.title ?? f.title}
                   label={f.title}
                   shape="wide"
@@ -242,7 +257,7 @@ export async function PeopleProfiles({
               className="fam-section-rule grid gap-x-14 gap-y-7 pt-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,20rem)_1fr]"
             >
               <ImageWell
-                src={shots[p.slug] ?? null}
+                src={chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null}
                 alt={SUBJECT_LABEL[p.slug] ?? p.name}
                 label={SUBJECT_LABEL[p.slug] ?? p.name}
                 shape="tall"
@@ -284,7 +299,7 @@ export async function PeopleProfiles({
         <li key={p.slug}>
           <Link href={`/library?subject=${p.slug}`} className="group block">
             <ImageWell
-              src={shots[p.slug] ?? null}
+              src={chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null}
               alt={SUBJECT_LABEL[p.slug] ?? p.name}
               label={SUBJECT_LABEL[p.slug] ?? p.name}
               shape="tall"

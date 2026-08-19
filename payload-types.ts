@@ -477,6 +477,14 @@ export interface Person {
   role?: string | null;
   bio?: string | null;
   /**
+   * Portrait for this person's tile. Paste an absolute image URL. Overrides the frame borrowed from the catalog.
+   */
+  portraitUrl?: string | null;
+  /**
+   * Or upload a portrait.
+   */
+  portraitImage?: (number | null) | Media;
+  /**
    * One of the four Lolli family members.
    */
   isFamily?: boolean | null;
@@ -499,6 +507,14 @@ export interface Film {
    */
   slug: string;
   synopsis?: string | null;
+  /**
+   * Key art for this film's tile. Paste an absolute image URL. Overrides the frame borrowed from the catalog; leave empty to keep borrowing.
+   */
+  posterUrl?: string | null;
+  /**
+   * Or upload the key art.
+   */
+  posterImage?: (number | null) | Media;
   /**
    * Best-documentary awards.
    */
@@ -2055,6 +2071,8 @@ export interface PeopleSelect<T extends boolean = true> {
   slug?: T;
   role?: T;
   bio?: T;
+  portraitUrl?: T;
+  portraitImage?: T;
   isFamily?: T;
   isMinor?: T;
   updatedAt?: T;
@@ -2068,6 +2086,8 @@ export interface FilmsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   synopsis?: T;
+  posterUrl?: T;
+  posterImage?: T;
   awards?: T;
   year?: T;
   status?: T;

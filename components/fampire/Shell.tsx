@@ -44,6 +44,16 @@ export default function Shell({
   signedIn: boolean;
 }) {
   const pathname = usePathname();
+  /**
+   * The mobile menu.
+   *
+   * Every nav link carried `hidden sm:inline`, so below 640px the masthead
+   * offered a bare "Search" link and nothing else — the Library, Films, People
+   * and Press were unreachable on a phone, which is most of a press room's
+   * traffic. Closed on navigation so tapping a link does not leave the drawer
+   * covering the page you asked for.
+   */
+  const [menuOpen, setMenuOpen] = useState(false);
   // The curtain belongs on the front door only. Someone who arrives on a deep
   // link from a Slack message wants the asset, not an overture — and a
   // preloader on every route is the single fastest way to make a fast site
@@ -111,12 +121,29 @@ export default function Shell({
                   </Link>
                 );
               })}
-              <Link
-                href={`/library`}
-                className="text-[13.5px] font-semibold text-fam-muted transition-colors hover:text-fam-ink sm:hidden"
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-expanded={menuOpen}
+                aria-controls="fam-mobile-nav"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                className="-mr-1 flex h-9 w-9 items-center justify-center text-fam-ink sm:hidden"
               >
-                Search
-              </Link>
+                {/* Two rules that cross into an X. Cheaper than an icon font
+                    and it animates, so the button reads as a toggle. */}
+                <span className="relative block h-4 w-5" aria-hidden>
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 bg-fam-ink transition-transform duration-200 ${
+                      menuOpen ? "top-[7px] rotate-45" : "top-[3px]"
+                    }`}
+                  />
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 bg-fam-ink transition-transform duration-200 ${
+                      menuOpen ? "top-[7px] -rotate-45" : "top-[11px]"
+                    }`}
+                  />
+                </span>
+              </button>
               {signedIn ? (
                 <span className="fam-meta hidden items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-fam-muted md:inline-flex">
                   <span className="h-1.5 w-1.5 rounded-full bg-fam-ink" aria-hidden />
@@ -132,6 +159,30 @@ export default function Shell({
               )}
             </nav>
           </div>
+
+          {/* The drawer. Rendered only when open so its links are not in the
+              tab order of a page that is not showing them. */}
+          {menuOpen ? (
+            <div id="fam-mobile-nav" className="border-t border-fam-rule bg-fam-paper sm:hidden">
+              <nav className="mx-auto flex max-w-[1320px] flex-col px-6 py-2">
+                {nav.map((n) => {
+                  const active = pathname === n.href || pathname.startsWith(`${n.href}/`);
+                  return (
+                    <Link
+                      key={n.href}
+                      href={n.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`border-b border-fam-rule py-4 text-[16px] font-semibold last:border-b-0 ${
+                        active ? "text-fam-ink" : "text-fam-body"
+                      }`}
+                    >
+                      {n.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+          ) : null}
         </header>
 
         <main>{children}</main>

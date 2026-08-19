@@ -63,6 +63,28 @@ export const People: CollectionConfig = {
     { name: "role", type: "text", admin: { description: "How to describe them in a caption, e.g. 'Founder', 'Guest'." } },
     { name: "bio", type: "textarea" },
     {
+      /**
+       * A portrait that does not depend on catalog state.
+       *
+       * Portraits are otherwise picked from published collections featuring
+       * the person, so Love and Legend showed black placeholders for as long
+       * as every collection featuring them was held for review — the page
+       * silently reflected a moderation decision as an absence of a face.
+       */
+      name: "portraitUrl",
+      type: "text",
+      admin: {
+        description:
+          "Portrait for this person's tile. Paste an absolute image URL. Overrides the frame borrowed from the catalog.",
+      },
+    },
+    {
+      name: "portraitImage",
+      type: "upload",
+      relationTo: "media",
+      admin: { description: "Or upload a portrait." },
+    },
+    {
       name: "isFamily",
       type: "checkbox",
       defaultValue: false,
@@ -89,6 +111,31 @@ export const Films: CollectionConfig = {
     { name: "title", type: "text", required: true },
     slug,
     { name: "synopsis", type: "textarea" },
+    {
+      /**
+       * Artwork chosen by hand, independent of the catalog.
+       *
+       * The tile picture is otherwise borrowed from the best-ranked collection
+       * carrying this film — which works until a film has no collections at
+       * all. Skin Deep, From Fat Lolli to 6 Pack Lolli and The New Woo have
+       * zero, so all three rendered as black placeholders on the front page
+       * with no way for anyone to fix it in the CMS. A film exists whether or
+       * not its footage has been indexed yet.
+       */
+      name: "posterUrl",
+      type: "text",
+      admin: {
+        description:
+          "Key art for this film's tile. Paste an absolute image URL. Overrides the frame borrowed from the catalog; leave empty to keep borrowing.",
+      },
+    },
+    {
+      name: "posterImage",
+      type: "upload",
+      relationTo: "media",
+      admin: { description: "Or upload the key art." },
+    },
+
     { name: "awards", type: "number", defaultValue: 0, admin: { description: "Best-documentary awards." } },
     { name: "year", type: "number" },
     {

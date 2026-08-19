@@ -222,6 +222,9 @@ export const loadWatchLinks = cache(async (): Promise<WatchLink[]> => {
 export type FilmRecord = {
   slug: string;
   title: string;
+  /** Hand-set key art, which beats anything borrowed from the catalog. */
+  posterUrl?: string | null;
+  posterImage?: { url?: string } | string | null;
   awards?: number | null;
   note?: string | null;
   year?: number | null;
@@ -232,13 +235,16 @@ export type FilmRecord = {
 
 export const loadFilms = cache(async (): Promise<FilmRecord[]> => {
   const payload = await getPayload({ config });
-  const r = await payload.find({ collection: "films", limit: 100, depth: 0, sort: "-awards" });
+  const r = await payload.find({ collection: "films", limit: 100, depth: 1, sort: "-awards" });
   return r.docs as unknown as FilmRecord[];
 });
 
 export type PersonRecord = {
   slug: string;
   name: string;
+  /** Hand-set portrait, which beats anything borrowed from the catalog. */
+  portraitUrl?: string | null;
+  portraitImage?: { url?: string } | string | null;
   role?: string | null;
   bio?: string | null;
   isFamily?: boolean | null;
@@ -252,7 +258,7 @@ export const loadFamily = cache(async (): Promise<PersonRecord[]> => {
     collection: "people",
     where: { isFamily: { equals: true } },
     limit: 20,
-    depth: 0,
+    depth: 1,
   });
   const order = ["anthony", "tereza", "love", "legend"];
   return (r.docs as unknown as PersonRecord[]).sort(

@@ -316,3 +316,17 @@
   .fam .fam-zoom,
   .fam .group:hover .fam-zoom { transition: none; transform: none; }
 }
+
+
+/* The Library's filter rail.
+   ---------------------------------------------------------------------
+   It is a <details> so mobile gets a real, script-free disclosure: closed by
+   default, so a phone visitor sees collections instead of ~200 filter rows.
+   From `lg` up there is no drawer at all — the summary disappears and the
+   panel is forced open, because a sticky rail beside the results is the right
+   shape on a wide screen. Forcing it open in CSS avoids having to script the
+   `open` attribute at a breakpoint. */
+@media (min-width: 1024px) {
+  .fam details.fam-facets > summary { display: none; }
+  .fam details.fam-facets > div { display: block !important; }
+}

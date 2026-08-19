@@ -206,7 +206,24 @@ export default async function LibraryBrowser({
             value showing "6" always yields 6, and options that would yield
             nothing are simply not offered. */}
         {showFacets ? (
-          <aside className="lg:sticky lg:top-24 lg:self-start">
+          /**
+           * A drawer on small screens, a rail on large ones.
+           *
+           * Every axis rendered at full length on mobile — Kind, Orientation,
+           * Occasion, Brand, Person, Featuring, Place, Issue, Year, Film,
+           * Event — so a phone visitor scrolled past roughly two hundred
+           * filter rows before reaching a single collection. `<details>` does
+           * this natively: closed by default below `lg`, forced open above it
+           * with `open`, and it keeps working with JavaScript disabled.
+           */
+          <details
+            className="fam-facets group mb-8 lg:mb-0 lg:sticky lg:top-24 lg:self-start"
+          >
+            <summary className="fam-meta mb-4 flex cursor-pointer list-none items-center justify-between border-y border-fam-rule py-3 text-[11px] uppercase tracking-[0.14em] text-fam-ink lg:hidden">
+              Filters
+              <span aria-hidden className="text-[14px] transition-transform group-open:rotate-45">+</span>
+            </summary>
+          <div className="lg:sticky lg:top-24 lg:self-start">
             {/* A nested scroller inside a Lenis page is the classic "some of it
                 scrolls at a different speed" bug: the rail scrolls natively while
                 the page scrolls smoothed, and once the rail hits its end the
@@ -257,7 +274,8 @@ export default async function LibraryBrowser({
                 );
               })}
             </div>
-          </aside>
+          </div>
+          </details>
         ) : null}
 
         <section className={showFacets ? "mt-12 lg:mt-0" : ""}>
