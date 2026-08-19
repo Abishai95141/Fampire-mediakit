@@ -90,6 +90,8 @@ export default function HeroVideo({
 
   const reduceMotion = useReducedMotion();
   const showStill = failed || reduceMotion === true || !embeddable;
+  const parsed = parseVideo(videoId);
+  const isYouTube = parsed?.kind === "youtube";
 
   const send = useCallback((method: string, value?: unknown) => {
     frameRef.current?.contentWindow?.postMessage(JSON.stringify({ method, value }), ORIGIN);
@@ -143,10 +145,16 @@ export default function HeroVideo({
       unmute();
     }
 
-    // Nothing to wait for when the embed is known-refused, or when the visitor
-    // has asked for less motion: lift the curtain at once rather than making
-    // them sit through the watchdog.
-    if (!embeddable || reduceMotion === true) {
+    // Nothing to wait for when the embed is known-refused, when the visitor
+    // has asked for less motion, or when this is a YouTube video: everything
+    // below this line is Vimeo's postMessage handshake, listening only to
+    // messages from player.vimeo.com. A YouTube iframe never sends those, so
+    // without this check `playingRef` would never flip true, the 11-second
+    // `giveUp` timer below would always fire, and the component would swap
+    // to the poster out from under a YouTube video that was actually playing
+    // fine the whole time — audio included, since nothing here ever told
+    // that iframe to stop. YouTube's own autoplay+loop needs no verification.
+    if (!embeddable || reduceMotion === true || isYouTube) {
       releasePreloader();
       return;
     }
@@ -324,9 +332,7 @@ export default function HeroVideo({
       // A curtain that never lifts is worse than an unplayed video.
       releasePreloader();
     };
-  }, [reduceMotion, startAt, send, unmute, embeddable]);
-
-  const parsed = parseVideo(videoId);
+  }, [reduceMotion, startAt, send, unmute, embeddable, isYouTube]);
 
   /**
    * YouTube gets a plain embed, deliberately.
