@@ -109,7 +109,7 @@ export default function EntryCard({
    */
   const editLink = signedIn ? (
     <Link
-      href={`/admin/collections/entries/${entry.id}`}
+      href={`/admin/collections/entries/${entry.record_id}`}
       className="fam-underline mt-2 inline-block text-[11px] font-semibold text-fam-muted hover:text-fam-ink"
     >
       Edit this collection →

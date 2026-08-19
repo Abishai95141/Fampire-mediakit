@@ -80,6 +80,9 @@ export function toEntry(doc: Record<string, unknown>): Entry {
 
   return {
     id: String(doc.folderId ?? doc.id),
+    // The row id, kept separate from the public `id` above — see the Entry
+    // type. Admin deep links need this one and nothing else does.
+    record_id: doc.id as number | string,
     slug: (doc.slug as string) ?? String(doc.folderId ?? doc.id),
     preview_file_id: (doc.previewFileId as string) ?? null,
     title: String(doc.title ?? ""),

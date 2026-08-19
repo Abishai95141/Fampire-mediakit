@@ -88,7 +88,7 @@ export default async function CollectionPage({ params }: Args) {
     <>
       {/* Renders nothing for a signed-out reader — a press contact must never
           see editorial furniture on a public surface. */}
-      <EditBar collection="entries" id={entry.id} label={entry.title} />
+      <EditBar collection="entries" id={entry.record_id} label={entry.title} />
     <main className="mx-auto max-w-4xl px-6 py-16">
       <nav className="text-xs uppercase tracking-[0.2em] opacity-60">
         <Link href={`/library`} className="hover:opacity-100">

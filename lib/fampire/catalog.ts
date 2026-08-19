@@ -37,7 +37,23 @@ export type Kind =
 export type Subject = "anthony" | "tereza" | "love" | "legend" | (string & {});
 
 export type Entry = {
+  /**
+   * The PUBLIC identity: the client's Drive folder id, which is stable across
+   * every copy of the database and is what public URLs fall back to. It is
+   * deliberately NOT the database row id.
+   */
   id: string;
+  /**
+   * The DATABASE row id, for admin deep links only.
+   *
+   * These have to be two fields. `id` above is the Drive folder id, so
+   * `/admin/collections/entries/${entry.id}` asked Payload for a document
+   * whose primary key was "1iRIVHXfAVJmNxMSd6IMcNgk_cl5UwA34" and got
+   * "could not be found" on every Edit link on the site. Row ids also differ
+   * between the local and production databases, so they can never be the
+   * public identifier — which is exactly why `id` is the folder id.
+   */
+  record_id: number | string;
   title: string;
   description: string;
   url: string;
