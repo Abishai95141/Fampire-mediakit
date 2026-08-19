@@ -185,7 +185,7 @@ export default function Shell({
           ) : null}
         </header>
 
-        <main>{children}</main>
+        <main className="pb-16 sm:pb-24">{children}</main>
 
         <footer className="bg-fam-ink text-white">
           <div className="mx-auto max-w-[1320px] px-6 py-16 sm:px-10 lg:px-12">
