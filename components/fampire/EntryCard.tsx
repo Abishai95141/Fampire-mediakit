@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Preview from "@/components/fampire/Preview";
+import SourceLink from "@/components/fampire/SourceLink";
 import {
   BRAND_LABEL,
   PLATFORM_LABEL,
@@ -71,9 +72,8 @@ export default function EntryCard({
             Password at source
           </span>
         ) : (
-          <span className="text-[13px] font-semibold text-fam-ink">
-            Open in {PLATFORM_LABEL[entry.source_platform]} ↗
-          </span>
+          /* No href: the whole card is already a Link — see SourceLink. */
+          <SourceLink platform={entry.source_platform} />
         )}
 
         {entry.contains_minor ? (

@@ -57,6 +57,24 @@
 .fam {
   font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Long unbroken strings wrap instead of escaping their box. Set HERE, once,
+     rather than per-component: `overflow-wrap` inherits, so every surface —
+     including ones that do not exist yet — gets it without anyone remembering
+     to. This is not hypothetical tidiness. The catalog is named from the
+     client's own folders, and a folder called
+     "A4M Red Carpet — 5991133C40EFB052899F85198F244EDA" is a single 32-character
+     "word" that no amount of column width will ever fit; it ran straight across
+     the card beside it. */
+  overflow-wrap: break-word;
+}
+
+/* `break-word` alone does not shrink a box's intrinsic MINIMUM width — a grid
+   or flex track sized from content can still be forced open by one long token.
+   `anywhere` does, so text-bearing elements get it too. `:where()` keeps the
+   specificity at zero, so any component can still opt out. */
+.fam
+  :where(h1, h2, h3, h4, h5, h6, p, li, dd, dt, blockquote, figcaption, td, th) {
+  overflow-wrap: anywhere;
 }
 
 /* Every COLOUR default lives in @layer base, and that is load-bearing.
@@ -288,6 +306,49 @@
   background: var(--fam-paper);
   color: var(--fam-ink);
   border-color: var(--fam-paper);
+}
+
+/* The way OUT of the site, to the client's own storage.
+
+   This is the single most important control on a collection — the whole
+   product is a catalog over files it deliberately does not host, so "open it
+   where it actually lives" is the payoff of every page. It read as grey body
+   text indistinguishable from the metadata beside it. A bordered button with
+   the platform's own mark makes it findable at a glance.
+
+   Deliberately smaller than `fam-btn`: on a card it sits in a row with the
+   status badges, and matching their scale keeps that row one line of
+   furniture rather than a button with debris around it. */
+.fam .fam-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--fam-ink);
+  padding: 0.5rem 0.85rem;
+  font-family: var(--font-poppins-fam), var(--font-jakarta), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--fam-ink);
+  background: var(--fam-paper);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+/* On a card the button is a `<span>` — the whole card is already one anchor,
+   and an anchor inside an anchor is invalid HTML the browser silently
+   discards. So the hover state has to come from the CARD, not from the
+   button, or it would never light up in the place it matters most. */
+.fam a.fam-source:hover,
+.fam a.fam-source:focus-visible,
+.fam .group:hover .fam-source {
+  background: var(--fam-ink);
+  color: var(--fam-paper);
+}
+/* The platform mark keeps its own colours (a logo is a logo), but the arrow
+   and rule are the site's. */
+.fam .fam-source svg {
+  flex-shrink: 0;
 }
 
 /* Media wells sit on BLACK, not on a grey. Photography reads as photography

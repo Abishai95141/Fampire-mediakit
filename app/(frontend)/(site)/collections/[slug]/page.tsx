@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import EditBar from "@/components/fampire/EditBar";
 import EntryCard from "@/components/fampire/EntryCard";
 import Section from "@/components/fampire/Section";
+import SourceLink from "@/components/fampire/SourceLink";
 import { isSignedIn } from "@/lib/fampire/auth";
 import { KIND_LABEL_FALLBACK, PLATFORM_LABEL } from "@/lib/fampire/catalog";
 import { getCollection, previewImage, relatedCollections } from "@/lib/fampire/collection";
@@ -154,14 +155,7 @@ export default async function CollectionPage({ params }: Args) {
       </div>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <a
-          href={entry.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded border px-5 py-3 font-medium"
-        >
-          Open in {PLATFORM_LABEL[entry.source_platform] ?? "storage"}
-        </a>
+        <SourceLink platform={entry.source_platform} href={entry.url} />
         {entry.access === "password" ? (
           <span className="text-sm opacity-70">
             Password protected — contact the media team for access.
