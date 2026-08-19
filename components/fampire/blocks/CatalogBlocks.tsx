@@ -117,12 +117,21 @@ export async function FilmProfiles({
                   ) : null}
 
                   <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-                    <Link
-                      href={`/library?film=${encodeURIComponent(f.title)}`}
-                      className="fam-underline text-[14px] font-semibold text-fam-ink"
-                    >
-                      {assets.length} collection{assets.length === 1 ? "" : "s"} →
-                    </Link>
+                    {/* A link promising nothing is worse than a sentence.
+                        Three films have no indexed collections yet, and
+                        "0 collections →" invited a click into an empty page. */}
+                    {assets.length > 0 ? (
+                      <Link
+                        href={`/library?film=${encodeURIComponent(f.title)}`}
+                        className="fam-underline text-[14px] font-semibold text-fam-ink"
+                      >
+                        {assets.length} collection{assets.length === 1 ? "" : "s"} →
+                      </Link>
+                    ) : (
+                      <span className="text-[14px] text-fam-muted">
+                        No collections indexed yet
+                      </span>
+                    )}
                     {showWatchLinks && watch.length > 0 ? (
                       <span className="text-[14px] text-fam-muted">
                         Watch on{" "}

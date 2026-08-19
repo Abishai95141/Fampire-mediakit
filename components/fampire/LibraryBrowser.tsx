@@ -12,6 +12,7 @@ import {
   facetsToQuery,
   SUBJECT_LABEL,
   visibleEntries,
+  heldBackCount,
   type Entry,
   type Facets,
 } from "@/lib/fampire/catalog";
@@ -102,6 +103,8 @@ export default async function LibraryBrowser({
   // here — private entries render as a locked card carrying only a title and a
   // description, never a URL.
   const all = await visibleEntries(signedIn);
+  // Counted, not assumed — see heldBackCount.
+  const held = signedIn ? 0 : await heldBackCount();
   const pool = applyLocked(all, locked);
 
   const results = sortEntries(applyFacets(pool, facets), facets.sort, facets.q);
@@ -315,10 +318,11 @@ export default async function LibraryBrowser({
                 ))}
               </ul>
               <div className="border-t border-fam-rule" />
-              {!signedIn ? (
+              {!signedIn && held > 0 ? (
                 <p className="mt-8 max-w-xl text-[13px] leading-relaxed text-fam-muted">
-                  Some collections are held back — password-gated at source, or
-                  awaiting written sign-off before they publish.{" "}
+                  {held} collection{held === 1 ? " is" : "s are"} held back —
+                  password-gated at source, or awaiting written sign-off before
+                  they publish.{" "}
                   <Link
                     href={`/login?next=${encodeURIComponent(basePath)}`}
                     className="fam-underline font-semibold text-fam-ink"

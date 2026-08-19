@@ -332,6 +332,24 @@ function formatAired(iso: string): string | null {
   return Number.isNaN(t) ? null : AIRED_FORMAT.format(new Date(t));
 }
 
+/**
+ * How many collections are genuinely held back right now.
+ *
+ * The Library told every signed-out reader "Some collections are held back"
+ * unconditionally. Once everything was published that became a false statement
+ * on a public page, inviting people to sign in for material that does not
+ * exist. A claim about the archive should be counted, not assumed.
+ */
+export const heldBackCount = cache(async (): Promise<number> => {
+  const payload = await getPayload({ config });
+  const r = await payload.count({
+    collection: "entries",
+    where: { _status: { equals: "draft" } },
+    overrideAccess: true,
+  });
+  return r.totalDocs;
+});
+
 export type SiteChrome = {
   nav: { label: string; href: string }[];
   footer: {

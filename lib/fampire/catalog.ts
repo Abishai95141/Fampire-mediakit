@@ -115,6 +115,7 @@ export {
   loadPeople,
   loadAppearances,
   loadChrome,
+  heldBackCount,
   type FilmRecord,
   type PersonRecord,
   type AppearanceRecord,
