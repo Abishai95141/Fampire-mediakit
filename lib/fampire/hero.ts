@@ -1,11 +1,10 @@
 import { cache } from "react";
 
-import { HERO } from "./media";
-
 /**
- * Is the hero video actually embeddable right now?
+ * Is a given Vimeo video actually embeddable right now?
  *
- * Measured, not assumed. As of this writing the client's own trailer is NOT:
+ * Measured, not assumed. The client's own default trailer, for instance, is
+ * NOT:
  *
  *   https://vimeo.com/1025829605              → 200  (public, watchable on Vimeo)
  *   .../api/oembed.json?url=…                 → 200  (full metadata, 316s, poster)
@@ -14,12 +13,20 @@ import { HERO } from "./media";
  * A public video whose PLAYER refuses everyone means embedding is switched off
  * in that video's Vimeo privacy settings ("Where can this be embedded?"). It is
  * an account-side setting; no amount of client code fixes it, and no autoplay,
- * codec, muted or playsInline change is involved.
+ * codec, muted or playsInline change is involved. (That video now ships as a
+ * self-hosted default instead — see lib/fampire/media.ts — so this probe only
+ * matters for a Vimeo link someone pastes into the CMS.)
  *
  * Why check at all instead of letting the player fail: a cross-origin iframe
  * does not report a 401 to the page, so the component could only infer failure
  * from silence — it waited eleven seconds on a dead frame before falling back.
  * Asking the server first turns that into an instant, deliberate still.
+ *
+ * Takes the id explicitly rather than reaching for a fixed default — every
+ * CMS-provided Vimeo link is its own video, with its own privacy setting, and
+ * checking the same id regardless of what's actually configured meant a
+ * working replacement video would still get silently vetoed by the ORIGINAL
+ * trailer's embed status.
  *
  * Fails OPEN: if the probe itself errors we assume embeddable and let the
  * component's own watchdog decide, because a network blip here should not
@@ -34,8 +41,8 @@ export type HeroEmbedStatus = {
   reason: string;
 };
 
-export const heroEmbedStatus = cache(async (): Promise<HeroEmbedStatus> => {
-  const url = `https://player.vimeo.com/video/${HERO.videoId}`;
+export const heroEmbedStatus = cache(async (videoId: string): Promise<HeroEmbedStatus> => {
+  const url = `https://player.vimeo.com/video/${videoId}`;
   try {
     const res = await fetch(url, {
       method: "GET",

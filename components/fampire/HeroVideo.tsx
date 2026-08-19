@@ -70,12 +70,22 @@ export default function HeroVideo({
    * (lib/fampire/hero.ts), the still renders immediately instead.
    */
   embeddable = true,
+  /**
+   * The self-hosted default, used whenever `videoId` doesn't resolve to a
+   * real Vimeo or YouTube link — i.e. the CMS field is empty, or someone
+   * pasted something `parseVideo` can't make sense of. A plain HTML
+   * `<video>` needs none of the iframe machinery below: no cross-origin
+   * postMessage handshake, no embeddability probe, no watchdog. The browser
+   * just tells us directly when it's playing.
+   */
+  fallbackSrc,
 }: {
   videoId: string;
   poster: string;
   title: string;
   startAt?: number;
   embeddable?: boolean;
+  fallbackSrc?: string;
 }) {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const ytFrameRef = useRef<HTMLIFrameElement | null>(null);
@@ -93,6 +103,7 @@ export default function HeroVideo({
   const showStill = failed || reduceMotion === true || !embeddable;
   const parsed = parseVideo(videoId);
   const isYouTube = parsed?.kind === "youtube";
+  const useSelfHosted = !parsed && Boolean(fallbackSrc);
 
   const send = useCallback((method: string, value?: unknown) => {
     frameRef.current?.contentWindow?.postMessage(JSON.stringify({ method, value }), ORIGIN);
@@ -147,15 +158,17 @@ export default function HeroVideo({
     }
 
     // Nothing to wait for when the embed is known-refused, when the visitor
-    // has asked for less motion, or when this is a YouTube video: everything
-    // below this line is Vimeo's postMessage handshake, listening only to
-    // messages from player.vimeo.com. A YouTube iframe never sends those, so
-    // without this check `playingRef` would never flip true, the 11-second
-    // `giveUp` timer below would always fire, and the component would swap
-    // to the poster out from under a YouTube video that was actually playing
-    // fine the whole time — audio included, since nothing here ever told
-    // that iframe to stop. YouTube's own autoplay+loop needs no verification.
-    if (!embeddable || reduceMotion === true || isYouTube) {
+    // has asked for less motion, when this is a YouTube video, or when this
+    // is the self-hosted fallback: everything below this line is Vimeo's
+    // postMessage handshake, listening only to messages from
+    // player.vimeo.com. Neither a YouTube iframe nor a plain <video> element
+    // ever sends those, so without this check `playingRef` would never flip
+    // true, the 11-second `giveUp` timer below would always fire, and the
+    // component would swap to the poster out from under a video that was
+    // actually playing fine the whole time. Both other sources verify
+    // themselves through their own native means — see the effect below for
+    // the self-hosted one.
+    if (!embeddable || reduceMotion === true || isYouTube || useSelfHosted) {
       releasePreloader();
       return;
     }
@@ -333,7 +346,7 @@ export default function HeroVideo({
       // A curtain that never lifts is worse than an unplayed video.
       releasePreloader();
     };
-  }, [reduceMotion, startAt, send, unmute, embeddable, isYouTube]);
+  }, [reduceMotion, startAt, send, unmute, embeddable, isYouTube, useSelfHosted]);
 
   /**
    * YouTube's own sound-acquisition loop.
@@ -408,6 +421,53 @@ export default function HeroVideo({
           title={title}
           allow="autoplay; fullscreen; picture-in-picture"
           className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    );
+  }
+
+  /**
+   * The self-hosted default: a plain <video>, no iframe at all.
+   *
+   * This is the one source with a real HTMLMediaElement under our own
+   * control — `onPlaying` is a genuine signal, not an inference from a
+   * cross-origin postMessage that may or may not arrive, so the preloader
+   * releases the instant playback actually starts rather than on a timer.
+   * `startAt` is applied by seeking on load, since there's no `#t=` embed
+   * param for a file we're serving ourselves.
+   */
+  if (useSelfHosted && !showStill) {
+    return (
+      <div className="absolute inset-0 overflow-hidden bg-fam-ink">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          referrerPolicy="no-referrer"
+          className={`absolute inset-0 h-full w-full object-cover brightness-[0.78] transition-opacity duration-700 ${
+            playing ? "opacity-0" : "opacity-100"
+          }`}
+        />
+        <video
+          src={fallbackSrc}
+          title={title}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onLoadedMetadata={(e) => {
+            if (startAt) e.currentTarget.currentTime = startAt;
+          }}
+          onPlaying={() => {
+            setPlaying(true);
+            window.dispatchEvent(new Event(HERO_READY_EVENT));
+          }}
+          onError={() => setFailed(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            playing ? "opacity-100" : "opacity-0"
+          }`}
         />
       </div>
     );

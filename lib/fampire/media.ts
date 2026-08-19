@@ -28,6 +28,28 @@ export function wixImage(url: string | null, width: number, height: number): str
  */
 export const HERO = {
   videoId: "1025829605",
+  /**
+   * The DEFAULT hero source — used whenever the Pages CMS's own video field
+   * is empty. A self-hosted copy of `watchHref` below, not a link.
+   *
+   * This is a deliberate, one-time, explicitly-authorized exception to "we
+   * host nothing" (see the file doc comment): the client's Vimeo privacy
+   * setting blocks this exact video's embed everywhere but vimeo.com
+   * (`lib/fampire/hero.ts` has the full diagnosis), and the client asked for
+   * it to just work as the default rather than staying broken until they
+   * change that setting. It is still swappable with any Vimeo/YouTube link
+   * pasted into the CMS field — this is only the fallback when that field is
+   * empty, not a replacement for it.
+   *
+   * Not committed to git (57MB) — see /public/hero/ in .gitignore. To redo
+   * this from scratch: capture a fresh signed DASH manifest by loading
+   * https://vimeo.com/1025829605 in a real browser and reading the
+   * `playlist.json` network response (the direct player/config endpoints
+   * 401 for anything that isn't a real browser session), download the
+   * highest-bitrate video + audio tracks, mux with ffmpeg, then re-encode
+   * for the web (source is a 174MB ProRes-ish master).
+   */
+  selfHostedUrl: "/hero/biohack-yourself-trailer.mp4",
   posterHash:
     "1945487480-05af284dfbfcde23cfbb30292c057ff7ca1842ac49cb5f6dce06ef5bdde4664e",
   title: "Biohack Yourself — Directors Trailer",

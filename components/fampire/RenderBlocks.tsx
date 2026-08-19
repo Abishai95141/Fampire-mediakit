@@ -181,25 +181,27 @@ export default async function RenderBlocks({
          * the masthead stays white and opaque above both.
          */
         case "heroFeature": {
-          // `||` not `??`: an empty text field arrives as "", which is a value.
-          const heroVideo = String(block.videoId || HERO.videoId);
-          const parsedHero = parseVideo(heroVideo);
+          // An empty text field arrives as "" — falsy, and correctly so: an
+          // empty CMS override means "no override", not "an empty video".
+          const cmsVideo = String(block.videoId ?? "").trim();
+          const parsedHero = cmsVideo ? parseVideo(cmsVideo) : null;
           /**
-           * Only probe Vimeo when the video IS Vimeo.
-           *
-           * `heroEmbedStatus()` asks player.vimeo.com whether the embed will be
-           * served. Running it for a YouTube URL would let an unrelated Vimeo
-           * 401 veto a video that embeds perfectly well, which is exactly the
-           * situation the YouTube support exists to escape.
+           * Only probe Vimeo when the CMS is actually pointed at a Vimeo
+           * video. No CMS override at all means the self-hosted default
+           * (HeroVideo's `fallbackSrc`) — nothing to probe, always plays.
+           * A YouTube link embeds without this check by design. And when it
+           * IS Vimeo, probe THAT video's id, not a fixed default — every
+           * link is its own video with its own privacy setting, and
+           * checking a different one meant a working replacement could get
+           * silently vetoed by an unrelated video's embed status.
            */
           const hero =
-            parsedHero?.kind === "youtube"
+            !cmsVideo || parsedHero?.kind === "youtube"
               ? { embeddable: true }
-              : await heroEmbedStatus();
+              : await heroEmbedStatus(parsedHero?.id ?? cmsVideo);
           const stats = (block.stats as { value?: string; label: string; source?: string }[]) ?? [];
           const resolved = await resolveStats(stats);
           const actions = (block.actions as { label: string; href: string; emphasis?: string }[]) ?? [];
-          const videoId = heroVideo;
           return (
             <section
               key={key}
@@ -211,7 +213,8 @@ export default async function RenderBlocks({
               <div className="relative aspect-video w-full overflow-hidden bg-fam-ink lg:border-r lg:border-fam-rule">
                 <HeroVideo
                   embeddable={hero.embeddable}
-                  videoId={videoId}
+                  videoId={cmsVideo}
+                  fallbackSrc={HERO.selfHostedUrl}
                   poster={heroSkeleton()}
                   title={HERO.title}
                   startAt={Number(block.startAt ?? HERO.startAt)}
