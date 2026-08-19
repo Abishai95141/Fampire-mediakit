@@ -78,6 +78,7 @@ export default function HeroVideo({
   embeddable?: boolean;
 }) {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
+  const ytFrameRef = useRef<HTMLIFrameElement | null>(null);
   const playingRef = useRef(false);
   /** When the player last reported progress — see the watchdog below. */
   const lastTickRef = useRef(0);
@@ -335,6 +336,49 @@ export default function HeroVideo({
   }, [reduceMotion, startAt, send, unmute, embeddable, isYouTube]);
 
   /**
+   * YouTube's own sound-acquisition loop.
+   *
+   * The `mute=1` in the embed URL is what guarantees autoplay starts at all —
+   * browsers refuse audible autoplay before the visitor has interacted with
+   * the page. The Vimeo path above has an entire gesture-triggered unmute
+   * loop for exactly this reason; the YouTube branch had none, so a YouTube
+   * hero video was permanently silent no matter how the visitor interacted
+   * with the page. This is that same loop, aimed at the YouTube iframe API
+   * (`postMessage({event:"command", func:"unMute"})`) instead of Vimeo's.
+   */
+  useEffect(() => {
+    if (!isYouTube || showStill) return;
+    const sendYt = (func: string, args: unknown[] = []) =>
+      ytFrameRef.current?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func, args }),
+        "https://www.youtube-nocookie.com",
+      );
+    const tryUnmute = () => {
+      sendYt("unMute");
+      sendYt("setVolume", [100]);
+    };
+
+    const GESTURES = ["pointerdown", "keydown", "touchstart"] as const;
+    function onGesture() {
+      tryUnmute();
+    }
+    GESTURES.forEach((g) => window.addEventListener(g, onGesture, true));
+
+    // Ask immediately (covers a return visit, where activation already
+    // exists) and keep asking for a while — the iframe is not necessarily
+    // listening on the very first attempt.
+    tryUnmute();
+    const nudge = setInterval(tryUnmute, 700);
+    const stopNudging = setTimeout(() => clearInterval(nudge), 12_000);
+
+    return () => {
+      GESTURES.forEach((g) => window.removeEventListener(g, onGesture, true));
+      clearInterval(nudge);
+      clearTimeout(stopNudging);
+    };
+  }, [isYouTube, showStill]);
+
+  /**
    * YouTube gets a plain embed, deliberately.
    *
    * The Vimeo path below carries a lot of machinery — a postMessage handshake,
@@ -347,7 +391,7 @@ export default function HeroVideo({
     const yt =
       `https://www.youtube-nocookie.com/embed/${parsed.id}` +
       `?autoplay=1&mute=1&loop=1&playlist=${parsed.id}&controls=0&modestbranding=1` +
-      `&rel=0&playsinline=1&disablekb=1${startAt ? `&start=${startAt}` : ""}`;
+      `&rel=0&playsinline=1&disablekb=1&enablejsapi=1${startAt ? `&start=${startAt}` : ""}`;
     return (
       <div className="absolute inset-0 overflow-hidden bg-fam-ink">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -359,6 +403,7 @@ export default function HeroVideo({
           className="absolute inset-0 h-full w-full object-cover brightness-[0.78]"
         />
         <iframe
+          ref={ytFrameRef}
           src={yt}
           title={title}
           allow="autoplay; fullscreen; picture-in-picture"
