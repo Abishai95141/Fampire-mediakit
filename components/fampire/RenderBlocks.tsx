@@ -3,7 +3,7 @@ import { RichText as LexicalRichText } from "@payloadcms/richtext-lexical/react"
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 import EntryCard from "@/components/fampire/EntryCard";
-import HeroVideo from "@/components/fampire/HeroVideo";
+import HeroVideo, { parseVideo } from "@/components/fampire/HeroVideo";
 import Section from "@/components/fampire/Section";
 import SearchBar from "@/components/fampire/SearchBar";
 import LibraryBrowser from "@/components/fampire/LibraryBrowser";
@@ -180,13 +180,25 @@ export default async function RenderBlocks({
          * the masthead stays white and opaque above both.
          */
         case "heroFeature": {
-          const hero = await heroEmbedStatus();
+          // `||` not `??`: an empty text field arrives as "", which is a value.
+          const heroVideo = String(block.videoId || HERO.videoId);
+          const parsedHero = parseVideo(heroVideo);
+          /**
+           * Only probe Vimeo when the video IS Vimeo.
+           *
+           * `heroEmbedStatus()` asks player.vimeo.com whether the embed will be
+           * served. Running it for a YouTube URL would let an unrelated Vimeo
+           * 401 veto a video that embeds perfectly well, which is exactly the
+           * situation the YouTube support exists to escape.
+           */
+          const hero =
+            parsedHero?.kind === "youtube"
+              ? { embeddable: true }
+              : await heroEmbedStatus();
           const stats = (block.stats as { value?: string; label: string; source?: string }[]) ?? [];
           const resolved = await resolveStats(stats);
           const actions = (block.actions as { label: string; href: string; emphasis?: string }[]) ?? [];
-          // `||` not `??`: an empty text field arrives as "", which is a value,
-          // so `??` would hand HeroVideo a blank id and render a dead frame.
-          const videoId = String(block.videoId || HERO.videoId);
+          const videoId = heroVideo;
           return (
             <section
               key={key}

@@ -211,6 +211,23 @@ export interface Entry {
    */
   description: string;
   /**
+   * What the asset IS. Required.
+   */
+  kind:
+    | 'b-roll'
+    | 'event photography'
+    | 'headshots'
+    | 'poster'
+    | 'logo'
+    | 'trailer'
+    | 'BTS'
+    | 'podcast'
+    | 'press'
+    | 'magazine'
+    | 'document'
+    | 'interview'
+    | 'audio';
+  /**
    * Points at the client's own storage. Use the portable /drive/folders/<id> form — never /drive/u/N/, which encodes a browser account position and breaks for everyone else.
    */
   url: string;
@@ -239,23 +256,6 @@ export interface Entry {
    * For the preview image.
    */
   altText?: string | null;
-  /**
-   * What the asset IS.
-   */
-  kind:
-    | 'b-roll'
-    | 'event photography'
-    | 'headshots'
-    | 'poster'
-    | 'logo'
-    | 'trailer'
-    | 'BTS'
-    | 'podcast'
-    | 'press'
-    | 'magazine'
-    | 'document'
-    | 'interview'
-    | 'audio';
   /**
    * What it came FROM. The second axis.
    */
@@ -750,7 +750,7 @@ export interface Page {
          */
         intro?: string | null;
         /**
-         * Vimeo ID. Leave empty to show the still poster only.
+         * A YouTube or Vimeo URL, or a bare Vimeo ID. Leave empty for the still poster. Note: a Vimeo video whose privacy settings disable embedding will refuse to play on any site — the page falls back to the poster.
          */
         videoId?: string | null;
         /**
@@ -1478,6 +1478,7 @@ export interface EntriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  kind?: T;
   url?: T;
   rewrittenFrom?: T;
   alternates?:
@@ -1489,7 +1490,6 @@ export interface EntriesSelect<T extends boolean = true> {
   previewUrl?: T;
   previewImage?: T;
   altText?: T;
-  kind?: T;
   occasion?: T;
   tenant?: T;
   people?: T;

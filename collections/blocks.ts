@@ -349,7 +349,11 @@ export const HeroFeature: Block = {
     {
       name: "videoId",
       type: "text",
-      admin: { description: "Vimeo ID. Leave empty to show the still poster only." },
+      label: "Video",
+      admin: {
+        description:
+          "A YouTube or Vimeo URL, or a bare Vimeo ID. Leave empty for the still poster. Note: a Vimeo video whose privacy settings disable embedding will refuse to play on any site — the page falls back to the poster.",
+      },
     },
     { name: "startAt", type: "number", admin: { description: "Seconds into the film to start." } },
     {

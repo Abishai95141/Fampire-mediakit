@@ -189,6 +189,27 @@ export const Entries: CollectionConfig = {
               admin: { description: "One line, human. What is inside and where it came from." },
             },
             {
+              /**
+               * Required, so it belongs beside the other required fields.
+               *
+               * This lived on the Facets tab while title, description and url
+               * lived here — so filling in this tab and pressing Save produced
+               * "The following field is invalid: Facets > Kind", naming a tab
+               * the person had never opened. Four required fields split across
+               * two tabs is not a validation problem, it is a form-design one.
+               */
+              name: "kind",
+              type: "select",
+              required: true,
+              index: true,
+              admin: { description: "What the asset IS. Required." },
+              options: [
+                "b-roll", "event photography", "headshots", "poster", "logo",
+                "trailer", "BTS", "podcast", "press", "magazine", "document",
+                "interview", "audio",
+              ].map((v) => ({ label: v, value: v })),
+            },
+            {
               name: "url",
               type: "text",
               required: true,
@@ -251,25 +272,10 @@ export const Entries: CollectionConfig = {
           description: "Two axes must filter simultaneously, and every filter state is URL-addressable.",
           fields: [
             {
-              type: "row",
-              fields: [
-                {
-                  name: "kind",
-                  type: "select",
-                  required: true,
-                  index: true,
-                  admin: { width: "50%", description: "What the asset IS." },
-                  options: [
-                    "b-roll", "event photography", "headshots", "poster", "logo",
-                    "trailer", "BTS", "podcast", "press", "magazine", "document",
-                    "interview", "audio",
-                  ].map((v) => ({ label: v, value: v })),
-                },
-                {
                   name: "occasion",
                   type: "select",
                   index: true,
-                  admin: { width: "50%", description: "What it came FROM. The second axis." },
+                  admin: { description: "What it came FROM. The second axis." },
                   options: [
                     { label: "Premiere", value: "premiere" },
                     { label: "Book signing", value: "book-signing" },
@@ -285,8 +291,6 @@ export const Entries: CollectionConfig = {
                     // Explicit rather than NULL — see derive.mjs.
                     { label: "Unspecified", value: "unspecified" },
                   ],
-                },
-              ],
             },
             brandField,
             {

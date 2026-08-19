@@ -53,6 +53,26 @@ const ORIGIN = "https://player.vimeo.com";
  */
 let documentHasHadSound = false;
 
+/**
+ * Which service a hero URL points at, and its id.
+ *
+ * The hero could only ever be a Vimeo id, which became a hard block: the
+ * client's trailer has embedding disabled in its Vimeo privacy settings, the
+ * player answers 401 to every site, and no code here can override that. With
+ * no second Vimeo video in the catalog there was literally nothing to swap in.
+ * YouTube embeds freely, and the client has a film and 57 appearances there.
+ */
+export function parseVideo(input?: string | null): { kind: "vimeo" | "youtube"; id: string } | null {
+  const v = (input ?? "").trim();
+  if (!v) return null;
+  if (/^\d+$/.test(v)) return { kind: "vimeo", id: v };            // bare Vimeo id, as before
+  const yt = v.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{6,})/i);
+  if (yt) return { kind: "youtube", id: yt[1]! };
+  const vm = v.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
+  if (vm) return { kind: "vimeo", id: vm[1]! };
+  return null;
+}
+
 export default function HeroVideo({
   videoId,
   poster,
@@ -324,8 +344,44 @@ export default function HeroVideo({
     };
   }, [reduceMotion, startAt, send, unmute, embeddable]);
 
+  const parsed = parseVideo(videoId);
+
+  /**
+   * YouTube gets a plain embed, deliberately.
+   *
+   * The Vimeo path below carries a lot of machinery — a postMessage handshake,
+   * a sound-acquisition loop, a stall watchdog. Reimplementing all of that
+   * against the YouTube iframe API would double the surface for a fallback
+   * source. Autoplay muted and looping is what the hero actually needs, and it
+   * is what both services allow without user interaction.
+   */
+  if (parsed?.kind === "youtube" && !showStill) {
+    const yt =
+      `https://www.youtube-nocookie.com/embed/${parsed.id}` +
+      `?autoplay=1&mute=1&loop=1&playlist=${parsed.id}&controls=0&modestbranding=1` +
+      `&rel=0&playsinline=1&disablekb=1${startAt ? `&start=${startAt}` : ""}`;
+    return (
+      <div className="absolute inset-0 overflow-hidden bg-fam-ink">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 h-full w-full object-cover brightness-[0.78]"
+        />
+        <iframe
+          src={yt}
+          title={title}
+          allow="autoplay; fullscreen; picture-in-picture"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    );
+  }
+
   const src =
-    `${ORIGIN}/video/${videoId}` +
+    `${ORIGIN}/video/${parsed?.id ?? videoId}` +
     `?autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1` +
     (startAt ? `#t=${startAt}s` : "");
 
