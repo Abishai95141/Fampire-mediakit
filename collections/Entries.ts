@@ -120,7 +120,37 @@ export const Entries: CollectionConfig = {
       },
     ],
     beforeChange: [
-      ({ data, req }) => {
+      /**
+       * Tagging a child IS flagging the entry.
+       *
+       * The gate below refuses to publish a FLAGGED entry without human
+       * confirmation — but nothing connected the flag to the `people` field,
+       * so attaching Love or Legend left `containsMinor` false and the entry
+       * sailed straight past the gate. A child tagged but unflagged is
+       * precisely the false negative §9.1 calls unrecoverable, and it was
+       * reachable from the ordinary admin form and from any bulk attribution
+       * script.
+       *
+       * Only ever sets the flag, never clears it: a collection can obviously
+       * feature a child nobody has tagged yet, so absence of a tagged minor
+       * is not evidence of absence.
+       */
+      async ({ data, req }) => {
+        const ids = (data?.people ?? []) as (number | string | { id?: number | string })[];
+        if (!Array.isArray(ids) || ids.length === 0 || data?.containsMinor) return data;
+        const norm = ids.map((p) => (typeof p === "object" && p ? p.id : p)).filter(Boolean);
+        if (!norm.length) return data;
+        const found = await req.payload.find({
+          collection: "people",
+          where: { id: { in: norm }, isMinor: { equals: true } },
+          limit: 1,
+          depth: 0,
+          overrideAccess: true,
+        });
+        if (found.totalDocs > 0) data.containsMinor = true;
+        return data;
+      },
+      ({ data, req, originalDoc }) => {
         /**
          * The hard stop (§9.1). Love and Legend Lolli are children and appear
          * throughout the library. A false negative publishes a child's image
@@ -132,8 +162,22 @@ export const Entries: CollectionConfig = {
             "This entry is flagged as containing a minor. A person must confirm it (Contains minor → confirmed) before it can be published.",
           );
         }
-        // Only an approver or admin may confirm the flag.
-        if (data?.containsMinorConfirmed && !["admin", "approver"].includes(req.user?.role ?? "")) {
+        /**
+         * Only an approver or admin may CONFIRM the flag — i.e. move it from
+         * unconfirmed to confirmed. It is the act of confirming that is
+         * restricted, not the existence of a confirmation.
+         *
+         * This used to fire on any truthy value, so every later edit to an
+         * already-confirmed entry was refused unless an approver made it:
+         * a contributor fixing a typo, or any maintenance script, got
+         * "Only an approver or admin may confirm a contains-minor flag" for
+         * a field they had not touched. That both blocks ordinary work and
+         * teaches people the safety rail is noise — which is how a rail stops
+         * being read. Comparing against `originalDoc` restricts exactly the
+         * transition that matters and nothing else.
+         */
+        const confirming = data?.containsMinorConfirmed && !originalDoc?.containsMinorConfirmed;
+        if (confirming && !["admin", "approver"].includes(req.user?.role ?? "")) {
           throw new Error("Only an approver or admin may confirm a contains-minor flag.");
         }
         return data;
