@@ -70,6 +70,20 @@ const all = await api.find({
 const groups = new Map<string, Record<string, unknown>[]>();
 for (const e of all.docs as Record<string, unknown>[]) {
   if (!e.event) continue;
+  /**
+   * An entry flagged for a minor and NOT yet confirmed never merges.
+   *
+   * The merge inherits `containsMinor` as the OR of the group, so folding one
+   * unreviewed flag into a published group forces the survivor to draft and
+   * takes the whole group off the public site with it. Measured before this
+   * guard: 4 groups qualified, two of them holding 77 published collections
+   * and ~16,000 files, which would all have gone dark — an outcome nobody
+   * asked for and nobody would have connected to a "tidy the library" pass.
+   *
+   * A pending flag is a queue, so it stays its own draft row until a person
+   * decides. Everything else in its group still consolidates normally.
+   */
+  if (e.containsMinor === true && e.containsMinorConfirmed !== true) continue;
   const ev = typeof e.event === "object" ? (e.event as { id: number }).id : (e.event as number);
   /**
    * YEAR is part of the grain, not decoration.
