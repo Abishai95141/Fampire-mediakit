@@ -37,7 +37,38 @@ export const Entries: CollectionConfig = {
   labels: { singular: "Collection", plural: "Collections" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "kind", "year", "fileCount", "minorRisk", "linkStatus", "_status"],
+    /**
+     * NOT film/event as columns — they cannot render.
+     *
+     * Adding them looked like the obvious fix for "549 collections read as
+     * one flat crowd", and it displayed `<No Film>` on every single row,
+     * including rows demonstrably carrying film 1 and event 1 in the
+     * database. Payload's list view hardcodes `depth: 0`
+     * (@payloadcms/next/dist/views/List/index.js), so a relationship column
+     * receives a bare id and renders the empty-state label. A column that
+     * says "No Film" for 549 rows that all have films is worse than no
+     * column: it is a confident wrong answer.
+     *
+     * Grouping is handled by `groupBy` below instead, which resolves the
+     * related titles server-side and is the feature actually designed for
+     * this.
+     */
+    defaultColumns: ["title", "kind", "year", "fileCount", "minorRisk", "_status"],
+    /**
+     * The hierarchy, without inventing one.
+     *
+     * "Collections > sHEALed > …" is what was asked for. Real parent-child
+     * nesting would mean hand-assigning a parent to 549 rows and then
+     * maintaining a second tree that can disagree with Film and Event —
+     * which already describe exactly this grouping and are already filled
+     * in. `groupBy` uses them directly: pick Film in the list view and
+     * sHEALed's 222 collections collect under one heading.
+     *
+     * Marked experimental by Payload (3.88). It is one boolean, it changes
+     * no data, and turning it off restores the plain list — but it is worth
+     * knowing it is beta rather than assuming it is settled API.
+     */
+    groupBy: true,
     group: "Library",
     description:
       "Every collection in the library. Search by title, description or the original folder name; filter by any facet; edit or delete any row. New Collection needs four things — a title, a one-line description, the link, and what kind it is. Everything else can be filled in later. Never migrate, copy or host the client's files; links plus metadata only.",

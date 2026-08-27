@@ -11,6 +11,8 @@ import * as migration_20260813_090803_surfaces_as_blocks from './20260813_090803
 import * as migration_20260813_091516_editor_thumbnails from './20260813_091516_editor_thumbnails';
 import * as migration_20260814_153025_drop_multitenancy from './20260814_153025_drop_multitenancy';
 import * as migration_20260819_032512_film_poster_person_portrait from './20260819_032512_film_poster_person_portrait';
+import * as migration_20260824_044737_add_people_aliases from './20260824_044737_add_people_aliases';
+import * as migration_20260827_172830_add_appearance_order from './20260827_172830_add_appearance_order';
 
 export const migrations = [
   {
@@ -76,6 +78,16 @@ export const migrations = [
   {
     up: migration_20260819_032512_film_poster_person_portrait.up,
     down: migration_20260819_032512_film_poster_person_portrait.down,
-    name: '20260819_032512_film_poster_person_portrait'
+    name: '20260819_032512_film_poster_person_portrait',
+  },
+  {
+    up: migration_20260824_044737_add_people_aliases.up,
+    down: migration_20260824_044737_add_people_aliases.down,
+    name: '20260824_044737_add_people_aliases',
+  },
+  {
+    up: migration_20260827_172830_add_appearance_order.up,
+    down: migration_20260827_172830_add_appearance_order.down,
+    name: '20260827_172830_add_appearance_order'
   },
 ];

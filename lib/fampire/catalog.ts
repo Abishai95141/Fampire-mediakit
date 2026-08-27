@@ -109,6 +109,17 @@ export type Entry = {
   /** What the material came FROM, alongside `kind` (what it IS). */
   occasion?: string | null;
   location?: string | null;
+  /**
+   * Whether the folder is mostly stills, mostly footage, or documents.
+   *
+   * "Is this video or photos" is the first question an editor asks and the
+   * library could not answer it: the value was measured at crawl time and
+   * stored on every row, but `toEntry` never carried it across, so no facet
+   * could exist over data the front end had never been given. `kind` is
+   * close but not the same axis — "event photography" and "b-roll" describe
+   * the SHOOT, and either can hand you a folder full of the other thing.
+   */
+  media?: string | null;
   /** The client's own folder ancestry as plain text, for search only. Never
    *  rendered publicly — it is production vocabulary, not a reader's. */
   folder_path_text?: string | null;
@@ -306,6 +317,8 @@ export type Facets = {
   location?: string;
   person?: string;
   issue?: string;
+  /** Stills vs footage — see `Entry.media`. */
+  media?: string;
   sort?: string;
   page?: string;
   /**
@@ -330,6 +343,10 @@ export function facetsFromParams(params: Record<string, string | string[] | unde
     film: one(params.film),
     event: one(params.event),
     occasion: one(params.occasion),
+    // Must be listed here explicitly: this is an allowlist, not a passthrough,
+    // so a facet missing from it silently drops out of the URL and the filter
+    // looks broken while every other layer is correct.
+    media: one(params.media),
     orientation: one(params.orientation),
     location: one(params.location),
     person: one(params.person),
@@ -508,6 +525,7 @@ export function applyFacets(entries: Entry[], f: Facets): Entry[] {
   if (f.film) out = out.filter((e) => e.film === f.film);
   if (f.event) out = out.filter((e) => e.event === f.event);
   if (f.occasion) out = out.filter((e) => e.occasion === f.occasion);
+  if (f.media) out = out.filter((e) => e.media === f.media);
   if (f.orientation) out = out.filter((e) => e.orientation === f.orientation);
   if (f.location) out = out.filter((e) => e.location === f.location);
   // Guest people — 321 entries carry them and no control reached them before.
@@ -539,6 +557,7 @@ export function facetCounts(entries: Entry[], f: Facets, axis: keyof Facets): [s
     else if (axis === "film") bump(e.film);
     else if (axis === "event") bump(e.event);
     else if (axis === "occasion") bump(e.occasion ?? null);
+    else if (axis === "media") bump(e.media ?? null);
     else if (axis === "orientation") bump(e.orientation ?? null);
     else if (axis === "location") bump(e.location ?? null);
     else if (axis === "person") for (const p of e.people ?? []) bump(p);

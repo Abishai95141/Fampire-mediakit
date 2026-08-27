@@ -57,6 +57,21 @@ export default buildConfig({
     meta: {
       titleSuffix: "— FAMPIRE Media Center",
     },
+    /**
+     * The wordmark on the login screen and in the nav.
+     *
+     * Both paths must also appear in app/(payload)/admin/importMap.js, which
+     * is generated at build time — run `npm run payload:importmap` after
+     * touching this. A component missing from that map does not fail loudly:
+     * the whole admin renders as a blank page and the only clue is
+     * "PayloadComponent not found in importMap" in the server log.
+     */
+    components: {
+      graphics: {
+        Logo: "/components/admin/Logo.tsx#Logo",
+        Icon: "/components/admin/Icon.tsx#Icon",
+      },
+    },
   },
 
   routes: {

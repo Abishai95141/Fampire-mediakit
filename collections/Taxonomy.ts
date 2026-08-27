@@ -60,6 +60,30 @@ export const People: CollectionConfig = {
       },
     },
     slug,
+    {
+      /**
+       * Every other spelling this person appears under.
+       *
+       * The archive names one person many ways — "Dr. Bales" and "Dr. Martin
+       * Bales", "Dr. Amie Hornaman" and "Dr. Aimie Hornaman", "Steve" and
+       * "Steven Moore" — because the names were read out of folder paths
+       * written by different people over several years. Left as free text
+       * that produced a fractured Featuring list where one doctor occupied
+       * four rows and none of them held all their material.
+       *
+       * Merging without recording the variants would be worse: the folder
+       * name is still the client's own, and a producer who knows the doctor
+       * as "Dr. Bales" must still find them. So a merge writes the losing
+       * spellings here, and search matches on these as well as on `name`.
+       */
+      name: "aliases",
+      type: "array",
+      admin: {
+        description:
+          "Other spellings this person is filed under. Search matches these too, so merging duplicates never loses a way of finding someone.",
+      },
+      fields: [{ name: "alias", type: "text", required: true }],
+    },
     { name: "role", type: "text", admin: { description: "How to describe them in a caption, e.g. 'Founder', 'Guest'." } },
     { name: "bio", type: "textarea" },
     {

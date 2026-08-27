@@ -126,6 +126,10 @@ export function toEntry(doc: Record<string, unknown>): Entry {
     crew: relNames(doc.crew),
     rights_holders: relNames(doc.rightsHolder),
     occasion: (doc.occasion as string) ?? null,
+    // Measured at crawl time and stored on every row, but never carried
+    // across this seam — so "video or photos?" was unanswerable on the site
+    // despite the answer sitting in the database the whole time.
+    media: (doc.dominantMedia as string) ?? null,
     location: titleOf(doc.location as Rel),
     // Search-only: the client's own folder vocabulary ("master",
     // "deliverables") which readers never see but the team searches by.
@@ -223,6 +227,9 @@ export const loadWatchLinks = cache(async (): Promise<WatchLink[]> => {
 // developer. They are CMS records now; these are the readers.
 
 export type FilmRecord = {
+  /** Row id, for the per-item edit link — loadFilms casts docs wholesale, so
+   *  this is already present at runtime and only needed declaring. */
+  id?: number | string;
   slug: string;
   title: string;
   /** Hand-set key art, which beats anything borrowed from the catalog. */
@@ -243,6 +250,14 @@ export const loadFilms = cache(async (): Promise<FilmRecord[]> => {
 });
 
 export type PersonRecord = {
+  /**
+   * The row id, for the per-item edit link on the People page.
+   *
+   * `loadFamily`/`loadPeople` cast the raw Payload docs straight to this
+   * type, so the value has always been there at runtime — it simply was not
+   * declared, which is why nothing could link to it.
+   */
+  id?: number | string;
   slug: string;
   name: string;
   /** Hand-set portrait, which beats anything borrowed from the catalog. */
@@ -277,6 +292,8 @@ export const loadPeople = cache(async (): Promise<PersonRecord[]> => {
 });
 
 export type AppearanceRecord = {
+  /** Row id, for the per-item edit link — see the twin type in CatalogBlocks. */
+  record_id?: number | string | null;
   title: string;
   url?: string | null;
   outlet?: string | null;
@@ -303,13 +320,24 @@ export const loadAppearances = cache(async (): Promise<AppearanceRecord[]> => {
     collection: "appearances",
     limit: 500,
     depth: 0,
-    sort: "-date",
+    /**
+     * The editor's own order, set by dragging rows in the admin.
+     *
+     * Was "-date". Every existing row was seeded (scripts/seed-appearance-
+     * order.ts) with keys generated in that same date-descending order, so
+     * this swap moved nothing on the page — it only makes the order editable
+     * from here on. Without that seeding step every `_order` was NULL and
+     * this line alone would have scrambled the press log.
+     */
+    sort: "_order",
     overrideAccess: false,
     user: null,
   });
   return r.docs.map((d) => {
     const doc = d as unknown as Record<string, unknown>;
     return {
+      // Carried so a signed-in editor gets an edit link on the item itself.
+      record_id: (doc.id as number | string) ?? null,
       title: String(doc.title ?? ""),
       url: (doc.url as string) ?? null,
       outlet: (doc.outlet as string) ?? null,

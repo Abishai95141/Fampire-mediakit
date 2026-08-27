@@ -70,7 +70,19 @@ export const Articles: CollectionConfig = {
   labels: { singular: "Article", plural: "Articles" },
   admin: {
     useAsTitle: "title",
-    group: "Stories",
+    /**
+     * Hidden from the sidebar: empty AND unread.
+     *
+     * Zero rows, and no block renders it — the Press page's `pressList`
+     * reads Appearances, not this. It was sitting in the nav next to
+     * collections that hold 634 and 153 rows, making the admin look busier
+     * than the work actually is.
+     *
+     * `false` hides it from the sidebar and dashboard only; the routes still
+     * work, nothing is deleted, and restoring it is changing this one line
+     * back to "Stories" the day someone starts writing press releases.
+     */
+    group: false,
     defaultColumns: ["title", "type", "publishedAt", "_status"],
     description: "Press releases, announcements and features written by the team.",
   },
@@ -156,7 +168,13 @@ export const MagazineIssues: CollectionConfig = {
   labels: { singular: "Magazine Issue", plural: "Magazine Issues" },
   admin: {
     useAsTitle: "title",
-    group: "Stories",
+    /**
+     * Hidden from the sidebar, same reason as Articles — and this one is the
+     * clearer case: the magazine shelf on the landing page reads ENTRIES
+     * tagged `magazine`, never this collection. Zero rows, nothing reads it.
+     * Set back to "Stories" to bring it out of hiding.
+     */
+    group: false,
     defaultColumns: ["issueNumber", "title", "publishedAt", "_status"],
     description: "One record per issue. Cover subject, cover image, and where to read it.",
   },
@@ -218,6 +236,23 @@ export const MagazineIssues: CollectionConfig = {
 export const Appearances: CollectionConfig = {
   slug: "appearances",
   labels: { singular: "Appearance", plural: "Appearances" },
+  /**
+   * Drag-to-reorder in the list view.
+   *
+   * The press page previously had no way to curate order at all: the full log
+   * sorted by date and "Most watched" by view count, both automatic, so
+   * putting a particular podcast first was impossible without editing its
+   * date. This adds a fractional-index field Payload reorders against.
+   *
+   * The public sort follows this order (see `loadAppearances`), and existing
+   * rows were seeded to match the previous date-descending order — so turning
+   * this on changed nothing visible, and the page only moves when someone
+   * actually drags something.
+   *
+   * Marked @experimental by Payload 3.88: "There may be frequent breaking
+   * changes to this API."
+   */
+  orderable: true,
   admin: {
     useAsTitle: "title",
     group: "Stories",

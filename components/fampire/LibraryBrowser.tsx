@@ -38,6 +38,24 @@ import {
 type Axis = { key: keyof Facets; label: string; format?: (v: string) => string };
 
 const AXES: Axis[] = [
+  {
+    /**
+     * First, because "video or photos?" is the first thing anyone asks and
+     * `kind` does not answer it — "event photography" and "b-roll" describe
+     * the shoot, and either can hand you a folder full of the other thing.
+     */
+    key: "media",
+    label: "Photos or video",
+    format: (v) =>
+      ({
+        image: "Photos",
+        video: "Video",
+        document: "Documents",
+        audio: "Audio",
+        vector: "Logos & graphics",
+        other: "Other files",
+      })[v] ?? v,
+  },
   { key: "kind", label: "Kind" },
   {
     key: "orientation",
@@ -215,18 +233,31 @@ export default async function LibraryBrowser({
            * Every axis rendered at full length on mobile — Kind, Orientation,
            * Occasion, Brand, Person, Featuring, Place, Issue, Year, Film,
            * Event — so a phone visitor scrolled past roughly two hundred
-           * filter rows before reaching a single collection. `<details>` does
-           * this natively: closed by default below `lg`, forced open above it
-           * with `open`, and it keeps working with JavaScript disabled.
+           * filter rows before reaching a single collection.
+           *
+           * THIS WAS A `<details>` AND THE RAIL WAS INVISIBLE ON DESKTOP.
+           * The element was never given `open`; a media query instead set
+           * `display: block !important` on its child and trusted that to
+           * reveal it. It does not. A closed `<details>` hides its content
+           * through the UA stylesheet no matter what `display` the child is
+           * given, so the panel measured 216×0 at 1440px wide with all twelve
+           * axes present in the DOM and none of them on screen — the whole
+           * filter rail, silently absent, while the markup looked correct.
+           *
+           * A checkbox and a label do the same job with no such trapdoor:
+           * hidden until checked below `lg`, unconditionally shown from `lg`
+           * up. Still no JavaScript, and nothing to force open.
            */
-          <details
-            className="fam-facets group mb-8 lg:mb-0 lg:sticky lg:top-24 lg:self-start"
-          >
-            <summary className="fam-meta mb-4 flex cursor-pointer list-none items-center justify-between border-y border-fam-rule py-3 text-[11px] uppercase tracking-[0.14em] text-fam-ink lg:hidden">
+          <div className="fam-facets group mb-8 lg:mb-0 lg:sticky lg:top-24 lg:self-start">
+            <input type="checkbox" id="fam-facets-toggle" className="peer sr-only" />
+            <label
+              htmlFor="fam-facets-toggle"
+              className="fam-meta mb-4 flex cursor-pointer list-none items-center justify-between border-y border-fam-rule py-3 text-[11px] uppercase tracking-[0.14em] text-fam-ink lg:hidden"
+            >
               Filters
-              <span aria-hidden className="text-[14px] transition-transform group-open:rotate-45">+</span>
-            </summary>
-          <div className="lg:sticky lg:top-24 lg:self-start">
+              <span aria-hidden className="text-[14px] transition-transform peer-checked:rotate-45">+</span>
+            </label>
+          <div className="hidden peer-checked:block lg:block lg:sticky lg:top-24 lg:self-start">
             {/* A nested scroller inside a Lenis page is the classic "some of it
                 scrolls at a different speed" bug: the rail scrolls natively while
                 the page scrolls smoothed, and once the rail hits its end the
@@ -278,7 +309,7 @@ export default async function LibraryBrowser({
               })}
             </div>
           </div>
-          </details>
+          </div>
         ) : null}
 
         <section className={showFacets ? "mt-12 lg:mt-0" : ""}>

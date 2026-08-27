@@ -470,11 +470,17 @@ export default async function RenderBlocks({
               n={n}
               title={headingText}
               aside={introText ?? `${shown.length} titles · ${awards} documentary awards`}
+              /* Signed-in only: an "Add" control on a public press page would
+                 advertise an admin route to every reader. Section renders the
+                 link only when both props are present, so undefined is enough. */
+              href={signedIn ? "/admin/collections/films/create" : undefined}
+              hrefLabel={signedIn ? "Add a film" : undefined}
             >
               <FilmProfiles
                 films={shown}
                 layout={String(block.layout ?? "list")}
                 showWatchLinks={block.showWatchLinks !== false}
+                signedIn={signedIn}
               />
             </Section>
           );
@@ -488,11 +494,19 @@ export default async function RenderBlocks({
             ? (await loadPeople()).filter((p) => picked.includes(p.slug))
             : await loadFamily();
           return (
-            <Section key={key} n={n} title={headingText} aside={introText}>
+            <Section
+              key={key}
+              n={n}
+              title={headingText}
+              aside={introText}
+              href={signedIn ? "/admin/collections/people/create" : undefined}
+              hrefLabel={signedIn ? "Add a person" : undefined}
+            >
               <PeopleProfiles
                 people={shown}
                 layout={String(block.layout ?? "portraits")}
                 showBios={block.showBios !== false}
+                signedIn={signedIn}
               />
             </Section>
           );
@@ -544,9 +558,25 @@ export default async function RenderBlocks({
           // them buries the actual content one level deeper than it reads.
           return (
             <div key={key} className="mx-auto max-w-[1320px] px-6 pt-16 sm:px-10 lg:px-12">
+              {/* The press log brings its own headings rather than a Section,
+                  so the "Add" control is placed here instead of via Section's
+                  href. Signed-in only, same as every other editing affordance
+                  on a public surface. */}
+              {signedIn ? (
+                <div className="mb-6 flex justify-end">
+                  <Link
+                    href="/admin/collections/appearances/create"
+                    className="fam-meta inline-flex items-center gap-1 border border-fam-ink px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-fam-ink transition-colors hover:bg-fam-ink hover:text-fam-paper print:hidden"
+                  >
+                    Add an appearance
+                    <span aria-hidden>→</span>
+                  </Link>
+                </div>
+              ) : null}
               <PressLog
                 appearances={limited as AppearanceRecord[]}
                 featuredCount={Number(block.featuredCount ?? 3)}
+                signedIn={signedIn}
               />
             </div>
           );

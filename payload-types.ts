@@ -472,6 +472,15 @@ export interface Person {
    */
   slug: string;
   /**
+   * Other spellings this person is filed under. Search matches these too, so merging duplicates never loses a way of finding someone.
+   */
+  aliases?:
+    | {
+        alias: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * How to describe them in a caption, e.g. 'Founder', 'Guest'.
    */
   role?: string | null;
@@ -676,6 +685,7 @@ export interface MagazineIssue {
  */
 export interface Appearance {
   id: number;
+  _order?: string | null;
   title: string;
   /**
    * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
@@ -1662,6 +1672,7 @@ export interface MagazineIssuesSelect<T extends boolean = true> {
  * via the `definition` "appearances_select".
  */
 export interface AppearancesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   tenant?: T;
   outlet?: T;
@@ -2069,6 +2080,12 @@ export interface SiteSettingsSelect<T extends boolean = true> {
 export interface PeopleSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  aliases?:
+    | T
+    | {
+        alias?: T;
+        id?: T;
+      };
   role?: T;
   bio?: T;
   portraitUrl?: T;

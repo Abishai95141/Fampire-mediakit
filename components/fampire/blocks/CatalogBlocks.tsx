@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { ImageWell } from "@/components/fampire/Preview";
+
 import {
   loadEntries,
   loadFilms,
@@ -26,6 +27,43 @@ import {
  * section embeds real records and cannot drift out of date relative to them.
  */
 
+/**
+ * "Edit this" on an individual item, for a signed-in editor.
+ *
+ * Collections have had one of these on every card for a while; press
+ * appearances and people profiles did not, so the only route to a single
+ * podcast was to know it lived under Stories → Appearances and find it by
+ * name. Reported as: each item should have its own edit button.
+ *
+ * ALWAYS rendered as a sibling of the item's own <a>, never inside it. An
+ * anchor nested in an anchor is invalid HTML and the browser silently drops
+ * one of them — which here would break either the edit link or the link to
+ * the podcast itself, with nothing in the console to say why.
+ *
+ * Renders nothing at all when signed out: public press surfaces stay
+ * completely ungated, so this must not exist in the markup for a reader.
+ */
+function EditPill({
+  href,
+  label = "Edit",
+  signedIn,
+}: {
+  href: string;
+  label?: string;
+  signedIn?: boolean;
+}) {
+  if (!signedIn) return null;
+  return (
+    <Link
+      href={href}
+      className="fam-meta mt-2 inline-flex items-center gap-1 border border-fam-rule px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-fam-muted transition-colors hover:border-fam-ink hover:text-fam-ink print:hidden"
+    >
+      {label}
+      <span aria-hidden>→</span>
+    </Link>
+  );
+}
+
 const fmt = new Intl.NumberFormat("en-US");
 
 /**
@@ -47,10 +85,12 @@ export async function FilmProfiles({
   films,
   layout = "list",
   showWatchLinks = true,
+  signedIn = false,
 }: {
   films: FilmRecord[];
   layout?: string;
   showWatchLinks?: boolean;
+  signedIn?: boolean;
 }) {
   const entries = await loadEntries();
   const watchLinks = await loadWatchLinks();
@@ -151,6 +191,13 @@ export async function FilmProfiles({
                       </span>
                     ) : null}
                   </div>
+                  {f.id ? (
+                    <EditPill
+                      href={`/admin/collections/films/${f.id}`}
+                      label="Edit this film"
+                      signedIn={signedIn}
+                    />
+                  ) : null}
                 </div>
 
                 <ImageWell
@@ -196,10 +243,12 @@ export async function PeopleProfiles({
   people,
   layout = "portraits",
   showBios = true,
+  signedIn = false,
 }: {
   people: PersonRecord[];
   layout?: string;
   showBios?: boolean;
+  signedIn?: boolean;
 }) {
   const publicEntries = await loadEntries();
   const shots = previewsForSubjects(publicEntries, people.map((p) => p.slug));
@@ -287,6 +336,15 @@ export async function PeopleProfiles({
                   <p className="fam-meta mt-2 text-[10px] uppercase tracking-[0.12em] text-fam-muted">
                     {awaiting} more awaiting review
                   </p>
+                ) : null}
+                {p.id ? (
+                  <div>
+                    <EditPill
+                      href={`/admin/collections/people/${p.id}`}
+                      label="Edit this person"
+                      signedIn={signedIn}
+                    />
+                  </div>
                 ) : null}
               </div>
               <div className="max-w-2xl">
@@ -406,6 +464,15 @@ export async function WatchGrid() {
 // ── Press ───────────────────────────────────────────────────────────────
 
 export type AppearanceRecord = {
+  /**
+   * The database row id, for the per-item edit link.
+   *
+   * Deliberately the row id and not a slug: this addresses the admin, which
+   * routes by id. It is optional because the type predates the field and a
+   * record without one simply renders no edit affordance rather than an
+   * "/undefined" link.
+   */
+  record_id?: number | string | null;
   title: string;
   url?: string | null;
   outlet?: string | null;
@@ -418,18 +485,26 @@ export type AppearanceRecord = {
 export function PressLog({
   appearances,
   featuredCount = 3,
+  signedIn = false,
 }: {
   appearances: AppearanceRecord[];
   featuredCount?: number;
+  signedIn?: boolean;
 }) {
-  /** Dates arrive as prose ("Feb 24, 2026"), so parse leniently and push
-   *  anything unparseable to the end rather than guessing a position. */
-  const airedTime = (a: AppearanceRecord) => {
-    if (!a.aired) return -Infinity;
-    const t = Date.parse(a.aired);
-    return Number.isNaN(t) ? -Infinity : t;
-  };
-  const sorted = [...appearances].sort((a, b) => airedTime(b) - airedTime(a));
+  /**
+   * The full log renders in the order it is GIVEN.
+   *
+   * It used to re-sort by date here, which silently defeated the whole point
+   * of drag-to-reorder: an editor could rearrange Appearances in the admin,
+   * the query would return them in that order, and this line would throw it
+   * away and re-sort by date before painting. The order now comes from
+   * `loadAppearances`, which sorts on the editor's `_order` key.
+   *
+   * "Most watched" below is deliberately still sorted by view count — that
+   * is a stated editorial rule ("the 506,000-view one leads"), not an
+   * accident of ordering.
+   */
+  const sorted = appearances;
 
   /** The most-watched appearances lead the page — a booker scanning for reach
    *  should not have to read 57 rows to find the 506,000-view one. */
@@ -471,6 +546,12 @@ export function PressLog({
                     <p className="mt-1 text-[14px] text-fam-muted">with {a.outlet}</p>
                   ) : null}
                 </a>
+                {a.record_id ? (
+                  <EditPill
+                    href={`/admin/collections/appearances/${a.record_id}`}
+                    signedIn={signedIn}
+                  />
+                ) : null}
               </li>
             ))}
           </ul>
@@ -522,6 +603,14 @@ export function PressLog({
                   {a.views ? `${fmt.format(a.views)} views` : ""}
                 </span>
               </a>
+              {a.record_id ? (
+                <div className="-mt-2 pb-4 sm:pl-[6.5rem]">
+                  <EditPill
+                    href={`/admin/collections/appearances/${a.record_id}`}
+                    signedIn={signedIn}
+                  />
+                </div>
+              ) : null}
             </li>
           ))}
         </ul>

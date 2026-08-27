@@ -58,33 +58,70 @@ export default function SearchBar({
     router.push(value ? `/library?q=${encodeURIComponent(value)}` : `/library`);
   }
 
+  function clear() {
+    setValue("");
+    ref.current?.focus();
+    if (!live) return;
+    const next = new URLSearchParams(params.toString());
+    next.delete("q");
+    const qs = next.toString();
+    router.replace(qs ? `/library?${qs}` : `/library`, { scroll: false });
+  }
+
+  /**
+   * A bordered field with a real button, rather than a big underlined input
+   * with a decorative "↵".
+   *
+   * The old bar put an oversized placeholder, the typed query and a glyph on
+   * one baseline with no boundary around any of them, and the glyph was
+   * `pointer-events-none` — so the one thing that looked like a control was
+   * the one thing you could not click. Reported as "confusing, too many
+   * elements in the same place", and on the Library it sat directly above the
+   * sort row with nothing separating them.
+   *
+   * The box gives search an edge of its own so it reads as one control, and
+   * SEARCH is a real submit button. On the Library the field still filters as
+   * you type; the button is there because a visible affordance is what tells
+   * someone this is a search field at all, and pressing it is never wrong.
+   */
   return (
-    <form onSubmit={onSubmit} className="group relative block">
-      <input
-        ref={ref}
-        type="search"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder={placeholder}
-        aria-label="Search the FAMPIRE library"
-        /**
-         * The placeholder has to FIT.
-         *
-         * At 22px on a 375px screen, "Search — a person, a film, an event, a
-         * year" ran straight under the ↵ glyph and was clipped mid-word, on
-         * both the home page and the Library. The type ramp now starts at
-         * 16px, and `text-ellipsis` means any placeholder an editor writes
-         * degrades to a clean truncation instead of colliding with the
-         * affordance next to it.
-         */
-        className="fam-display-sm w-full overflow-hidden text-ellipsis border-b-2 border-fam-ink/30 bg-transparent pb-4 pr-9 text-[16px] text-fam-ink outline-none transition-colors placeholder:text-fam-muted focus:border-fam-ink sm:pr-10 sm:text-[24px] md:text-[28px] lg:text-[32px]"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-4 right-0 text-[14px] text-fam-muted transition-colors group-focus-within:text-fam-ink sm:bottom-5 sm:text-[inherit]"
-      >
-        ↵
-      </span>
+    <form onSubmit={onSubmit} role="search" className="block">
+      <div className="flex items-stretch border-2 border-fam-ink bg-fam-paper transition-shadow focus-within:shadow-[3px_3px_0_0_var(--fam-ink)]">
+        <input
+          ref={ref}
+          type="search"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder={placeholder}
+          aria-label="Search the FAMPIRE library"
+          /**
+           * Capped at 20px. The placeholder has to FIT: at 32px, "Search — a
+           * person, a film, an event, a year" was clipped mid-word on a
+           * 375px screen. Inside a box the type no longer has to be huge to
+           * carry the element, so it can be a size that fits.
+           */
+          className="w-full min-w-0 flex-1 overflow-hidden text-ellipsis bg-transparent px-4 py-3.5 text-[15px] text-fam-ink outline-none placeholder:text-fam-muted sm:px-5 sm:text-[17px] lg:text-[20px]
+                     [&::-webkit-search-cancel-button]:appearance-none"
+        />
+
+        {value ? (
+          <button
+            type="button"
+            onClick={clear}
+            aria-label="Clear search"
+            className="shrink-0 px-3 text-[18px] leading-none text-fam-muted transition-colors hover:text-fam-ink"
+          >
+            ×
+          </button>
+        ) : null}
+
+        <button
+          type="submit"
+          className="fam-meta shrink-0 border-l-2 border-fam-ink bg-fam-ink px-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-fam-paper transition-opacity hover:opacity-82 sm:px-6"
+        >
+          Search
+        </button>
+      </div>
     </form>
   );
 }

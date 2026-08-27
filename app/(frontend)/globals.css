@@ -387,7 +387,9 @@
    panel is forced open, because a sticky rail beside the results is the right
    shape on a wide screen. Forcing it open in CSS avoids having to script the
    `open` attribute at a breakpoint. */
-@media (min-width: 1024px) {
-  .fam details.fam-facets > summary { display: none; }
-  .fam details.fam-facets > div { display: block !important; }
-}
+/* Nothing needed here any more. This used to try to reveal a closed
+   <details> from `lg` up with `display: block !important` on its child,
+   which does not work — a closed <details> hides its content through the UA
+   stylesheet regardless — so the rail was invisible on every desktop screen.
+   The disclosure is now a checkbox + label in LibraryBrowser.tsx, handled
+   entirely by utility classes. */
