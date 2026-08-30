@@ -41,6 +41,21 @@ export default function SearchBar({
       const next = new URLSearchParams(params.toString());
       if (value) next.set("q", value);
       else next.delete("q");
+      /**
+       * A new query starts at page one.
+       *
+       * Without this the stale `page` survives into the new result set, and a
+       * query narrower than the page you were on renders NOTHING while the
+       * header and every facet still report the correct count. Measured on
+       * production: `?q=315` returned the one match, `?page=3&q=315` said
+       * "1 of 549 collections" and drew zero cards.
+       *
+       * That is indistinguishable from "search is broken" — and it was
+       * reported as exactly that, as the top finding of a client retrieval
+       * test. The facet links already rebuild from scratch and so never had
+       * this; only typing carried the old page forward.
+       */
+      next.delete("page");
       const qs = next.toString();
       // replace, not push — typing should not fill the back button with a
       // history entry per keystroke.
@@ -64,6 +79,8 @@ export default function SearchBar({
     if (!live) return;
     const next = new URLSearchParams(params.toString());
     next.delete("q");
+    // Clearing widens the set, so the old page is meaningless here too.
+    next.delete("page");
     const qs = next.toString();
     router.replace(qs ? `/library?${qs}` : `/library`, { scroll: false });
   }

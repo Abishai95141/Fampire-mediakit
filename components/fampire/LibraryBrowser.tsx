@@ -114,7 +114,7 @@ export default async function LibraryBrowser({
   showCount?: boolean;
   locked?: LockedFilters;
 }) {
-  const page = Math.max(1, Number(facets.page ?? 1) || 1);
+  const requestedPage = Math.max(1, Number(facets.page ?? 1) || 1);
   const size = perPage > 0 ? perPage : 60;
 
   // Decides which rows are listed as openable. Nothing sensitive is served
@@ -134,6 +134,16 @@ export default async function LibraryBrowser({
    * was the real scaling wall, well before anything algorithmic.
    */
   const totalPages = Math.max(1, Math.ceil(results.length / size));
+  /**
+   * Clamped to the last page that exists.
+   *
+   * An out-of-range page renders an empty grid while the header and every
+   * facet still report the true count — which reads as "the search returned
+   * nothing" even though it matched. The search box no longer carries a stale
+   * page forward, but a pasted or bookmarked URL still can, and a shared link
+   * that silently shows nothing is the same failure with a longer fuse.
+   */
+  const page = Math.min(requestedPage, totalPages);
   const shown = results.slice((page - 1) * size, page * size);
   // A near-miss should land somewhere, not on an empty page.
   const suggestion = results.length === 0 && facets.q ? suggestTerm(pool, facets.q) : null;

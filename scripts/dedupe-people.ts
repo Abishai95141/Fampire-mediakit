@@ -87,6 +87,7 @@ const union = (a: number, b: number) => { const ra = find(a), rb = find(b); if (
 
 const byId = new Map(people.map((p) => [p.id, p]));
 const declined: string[] = [];
+const coinTosses: string[] = [];
 
 // Artifacts first, so they fold into the real person before pairwise matching.
 for (const p of people) {
@@ -104,20 +105,57 @@ for (let i = 0; i < people.length; i++) {
     const ta = norm(a.name).split(" ").filter(Boolean);
     const tb = norm(b.name).split(" ").filter(Boolean);
     if (!ta.length || !tb.length) continue;
-    if (ta[ta.length - 1] !== tb[tb.length - 1]) continue;   // surnames must match
+    const sameSurname = ta[ta.length - 1] === tb[tb.length - 1];
+
+    /**
+     * FIRST-NAME-ONLY versus full name: "Dr. Jigar" ⊂ "Dr. Jigar Gandhi".
+     *
+     * The original rule required the LAST token to match, which silently
+     * skipped this whole class — "jigar" never equals "gandhi". Four such
+     * pairs survived every previous pass and were found by the client's own
+     * retrieval test: Jigar/Jigar Gandhi, Rajka/Rajka Milanovic, Yuriy/Yuriy
+     * May, and (as a surname slip) Porceli/Porcelli.
+     *
+     * Deliberately narrow: ONE side must be a single bare token, and that
+     * token must equal the other's FIRST token. "Dr. Kuo" ⊂ "Dr. Kuo
+     * Extension" is caught by ARTIFACTS instead, and a lone surname such as
+     * "Dr. Bales" ⊂ "Dr. Martin Bales" is still the surname rule's job.
+     */
+    const oneIsBareFirstName =
+      (ta.length === 1 && tb.length > 1 && ta[0] === tb[0]) ||
+      (tb.length === 1 && ta.length > 1 && tb[0] === ta[0]);
+
+    /**
+     * SURNAME SLIP with an identical first name: Richard Porceli/Porcelli.
+     *
+     * Requiring the first names to match EXACTLY is what keeps this safe —
+     * without that, one edit on a surname would fuse Dr. Griffin Cole with a
+     * hypothetical "Dr. Griffin Colt", and more importantly it stays clear of
+     * the real pairs this archive contains (Nammy Patel vs Nayan Patel share
+     * a surname and are different people).
+     */
+    const aFirstTok = ta.slice(0, -1).join(" ");
+    const bFirstTok = tb.slice(0, -1).join(" ");
+    const surnameSlip =
+      !sameSurname &&
+      ta.length > 1 && tb.length > 1 &&
+      aFirstTok === bFirstTok &&
+      editDistance(ta[ta.length - 1], tb[tb.length - 1]) <= 1;
+
+    if (!sameSurname && !oneIsBareFirstName && !surnameSlip) continue;
 
     const exact = norm(a.name) === norm(b.name);
-    const aFirst = ta.length > 1 ? ta.slice(0, -1).join(" ") : "";
-    const bFirst = tb.length > 1 ? tb.slice(0, -1).join(" ") : "";
+    const aFirst = ta.length > 1 ? aFirstTok : "";
+    const bFirst = tb.length > 1 ? bFirstTok : "";
     const shortVsFull = aFirst === "" || bFirst === "";
     const firstNameSlip = aFirst && bFirst && editDistance(aFirst, bFirst) <= 1;
 
-    if (exact || shortVsFull || firstNameSlip) union(a.id, b.id);
+    if (exact || oneIsBareFirstName || surnameSlip || shortVsFull || firstNameSlip) union(a.id, b.id);
     else if (aFirst && bFirst) declined.push(`${a.name} (${a.refs})  ≠  ${b.name} (${b.refs})`);
   }
 }
 
-// Build groups; canonical = family first, then most references, then longest name.
+// Build groups; canonical = family first, then the MOST COMPLETE NAME, then refs.
 const groups = new Map<number, P[]>();
 for (const p of people) {
   const r = find(p.id);
@@ -128,8 +166,52 @@ let merged = 0, repointed = 0, dropped = 0;
 
 for (const [, members] of groups) {
   if (members.length < 2) continue;
-  const canonical = [...members].sort((x, y) =>
-    Number(y.isFamily) - Number(x.isFamily) || y.refs - x.refs || y.name.length - x.name.length)[0];
+  /**
+   * The surviving name is the most complete one, not the most-used one.
+   *
+   * Ranking by reference count first is how a merge ends up RENAMING a real
+   * person to a folder abbreviation: "Dr. Whitfield" carried 3 references and
+   * "Dr. Robert Whitfield" only 2, so the fuller, correct name was the one
+   * deleted. Same for Trivedi over Ameet Trivedi and Curatola over Gerry
+   * Curatola. Token count decides first — a first-and-surname record always
+   * beats a bare surname — and references only break a genuine tie.
+   */
+  const tokens = (n: string) => norm(n).split(" ").filter(Boolean).length;
+  /**
+   * Keep the honorific. This archive is mostly clinicians and the client's own
+   * folders title them; dropping it would turn "Dr. Ana Maria" into "Ana
+   * Maria" purely because the untitled row happened to be used more often.
+   */
+  const titled = (n: string) => (/^\s*(dr|prof)\.?\s+/i.test(n) ? 1 : 0);
+  const rank = (x: P, y: P) =>
+    Number(y.isFamily) - Number(x.isFamily) ||
+    tokens(y.name) - tokens(x.name) ||
+    titled(y.name) - titled(x.name) ||
+    y.refs - x.refs;
+  /**
+   * Deliberately NO length tiebreak.
+   *
+   * Ranking a longer string higher prefers the typo whenever the typo is the
+   * one with the extra letter — it silently kept "Dr. Sanchin Karande" over
+   * "Dr. Sachin Karande". A tie here is a real tie, and saying so out loud
+   * beats breaking it on a rule that is wrong as often as it is right.
+   */
+  const ordered = [...members].sort(rank);
+  const canonical = ordered[0];
+
+  /**
+   * Where the top two are indistinguishable on every rule, the surviving
+   * SPELLING was decided by array order, which is not a decision.
+   *
+   * The merge is still right — these are one person, and the losing spelling
+   * survives as an alias so either spelling finds them. Only the display
+   * label is a guess, so it is printed for a human rather than presented as
+   * settled: Sachin/Sanchin Karande and Catharine/Catherine Davies are real
+   * cases where the machine has no basis to prefer either.
+   */
+  if (ordered.length > 1 && rank(ordered[0], ordered[1]) === 0) {
+    coinTosses.push(`${canonical.name}  (kept)  vs  ${ordered[1].name}`);
+  }
   const losers = members.filter((m) => m.id !== canonical.id);
 
   const aliasSet = new Set<string>([
@@ -184,6 +266,10 @@ for (const p of people) {
   await api.delete({ collection: "people", id: p.id, overrideAccess: true, user: admin });
 }
 
+if (coinTosses.length) {
+  console.log(`\nSURVIVING SPELLING WAS A COIN TOSS — a human should pick: ${coinTosses.length}`);
+  for (const c of coinTosses) console.log(`  ${c}`);
+}
 console.log(`\n${DRY ? "[DRY RUN] " : ""}people before ${people.length} → after ${people.length - merged - dropped}`);
 console.log(`  merged away: ${merged}   artifacts dropped: ${dropped}   entry references repointed: ${repointed}`);
 if (declined.length) {
