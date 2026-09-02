@@ -33,7 +33,7 @@ export default function PeopleRoster({ people }: { people: RosterPerson[] }) {
   const p = people[Math.min(active, people.length - 1)]!;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-16">
+    <div className="z-layout grid gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-16">
       {/* The panel. Order last on mobile so the names — the actual content —
           come first on a phone rather than a 4:3 portrait pushing them down. */}
       <div className="order-last lg:order-first">

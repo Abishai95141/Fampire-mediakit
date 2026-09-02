@@ -608,16 +608,21 @@
 
 /* Card grids: sit each card on a panel so the grid reads as objects rather
    than as text in columns, and give it somewhere to go on hover. */
-.zeen .fam-section-rule + div > .grid > * {
+/* `:not(.z-layout)` matters. The roster and the slate accordion are also
+   two-column GRIDS, so without it this rule panelled each of their COLUMNS —
+   which is why the people list sat in a grey box with a large empty tail
+   under four names, and the slate's rail ran on past its own caption. Those
+   two bring their own surfaces; only real card grids want this. */
+.zeen .fam-section-rule + div > .grid:not(.z-layout) > * {
   border-radius: 18px;
   padding: 14px;
   background: var(--z-panel, #f4f2ee);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
 }
-.zeen .fam-section-rule + div > .grid > *:hover {
+.zeen .fam-section-rule + div > .grid:not(.z-layout) > *:hover {
   transform: translateY(-4px);
 }
-.zeen .z-band--dark .fam-section-rule + div > .grid > * {
+.zeen .z-band--dark .fam-section-rule + div > .grid:not(.z-layout) > * {
   background: #1c1c1c;
 }
 
@@ -635,5 +640,5 @@
 .zeen .z-band section { margin-top: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .zeen .fam-section-rule + div > .grid > *:hover { transform: none; }
+  .zeen .fam-section-rule + div > .grid:not(.z-layout) > *:hover { transform: none; }
 }

@@ -36,7 +36,7 @@ export default function FilmAccordion({ films }: { films: AccordionFilm[] }) {
   const shown = films[Math.min(open, films.length - 1)]!;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] lg:gap-16">
+    <div className="z-layout grid gap-10 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] lg:gap-16">
       {/* The rail: key art for whichever film is open, so the left column is
           not a decorative still that contradicts the row you just expanded. */}
       <div className="order-last lg:order-first">
@@ -50,17 +50,26 @@ export default function FilmAccordion({ films }: { films: AccordionFilm[] }) {
             className="max-w-[300px]"
           >
             {shown.poster ? (
+              /**
+               * No fixed ratio, and no crop.
+               *
+               * Half the slate has portrait key art and half has only a 16:9
+               * still from its own material, so ANY single aspect ratio crops
+               * one of the two badly — a 3/4 frame was cutting an 800x450
+               * frame of The Guru down to 300x400 and taking most of the
+               * picture with it. The rail is a fixed-width column; letting the
+               * height follow the source means every film is shown whole.
+               */
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={shown.poster}
-                alt={`${shown.title}, key art`}
-                className="w-full rounded-[16px] object-cover"
-                style={{ aspectRatio: "2 / 3" }}
+                alt={`${shown.title} — still from its own collections`}
+                className="h-auto w-full rounded-[16px]"
               />
             ) : (
               <div
                 className="flex w-full items-end rounded-[16px] bg-[#ece9e4] p-4"
-                style={{ aspectRatio: "2 / 3" }}
+                style={{ aspectRatio: "3 / 4" }}
               >
                 <span className="z-label">{shown.title}</span>
               </div>
@@ -69,7 +78,10 @@ export default function FilmAccordion({ films }: { films: AccordionFilm[] }) {
               {[
                 shown.awards ? `${shown.awards} award${shown.awards === 1 ? "" : "s"}` : null,
                 shown.year ? String(shown.year) : null,
-                shown.status,
+                /* "released" / "in-production" are stored as machine values;
+                   printing them raw put a lower-case word at the end of an
+                   otherwise typeset line. */
+                shown.status ? shown.status.replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase()) : null,
               ]
                 .filter(Boolean)
                 .join(" · ")}

@@ -226,9 +226,21 @@ export async function laneImages(
 export async function accordionFilms(films: FilmRecord[]): Promise<AccordionFilm[]> {
   const entries = await loadEntries();
   return films.map((f) => {
+    /**
+     * Ranked, not just biggest.
+     *
+     * Taking the largest collection gave The Guru a landscape behind-the-scenes
+     * frame of a cinema audience as its "key art". Key art first, then a
+     * trailer frame, then anything — and only inside that band does size
+     * decide. Three films (The Guru, Biohack Yourself, sHEALed) have no key art
+     * in the archive at all, so for those this is openly a still from their own
+     * material rather than a poster, which is why the rail is not shaped like
+     * one.
+     */
+    const rank = (k: string) => (k === "poster" ? 0 : k === "trailer" ? 1 : k === "BTS" ? 2 : 3);
     const own = entries
       .filter((e) => e.film === f.title && e.image)
-      .sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0));
+      .sort((a, b) => rank(a.kind) - rank(b.kind) || (b.file_count ?? 0) - (a.file_count ?? 0));
     return {
       slug: f.slug,
       title: f.title,
