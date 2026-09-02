@@ -37,10 +37,19 @@ export default function StatementSplit({
     <motion.div
       className={[
         "pointer-events-none select-none",
+        /**
+         * z-0, explicitly. In the approved layout the words run IN FRONT of
+         * the pictures — that crossing is the whole effect — but these were
+         * painting over the type, so "unmeasured" was half-hidden behind a
+         * portrait. Leaving z-index at auto is what allowed it: the rotate
+         * transform gives each portrait its own stacking context, and the
+         * result depended on DOM order rather than on a decision.
+         */
+        "z-0",
         overlap ? "absolute top-1/2 -translate-y-1/2" : "relative",
         overlap ? (side === "left" ? "left-0" : "right-0") : "",
       ].join(" ")}
-      style={{ width: overlap ? "clamp(120px, 19vw, 300px)" : "clamp(110px, 15vw, 230px)" }}
+      style={{ width: overlap ? "clamp(104px, 16vw, 260px)" : "clamp(110px, 15vw, 230px)" }}
       initial={reduce ? false : { opacity: 0, y: 26, rotate: 0 }}
       whileInView={{ opacity: 1, y: 0, rotate: side === "left" ? -4 : 4 }}
       viewport={{ once: true, amount: 0.4 }}
@@ -62,6 +71,14 @@ export default function StatementSplit({
           "relative flex items-center",
           overlap ? "justify-center" : "justify-between gap-4 sm:gap-10",
         ].join(" ")}
+        /**
+         * The portraits are absolutely positioned and centred on this row, so
+         * the row has to be at least as tall as they are. It was not: a 260px
+         * card is ~347px tall against a two-line row of ~170px, so ~90px of
+         * picture hung below and sat on top of the notes underneath — which is
+         * why the two paragraphs were unreadable. 4/3 is the portrait ratio.
+         */
+        style={overlap ? { minHeight: "calc(clamp(104px, 16vw, 260px) * 4 / 3)" } : undefined}
       >
         {!overlap && left ? <Portrait p={left} side="left" /> : null}
 
@@ -91,7 +108,7 @@ export default function StatementSplit({
       </div>
 
       {notes.length ? (
-        <div className="mt-14 grid gap-8 sm:mt-20 sm:grid-cols-2">
+        <div className="relative z-20 mt-14 grid gap-8 sm:mt-20 sm:grid-cols-2">
           {notes.map((n, i) => (
             <p key={i} className={`z-body max-w-[34ch] text-[15px] ${i === 1 ? "sm:justify-self-end sm:text-right" : ""}`}>
               {n.text}
