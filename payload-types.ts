@@ -1084,10 +1084,14 @@ export interface Page {
         heading?: string | null;
         intro?: string | null;
         /**
+         * Render the section on the near-black band.
+         */
+        dark?: boolean | null;
+        /**
          * Leave empty to show the whole slate.
          */
         films?: (number | Film)[] | null;
-        layout?: ('list' | 'grid' | 'profiles') | null;
+        layout?: ('list' | 'grid' | 'profiles' | 'accordion') | null;
         showWatchLinks?: boolean | null;
         id?: string | null;
         blockName?: string | null;
@@ -1159,6 +1163,11 @@ export interface Page {
          * Leave empty for all of them.
          */
         limit?: number | null;
+        layout?: ('log' | 'progression') | null;
+        /**
+         * Render the section on the near-black band.
+         */
+        dark?: boolean | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'pressList';
@@ -1976,6 +1985,7 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              dark?: T;
               films?: T;
               layout?: T;
               showWatchLinks?: T;
@@ -2023,6 +2033,8 @@ export interface PagesSelect<T extends boolean = true> {
               intro?: T;
               featuredCount?: T;
               limit?: T;
+              layout?: T;
+              dark?: T;
               id?: T;
               blockName?: T;
             };

@@ -1,10 +1,13 @@
 import Link from "next/link";
 
 import PortraitDeck, { type DeckCard } from "@/components/fampire/blocks/PortraitDeck";
+import type { AccordionFilm } from "@/components/fampire/blocks/FilmAccordion";
 import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
+import type { ProgressionItem } from "@/components/fampire/blocks/PressProgression";
 import type { SplitPortrait } from "@/components/fampire/blocks/StatementSplit";
 import { applyFacets, facetsFromParams, previewsForSubjects } from "@/lib/fampire/catalog";
 import { loadBrands, loadEntries, loadFamily, loadPeople } from "@/lib/fampire/payload-catalog";
+import type { AppearanceRecord, FilmRecord } from "@/lib/fampire/payload-catalog";
 import type { PersonRecord } from "@/lib/fampire/payload-catalog";
 
 /**
@@ -210,4 +213,45 @@ export async function laneImages(
     if (pick?.image) used.add(pick.image);
     return { ...l, src: pick?.image ?? null };
   });
+}
+
+
+/**
+ * Films, resolved for the accordion.
+ *
+ * Key art falls back to a frame from the film's own collections, the same rule
+ * portraits follow — a film with no uploaded poster still shows a picture from
+ * its own material rather than a grey box.
+ */
+export async function accordionFilms(films: FilmRecord[]): Promise<AccordionFilm[]> {
+  const entries = await loadEntries();
+  return films.map((f) => {
+    const own = entries
+      .filter((e) => e.film === f.title && e.image)
+      .sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0));
+    return {
+      slug: f.slug,
+      title: f.title,
+      synopsis: f.synopsis ?? null,
+      note: f.note ?? null,
+      year: f.year ?? null,
+      awards: f.awards ?? null,
+      status: f.status ?? null,
+      poster: chosen(f.posterUrl, f.posterImage) ?? own[0]?.image ?? null,
+      watch: f.watch ?? null,
+    };
+  });
+}
+
+/** Appearances, flattened for the numbered progression. Synchronous — the
+ *  records are already loaded by the time the block renders. */
+export function progressionItems(list: AppearanceRecord[]): ProgressionItem[] {
+  return list.map((a) => ({
+    title: a.title,
+    outlet: a.outlet ?? null,
+    aired: a.aired ?? null,
+    views: a.views ?? null,
+    thumbnail: a.thumbnail ?? null,
+    url: a.url ?? null,
+  }));
 }

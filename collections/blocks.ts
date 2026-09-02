@@ -286,6 +286,12 @@ export const FilmStrip: Block = {
   fields: [
     ...heading,
     {
+      name: "dark",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Render the section on the near-black band." },
+    },
+    {
       name: "films",
       type: "relationship",
       relationTo: "films",
@@ -305,6 +311,9 @@ export const FilmStrip: Block = {
         { label: "Compact list", value: "list" },
         { label: "Poster grid", value: "grid" },
         { label: "Full profiles (synopsis, artwork, where to watch)", value: "profiles" },
+        /* The approved layout's module accordion. Eight films as eight
+           posters is a wall; eight rows you can open is a slate. */
+        { label: "Accordion (one open at a time, with synopsis)", value: "accordion" },
       ],
     },
     { name: "showWatchLinks", type: "checkbox", defaultValue: true },
@@ -536,6 +545,24 @@ export const PressList: Block = {
       admin: { description: "How many of the most-watched appearances lead the page. 0 for none." },
     },
     { name: "limit", type: "number", admin: { description: "Leave empty for all of them." } },
+    {
+      name: "layout",
+      type: "select",
+      defaultValue: "log",
+      options: [
+        { label: "Log (most watched, then the full list)", value: "log" },
+        /* The approved layout's numbered progression. The numbering is real:
+           Appearances are drag-ordered in the CMS, so 01 is the one the team
+           put first. */
+        { label: "Numbered progression (still beside each)", value: "progression" },
+      ],
+    },
+    {
+      name: "dark",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Render the section on the near-black band." },
+    },
   ],
 };
 

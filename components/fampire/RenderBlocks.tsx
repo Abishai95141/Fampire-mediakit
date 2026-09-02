@@ -18,11 +18,15 @@ import {
 import {
   BrandStripBlock,
   DeckHeroBlock,
+  accordionFilms,
   laneImages,
+  progressionItems,
   rosterPeople,
   splitPortraits,
 } from "@/components/fampire/blocks/ZeenBlocks";
+import FilmAccordion from "@/components/fampire/blocks/FilmAccordion";
 import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
+import PressProgression from "@/components/fampire/blocks/PressProgression";
 import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
 import StatementSplit from "@/components/fampire/blocks/StatementSplit";
 import {
@@ -538,6 +542,25 @@ export default async function RenderBlocks({
           const picked = ((block.films as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[];
           const shown = picked.length ? films.filter((f) => picked.includes(f.slug)) : films;
           const awards = shown.reduce((sum, f) => sum + (f.awards ?? 0), 0);
+          if (block.layout === "accordion") {
+            const body = (
+              <Section
+                n={n}
+                title={headingText}
+                aside={introText}
+                href={signedIn ? "/admin/collections/films/create" : undefined}
+                hrefLabel={signedIn ? "Add a film" : undefined}
+              >
+                <FilmAccordion films={await accordionFilms(shown)} />
+              </Section>
+            );
+            return block.dark ? (
+              <div key={key} className="z-band z-band--dark mt-16 sm:mt-24">{body}</div>
+            ) : (
+              <div key={key}>{body}</div>
+            );
+          }
+
           return (
             <Section
               key={key}
@@ -631,6 +654,25 @@ export default async function RenderBlocks({
         case "pressList": {
           const appearances = await loadAppearances();
           const limited = block.limit ? appearances.slice(0, Number(block.limit)) : appearances;
+          if (block.layout === "progression") {
+            const body = (
+              <Section
+                n={n}
+                title={headingText}
+                aside={introText}
+                href={signedIn ? "/admin/collections/appearances/create" : undefined}
+                hrefLabel={signedIn ? "Add an appearance" : undefined}
+              >
+                <PressProgression items={progressionItems(limited as AppearanceRecord[])} />
+              </Section>
+            );
+            return block.dark ? (
+              <div key={key} className="z-band z-band--dark mt-16 sm:mt-24">{body}</div>
+            ) : (
+              <div key={key}>{body}</div>
+            );
+          }
+
           // Not wrapped in `Section`: the log brings its own two heads ("Most
           // watched", "The full log"), and nesting a numbered section around
           // them buries the actual content one level deeper than it reads.

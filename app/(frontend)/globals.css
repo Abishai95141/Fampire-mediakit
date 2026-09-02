@@ -429,6 +429,10 @@
   --z-on-dark: #ffffff;
   --z-on-dark-muted: #a8a8a8;
   --z-rule: #e7e5e0;
+  /* The card ground. Not white: on a white page a panel needs its own value
+     or the cards vanish and the grid reads as text in columns again. Measured
+     off the approved layout's card fills. */
+  --z-panel: #f4f2ee;
   --z-card-radius: 18px;
 
   background: var(--z-ground);
@@ -490,6 +494,10 @@
   --z-ink: var(--z-on-dark);
   --z-muted: var(--z-on-dark-muted);
   --z-rule: #2a2a2a;
+  /* The approved layout keeps its cards LIGHT on the near-black band — that
+     contrast is the whole effect of the section — so the panel does not
+     invert here. Components that sit on it set their own dark ink. */
+  --z-panel: #f4f2ee;
 }
 .zeen .z-wrap {
   width: min(1240px, 100% - 48px);
@@ -580,3 +588,52 @@
 .zeen a { font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif; }
 .zeen .fam-display,
 .zeen .fam-display-sm { font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.03em; }
+
+/* The catalog sections, lifted into the approved layout's card language.
+   ---------------------------------------------------------------------
+   Films, people and the intent lanes got purpose-built layouts. Everything
+   else — the room, the magazine shelf, where to watch — was still rendering
+   the house style under a bigger heading, which is the part the client called
+   boring, and fairly: square-cornered wells on hairline rules read as a
+   spreadsheet next to the rounded, panelled sections above them.
+
+   These rules only reshape what is already there. No block markup changes, so
+   the same components keep rendering the other four pages exactly as before.*/
+
+/* Every picture in the scope gets the deck's corner radius. */
+.zeen .fam-well {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Card grids: sit each card on a panel so the grid reads as objects rather
+   than as text in columns, and give it somewhere to go on hover. */
+.zeen .fam-section-rule + div > .grid > * {
+  border-radius: 18px;
+  padding: 14px;
+  background: var(--z-panel, #f4f2ee);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
+}
+.zeen .fam-section-rule + div > .grid > *:hover {
+  transform: translateY(-4px);
+}
+.zeen .z-band--dark .fam-section-rule + div > .grid > * {
+  background: #1c1c1c;
+}
+
+/* The house style separates rows with hairlines and top borders; inside a
+   panel those become a second, competing edge. */
+.zeen .fam-section-rule + div .border-t,
+.zeen .fam-section-rule + div .border-y,
+.zeen .fam-section-rule + div .divide-y > * {
+  border-color: transparent;
+}
+
+/* Section heads get room to breathe — the approved layout runs ~140px between
+   bands, against the house style's 64px. */
+.zeen section { margin-top: clamp(72px, 10vw, 132px); }
+.zeen .z-band section { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zeen .fam-section-rule + div > .grid > *:hover { transform: none; }
+}
