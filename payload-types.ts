@@ -797,6 +797,39 @@ export interface Page {
         blockType: 'brandStrip';
       }
     | {
+        /**
+         * One line of display type per row.
+         */
+        lines: {
+          text: string;
+          id?: string | null;
+        }[];
+        /**
+         * Let the pictures sit behind the words rather than beside them.
+         */
+        overlap?: boolean | null;
+        /**
+         * Two people, left and right. Leave empty to use the first two family members, so the section follows the CMS.
+         */
+        portraits?: (number | Person)[] | null;
+        /**
+         * Optional short lines beneath, one at each side.
+         */
+        notes?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Render on the near-black band.
+         */
+        dark?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'statementSplit';
+      }
+    | {
         eyebrow?: string | null;
         /**
          * The paragraph beside the film.
@@ -1071,7 +1104,7 @@ export interface Page {
          * Leave empty to show the whole family.
          */
         people?: (number | Person)[] | null;
-        layout?: ('names' | 'portraits' | 'profiles') | null;
+        layout?: ('names' | 'portraits' | 'profiles' | 'roster') | null;
         /**
          * Bios come from Who & What → People, so they are written once and reused.
          */
@@ -1146,6 +1179,7 @@ export interface Page {
           href: string;
           id?: string | null;
         }[];
+        layout?: ('cards' | 'phases') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'lanes';
@@ -1770,6 +1804,27 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        statementSplit?:
+          | T
+          | {
+              lines?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              overlap?: T;
+              portraits?: T;
+              notes?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              dark?: T;
+              id?: T;
+              blockName?: T;
+            };
         heroFeature?:
           | T
           | {
@@ -1985,6 +2040,7 @@ export interface PagesSelect<T extends boolean = true> {
                     href?: T;
                     id?: T;
                   };
+              layout?: T;
               id?: T;
               blockName?: T;
             };

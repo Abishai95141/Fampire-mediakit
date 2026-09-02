@@ -15,7 +15,16 @@ import {
   WatchGrid,
   type AppearanceRecord,
 } from "@/components/fampire/blocks/CatalogBlocks";
-import { BrandStripBlock, DeckHeroBlock } from "@/components/fampire/blocks/ZeenBlocks";
+import {
+  BrandStripBlock,
+  DeckHeroBlock,
+  laneImages,
+  rosterPeople,
+  splitPortraits,
+} from "@/components/fampire/blocks/ZeenBlocks";
+import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
+import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
+import StatementSplit from "@/components/fampire/blocks/StatementSplit";
 import {
   applyFacets,
   loadAppearances,
@@ -206,6 +215,30 @@ export default async function RenderBlocks({
               marquee={block.marquee !== false}
             />
           );
+
+        case "statementSplit": {
+          const lines = ((block.lines as { text: string }[]) ?? []).map((l) => l.text).filter(Boolean);
+          if (!lines.length) return null;
+          const [pl, pr] = await splitPortraits(
+            ((block.portraits as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[],
+          );
+          const inner = (
+            <div className="z-wrap">
+              <StatementSplit
+                lines={lines}
+                left={pl}
+                right={pr}
+                notes={((block.notes as { text: string }[]) ?? []).filter((x) => x?.text)}
+                overlap={block.overlap === true}
+              />
+            </div>
+          );
+          return block.dark ? (
+            <section key={key} className="z-band z-band--dark mt-16 sm:mt-24">{inner}</section>
+          ) : (
+            <section key={key} className="z-band">{inner}</section>
+          );
+        }
 
         case "heroFeature": {
           // An empty text field arrives as "" — falsy, and correctly so: an
@@ -437,7 +470,20 @@ export default async function RenderBlocks({
           );
         }
 
-        case "lanes":
+        case "lanes": {
+          const laneRows =
+            (block.lanes as { label: string; detail?: string; href: string }[]) ?? [];
+          /* The numbered progression needs a picture per lane. It comes from
+             the collections the lane actually points at, so the section can
+             never advertise material the archive does not hold. */
+          if (block.layout === "phases") {
+            const withPics = await laneImages(laneRows);
+            return (
+              <Section key={key} n={n} title={headingText} aside={introText}>
+                <PhaseLanes lanes={withPics} />
+              </Section>
+            );
+          }
           return (
             <Section key={key} n={n} title={headingText} aside={introText}>
               <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -463,6 +509,7 @@ export default async function RenderBlocks({
               </ul>
             </Section>
           );
+        }
 
         case "stats": {
           const resolved = await resolveStats(
@@ -529,12 +576,16 @@ export default async function RenderBlocks({
               href={signedIn ? "/admin/collections/people/create" : undefined}
               hrefLabel={signedIn ? "Add a person" : undefined}
             >
+              {block.layout === "roster" ? (
+                <PeopleRoster people={await rosterPeople(shown)} />
+              ) : (
               <PeopleProfiles
                 people={shown}
                 layout={String(block.layout ?? "portraits")}
                 showBios={block.showBios !== false}
                 signedIn={signedIn}
               />
+              )}
             </Section>
           );
         }

@@ -230,6 +230,18 @@ export const Lanes: Block = {
         { name: "href", type: "text", required: true, admin: { description: "A pre-filtered Library view." } },
       ],
     },
+    {
+      name: "layout",
+      type: "select",
+      defaultValue: "cards",
+      options: [
+        { label: "Cards", value: "cards" },
+        /* Picture, oversized numeral, card — the approved layout's numbered
+           progression. The picture is pulled from the collections each lane
+           actually leads to, never uploaded. */
+        { label: "Numbered progression (picture beside each)", value: "phases" },
+      ],
+    },
   ],
 };
 
@@ -319,6 +331,10 @@ export const PeopleRow: Block = {
         { label: "Names only", value: "names" },
         { label: "Portrait grid", value: "portraits" },
         { label: "Full profiles (portrait, bio, collection count)", value: "profiles" },
+        /* The approved landing layout's roster: a list of names and roles,
+           with the hovered person's portrait and bio beside it. Suits people
+           who hold several roles at once better than a portrait grid can. */
+        { label: "Roster (names and roles, portrait beside)", value: "roster" },
       ],
     },
     {
@@ -781,9 +797,58 @@ export const BrandStrip: Block = {
   ],
 };
 
+/**
+ * Very large type with a portrait at each outer edge.
+ *
+ * The approved layout uses this construction twice, at two settings: once with
+ * the pictures overlapping the words, once with them pushed to the sides of a
+ * centred stack. One block with an `overlap` switch, rather than two blocks
+ * that differ by a rotation.
+ */
+export const StatementSplitBlock: Block = {
+  slug: "statementSplit",
+  labels: { singular: "Split statement (big type, two portraits)", plural: "Split statements" },
+  fields: [
+    {
+      name: "lines",
+      type: "array",
+      minRows: 1,
+      maxRows: 6,
+      required: true,
+      admin: { description: "One line of display type per row." },
+      fields: [{ name: "text", type: "text", required: true }],
+    },
+    {
+      name: "overlap",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Let the pictures sit behind the words rather than beside them." },
+    },
+    {
+      name: "portraits",
+      type: "relationship",
+      relationTo: "people",
+      hasMany: true,
+      maxDepth: 1,
+      admin: {
+        description:
+          "Two people, left and right. Leave empty to use the first two family members, so the section follows the CMS.",
+      },
+    },
+    {
+      name: "notes",
+      type: "array",
+      maxRows: 2,
+      admin: { description: "Optional short lines beneath, one at each side." },
+      fields: [{ name: "text", type: "textarea", required: true }],
+    },
+    { name: "dark", type: "checkbox", defaultValue: false, admin: { description: "Render on the near-black band." } },
+  ],
+};
+
 export const PAGE_BLOCKS: Block[] = [
   // Structure
-  DeckHero, BrandStrip, HeroFeature, Hero, Statement, RichText, Columns, Divider,
+  DeckHero, BrandStrip, StatementSplitBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
   // The catalog, seen through different lenses
   LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
   MagazineShelf, WatchGrid, PressList,

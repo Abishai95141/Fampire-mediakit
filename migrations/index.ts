@@ -14,6 +14,7 @@ import * as migration_20260819_032512_film_poster_person_portrait from './202608
 import * as migration_20260824_044737_add_people_aliases from './20260824_044737_add_people_aliases';
 import * as migration_20260827_172830_add_appearance_order from './20260827_172830_add_appearance_order';
 import * as migration_20260902_154004_add_zeen_landing_blocks from './20260902_154004_add_zeen_landing_blocks';
+import * as migration_20260902_162333_add_zeen_layouts from './20260902_162333_add_zeen_layouts';
 
 export const migrations = [
   {
@@ -94,6 +95,11 @@ export const migrations = [
   {
     up: migration_20260902_154004_add_zeen_landing_blocks.up,
     down: migration_20260902_154004_add_zeen_landing_blocks.down,
-    name: '20260902_154004_add_zeen_landing_blocks'
+    name: '20260902_154004_add_zeen_landing_blocks',
+  },
+  {
+    up: migration_20260902_162333_add_zeen_layouts.up,
+    down: migration_20260902_162333_add_zeen_layouts.down,
+    name: '20260902_162333_add_zeen_layouts'
   },
 ];

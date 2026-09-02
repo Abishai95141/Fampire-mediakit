@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 import PortraitDeck, { type DeckCard } from "@/components/fampire/blocks/PortraitDeck";
-import { previewsForSubjects } from "@/lib/fampire/catalog";
+import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
+import type { SplitPortrait } from "@/components/fampire/blocks/StatementSplit";
+import { applyFacets, facetsFromParams, previewsForSubjects } from "@/lib/fampire/catalog";
 import { loadBrands, loadEntries, loadFamily, loadPeople } from "@/lib/fampire/payload-catalog";
 import type { PersonRecord } from "@/lib/fampire/payload-catalog";
 
@@ -146,4 +148,66 @@ export async function BrandStripBlock({
       )}
     </section>
   );
+}
+
+
+// ── Data helpers for the other approved layouts ─────────────────────────
+
+/** People, resolved for the roster: name, role, bio and a picture. */
+export async function rosterPeople(people: PersonRecord[]): Promise<RosterPerson[]> {
+  const shots = previewsForSubjects(await loadEntries(), people.map((p) => p.slug));
+  return people.map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    role: p.role ?? null,
+    bio: (p as { bio?: string | null }).bio ?? null,
+    src: chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null,
+  }));
+}
+
+/**
+ * Two portraits for a split statement.
+ *
+ * An empty relationship falls back to the first two family members rather than
+ * rendering blank panels, so the block is safe to drop onto a page before
+ * anyone has chosen who should appear in it.
+ */
+export async function splitPortraits(slugs: string[]): Promise<[SplitPortrait | null, SplitPortrait | null]> {
+  const pool = slugs.length
+    ? (await loadPeople()).filter((p) => slugs.includes(p.slug))
+    : await loadFamily();
+  const cards = await toCards(pool.slice(0, 2));
+  return [cards[0] ?? null, cards[1] ?? null];
+}
+
+/**
+ * A real frame for each intent lane.
+ *
+ * Every lane is a pre-filtered Library URL, so its picture is taken from the
+ * collections behind that exact filter — parsed with the same `facetsFromParams`
+ * and `applyFacets` the Library itself uses, rather than a second, drifting
+ * interpretation of the query string. Largest collection first, on the
+ * assumption that the biggest folder is the most representative one.
+ */
+export async function laneImages(
+  lanes: { label: string; detail?: string | null; href: string }[],
+): Promise<{ label: string; detail?: string | null; href: string; src: string | null }[]> {
+  const entries = await loadEntries();
+  const used = new Set<string>();
+
+  return lanes.map((l) => {
+    const qs = l.href.includes("?") ? l.href.slice(l.href.indexOf("?") + 1) : "";
+    const params: Record<string, string> = {};
+    for (const [k, v] of new URLSearchParams(qs)) params[k] = v;
+
+    const matched = applyFacets(entries, facetsFromParams(params))
+      .filter((e) => e.image)
+      .sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0));
+
+    // Never the same picture twice in one progression — four identical frames
+    // would read as a broken loop rather than four different kinds of work.
+    const pick = matched.find((e) => e.image && !used.has(e.image)) ?? matched[0];
+    if (pick?.image) used.add(pick.image);
+    return { ...l, src: pick?.image ?? null };
+  });
 }
