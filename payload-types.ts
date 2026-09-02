@@ -1108,7 +1108,15 @@ export interface Page {
          * Leave empty to show the whole family.
          */
         people?: (number | Person)[] | null;
-        layout?: ('names' | 'portraits' | 'profiles' | 'roster') | null;
+        /**
+         * Render the section on the near-black band.
+         */
+        dark?: boolean | null;
+        /**
+         * Small label under the heading. Card stack layout only.
+         */
+        rail?: string | null;
+        layout?: ('names' | 'portraits' | 'profiles' | 'roster' | 'stack') | null;
         /**
          * Bios come from Who & What → People, so they are written once and reused.
          */
@@ -1999,6 +2007,8 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               intro?: T;
               people?: T;
+              dark?: T;
+              rail?: T;
               layout?: T;
               showBios?: T;
               id?: T;

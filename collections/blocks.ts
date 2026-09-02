@@ -239,7 +239,7 @@ export const Lanes: Block = {
         /* Picture, oversized numeral, card — the approved layout's numbered
            progression. The picture is pulled from the collections each lane
            actually leads to, never uploaded. */
-        { label: "Numbered progression (picture beside each)", value: "phases" },
+        { label: "Ledger (live collection + file counts, no imagery)", value: "phases" },
       ],
     },
   ],
@@ -333,6 +333,20 @@ export const PeopleRow: Block = {
       admin: { description: "Leave empty to show the whole family." },
     },
     {
+      name: "dark",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Render the section on the near-black band." },
+    },
+    {
+      name: "rail",
+      type: "text",
+      admin: {
+        description: "Small label under the heading. Card stack layout only.",
+        condition: (_, sib) => sib?.layout === "stack",
+      },
+    },
+    {
       name: "layout",
       type: "select",
       defaultValue: "portraits",
@@ -344,6 +358,9 @@ export const PeopleRow: Block = {
            with the hovered person's portrait and bio beside it. Suits people
            who hold several roles at once better than a portrait grid can. */
         { label: "Roster (names and roles, portrait beside)", value: "roster" },
+        /* The approved layout's card stack: heading held on the left, and on
+           the right a portrait with a dashed, numbered card lying across it. */
+        { label: "Card stack (portrait behind a numbered card, dark band)", value: "stack" },
       ],
     },
     {

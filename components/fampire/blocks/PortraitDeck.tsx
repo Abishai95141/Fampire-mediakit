@@ -33,7 +33,7 @@ export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
         // Measured off the approved layout: ~9° between neighbours, each step
         // out sits lower and slightly smaller, and the centre card is in front.
         const rotate = off * 9;
-        const y = dist * 34;
+        const y = dist * 40;
         const scale = 1 - dist * 0.06;
 
         return (
@@ -42,8 +42,19 @@ export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
             className="relative"
             style={{
               zIndex: n - dist,
-              width: `clamp(112px, ${17 - dist * 0.9}vw, ${230 - dist * 14}px)`,
-              marginInline: "clamp(-26px, -2.2vw, -10px)",
+              /**
+               * Wider cards, and far less overlap.
+               *
+               * The deck was reading as crowded because the cards were both
+               * small and pulled together by up to 26px each side, so four
+               * portraits occupied barely half the row while the rest of the
+               * hero sat empty. They are now up to 290px with the overlap cut
+               * to ~10px — enough for the fan to still read as one deck rather
+               * than four separate pictures, and the fan spreads across the
+               * width it was already reserving.
+               */
+              width: `clamp(124px, ${19 - dist * 0.8}vw, ${290 - dist * 16}px)`,
+              marginInline: "clamp(-14px, -1vw, -4px)",
             }}
             initial={reduce ? false : { opacity: 0, y: y + 60, rotate: 0, scale: scale * 0.94 }}
             animate={{ opacity: 1, y, rotate, scale }}

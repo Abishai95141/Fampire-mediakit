@@ -19,13 +19,14 @@ import {
   BrandStripBlock,
   DeckHeroBlock,
   accordionFilms,
-  laneImages,
+  laneCounts,
   progressionItems,
   rosterPeople,
   splitPortraits,
 } from "@/components/fampire/blocks/ZeenBlocks";
 import FilmAccordion from "@/components/fampire/blocks/FilmAccordion";
 import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
+import PeopleStack from "@/components/fampire/blocks/PeopleStack";
 import PressProgression from "@/components/fampire/blocks/PressProgression";
 import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
 import StatementSplit from "@/components/fampire/blocks/StatementSplit";
@@ -477,14 +478,13 @@ export default async function RenderBlocks({
         case "lanes": {
           const laneRows =
             (block.lanes as { label: string; detail?: string; href: string }[]) ?? [];
-          /* The numbered progression needs a picture per lane. It comes from
-             the collections the lane actually points at, so the section can
-             never advertise material the archive does not hold. */
+          /* The ledger needs a live count per lane, taken from the very
+             filter the lane opens — so the number on the card and the page it
+             leads to can never disagree. */
           if (block.layout === "phases") {
-            const withPics = await laneImages(laneRows);
             return (
               <Section key={key} n={n} title={headingText} aside={introText}>
-                <PhaseLanes lanes={withPics} />
+                <PhaseLanes lanes={await laneCounts(laneRows)} />
               </Section>
             );
           }
@@ -590,6 +590,25 @@ export default async function RenderBlocks({
           const shown = picked.length
             ? (await loadPeople()).filter((p) => picked.includes(p.slug))
             : await loadFamily();
+          /* The card stack is two-column and holds its own heading on the
+             left, so it is not wrapped in `Section` — a head above it would
+             leave that column empty for the whole scroll. */
+          if (block.layout === "stack") {
+            const stack = (
+              <PeopleStack
+                heading={headingText}
+                intro={introText}
+                rail={block.rail as string | null}
+                people={await rosterPeople(shown)}
+              />
+            );
+            return block.dark ? (
+              <section key={key} className="z-band z-band--dark mt-16 sm:mt-24">{stack}</section>
+            ) : (
+              <section key={key} className="z-band">{stack}</section>
+            );
+          }
+
           return (
             <Section
               key={key}

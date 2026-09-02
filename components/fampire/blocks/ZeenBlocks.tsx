@@ -88,7 +88,11 @@ export async function DeckHeroBlock({
               <PortraitDeck cards={cards} />
             </div>
 
-            <div className="mt-6 flex flex-col items-start justify-between gap-6 sm:mt-10 sm:flex-row sm:items-end">
+            {/* Clearance, not decoration. With the deck widened, the lower
+                corner of the outermost card reached into the wordmark's box —
+                the geometry pass flagged "FAMPIRE" as sitting under a picture.
+                The fan is meant to sit ABOVE the mark, not touch it. */}
+            <div className="mt-14 flex flex-col items-start justify-between gap-6 sm:mt-20 sm:flex-row sm:items-end">
               {/* The oversized mark. `h1` because on the landing page this
                   IS the page's heading, not decoration. */}
               <h1 className="z-wordmark">{wordmark}</h1>
@@ -184,37 +188,35 @@ export async function splitPortraits(slugs: string[]): Promise<[SplitPortrait | 
 }
 
 /**
- * A real frame for each intent lane.
+ * How much sits behind each intent lane.
  *
- * Every lane is a pre-filtered Library URL, so its picture is taken from the
- * collections behind that exact filter — parsed with the same `facetsFromParams`
- * and `applyFacets` the Library itself uses, rather than a second, drifting
- * interpretation of the query string. Largest collection first, on the
- * assumption that the biggest folder is the most representative one.
+ * A lane is a pre-filtered Library URL, so the count is produced by running
+ * that exact filter through the Library's own `facetsFromParams` and
+ * `applyFacets` rather than a second, drifting reading of the query string.
+ * The number therefore cannot disagree with the page the lane opens.
+ *
+ * This replaced a per-lane image. Choosing a picture for a FILTER meant
+ * grabbing whatever sat at the top of it, which put a documentary about cats
+ * in front of "Book them"; a count is the thing a lane can honestly state
+ * about itself.
  */
-export async function laneImages(
+export async function laneCounts(
   lanes: { label: string; detail?: string | null; href: string }[],
-): Promise<{ label: string; detail?: string | null; href: string; src: string | null }[]> {
+): Promise<{ label: string; detail?: string | null; href: string; collections: number; files: number }[]> {
   const entries = await loadEntries();
-  const used = new Set<string>();
 
   return lanes.map((l) => {
     const qs = l.href.includes("?") ? l.href.slice(l.href.indexOf("?") + 1) : "";
     const params: Record<string, string> = {};
     for (const [k, v] of new URLSearchParams(qs)) params[k] = v;
-
-    const matched = applyFacets(entries, facetsFromParams(params))
-      .filter((e) => e.image)
-      .sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0));
-
-    // Never the same picture twice in one progression — four identical frames
-    // would read as a broken loop rather than four different kinds of work.
-    const pick = matched.find((e) => e.image && !used.has(e.image)) ?? matched[0];
-    if (pick?.image) used.add(pick.image);
-    return { ...l, src: pick?.image ?? null };
+    const matched = applyFacets(entries, facetsFromParams(params));
+    return {
+      ...l,
+      collections: matched.length,
+      files: matched.reduce((n, e) => n + (e.file_count ?? 0), 0),
+    };
   });
 }
-
 
 /**
  * Films, resolved for the accordion.
