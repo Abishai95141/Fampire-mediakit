@@ -393,3 +393,190 @@
    stylesheet regardless — so the rail was invisible on every desktop screen.
    The disclosure is now a checkbox + label in LibraryBrowser.tsx, handled
    entirely by utility classes. */
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE ZEEN LAYER — the landing page, and nothing else.
+   ══════════════════════════════════════════════════════════════════════
+
+   The client approved the Zeen "Brand Accelerator" layout and asked for it
+   to be adopted wholesale for FAMPIRE while staying driven by this CMS. Its
+   visual language is a different system from the rest of the Media Center:
+   Geist rather than Jakarta, a 128/64/48 display scale on tight negative
+   tracking, and a light/dark section rhythm.
+
+   Every rule here is scoped under `.zeen`. That is the whole reason the
+   brief's "must not require changes to the other pages" holds: /library,
+   /films, /people and /press never see a single one of these declarations,
+   and removing the class from the landing page reverts it completely.
+
+   MEASURED off the approved layout (localhost:4177), not eyeballed:
+     ground   #f8f7f4  →  #ffffff   the one change the client asked for
+     ink      #121212
+     muted    #4c4c4c
+     dark     #121212  (white type)
+     h1 128 / 600 / -0.05em      h2 64 / 500 / -0.05em
+     h3  48 / 600 / -0.03em      body 16 / 400 / 1.2
+   ---------------------------------------------------------------------- */
+
+.zeen {
+  /* Pure white, not the template's #f8f7f4. Scoped here so the swap cannot
+     leak into any other surface. */
+  --z-ground: #ffffff;
+  --z-ink: #121212;
+  --z-muted: #4c4c4c;
+  --z-dark: #121212;
+  --z-on-dark: #ffffff;
+  --z-on-dark-muted: #a8a8a8;
+  --z-rule: #e7e5e0;
+  --z-card-radius: 18px;
+
+  background: var(--z-ground);
+  color: var(--z-ink);
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* Display scale. `clamp` because the template is a fixed 1440 canvas and
+   this has to survive a 375px phone — the upper bound is the measured size,
+   so at desktop width it renders exactly as approved. */
+.zeen .z-wordmark {
+  font-size: clamp(56px, 13vw, 128px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  margin: 0;
+}
+.zeen .z-h2 {
+  font-size: clamp(32px, 5.6vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.3;
+  margin: 0;
+  text-wrap: balance;
+}
+.zeen .z-h3 {
+  font-size: clamp(26px, 3.4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+  text-wrap: balance;
+}
+.zeen .z-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--z-muted);
+}
+.zeen .z-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--z-muted);
+}
+
+/* Section rhythm. The template alternates white and near-black full-bleed
+   bands; the dark one flips every colour token so children need no variant
+   of their own. */
+.zeen .z-band {
+  padding-block: clamp(64px, 9vw, 140px);
+}
+.zeen .z-band--dark {
+  background: var(--z-dark);
+  color: var(--z-on-dark);
+  --z-ink: var(--z-on-dark);
+  --z-muted: var(--z-on-dark-muted);
+  --z-rule: #2a2a2a;
+}
+.zeen .z-wrap {
+  width: min(1240px, 100% - 48px);
+  margin-inline: auto;
+}
+@media (max-width: 640px) {
+  .zeen .z-wrap { width: min(1240px, 100% - 32px); }
+}
+
+/* The vertical rail beside the hero — "EST. 2022 · MERSEYSIDE · UK" in the
+   template, the institution's own line here. */
+.zeen .z-rail {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--z-muted);
+  white-space: nowrap;
+}
+
+/* Portrait cards: the fanned deck in the hero and the people grid share one
+   treatment — rounded, cropped 3:4, no border. */
+.zeen .z-portrait {
+  border-radius: var(--z-card-radius);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #ece9e4;
+}
+
+/* Marquee for the brand strip. Duplicated track, translated by exactly half,
+   so the loop has no seam. */
+@keyframes z-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.zeen .z-marquee {
+  display: flex;
+  width: max-content;
+  animation: z-marquee 38s linear infinite;
+}
+.zeen .z-marquee:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zeen .z-marquee { animation: none; }
+}
+
+/* Section heads, restyled for the landing page only.
+   ---------------------------------------------------------------------
+   The house style is a small letter-spaced eyebrow over a 2px rule, indexed
+   "01 — The films". The approved layout has neither: section heads are 64px
+   Geist on tight negative tracking with no rule and no number. Doing this in
+   CSS rather than by branching Section.tsx means the other four pages keep
+   the numbered rule with no conditional to maintain. */
+.zeen .fam-section-n { display: none; }
+
+.zeen .fam-section-rule {
+  border: none;
+  padding-top: 0;
+  align-items: flex-end;
+}
+.zeen .fam-section-rule h2.fam-eyebrow {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(32px, 5.6vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.3;
+  text-transform: none;
+  color: var(--z-ink);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+.zeen section { max-width: none; }
+.zeen section > .fam-section-rule,
+.zeen section > div:last-child {
+  width: min(1240px, 100%);
+  margin-inline: auto;
+}
+
+/* Body copy inside the scope picks up Geist and the template's greys without
+   every block needing a variant. */
+.zeen p,
+.zeen li,
+.zeen a { font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif; }
+.zeen .fam-display,
+.zeen .fam-display-sm { font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.03em; }

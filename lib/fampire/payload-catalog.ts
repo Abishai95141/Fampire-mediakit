@@ -291,6 +291,28 @@ export const loadPeople = cache(async (): Promise<PersonRecord[]> => {
   return r.docs as unknown as PersonRecord[];
 });
 
+export type BrandRecord = {
+  id?: number | string;
+  slug: string;
+  name: string;
+  tagline?: string | null;
+  hasAssets?: boolean | null;
+};
+
+/**
+ * The worlds, for the landing page's brand strip.
+ *
+ * Brands already existed as a filter axis on the Library but nothing ever
+ * RENDERED them, so there was no way for a new brand to appear anywhere on
+ * the site. This is that read. Sorted by name so the strip has a stable order
+ * rather than insertion order, which an editor cannot see or control.
+ */
+export const loadBrands = cache(async (): Promise<BrandRecord[]> => {
+  const payload = await getPayload({ config });
+  const r = await payload.find({ collection: "brands", limit: 200, depth: 0, sort: "name" });
+  return r.docs as unknown as BrandRecord[];
+});
+
 export type AppearanceRecord = {
   /** Row id, for the per-item edit link — see the twin type in CatalogBlocks. */
   record_id?: number | string | null;

@@ -13,6 +13,7 @@ import * as migration_20260814_153025_drop_multitenancy from './20260814_153025_
 import * as migration_20260819_032512_film_poster_person_portrait from './20260819_032512_film_poster_person_portrait';
 import * as migration_20260824_044737_add_people_aliases from './20260824_044737_add_people_aliases';
 import * as migration_20260827_172830_add_appearance_order from './20260827_172830_add_appearance_order';
+import * as migration_20260902_154004_add_zeen_landing_blocks from './20260902_154004_add_zeen_landing_blocks';
 
 export const migrations = [
   {
@@ -88,6 +89,11 @@ export const migrations = [
   {
     up: migration_20260827_172830_add_appearance_order.up,
     down: migration_20260827_172830_add_appearance_order.down,
-    name: '20260827_172830_add_appearance_order'
+    name: '20260827_172830_add_appearance_order',
+  },
+  {
+    up: migration_20260902_154004_add_zeen_landing_blocks.up,
+    down: migration_20260902_154004_add_zeen_landing_blocks.down,
+    name: '20260902_154004_add_zeen_landing_blocks'
   },
 ];

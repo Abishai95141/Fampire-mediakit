@@ -15,6 +15,7 @@ import {
   WatchGrid,
   type AppearanceRecord,
 } from "@/components/fampire/blocks/CatalogBlocks";
+import { BrandStripBlock, DeckHeroBlock } from "@/components/fampire/blocks/ZeenBlocks";
 import {
   applyFacets,
   loadAppearances,
@@ -180,6 +181,32 @@ export default async function RenderBlocks({
          * picture keeps changing underneath it — so the two never overlap and
          * the masthead stays white and opaque above both.
          */
+        /* The approved landing layout's opening frame. Both of the Zeen
+           blocks resolve their own CMS reads inside the component, so this
+           case only forwards what the editor chose. */
+        case "deckHero":
+          return (
+            <DeckHeroBlock
+              key={key}
+              wordmark={String(block.wordmark ?? "FAMPIRE")}
+              headline={block.headline as string | null}
+              headlineTail={block.headlineTail as string | null}
+              rail={block.rail as string | null}
+              note={block.note as string | null}
+              peopleSlugs={((block.people as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[]}
+            />
+          );
+
+        case "brandStrip":
+          return (
+            <BrandStripBlock
+              key={key}
+              label={block.label as string | null}
+              brandSlugs={((block.brands as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[]}
+              marquee={block.marquee !== false}
+            />
+          );
+
         case "heroFeature": {
           // An empty text field arrives as "" — falsy, and correctly so: an
           // empty CMS override means "no override", not "an empty video".

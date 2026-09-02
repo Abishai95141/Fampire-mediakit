@@ -1,0 +1,79 @@
+"use client";
+
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+
+/**
+ * The fanned deck of portraits in the landing hero.
+ *
+ * Client-side only because it animates; the CMS read that decides WHOSE
+ * portraits these are happens on the server in ZeenBlocks and arrives here
+ * already resolved. That split is what lets the hero be CMS-driven without
+ * shipping Payload to the browser.
+ *
+ * The fan is computed from the card's distance off centre rather than
+ * hardcoded per card, so the shape holds whether the CMS returns three people
+ * or five — which it must, because an editor adding a family member changes
+ * the count with no code change.
+ */
+
+export type DeckCard = { slug: string; name: string; src: string | null };
+
+export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
+  const reduce = useReducedMotion();
+  const n = cards.length;
+  if (!n) return null;
+  const mid = (n - 1) / 2;
+
+  return (
+    <div className="relative flex items-end justify-center" style={{ perspective: 1200 }}>
+      {cards.map((c, i) => {
+        const off = i - mid;
+        const dist = Math.abs(off);
+        // Measured off the approved layout: ~9° between neighbours, each step
+        // out sits lower and slightly smaller, and the centre card is in front.
+        const rotate = off * 9;
+        const y = dist * 34;
+        const scale = 1 - dist * 0.06;
+
+        return (
+          <motion.div
+            key={c.slug}
+            className="relative"
+            style={{
+              zIndex: n - dist,
+              width: `clamp(112px, ${17 - dist * 0.9}vw, ${230 - dist * 14}px)`,
+              marginInline: "clamp(-26px, -2.2vw, -10px)",
+            }}
+            initial={reduce ? false : { opacity: 0, y: y + 60, rotate: 0, scale: scale * 0.94 }}
+            animate={{ opacity: 1, y, rotate, scale }}
+            transition={{
+              // Centre first, then outward — the deck reads as being dealt.
+              delay: reduce ? 0 : 0.08 * dist,
+              duration: 0.75,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            whileHover={reduce ? undefined : { y: y - 16, scale: scale * 1.03 }}
+          >
+            <Link
+              href={`/library?subject=${encodeURIComponent(c.slug)}`}
+              aria-label={`${c.name} — see their collections`}
+              className="block rounded-[18px] outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--z-ink)] focus-visible:ring-offset-4"
+            >
+              {c.src ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="z-portrait" src={c.src} alt={`${c.name}, portrait`} loading="eager" />
+              ) : (
+                /* No portrait yet. A labelled panel rather than a grey hole,
+                   so a newly added person still reads as a person. */
+                <div className="z-portrait flex items-end p-3">
+                  <span className="z-label">{c.name}</span>
+                </div>
+              )}
+            </Link>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}

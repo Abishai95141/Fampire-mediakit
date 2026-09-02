@@ -52,7 +52,22 @@ export default async function FampireHome({
   return (
     <>
       <EditBar collection="pages" id={page.id} label={String(page.title)} />
-      <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} />
+      {/**
+       * The Zeen scope.
+       *
+       * Everything the approved landing layout changes — Geist, the 128/64/48
+       * display scale, the white ground in place of the template's cream, the
+       * light/dark band rhythm — lives under this one class in globals.css.
+       *
+       * That is deliberate, and it is what satisfies the brief's "handled in a
+       * way that does not require changes to the other pages": /library,
+       * /films, /people and /press render from the same components and never
+       * match any of those selectors. Deleting this wrapper reverts the
+       * landing page to the house style with nothing else to undo.
+       */}
+      <div className="zeen">
+        <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} />
+      </div>
     </>
   );
 }

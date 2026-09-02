@@ -710,9 +710,80 @@ export const Columns: Block = {
  * page is hardcoded JSX any more, because the moment one page is special the
  * whole "select a page, edit its blocks" model stops being trustworthy.
  */
+
+/**
+ * The landing page's opening frame, in the approved Zeen layout.
+ *
+ * A fanned deck of portrait cards behind an oversized wordmark. The deck is
+ * NOT a list of uploaded images: it reads People out of the CMS, so the
+ * brief's "any new people added through the CMS should automatically be
+ * accessible wherever people are showcased" holds for the hero too. Leave
+ * `people` empty and it shows the family, newest portrait treatment first.
+ *
+ * Five cards is the measured count in the approved layout and the point at
+ * which the fan still reads as a fan; the field caps there rather than
+ * letting an editor add a sixth that overlaps the wordmark.
+ */
+export const DeckHero: Block = {
+  slug: "deckHero",
+  labels: { singular: "Deck hero (fanned portraits)", plural: "Deck heroes" },
+  fields: [
+    { name: "wordmark", type: "text", required: true, admin: { description: "The oversized mark. FAMPIRE." } },
+    { name: "headline", type: "textarea", admin: { description: "The claim beside it. Two or three lines." } },
+    {
+      name: "headlineTail",
+      type: "text",
+      admin: { description: "Trailing words rendered in grey, as in the approved layout." },
+    },
+    { name: "rail", type: "text", admin: { description: "Vertical rail text down the left edge." } },
+    { name: "note", type: "textarea", admin: { description: "Small paragraph at lower right." } },
+    {
+      name: "people",
+      type: "relationship",
+      relationTo: "people",
+      hasMany: true,
+      maxDepth: 1,
+      admin: {
+        description:
+          "Whose portraits fan across the hero. Leave empty to show the family automatically — then adding a family member in the CMS adds a card here with no page edit.",
+      },
+    },
+  ],
+};
+
+/**
+ * "We've helped them grow" — the brand strip.
+ *
+ * Reads the Brands collection rather than taking uploaded logos, which is the
+ * brief's second CMS requirement: a new brand is added in Payload and appears
+ * here with nothing to change on the page. Brands have no logo artwork in this
+ * system, so they set as wordmarks in the display face — which is also how the
+ * approved layout sets them.
+ */
+export const BrandStrip: Block = {
+  slug: "brandStrip",
+  labels: { singular: "Brand strip", plural: "Brand strips" },
+  fields: [
+    { name: "label", type: "text", defaultValue: "We\u2019ve helped them grow" },
+    {
+      name: "brands",
+      type: "relationship",
+      relationTo: "brands",
+      hasMany: true,
+      admin: { description: "Leave empty to show every brand in the CMS, in order." },
+    },
+    {
+      name: "marquee",
+      type: "checkbox",
+      defaultValue: true,
+      admin: { description: "Scroll the strip. Pauses on hover, and respects reduced-motion." },
+    },
+  ],
+};
+
 export const PAGE_BLOCKS: Block[] = [
   // Structure
-  HeroFeature, Hero, Statement, RichText, Columns, Divider,
+  DeckHero, BrandStrip, HeroFeature, Hero, Statement, RichText, Columns, Divider,
   // The catalog, seen through different lenses
   LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
   MagazineShelf, WatchGrid, PressList,

@@ -32,8 +32,13 @@ export default function Section({
   return (
     <section className="mx-auto mt-16 max-w-[1320px] px-6 sm:mt-24 sm:px-10 lg:px-12">
       <div className="fam-section-rule flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 pt-5">
+        {/* The index is its own element purely so a page-level scope can drop
+            it. The landing page runs the Zeen layout, which has no numbered
+            rules — under `.zeen` this span is hidden and the heading is set at
+            display size. Everywhere else it renders exactly as before. */}
         <h2 className="fam-eyebrow">
-          {n} — {title}
+          <span className="fam-section-n">{n} — </span>
+          {title}
         </h2>
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
           {aside ? (

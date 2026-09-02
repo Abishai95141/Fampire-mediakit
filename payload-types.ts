@@ -754,6 +754,49 @@ export interface Page {
    */
   layout: (
     | {
+        /**
+         * The oversized mark. FAMPIRE.
+         */
+        wordmark: string;
+        /**
+         * The claim beside it. Two or three lines.
+         */
+        headline?: string | null;
+        /**
+         * Trailing words rendered in grey, as in the approved layout.
+         */
+        headlineTail?: string | null;
+        /**
+         * Vertical rail text down the left edge.
+         */
+        rail?: string | null;
+        /**
+         * Small paragraph at lower right.
+         */
+        note?: string | null;
+        /**
+         * Whose portraits fan across the hero. Leave empty to show the family automatically — then adding a family member in the CMS adds a card here with no page edit.
+         */
+        people?: (number | Person)[] | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'deckHero';
+      }
+    | {
+        label?: string | null;
+        /**
+         * Leave empty to show every brand in the CMS, in order.
+         */
+        brands?: (number | Brand)[] | null;
+        /**
+         * Scroll the strip. Pauses on hover, and respects reduced-motion.
+         */
+        marquee?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'brandStrip';
+      }
+    | {
         eyebrow?: string | null;
         /**
          * The paragraph beside the film.
@@ -1706,6 +1749,27 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        deckHero?:
+          | T
+          | {
+              wordmark?: T;
+              headline?: T;
+              headlineTail?: T;
+              rail?: T;
+              note?: T;
+              people?: T;
+              id?: T;
+              blockName?: T;
+            };
+        brandStrip?:
+          | T
+          | {
+              label?: T;
+              brands?: T;
+              marquee?: T;
+              id?: T;
+              blockName?: T;
+            };
         heroFeature?:
           | T
           | {
