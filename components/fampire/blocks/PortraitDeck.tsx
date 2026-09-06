@@ -19,21 +19,31 @@ import ItemControls from "@/components/fampire/ItemControls";
  * the count with no code change.
  */
 
-export type DeckCard = { slug: string; name: string; src: string | null };
+export type DeckCard = {
+  slug: string;
+  name: string;
+  src: string | null;
+  /**
+   * The row id, carried as DATA.
+   *
+   * This was briefly an `idFor(slug)` callback passed down from the server
+   * component, which React refuses outright — "Functions cannot be passed
+   * directly to Client Components" — and which took the whole landing page to
+   * a 500 in production. Props that cross that boundary have to serialise.
+   */
+  id?: number | string | null;
+};
 
 export default function PortraitDeck({
   cards,
   signedIn = false,
   pageId,
   blockIndex,
-  idFor,
 }: {
   cards: DeckCard[];
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
-  /** Row id for a slug, so a card can carry its own controls. */
-  idFor?: (slug: string) => number | string | null;
 }) {
   const reduce = useReducedMotion();
   const n = cards.length;
@@ -86,7 +96,7 @@ export default function PortraitDeck({
               pageId={pageId}
               blockIndex={blockIndex}
               collection="people"
-              id={idFor?.(c.slug) ?? null}
+              id={c.id ?? null}
               label={c.name}
             />
             <Link

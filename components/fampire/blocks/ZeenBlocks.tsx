@@ -31,6 +31,7 @@ const chosen = (url?: string | null, upload?: { url?: string } | string | null):
 async function toCards(people: PersonRecord[]): Promise<DeckCard[]> {
   const shots = previewsForSubjects(await loadEntries(), people.map((p) => p.slug));
   return people.map((p) => ({
+    id: p.id ?? null,
     slug: p.slug,
     name: p.name,
     src: chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null,
@@ -72,8 +73,6 @@ export async function DeckHeroBlock({
     ? (await loadPeople()).filter((p) => peopleSlugs.includes(p.slug))
     : await loadFamily();
   const cards = await toCards(all.filter((p) => !hidden?.has(String(p.id))).slice(0, 5));
-  // Ids ride alongside so each card can carry its own controls.
-  const ids = new Map(all.map((p) => [p.slug, p.id]));
 
   return (
     <section className="relative overflow-hidden pt-14 pb-8 sm:pt-20">
@@ -101,7 +100,6 @@ export async function DeckHeroBlock({
                 signedIn={signedIn}
                 pageId={pageId}
                 blockIndex={blockIndex}
-                idFor={(slug) => ids.get(slug) ?? null}
               />
             </div>
 
