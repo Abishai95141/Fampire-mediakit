@@ -844,7 +844,7 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+               * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
                */
               image?: (number | null) | LandingAsset;
               /**
@@ -934,7 +934,7 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+               * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
                */
               image?: (number | null) | LandingAsset;
               /**
@@ -971,7 +971,7 @@ export interface Page {
       }
     | {
         /**
-         * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+         * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
          */
         image?: (number | null) | LandingAsset;
         /**
@@ -1351,7 +1351,7 @@ export interface Page {
                */
               source?: (number | null) | Film;
               /**
-               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+               * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
                */
               image?: (number | null) | LandingAsset;
               /**
@@ -1404,7 +1404,7 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+               * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
                */
               image?: (number | null) | LandingAsset;
               /**
@@ -1508,7 +1508,7 @@ export interface Page {
                */
               source?: (number | null) | Appearance;
               /**
-               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+               * The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.
                */
               image?: (number | null) | LandingAsset;
               /**

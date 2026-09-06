@@ -60,11 +60,20 @@ const pictureFields: NonNullable<Block["fields"]> = [
      * Uploading here is a page decision and changes nothing else.
      */
     name: "image",
-    type: "relationship",
+    /**
+     * `upload`, not `relationship`.
+     *
+     * A relationship to an upload collection renders a bare dropdown of
+     * filenames — which is why the report was "there is no image button".
+     * `type: "upload"` renders the real control: a thumbnail of what is
+     * currently set, and a picker that both browses the bucket and accepts a
+     * new file on the spot.
+     */
+    type: "upload",
     relationTo: "landing-assets",
     admin: {
       description:
-        "Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.",
+        "The picture for this element. Upload a new one or choose from Landing images — the page's own bucket. Nothing here touches a Person, Film or Brand record.",
     },
   },
   {
