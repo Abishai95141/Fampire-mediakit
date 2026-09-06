@@ -19,6 +19,8 @@ import { motion, useReducedMotion } from "framer-motion";
  */
 
 export type RosterPerson = {
+  /** Row id, so an item can be edited or taken off the page. */
+  id?: number | string | null;
   slug: string;
   name: string;
   role?: string | null;

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
+import ItemControls from "@/components/fampire/ItemControls";
+
 /**
  * The fanned deck of portraits in the landing hero.
  *
@@ -19,7 +21,20 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export type DeckCard = { slug: string; name: string; src: string | null };
 
-export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
+export default function PortraitDeck({
+  cards,
+  signedIn = false,
+  pageId,
+  blockIndex,
+  idFor,
+}: {
+  cards: DeckCard[];
+  signedIn?: boolean;
+  pageId?: number | string;
+  blockIndex?: number;
+  /** Row id for a slug, so a card can carry its own controls. */
+  idFor?: (slug: string) => number | string | null;
+}) {
   const reduce = useReducedMotion();
   const n = cards.length;
   if (!n) return null;
@@ -39,7 +54,7 @@ export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
         return (
           <motion.div
             key={c.slug}
-            className="relative"
+            className="fam-item relative"
             style={{
               zIndex: n - dist,
               /**
@@ -66,6 +81,14 @@ export default function PortraitDeck({ cards }: { cards: DeckCard[] }) {
             }}
             whileHover={reduce ? undefined : { y: y - 16, scale: scale * 1.03 }}
           >
+            <ItemControls
+              signedIn={signedIn}
+              pageId={pageId}
+              blockIndex={blockIndex}
+              collection="people"
+              id={idFor?.(c.slug) ?? null}
+              label={c.name}
+            />
             <Link
               href={`/library?subject=${encodeURIComponent(c.slug)}`}
               aria-label={`${c.name} — see their collections`}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
+import ItemControls from "@/components/fampire/ItemControls";
 import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
 
 /**
@@ -24,11 +25,17 @@ export default function PeopleStack({
   intro,
   people,
   rail,
+  signedIn = false,
+  pageId,
+  blockIndex,
 }: {
   heading?: string | null;
   intro?: string | null;
   people: RosterPerson[];
   rail?: string | null;
+  signedIn?: boolean;
+  pageId?: number | string;
+  blockIndex?: number;
 }) {
   const reduce = useReducedMotion();
   if (!people.length) return null;
@@ -47,12 +54,21 @@ export default function PeopleStack({
         {people.map((p, i) => (
           <motion.article
             key={p.slug}
-            className="relative"
+            className="fam-item relative"
             initial={reduce ? false : { opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
+            <ItemControls
+              signedIn={signedIn}
+              pageId={pageId}
+              blockIndex={blockIndex}
+              collection="people"
+              id={p.id}
+              label={p.name}
+            />
+
             {/* The portrait, offset right and up so the card can lie across
                 its lower-left corner exactly as in the approved layout. */}
             <div className="ml-auto w-[76%] sm:w-[68%]">

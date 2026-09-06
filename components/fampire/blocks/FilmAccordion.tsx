@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
+import ItemControls from "@/components/fampire/ItemControls";
+
 /**
  * The slate as an accordion — the approved layout's module list.
  *
@@ -18,6 +20,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
  */
 
 export type AccordionFilm = {
+  /** Row id, so a film can be edited or taken off the page. */
+  id?: number | string | null;
   slug: string;
   title: string;
   synopsis?: string | null;
@@ -29,7 +33,17 @@ export type AccordionFilm = {
   watch?: { platform: string; url: string; free?: boolean }[] | null;
 };
 
-export default function FilmAccordion({ films }: { films: AccordionFilm[] }) {
+export default function FilmAccordion({
+  films,
+  signedIn = false,
+  pageId,
+  blockIndex,
+}: {
+  films: AccordionFilm[];
+  signedIn?: boolean;
+  pageId?: number | string;
+  blockIndex?: number;
+}) {
   const [open, setOpen] = useState(0);
   const reduce = useReducedMotion();
   if (!films.length) return null;
@@ -94,7 +108,15 @@ export default function FilmAccordion({ films }: { films: AccordionFilm[] }) {
         {films.map((f, i) => {
           const on = i === Math.min(open, films.length - 1);
           return (
-            <li key={f.slug} className="border-t" style={{ borderColor: "var(--z-rule)" }}>
+            <li key={f.slug} className="fam-item border-t" style={{ borderColor: "var(--z-rule)" }}>
+              <ItemControls
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                collection="films"
+                id={f.id}
+                label={f.title}
+              />
               <h3>
                 <button
                   type="button"

@@ -756,3 +756,57 @@
   .zeen .z-cover-side { display: none; }
   .zeen .z-cover-centre { width: min(92vw, 560px) !important; }
 }
+
+/* Per-item controls. Signed-in only — ItemControls renders null otherwise, so
+   none of this reaches a public visitor.
+   ---------------------------------------------------------------------
+   Anchored to the item, revealed on hover or keyboard focus. Sitting on a
+   dark chip rather than the page's own colours because these appear over
+   photographs as often as over paper, and a control that inherits the
+   section's palette disappears on half of them. */
+.fam-item-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 25;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  pointer-events: none;
+}
+.fam-item:hover > .fam-item-controls,
+.fam-item:focus-within > .fam-item-controls,
+.fam-item-controls:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.fam-item { position: relative; }
+
+.fam-item-controls a,
+.fam-item-controls button {
+  font-family: var(--font-poppins-fam), ui-sans-serif, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(18, 18, 18, 0.88);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+}
+.fam-item-controls a:hover { background: #121212; }
+/* Destructive-looking only on the destructive-looking one, and even then it
+   is a page removal, not a delete. */
+.fam-item-controls button:hover { background: #a03a32; }
+.fam-item-controls button:disabled { opacity: 0.6; cursor: default; }
+
+@media (max-width: 640px) { .fam-item-controls { display: none; } }
+@media (prefers-reduced-motion: reduce) { .fam-item-controls { transition: none; } }

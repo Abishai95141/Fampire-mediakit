@@ -81,6 +81,21 @@ type Rel = { id?: number | string; slug?: string; title?: string; name?: string 
 
 const relSlug = (r: Rel) => (r && typeof r === "object" ? r.slug : undefined);
 
+/**
+ * Row ids taken off this page by a block's `hidden` list.
+ *
+ * Compared as strings because Payload hands relationships back as either a
+ * bare id or a populated object depending on depth, and a number-vs-string
+ * mismatch here would silently hide nothing.
+ */
+const hiddenIds = (block: Block): Set<string> =>
+  new Set(
+    ((block.hidden as unknown[]) ?? [])
+      .map((v) => (v && typeof v === "object" ? (v as { id: unknown }).id : v))
+      .filter((v) => v != null)
+      .map(String),
+  );
+
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
@@ -215,6 +230,10 @@ export default async function RenderBlocks({
           return (
             <DeckHeroBlock
               key={key}
+              signedIn={signedIn}
+              pageId={pageId}
+              blockIndex={i}
+              hidden={hiddenIds(block)}
               wordmark={String(block.wordmark ?? "FAMPIRE")}
               headline={block.headline as string | null}
               headlineTail={block.headlineTail as string | null}
@@ -228,6 +247,10 @@ export default async function RenderBlocks({
           return (
             <BrandStripBlock
               key={key}
+              signedIn={signedIn}
+              pageId={pageId}
+              blockIndex={i}
+              hidden={hiddenIds(block)}
               label={block.label as string | null}
               brandSlugs={((block.brands as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[]}
               marquee={block.marquee !== false}
@@ -627,7 +650,12 @@ export default async function RenderBlocks({
                 href={signedIn ? "/admin/collections/films/create" : undefined}
                 hrefLabel={signedIn ? "Add a film" : undefined}
               >
-                <FilmAccordion films={await accordionFilms(shown)} />
+                <FilmAccordion
+                  films={await accordionFilms(shown.filter((f) => !hiddenIds(block).has(String(f.id))))}
+                  signedIn={signedIn}
+                  pageId={pageId}
+                  blockIndex={i}
+                />
               </Section>
             );
             return block.dark ? (
@@ -663,9 +691,12 @@ export default async function RenderBlocks({
           const picked = ((block.people as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[];
           // An empty relationship means "the family", which is the common
           // case and saves an editor picking the same four every time.
-          const shown = picked.length
-            ? (await loadPeople()).filter((p) => picked.includes(p.slug))
-            : await loadFamily();
+          const drop = hiddenIds(block);
+          const shown = (
+            picked.length
+              ? (await loadPeople()).filter((p) => picked.includes(p.slug))
+              : await loadFamily()
+          ).filter((p) => !drop.has(String(p.id)));
           /* The card stack is two-column and holds its own heading on the
              left, so it is not wrapped in `Section` — a head above it would
              leave that column empty for the whole scroll. */
@@ -676,6 +707,9 @@ export default async function RenderBlocks({
                 intro={introText}
                 rail={block.rail as string | null}
                 people={await rosterPeople(shown)}
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={i}
               />
             );
             return block.dark ? (

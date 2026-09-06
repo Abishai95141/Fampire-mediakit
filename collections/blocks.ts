@@ -286,6 +286,25 @@ export const FilmStrip: Block = {
   fields: [
     ...heading,
     {
+      /**
+       * Taken off THIS page, not deleted.
+       *
+       * These sections show everything in their collection by default, so
+       * dropping one item used to mean listing all the others. Subtracting is
+       * the operation people actually want, and it is reversible: the record
+       * keeps existing and still appears everywhere else on the site.
+       *
+       * Normally set by the ✕ on the item itself while signed in; editable
+       * here too.
+       */
+      name: "hidden",
+      type: "relationship",
+      relationTo: "films",
+      hasMany: true,
+      label: "Hidden on this page",
+      admin: { description: "Removed from this section only. The record itself is untouched." },
+    },
+    {
       name: "dark",
       type: "checkbox",
       defaultValue: false,
@@ -331,6 +350,25 @@ export const PeopleRow: Block = {
       relationTo: "people",
       hasMany: true,
       admin: { description: "Leave empty to show the whole family." },
+    },
+    {
+      /**
+       * Taken off THIS page, not deleted.
+       *
+       * These sections show everything in their collection by default, so
+       * dropping one item used to mean listing all the others. Subtracting is
+       * the operation people actually want, and it is reversible: the record
+       * keeps existing and still appears everywhere else on the site.
+       *
+       * Normally set by the ✕ on the item itself while signed in; editable
+       * here too.
+       */
+      name: "hidden",
+      type: "relationship",
+      relationTo: "people",
+      hasMany: true,
+      label: "Hidden on this page",
+      admin: { description: "Removed from this section only. The record itself is untouched." },
     },
     {
       name: "dark",
@@ -798,6 +836,25 @@ export const DeckHero: Block = {
     { name: "rail", type: "text", admin: { description: "Vertical rail text down the left edge." } },
     { name: "note", type: "textarea", admin: { description: "Small paragraph at lower right." } },
     {
+      /**
+       * Taken off THIS page, not deleted.
+       *
+       * These sections show everything in their collection by default, so
+       * dropping one item used to mean listing all the others. Subtracting is
+       * the operation people actually want, and it is reversible: the record
+       * keeps existing and still appears everywhere else on the site.
+       *
+       * Normally set by the ✕ on the item itself while signed in; editable
+       * here too.
+       */
+      name: "hidden",
+      type: "relationship",
+      relationTo: "people",
+      hasMany: true,
+      label: "Hidden on this page",
+      admin: { description: "Removed from this section only. The record itself is untouched." },
+    },
+    {
       name: "people",
       type: "relationship",
       relationTo: "people",
@@ -831,6 +888,25 @@ export const BrandStrip: Block = {
       relationTo: "brands",
       hasMany: true,
       admin: { description: "Leave empty to show every brand in the CMS, in order." },
+    },
+    {
+      /**
+       * Taken off THIS page, not deleted.
+       *
+       * These sections show everything in their collection by default, so
+       * dropping one item used to mean listing all the others. Subtracting is
+       * the operation people actually want, and it is reversible: the record
+       * keeps existing and still appears everywhere else on the site.
+       *
+       * Normally set by the ✕ on the item itself while signed in; editable
+       * here too.
+       */
+      name: "hidden",
+      type: "relationship",
+      relationTo: "brands",
+      hasMany: true,
+      label: "Hidden on this page",
+      admin: { description: "Removed from this section only. The record itself is untouched." },
     },
     {
       name: "marquee",

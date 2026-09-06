@@ -775,6 +775,10 @@ export interface Page {
          */
         note?: string | null;
         /**
+         * Removed from this section only. The record itself is untouched.
+         */
+        hidden?: (number | Person)[] | null;
+        /**
          * Whose portraits fan across the hero. Leave empty to show the family automatically — then adding a family member in the CMS adds a card here with no page edit.
          */
         people?: (number | Person)[] | null;
@@ -788,6 +792,10 @@ export interface Page {
          * Leave empty to show every brand in the CMS, in order.
          */
         brands?: (number | Brand)[] | null;
+        /**
+         * Removed from this section only. The record itself is untouched.
+         */
+        hidden?: (number | Brand)[] | null;
         /**
          * Scroll the strip. Pauses on hover, and respects reduced-motion.
          */
@@ -1135,6 +1143,10 @@ export interface Page {
         heading?: string | null;
         intro?: string | null;
         /**
+         * Removed from this section only. The record itself is untouched.
+         */
+        hidden?: (number | Film)[] | null;
+        /**
          * Render the section on the near-black band.
          */
         dark?: boolean | null;
@@ -1159,6 +1171,10 @@ export interface Page {
          * Leave empty to show the whole family.
          */
         people?: (number | Person)[] | null;
+        /**
+         * Removed from this section only. The record itself is untouched.
+         */
+        hidden?: (number | Person)[] | null;
         /**
          * Render the section on the near-black band.
          */
@@ -1859,6 +1875,7 @@ export interface PagesSelect<T extends boolean = true> {
               headlineTail?: T;
               rail?: T;
               note?: T;
+              hidden?: T;
               people?: T;
               id?: T;
               blockName?: T;
@@ -1868,6 +1885,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               label?: T;
               brands?: T;
+              hidden?: T;
               marquee?: T;
               id?: T;
               blockName?: T;
@@ -2068,6 +2086,7 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              hidden?: T;
               dark?: T;
               films?: T;
               layout?: T;
@@ -2082,6 +2101,7 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               intro?: T;
               people?: T;
+              hidden?: T;
               dark?: T;
               rail?: T;
               layout?: T;

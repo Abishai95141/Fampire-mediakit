@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import ItemControls from "@/components/fampire/ItemControls";
 import PortraitDeck, { type DeckCard } from "@/components/fampire/blocks/PortraitDeck";
 import type { AccordionFilm } from "@/components/fampire/blocks/FilmAccordion";
 import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
@@ -8,7 +9,7 @@ import type { SplitPortrait } from "@/components/fampire/blocks/StatementSplit";
 import { applyFacets, facetsFromParams, previewsForSubjects } from "@/lib/fampire/catalog";
 import { loadBrands, loadEntries, loadFamily, loadPeople } from "@/lib/fampire/payload-catalog";
 import type { AppearanceRecord, FilmRecord } from "@/lib/fampire/payload-catalog";
-import type { PersonRecord } from "@/lib/fampire/payload-catalog";
+import type { BrandRecord, PersonRecord } from "@/lib/fampire/payload-catalog";
 
 /**
  * The two blocks the approved landing layout needs that the Media Center did
@@ -43,6 +44,10 @@ export async function DeckHeroBlock({
   rail,
   note,
   peopleSlugs,
+  signedIn = false,
+  pageId,
+  blockIndex,
+  hidden,
 }: {
   wordmark: string;
   headline?: string | null;
@@ -50,6 +55,10 @@ export async function DeckHeroBlock({
   rail?: string | null;
   note?: string | null;
   peopleSlugs: string[];
+  signedIn?: boolean;
+  pageId?: number | string;
+  blockIndex?: number;
+  hidden?: Set<string>;
 }) {
   /**
    * Empty relationship means "the family", matching how `peopleRow` already
@@ -62,7 +71,9 @@ export async function DeckHeroBlock({
   const all = peopleSlugs.length
     ? (await loadPeople()).filter((p) => peopleSlugs.includes(p.slug))
     : await loadFamily();
-  const cards = await toCards(all.slice(0, 5));
+  const cards = await toCards(all.filter((p) => !hidden?.has(String(p.id))).slice(0, 5));
+  // Ids ride alongside so each card can carry its own controls.
+  const ids = new Map(all.map((p) => [p.slug, p.id]));
 
   return (
     <section className="relative overflow-hidden pt-14 pb-8 sm:pt-20">
@@ -85,7 +96,13 @@ export async function DeckHeroBlock({
             ) : null}
 
             <div className="mt-8 sm:mt-10">
-              <PortraitDeck cards={cards} />
+              <PortraitDeck
+                cards={cards}
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                idFor={(slug) => ids.get(slug) ?? null}
+              />
             </div>
 
             {/* Clearance, not decoration. With the deck widened, the lower
@@ -109,23 +126,45 @@ export async function BrandStripBlock({
   label,
   brandSlugs,
   marquee = true,
+  signedIn = false,
+  pageId,
+  blockIndex,
+  hidden,
 }: {
   label?: string | null;
   brandSlugs: string[];
   marquee?: boolean;
+  signedIn?: boolean;
+  pageId?: number | string;
+  blockIndex?: number;
+  hidden?: Set<string>;
 }) {
   const all = await loadBrands();
-  const shown = brandSlugs.length ? all.filter((b) => brandSlugs.includes(b.slug)) : all;
+  const shown = (brandSlugs.length ? all.filter((b) => brandSlugs.includes(b.slug)) : all).filter(
+    (b) => !hidden?.has(String(b.id)),
+  );
   if (!shown.length) return null;
 
-  const Wordmark = ({ b }: { b: { slug: string; name: string } }) => (
-    <Link
-      href={`/library?brand=${encodeURIComponent(b.slug)}`}
-      className="shrink-0 px-7 text-[clamp(18px,2.1vw,26px)] font-medium tracking-[-0.02em] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100"
-      style={{ color: "var(--z-ink)" }}
-    >
-      {b.name}
-    </Link>
+  const Wordmark = ({ b, controls = false }: { b: BrandRecord; controls?: boolean }) => (
+    <span className={controls && signedIn ? "fam-item shrink-0" : "shrink-0"}>
+      <Link
+        href={`/library?brand=${encodeURIComponent(b.slug)}`}
+        className="block px-7 text-[clamp(18px,2.1vw,26px)] font-medium tracking-[-0.02em] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+        style={{ color: "var(--z-ink)" }}
+      >
+        {b.name}
+      </Link>
+      {controls ? (
+        <ItemControls
+          signedIn={signedIn}
+          pageId={pageId}
+          blockIndex={blockIndex}
+          collection="brands"
+          id={b.id}
+          label={b.name}
+        />
+      ) : null}
+    </span>
   );
 
   return (
@@ -141,7 +180,7 @@ export async function BrandStripBlock({
         <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)" }}>
           <div className="z-marquee">
             <div className="flex items-center">
-              {shown.map((b) => <Wordmark key={b.slug} b={b} />)}
+              {shown.map((b) => <Wordmark key={b.slug} b={b} controls />)}
             </div>
             <div className="flex items-center" aria-hidden>
               {shown.map((b) => <Wordmark key={`dup-${b.slug}`} b={b} />)}
@@ -150,7 +189,7 @@ export async function BrandStripBlock({
         </div>
       ) : (
         <div className="z-wrap flex flex-wrap items-center justify-center gap-y-4">
-          {shown.map((b) => <Wordmark key={b.slug} b={b} />)}
+          {shown.map((b) => <Wordmark key={b.slug} b={b} controls />)}
         </div>
       )}
     </section>
@@ -164,6 +203,7 @@ export async function BrandStripBlock({
 export async function rosterPeople(people: PersonRecord[]): Promise<RosterPerson[]> {
   const shots = previewsForSubjects(await loadEntries(), people.map((p) => p.slug));
   return people.map((p) => ({
+    id: p.id ?? null,
     slug: p.slug,
     name: p.name,
     role: p.role ?? null,
@@ -244,6 +284,7 @@ export async function accordionFilms(films: FilmRecord[]): Promise<AccordionFilm
       .filter((e) => e.film === f.title && e.image)
       .sort((a, b) => rank(a.kind) - rank(b.kind) || (b.file_count ?? 0) - (a.file_count ?? 0));
     return {
+      id: f.id ?? null,
       slug: f.slug,
       title: f.title,
       synopsis: f.synopsis ?? null,
