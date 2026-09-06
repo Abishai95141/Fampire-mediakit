@@ -66,7 +66,7 @@ export default async function FampireHome({
        * landing page to the house style with nothing else to undo.
        */}
       <div className="zeen">
-        <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} />
+        <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} pageId={page.id} />
       </div>
     </>
   );

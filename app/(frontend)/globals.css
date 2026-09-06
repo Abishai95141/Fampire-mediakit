@@ -642,3 +642,70 @@
 @media (prefers-reduced-motion: reduce) {
   .zeen .fam-section-rule + div > .grid:not(.z-layout) > *:hover { transform: none; }
 }
+
+/* The per-section editing handle.
+   ---------------------------------------------------------------------
+   Only ever rendered for a signed-in admin (BlockEdit returns null
+   otherwise), so none of this reaches a public visitor.
+
+   Quiet until wanted: a dotted outline and a small control cluster that
+   fade in on hover or keyboard focus. The alternative — a permanent bar per
+   section — would turn the editor's view of the site into a wireframe and
+   make it impossible to judge the design they are editing. */
+.fam-block-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 8px 22px -14px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+.fam-editable { position: relative; }
+.fam-editable:hover > .fam-block-edit,
+.fam-editable:focus-within > .fam-block-edit,
+.fam-block-edit:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* A dotted edge so it is obvious WHICH region a handle belongs to — sections
+   here run edge to edge and several sit directly against each other. */
+.fam-editable:hover { outline: 1px dashed rgba(18, 18, 18, 0.22); outline-offset: -1px; }
+.zeen .z-band--dark.fam-editable:hover { outline-color: rgba(255, 255, 255, 0.3); }
+
+.fam-block-edit a {
+  font-family: var(--font-poppins-fam), ui-sans-serif, system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #121212;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #f1efec;
+  white-space: nowrap;
+}
+.fam-block-edit a:hover { background: #121212; color: #fff; }
+.fam-block-edit-tag {
+  font-family: var(--font-poppins-fam), ui-sans-serif, system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b6660;
+  padding-left: 3px;
+  white-space: nowrap;
+}
+@media (max-width: 640px) { .fam-block-edit { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .fam-block-edit { transition: none; }
+}

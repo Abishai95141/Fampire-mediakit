@@ -908,6 +908,25 @@ export const RecapRowBlock: Block = {
   fields: [
     ...heading,
     {
+      name: "layout",
+      type: "select",
+      defaultValue: "cards",
+      options: [
+        { label: "Cards (three across, opens a player)", value: "cards" },
+        /* The approved reference: three panels on a turntable, the centre one
+           playing inline with its own scrubber and filmstrip. */
+        { label: "Turntable (3D, inline player with scrubber)", value: "coverflow" },
+      ],
+    },
+    {
+      name: "margin",
+      type: "text",
+      admin: {
+        description: "Handwritten note in the top corner. Turntable layout only.",
+        condition: (_, sib) => sib?.layout === "coverflow",
+      },
+    },
+    {
       name: "recaps",
       type: "array",
       minRows: 1,
@@ -940,6 +959,22 @@ export const RecapRowBlock: Block = {
           admin: {
             description:
               "The Google Drive share link. Any form works — /file/d/<id>/view, open?id=, or the bare id. The file must be shared as 'anyone with the link', or the public site cannot play it.",
+          },
+        },
+        {
+          name: "videoUrl",
+          type: "text",
+          admin: {
+            description:
+              "A file this site can serve, e.g. /recaps/anthony-1080.mp4. Required by the turntable layout: its scrubber and filmstrip need a real video element, which a Google Drive iframe cannot provide. Leave empty and the card falls back to the Drive player.",
+          },
+        },
+        {
+          name: "stripUrl",
+          type: "text",
+          admin: {
+            description:
+              "Filmstrip image under the scrubber — frames tiled into one row. Optional.",
           },
         },
         {

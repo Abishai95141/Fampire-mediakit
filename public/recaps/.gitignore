@@ -1,0 +1,3 @@
+# Recap videos: 135MB, shipped by scripts/deploy-recaps.sh, mirrored in S3.
+*.mp4
+*.jpg

@@ -836,6 +836,11 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         intro?: string | null;
+        layout?: ('cards' | 'coverflow') | null;
+        /**
+         * Handwritten note in the top corner. Turntable layout only.
+         */
+        margin?: string | null;
         recaps: {
           /**
            * Whose recap this is. Shown as the card's title.
@@ -857,6 +862,14 @@ export interface Page {
            * The Google Drive share link. Any form works — /file/d/<id>/view, open?id=, or the bare id. The file must be shared as 'anyone with the link', or the public site cannot play it.
            */
           url: string;
+          /**
+           * A file this site can serve, e.g. /recaps/anthony-1080.mp4. Required by the turntable layout: its scrubber and filmstrip need a real video element, which a Google Drive iframe cannot provide. Leave empty and the card falls back to the Drive player.
+           */
+          videoUrl?: string | null;
+          /**
+           * Filmstrip image under the scrubber — frames tiled into one row. Optional.
+           */
+          stripUrl?: string | null;
           /**
            * Optional override. Left empty, the poster is Drive's own thumbnail for the file.
            */
@@ -1886,6 +1899,8 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              layout?: T;
+              margin?: T;
               recaps?:
                 | T
                 | {
@@ -1894,6 +1909,8 @@ export interface PagesSelect<T extends boolean = true> {
                     blurb?: T;
                     when?: T;
                     url?: T;
+                    videoUrl?: T;
+                    stripUrl?: T;
                     posterUrl?: T;
                     id?: T;
                   };

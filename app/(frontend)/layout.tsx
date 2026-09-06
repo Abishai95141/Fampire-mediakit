@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Plus_Jakarta_Sans, Poppins } from "next/font/google";
+import { Caveat, Geist, Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -43,6 +43,21 @@ const poppins = Poppins({
   display: "swap",
 });
 
+/**
+ * The margin hand.
+ *
+ * The approved "Lately" layout annotates itself the way someone would mark up
+ * a contact sheet — a note beside the title, a note in the top corner. That
+ * only reads as a hand if it IS one; setting it in the display face just looks
+ * like a smaller heading. Not preloaded: one section of one page uses it.
+ */
+const caveat = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
   title: {
@@ -60,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jakarta.variable} ${poppins.variable} ${geist.variable} antialiased`}
+      className={`${jakarta.variable} ${poppins.variable} ${geist.variable} ${caveat.variable} antialiased`}
     >
       <body className="min-h-screen">{children}</body>
     </html>

@@ -69,7 +69,7 @@ export default async function CmsPage({ params, searchParams }: Args) {
             : undefined
         }
       />
-      <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} />
+      <RenderBlocks blocks={page.layout ?? []} facets={facets} signedIn={signedIn} pageId={page.id} />
     </>
   );
 }

@@ -18,6 +18,7 @@ import * as migration_20260902_162333_add_zeen_layouts from './20260902_162333_a
 import * as migration_20260902_163842_add_film_accordion_press_progression from './20260902_163842_add_film_accordion_press_progression';
 import * as migration_20260902_172044_add_people_stack from './20260902_172044_add_people_stack';
 import * as migration_20260906_035239_add_recap_row from './20260906_035239_add_recap_row';
+import * as migration_20260906_063508_add_recap_coverflow from './20260906_063508_add_recap_coverflow';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20260906_035239_add_recap_row.up,
     down: migration_20260906_035239_add_recap_row.down,
-    name: '20260906_035239_add_recap_row'
+    name: '20260906_035239_add_recap_row',
+  },
+  {
+    up: migration_20260906_063508_add_recap_coverflow.up,
+    down: migration_20260906_063508_add_recap_coverflow.down,
+    name: '20260906_063508_add_recap_coverflow'
   },
 ];

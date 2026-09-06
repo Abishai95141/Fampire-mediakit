@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import BlockEdit from "@/components/fampire/BlockEdit";
 import { RichText as LexicalRichText } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
@@ -27,6 +29,7 @@ import {
 import FilmAccordion from "@/components/fampire/blocks/FilmAccordion";
 import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
 import PeopleStack from "@/components/fampire/blocks/PeopleStack";
+import RecapCoverflow, { type CoverRecap } from "@/components/fampire/blocks/RecapCoverflow";
 import RecapRow, { type Recap } from "@/components/fampire/blocks/RecapRow";
 import PressProgression from "@/components/fampire/blocks/PressProgression";
 import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
@@ -157,11 +160,15 @@ export default async function RenderBlocks({
   blocks,
   facets,
   signedIn = false,
+  pageId,
 }: {
   blocks: unknown;
   /** Present only on pages that carry a Library browser. */
   facets?: Facets;
   signedIn?: boolean;
+  /** The page these blocks belong to, so each section's edit handle can link
+   *  straight back to the right record. */
+  pageId?: number | string;
 }) {
   const list = Array.isArray(blocks) ? (blocks as Block[]) : [];
 
@@ -181,8 +188,13 @@ export default async function RenderBlocks({
     NUMBERED.has(String(b.blockType)) ? String(++sectionNo).padStart(2, "0") : "",
   );
 
-  const rendered = await Promise.all(
-    list.map(async (block, i) => {
+  /**
+   * Each block is rendered, then WRAPPED — rather than every one of the
+   * twenty-odd cases below having to remember an edit handle of its own.
+   * `renderOne` is the switch exactly as it was; the wrapper adds the handle
+   * and the positioning context it needs.
+   */
+  const renderOne = async (block: Block, i: number) => {
       const key = `${block.blockType}-${i}`;
       const n = numbers[i]!;
       const headingText = String(block.heading ?? "");
@@ -241,7 +253,7 @@ export default async function RenderBlocks({
           };
 
           const rows = ((block.recaps as Record<string, unknown>[]) ?? [])
-            .map((r, i): Recap | null => {
+            .map((r, i): CoverRecap | null => {
               const id = fileId(String(r.url ?? ""));
               if (!id) return null;
               const poster =
@@ -255,14 +267,32 @@ export default async function RenderBlocks({
                 blurb: (r.blurb as string) ?? null,
                 when: (r.when as string) ?? null,
                 poster,
+                videoUrl: (r.videoUrl as string) ?? null,
+                stripUrl: (r.stripUrl as string) ?? null,
               };
             })
-            .filter(Boolean) as Recap[];
+            .filter(Boolean) as CoverRecap[];
 
           if (!rows.length) return null;
+
+          /* The turntable brings its own header, ticker and index rail, so it
+             is not wrapped in `Section` — a numbered rule above it would sit
+             on top of the black band it opens with. */
+          if (block.layout === "coverflow") {
+            return (
+              <RecapCoverflow
+                key={key}
+                heading={headingText}
+                intro={introText}
+                margin={block.margin as string | null}
+                recaps={rows}
+              />
+            );
+          }
+
           return (
             <Section key={key} n={n} title={headingText} aside={introText}>
-              <RecapRow recaps={rows} />
+              <RecapRow recaps={rows as Recap[]} />
             </Section>
           );
         }
@@ -923,6 +953,21 @@ export default async function RenderBlocks({
           // the CMS is one deploy ahead of the renderer.
           return null;
       }
+  };
+
+  const rendered = await Promise.all(
+    list.map(async (block, i) => {
+      const node = await renderOne(block, i);
+      if (!node) return null;
+      // Signed out, BlockEdit is null and this is one extra div with no
+      // class of consequence — no admin URL reaches a public visitor.
+      if (!signedIn || pageId == null) return node;
+      return (
+        <div key={`edit-${block.blockType}-${i}`} className="fam-editable">
+          {node}
+          <BlockEdit signedIn={signedIn} pageId={pageId} blockType={String(block.blockType)} />
+        </div>
+      );
     }),
   );
 
