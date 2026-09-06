@@ -55,10 +55,17 @@ const sourceField = (relationTo: CollectionSlug, what: string): NonNullable<Bloc
 /** Picture for a page-owned card: an upload, or a URL to something already hosted. */
 const pictureFields: NonNullable<Block["fields"]> = [
   {
+    /**
+     * The landing page's OWN bucket, not Media and not the person's portrait.
+     * Uploading here is a page decision and changes nothing else.
+     */
     name: "image",
     type: "relationship",
-    relationTo: "media",
-    admin: { description: "Upload or pick an image for this card." },
+    relationTo: "landing-assets",
+    admin: {
+      description:
+        "Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.",
+    },
   },
   {
     name: "imageUrl",
@@ -1222,9 +1229,71 @@ export const RecapRowBlock: Block = {
   ],
 };
 
+/**
+ * A picture that opens as you scroll, with the statement held over it.
+ *
+ * Replaces the two flanking portraits for the "You are not invisible"
+ * section. Those were a compromise: FAMPIRE's portraits are busy red-carpet
+ * photographs, so the words could not cross them and ended up sitting
+ * primly between two small pictures. One frame of the whole family, expanding
+ * to full bleed under the line, says the thing the section is actually about.
+ *
+ * The picture comes from Landing images — the page's own bucket — so choosing
+ * it is a page decision and touches no Person record.
+ */
+export const ScrollExpandBlock: Block = {
+  slug: "scrollExpand",
+  labels: { singular: "Scroll-expand statement", plural: "Scroll-expand statements" },
+  fields: [
+    ...pictureFields,
+    { name: "alt", type: "text", admin: { description: "Describe the picture for someone who cannot see it." } },
+    {
+      name: "title",
+      type: "text",
+      admin: { description: "Held over the frame at rest, and lifts away as the picture takes over." },
+    },
+    { name: "scrollHint", type: "text", admin: { description: "Small cue under the resting frame. Fades on first scroll." } },
+    {
+      name: "lines",
+      type: "array",
+      labels: { singular: "Line", plural: "Lines" },
+      admin: { description: "The statement, revealed once the picture reaches full bleed." },
+      fields: [{ name: "text", type: "text", required: true }],
+    },
+    {
+      name: "notes",
+      type: "array",
+      maxRows: 2,
+      admin: { description: "Optional short lines beneath the statement." },
+      fields: [{ name: "text", type: "textarea", required: true }],
+    },
+    {
+      type: "collapsible",
+      label: "Motion",
+      admin: { initCollapsed: true },
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "startWidth", type: "number", defaultValue: 42, admin: { width: "50%", description: "Resting frame width, % of the stage." } },
+            { name: "startHeight", type: "number", defaultValue: 58, admin: { width: "50%", description: "Resting frame height, %." } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "mediaZoom", type: "number", defaultValue: 1.35, admin: { width: "50%", description: "Zoom at rest, easing to 1." } },
+            { name: "scrollDistance", type: "number", defaultValue: 1.2, admin: { width: "50%", description: "Scroll length, in screen heights." } },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const PAGE_BLOCKS: Block[] = [
   // Structure
-  DeckHero, BrandStrip, StatementSplitBlock, RecapRowBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
+  DeckHero, BrandStrip, StatementSplitBlock, ScrollExpandBlock, RecapRowBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
   // The catalog, seen through different lenses
   LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
   MagazineShelf, WatchGrid, PressList,

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import BlockEdit from "@/components/fampire/BlockEdit";
+import { picture, type Ref } from "@/lib/fampire/page-items";
 import { RichText as LexicalRichText } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
@@ -34,6 +35,7 @@ import FilmAccordion from "@/components/fampire/blocks/FilmAccordion";
 import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
 import PeopleStack from "@/components/fampire/blocks/PeopleStack";
 import RecapCoverflow, { type CoverRecap } from "@/components/fampire/blocks/RecapCoverflow";
+import ScrollStatement from "@/components/fampire/blocks/ScrollStatement";
 import RecapRow, { type Recap } from "@/components/fampire/blocks/RecapRow";
 import PressProgression from "@/components/fampire/blocks/PressProgression";
 import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
@@ -323,6 +325,26 @@ export default async function RenderBlocks({
             <Section key={key} n={n} title={headingText} aside={introText}>
               <RecapRow recaps={rows as Recap[]} />
             </Section>
+          );
+        }
+
+        case "scrollExpand": {
+          const img = picture(block.image as Ref, block.imageUrl as string);
+          if (!img) return null;
+          return (
+            <ScrollStatement
+              key={key}
+              src={img}
+              alt={block.alt as string | null}
+              title={block.title as string | null}
+              scrollHint={block.scrollHint as string | null}
+              lines={((block.lines as { text: string }[]) ?? []).map((l) => l.text).filter(Boolean)}
+              notes={((block.notes as { text: string }[]) ?? []).filter((n) => n?.text)}
+              startWidth={block.startWidth as number | null}
+              startHeight={block.startHeight as number | null}
+              mediaZoom={block.mediaZoom as number | null}
+              scrollDistance={block.scrollDistance as number | null}
+            />
           );
         }
 

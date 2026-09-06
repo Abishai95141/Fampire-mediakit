@@ -9,6 +9,7 @@ import sharp from "sharp";
 
 import { Brands } from "./collections/Brands";
 import { Entries } from "./collections/Entries";
+import { LandingAssets } from "./collections/LandingAssets";
 import { Media } from "./collections/Media";
 import { Appearances, Articles, MagazineIssues } from "./collections/Stories";
 import { Pages, SiteSettings } from "./collections/Pages";
@@ -110,7 +111,7 @@ export default buildConfig({
    */
   collections: [
     Users, Brands,
-    Entries, Media,
+    Entries, Media, LandingAssets,
     Articles, MagazineIssues, Appearances,
     Pages, SiteSettings,
     People, Films, Events, Locations,

@@ -71,6 +71,7 @@ export interface Config {
     brands: Brand;
     entries: Entry;
     media: Media;
+    'landing-assets': LandingAsset;
     articles: Article;
     'magazine-issues': MagazineIssue;
     appearances: Appearance;
@@ -91,6 +92,7 @@ export interface Config {
     brands: BrandsSelect<false> | BrandsSelect<true>;
     entries: EntriesSelect<false> | EntriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'landing-assets': LandingAssetsSelect<false> | LandingAssetsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'magazine-issues': MagazineIssuesSelect<false> | MagazineIssuesSelect<true>;
     appearances: AppearancesSelect<false> | AppearancesSelect<true>;
@@ -584,6 +586,60 @@ export interface Location {
   createdAt: string;
 }
 /**
+ * Pictures the landing page composes with — hero cards, section backgrounds, anything that is a page decision rather than a record. Changing one here never changes a Person, Film or Brand.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-assets".
+ */
+export interface LandingAsset {
+  id: number;
+  /**
+   * What this picture is, in plain words. Shown in the picker.
+   */
+  title?: string | null;
+  /**
+   * Which section this was uploaded for. Only a label — nothing enforces it.
+   */
+  usedFor?: ('hero' | 'statement' | 'people' | 'films' | 'press' | 'lately' | 'other') | null;
+  /**
+   * Describe the picture for someone who cannot see it. Left empty, the card's own name is used.
+   */
+  alt?: string | null;
+  /**
+   * Photographer or source, where one is owed.
+   */
+  credit?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    wide?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
  * Press releases, announcements and features written by the team.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -788,9 +844,9 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Upload or pick an image for this card.
+               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
                */
-              image?: (number | null) | Media;
+              image?: (number | null) | LandingAsset;
               /**
                * Or paste a URL. Used only if no image is picked above.
                */
@@ -878,9 +934,9 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Upload or pick an image for this card.
+               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
                */
-              image?: (number | null) | Media;
+              image?: (number | null) | LandingAsset;
               /**
                * Or paste a URL. Used only if no image is picked above.
                */
@@ -912,6 +968,65 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'statementSplit';
+      }
+    | {
+        /**
+         * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
+         */
+        image?: (number | null) | LandingAsset;
+        /**
+         * Or paste a URL. Used only if no image is picked above.
+         */
+        imageUrl?: string | null;
+        /**
+         * Describe the picture for someone who cannot see it.
+         */
+        alt?: string | null;
+        /**
+         * Held over the frame at rest, and lifts away as the picture takes over.
+         */
+        title?: string | null;
+        /**
+         * Small cue under the resting frame. Fades on first scroll.
+         */
+        scrollHint?: string | null;
+        /**
+         * The statement, revealed once the picture reaches full bleed.
+         */
+        lines?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Optional short lines beneath the statement.
+         */
+        notes?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Resting frame width, % of the stage.
+         */
+        startWidth?: number | null;
+        /**
+         * Resting frame height, %.
+         */
+        startHeight?: number | null;
+        /**
+         * Zoom at rest, easing to 1.
+         */
+        mediaZoom?: number | null;
+        /**
+         * Scroll length, in screen heights.
+         */
+        scrollDistance?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'scrollExpand';
       }
     | {
         /**
@@ -1236,9 +1351,9 @@ export interface Page {
                */
               source?: (number | null) | Film;
               /**
-               * Upload or pick an image for this card.
+               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
                */
-              image?: (number | null) | Media;
+              image?: (number | null) | LandingAsset;
               /**
                * Or paste a URL. Used only if no image is picked above.
                */
@@ -1289,9 +1404,9 @@ export interface Page {
                */
               source?: (number | null) | Person;
               /**
-               * Upload or pick an image for this card.
+               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
                */
-              image?: (number | null) | Media;
+              image?: (number | null) | LandingAsset;
               /**
                * Or paste a URL. Used only if no image is picked above.
                */
@@ -1393,9 +1508,9 @@ export interface Page {
                */
               source?: (number | null) | Appearance;
               /**
-               * Upload or pick an image for this card.
+               * Pick or upload from Landing images — the page's own picture bucket. Nothing here touches a Person, Film or Brand record.
                */
-              image?: (number | null) | Media;
+              image?: (number | null) | LandingAsset;
               /**
                * Or paste a URL. Used only if no image is picked above.
                */
@@ -1700,6 +1815,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'landing-assets';
+        value: number | LandingAsset;
+      } | null)
+    | ({
         relationTo: 'articles';
         value: number | Article;
       } | null)
@@ -1955,6 +2074,51 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-assets_select".
+ */
+export interface LandingAssetsSelect<T extends boolean = true> {
+  title?: T;
+  usedFor?: T;
+  alt?: T;
+  credit?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        wide?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
@@ -2108,6 +2272,33 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               dark?: T;
+              id?: T;
+              blockName?: T;
+            };
+        scrollExpand?:
+          | T
+          | {
+              image?: T;
+              imageUrl?: T;
+              alt?: T;
+              title?: T;
+              scrollHint?: T;
+              lines?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              notes?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              startWidth?: T;
+              startHeight?: T;
+              mediaZoom?: T;
+              scrollDistance?: T;
               id?: T;
               blockName?: T;
             };

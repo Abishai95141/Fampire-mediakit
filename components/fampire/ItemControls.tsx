@@ -32,7 +32,7 @@ export default function ItemControls({
   signedIn: boolean;
   pageId?: number | string;
   blockIndex?: number;
-  /** Admin collection slug, e.g. "people". */
+  /** The record this card happens to be about, if any. */
   collection: string;
   id?: number | string | null;
   /** What this item is called, for the confirm and the aria-label. */
@@ -43,8 +43,11 @@ export default function ItemControls({
   const [busy, startTransition] = useTransition();
   const [pending, setPending] = useState(false);
 
-  if (!signedIn || id == null) return null;
-  const canHide = pageId != null && typeof blockIndex === "number";
+  // A card invented on the page has no record, and that is fine — it is still
+  // editable, because what you edit is the CARD.
+  if (!signedIn) return null;
+  const onPage = pageId != null;
+  const canHide = pageId != null && typeof blockIndex === "number" && id != null;
 
   const hide = async () => {
     if (
@@ -77,13 +80,39 @@ export default function ItemControls({
 
   return (
     <span className={`fam-item-controls print:hidden ${className}`}>
-      <a
-        href={`/admin/collections/${collection}/${id}`}
-        onClick={(e) => e.stopPropagation()}
-        aria-label={`Edit ${label}`}
-      >
-        Edit
-      </a>
+      {/**
+       * "Edit card" opens the PAGE, not the record.
+       *
+       * This used to link to /admin/collections/people/<id>, which was the
+       * whole complaint: clicking edit on a hero card took you to a person,
+       * where you could change their canonical portrait but not this card's
+       * picture, caption, link or position. The card lives on the page, so
+       * that is where editing it happens — and the page editor is also where
+       * the cards can be dragged into a different order.
+       */}
+      {onPage ? (
+        <a
+          href={`/admin/collections/pages/${pageId}`}
+          onClick={(e) => e.stopPropagation()}
+          aria-label={`Edit the ${label} card on this page`}
+          title="Edit this card — picture, words, link, order"
+        >
+          Edit card
+        </a>
+      ) : null}
+      {/* The record, offered separately and clearly labelled, for when
+          changing the person really is what you meant. */}
+      {id != null ? (
+        <a
+          href={`/admin/collections/${collection}/${id}`}
+          onClick={(e) => e.stopPropagation()}
+          aria-label={`Open the ${label} record`}
+          title="Open the underlying record (changes it everywhere)"
+          className="fam-item-record"
+        >
+          Record
+        </a>
+      ) : null}
       {canHide ? (
         <button
           type="button"

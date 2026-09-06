@@ -584,8 +584,12 @@
    the wrap's `100% - 32px` with a flat `100%`, and every section built that
    way lost both gutters: on a 390px phone the copy sat flush against the
    left edge with nothing between it and the bezel. */
+/* `.scroll-expand` joins `.z-wrap` in the exemption list for the same reason:
+   it is a <section> whose only child is the thing itself, so this rule caught
+   it and clamped a FULL-BLEED effect to 1240px, leaving black bars either
+   side at the moment it is supposed to take the whole screen. */
 .zeen section > .fam-section-rule,
-.zeen section > div:last-child:not(.z-wrap) {
+.zeen section > div:last-child:not(.z-wrap):not(.scroll-expand) {
   width: min(1240px, 100%);
   margin-inline: auto;
 }
@@ -810,3 +814,28 @@
 
 @media (max-width: 640px) { .fam-item-controls { display: none; } }
 @media (prefers-reduced-motion: reduce) { .fam-item-controls { transition: none; } }
+
+/* The secondary links in the editing affordances — the underlying record, and
+   a section's source collection — are quieter than the primary "edit the
+   page" action, because editing the page is nearly always what is meant and
+   editing the record changes it everywhere. */
+.fam-item-controls a.fam-item-record { background: rgba(18, 18, 18, 0.55); }
+.fam-item-controls a.fam-item-record:hover { background: rgba(18, 18, 18, 0.85); }
+.fam-block-edit a.fam-block-edit-src { background: transparent; color: #6b6660; box-shadow: inset 0 0 0 1px #ddd9d3; }
+.fam-block-edit a.fam-block-edit-src:hover { background: #121212; color: #fff; box-shadow: none; }
+
+
+/* The scroll-expand statement.
+   ---------------------------------------------------------------------
+   Its own stacking context and a hard black ground, so the frame reads as a
+   window opening rather than a picture floating on the page. */
+.zeen .scroll-expand { background: #0d0d0d; }
+
+/* The notes sit on a photograph at full bleed, where a 14px grey line is not
+   readable on its own. A local scrim under just those lines costs nothing and
+   means the scrim over the FACES can stay light. */
+.zeen .scroll-expand__overlay .se-notes {
+  background: linear-gradient(180deg, rgba(8,8,8,0) 0%, rgba(8,8,8,.55) 22%, rgba(8,8,8,.55) 78%, rgba(8,8,8,0) 100%);
+  padding: 18px 20px;
+  border-radius: 10px;
+}

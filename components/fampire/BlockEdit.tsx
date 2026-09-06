@@ -25,6 +25,7 @@ const SOURCE: Record<string, { label: string; slug: string } | null> = {
   deckHero: { label: "People", slug: "people" },
   brandStrip: { label: "Brands", slug: "brands" },
   statementSplit: { label: "People", slug: "people" },
+  scrollExpand: null,
   recapRow: null,
   peopleRow: { label: "People", slug: "people" },
   filmStrip: { label: "Films", slug: "films" },
@@ -46,6 +47,7 @@ const TITLE: Record<string, string> = {
   brandStrip: "The worlds",
   statement: "Institution",
   statementSplit: "Statement",
+  scrollExpand: "Statement",
   recapRow: "Lately",
   lanes: "Intent lanes",
   filmStrip: "Films",
@@ -78,18 +80,21 @@ export default function BlockEdit({
       data-block={blockType}
     >
       <span className="fam-block-edit-tag">{name}</span>
+      {/* The page record: where this section's own cards are added, edited,
+          reordered and deleted. That is the primary door now — the section's
+          content belongs to the page, not to a collection. */}
       <Link href={`/admin/collections/pages/${pageId}`} prefetch={false}>
-        Edit words
+        Edit section
+      </Link>
+      {/* The page's own picture bucket, so "attach a new image" has an
+          obvious destination that is not a Person's portrait. */}
+      <Link href="/admin/collections/landing-assets" prefetch={false}>
+        Images
       </Link>
       {src ? (
-        <>
-          <Link href={`/admin/collections/${src.slug}`} prefetch={false}>
-            {src.label}
-          </Link>
-          <Link href={`/admin/collections/${src.slug}/create`} prefetch={false}>
-            + Add
-          </Link>
-        </>
+        <Link href={`/admin/collections/${src.slug}`} prefetch={false} className="fam-block-edit-src">
+          {src.label}
+        </Link>
       ) : null}
     </div>
   );
