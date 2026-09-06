@@ -71,6 +71,53 @@ const page = (
 ).docs[0];
 if (!page) throw new Error("no page with slug '/'");
 
+/**
+ * MERGE, do not replace.
+ *
+ * This nearly shipped as a wholesale overwrite, and the comparison that
+ * caught it is the reason it does not. Production was AHEAD of the captured
+ * layout on two pieces of copy the client had corrected after the retrieval
+ * audit — "In 2025 their influence reached national scale" (the captured
+ * copy still said 2024, which was the reported error) and "Ten issues" (the
+ * capture said Eight, the other reported error). Replacing the layout would
+ * have silently reverted both fixes.
+ *
+ * So the split is: STRUCTURE comes from the file, CONTENT stays with the
+ * database. Only the keys below decide how a block is presented; everything
+ * else on an existing block — every heading, paragraph, label and link — is
+ * whatever production already holds. A key the live block does not have at
+ * all is additive and is taken from the file, since adding cannot destroy.
+ */
+const PRESENTATION = new Set(["layout", "dark", "rail", "marquee", "limit", "featuredCount"]);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const live = new Map<string, any>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+for (const b of (page.layout ?? []) as any[]) if (!live.has(b.blockType)) live.set(b.blockType, b);
+
+const kept: string[] = [];
+const forced: string[] = [];
+for (const b of layout) {
+  const cur = live.get(b.blockType);
+  if (!cur) continue; // a brand-new block: take the file's version whole
+  for (const k of Object.keys(b)) {
+    if (k === "blockType") continue;
+    if (PRESENTATION.has(k)) {
+      if (JSON.stringify(cur[k]) !== JSON.stringify(b[k])) forced.push(`${b.blockType}.${k}`);
+      continue; // keep the file's value
+    }
+    const hasLive = cur[k] !== undefined && cur[k] !== null && cur[k] !== "";
+    if (hasLive) {
+      if (JSON.stringify(cur[k]) !== JSON.stringify(b[k])) kept.push(`${b.blockType}.${k}`);
+      b[k] = cur[k]; // the database wins on content
+    }
+  }
+  // Row ids belong to this database; carrying the file's would orphan them.
+  if (cur.id) b.id = cur.id;
+}
+if (kept.length) console.log(`  content kept from the live page: ${kept.join(", ")}`);
+if (forced.length) console.log(`  presentation changed: ${forced.join(", ")}`);
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const before = ((page.layout ?? []) as any[]).map((b) => b.blockType);
 console.log(`page ${page.id} "${page.title}" — status ${page._status}`);
