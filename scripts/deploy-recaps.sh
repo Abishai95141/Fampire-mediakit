@@ -11,5 +11,5 @@ set -euo pipefail
 KEY=${1:?ssh key}; HOST=${2:?user@host}
 RSH="ssh -i $KEY -o StrictHostKeyChecking=no -o BatchMode=yes"
 $RSH "$HOST" "mkdir -p /home/ubuntu/app/public/recaps"
-rsync -az --info=progress2 -e "$RSH" public/recaps/*.mp4 public/recaps/*.jpg "$HOST":/home/ubuntu/app/public/recaps/
+rsync -az -e "$RSH" public/recaps/*.mp4 public/recaps/*.jpg "$HOST":/home/ubuntu/app/public/recaps/
 $RSH "$HOST" "ls -la /home/ubuntu/app/public/recaps | tail -n +2 | awk '{printf \"  %-26s %8.1f MB\n\", \$9, \$5/1048576}'"
