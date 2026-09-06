@@ -1,0 +1,216 @@
+[
+ {
+  "wordmark": "FAMPIRE",
+  "headline": "Wealth is passed.",
+  "headlineTail": "Health is not.",
+  "rail": "THE LOLLI FAMILY INSTITUTION",
+  "note": "A family that spent ten years filming the people capital is now chasing. Films, people, events and the full media library \u2014 linked straight to where each collection lives.",
+  "blockType": "deckHero",
+  "people": []
+ },
+ {
+  "label": "The worlds we have built",
+  "marquee": true,
+  "blockType": "brandStrip",
+  "brands": []
+ },
+ {
+  "eyebrow": "The institution",
+  "heading": "FAMPIRE is the crown above the worlds \u2014 not a company.",
+  "body": "Anthony and TereZa Lolli are the couple behind Biohack Yourself Media \u2014 an independent health and wellness platform reaching millions with expert-driven journalism and award-winning storytelling. Together they have produced more than a dozen documentaries, and they are raising two young trailblazers, Love and Legend Lolli, who are already reporting on health news before the age of ten.",
+  "secondary": "In 2024 their influence reached national scale when Biohack Yourself Media was selected as the exclusive health press at the MAHA Inaugural Ball \u2014 the Waldorf Astoria, Washington D.C., 20 January 2025.",
+  "actionLabel": "See the MAHA coverage",
+  "actionHref": "/library?event=MAHA+Inaugural+Ball",
+  "blockType": "statement"
+ },
+ {
+  "eyebrow": null,
+  "heading": "Lately",
+  "intro": "What the family has been up to \u2014 a recap from each of them.",
+  "recaps": [
+   {
+    "who": "Anthony",
+    "blurb": "The founder's recap \u2014 where the work is now, in his own words.",
+    "when": "Latest",
+    "url": "https://drive.google.com/file/d/1PWfoXVTd7FOAvf1aWjTjbMY1Wjz4Z83E/view",
+    "posterUrl": null,
+    "personSlugs": [
+     "anthony"
+    ]
+   },
+   {
+    "who": "TereZa",
+    "blurb": "The editor-in-chief's recap \u2014 the magazine, the films, the year so far.",
+    "when": "Latest",
+    "url": "https://drive.google.com/file/d/1T_91coRe0B4rCaPrKUPeFgCnJD5QF8OO/view",
+    "posterUrl": null,
+    "personSlugs": [
+     "tereza"
+    ]
+   },
+   {
+    "who": "Love & Legend",
+    "blurb": "The correspondents' recap \u2014 reporting, interviewing, on set.",
+    "when": "Latest",
+    "url": "https://drive.google.com/file/d/1yjb8CEGsb5A7GmSekJvAixrOyRBeNEvp/view",
+    "posterUrl": null,
+    "personSlugs": [
+     "love",
+     "legend"
+    ]
+   }
+  ],
+  "blockType": "recapRow"
+ },
+ {
+  "overlap": false,
+  "dark": false,
+  "lines": [
+   {
+    "text": "You are not invisible."
+   },
+   {
+    "text": "You are simply unmeasured."
+   }
+  ],
+  "notes": [
+   {
+    "text": "Every family office tracks every entity it owns. Every asset, every policy, every heir."
+   },
+   {
+    "text": "And not one of them measures the health of the two people the whole structure was built around."
+   }
+  ],
+  "blockType": "statementSplit",
+  "portraits": []
+ },
+ {
+  "placeholder": "Search \u2014 a person, a film, an event, a year",
+  "blockType": "searchBar",
+  "scope": {
+   "orientation": [],
+   "brand": null,
+   "kind": []
+  }
+ },
+ {
+  "eyebrow": null,
+  "heading": "What are you here to do",
+  "intro": null,
+  "layout": "phases",
+  "lanes": [
+   {
+    "label": "Book them",
+    "detail": "Bios, headshots and the introduction an MC reads out loud.",
+    "href": "/library?kind=headshots"
+   },
+   {
+    "label": "Write about them",
+    "detail": "Synopses, award counts, press coverage and approved copy.",
+    "href": "/library?kind=press"
+   },
+   {
+    "label": "Clip them",
+    "detail": "B-roll, trailers and cut recaps, straight into the timeline.",
+    "href": "/library?kind=b-roll"
+   },
+   {
+    "label": "Stage them",
+    "detail": "Event photography, galleries and logo packs for the room.",
+    "href": "/library?kind=event+photography"
+   }
+  ],
+  "blockType": "lanes"
+ },
+ {
+  "eyebrow": null,
+  "heading": "The films",
+  "intro": null,
+  "dark": false,
+  "layout": "accordion",
+  "showWatchLinks": false,
+  "blockType": "filmStrip",
+  "films": []
+ },
+ {
+  "eyebrow": null,
+  "heading": "The people",
+  "intro": "Seven members of this family have been through the work, ages seven to eighty-seven. These four report on it, direct it and appear in it.",
+  "dark": true,
+  "rail": "THE LOLLI FAMILY INSTITUTION",
+  "layout": "stack",
+  "showBios": true,
+  "blockType": "peopleRow",
+  "people": []
+ },
+ {
+  "eyebrow": null,
+  "heading": "The press",
+  "intro": "Podcasts, panels, keynotes and broadcast \u2014 every appearance, with where to watch it.",
+  "featuredCount": 3,
+  "limit": 6,
+  "layout": "progression",
+  "dark": true,
+  "blockType": "pressList"
+ },
+ {
+  "eyebrow": null,
+  "heading": "The room",
+  "intro": null,
+  "layout": "grid",
+  "limit": 6,
+  "sort": "-fileCount",
+  "viewAll": "/library?kind=event+photography",
+  "blockType": "entryQuery",
+  "filters": {
+   "kind": [
+    "event photography"
+   ],
+   "occasion": [],
+   "orientation": [],
+   "brand": null,
+   "people": [],
+   "film": null,
+   "event": null,
+   "location": null,
+   "year": null,
+   "excludeMinors": false
+  }
+ },
+ {
+  "eyebrow": null,
+  "heading": "The magazine",
+  "intro": null,
+  "aside": "Eight issues \u00b7 print in 4,300+ US and Canadian retail locations",
+  "limit": 12,
+  "blockType": "magazineShelf"
+ },
+ {
+  "eyebrow": null,
+  "heading": "Where to watch",
+  "intro": null,
+  "note": "Every collection listed here is open to everyone, no account required. The remainder are password-gated at source or held back pending written sign-off, and need a FAMPIRE sign-in.",
+  "blockType": "watchGrid"
+ },
+ {
+  "overlap": false,
+  "dark": true,
+  "lines": [
+   {
+    "text": "Wealth is passed."
+   },
+   {
+    "text": "Health is not."
+   },
+   {
+    "text": "So we filmed it."
+   },
+   {
+    "text": "And gave it away."
+   }
+  ],
+  "notes": [],
+  "blockType": "statementSplit",
+  "portraits": []
+ }
+]
