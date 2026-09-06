@@ -23,6 +23,10 @@ export type DeckCard = {
   slug: string;
   name: string;
   src: string | null;
+  /** Where the card links, when the page set one. */
+  href?: string | null;
+  /** Small line under the name, when the page set one. */
+  caption?: string | null;
   /**
    * The row id, carried as DATA.
    *
@@ -100,7 +104,7 @@ export default function PortraitDeck({
               label={c.name}
             />
             <Link
-              href={`/library?subject=${encodeURIComponent(c.slug)}`}
+              href={c.href ?? `/library?subject=${encodeURIComponent(c.slug)}`}
               aria-label={`${c.name} — see their collections`}
               className="block rounded-[18px] outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--z-ink)] focus-visible:ring-offset-4"
             >

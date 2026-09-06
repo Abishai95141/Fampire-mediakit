@@ -26,6 +26,8 @@ export type RosterPerson = {
   role?: string | null;
   bio?: string | null;
   src: string | null;
+  /** Where the card links, when the page set one. */
+  href?: string | null;
 };
 
 export default function PeopleRoster({ people }: { people: RosterPerson[] }) {

@@ -22,6 +22,9 @@ import {
   DeckHeroBlock,
   accordionFilms,
   laneCounts,
+  rowsToFilms,
+  rowsToProgression,
+  rowsToRoster,
   progressionItems,
   rosterPeople,
   splitPortraits,
@@ -234,6 +237,7 @@ export default async function RenderBlocks({
               pageId={pageId}
               blockIndex={i}
               hidden={hiddenIds(block)}
+              rows={(block.cards as Record<string, unknown>[]) ?? undefined}
               wordmark={String(block.wordmark ?? "FAMPIRE")}
               headline={block.headline as string | null}
               headlineTail={block.headlineTail as string | null}
@@ -251,6 +255,7 @@ export default async function RenderBlocks({
               pageId={pageId}
               blockIndex={i}
               hidden={hiddenIds(block)}
+              rows={(block.items as Record<string, unknown>[]) ?? undefined}
               label={block.label as string | null}
               brandSlugs={((block.brands as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[]}
               marquee={block.marquee !== false}
@@ -651,7 +656,11 @@ export default async function RenderBlocks({
                 hrefLabel={signedIn ? "Add a film" : undefined}
               >
                 <FilmAccordion
-                  films={await accordionFilms(shown.filter((f) => !hiddenIds(block).has(String(f.id))))}
+                  films={
+                    ((block.items as Record<string, unknown>[]) ?? []).length
+                      ? await rowsToFilms(block.items as Record<string, unknown>[])
+                      : await accordionFilms(shown.filter((f) => !hiddenIds(block).has(String(f.id))))
+                  }
                   signedIn={signedIn}
                   pageId={pageId}
                   blockIndex={i}
@@ -691,6 +700,7 @@ export default async function RenderBlocks({
           const picked = ((block.people as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[];
           // An empty relationship means "the family", which is the common
           // case and saves an editor picking the same four every time.
+          const ownRows = (block.cards as Record<string, unknown>[]) ?? [];
           const drop = hiddenIds(block);
           const shown = (
             picked.length
@@ -706,7 +716,7 @@ export default async function RenderBlocks({
                 heading={headingText}
                 intro={introText}
                 rail={block.rail as string | null}
-                people={await rosterPeople(shown)}
+                people={ownRows.length ? await rowsToRoster(ownRows) : await rosterPeople(shown)}
                 signedIn={signedIn}
                 pageId={pageId}
                 blockIndex={i}
@@ -729,7 +739,7 @@ export default async function RenderBlocks({
               hrefLabel={signedIn ? "Add a person" : undefined}
             >
               {block.layout === "roster" ? (
-                <PeopleRoster people={await rosterPeople(shown)} />
+                <PeopleRoster people={ownRows.length ? await rowsToRoster(ownRows) : await rosterPeople(shown)} />
               ) : (
               <PeopleProfiles
                 people={shown}
@@ -792,7 +802,13 @@ export default async function RenderBlocks({
                 href={signedIn ? "/admin/collections/appearances/create" : undefined}
                 hrefLabel={signedIn ? "Add an appearance" : undefined}
               >
-                <PressProgression items={progressionItems(limited as AppearanceRecord[])} />
+                <PressProgression
+                  items={
+                    ((block.items as Record<string, unknown>[]) ?? []).length
+                      ? rowsToProgression(block.items as Record<string, unknown>[])
+                      : progressionItems(limited as AppearanceRecord[])
+                  }
+                />
               </Section>
             );
             return block.dark ? (

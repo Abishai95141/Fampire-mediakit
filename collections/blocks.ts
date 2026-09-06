@@ -1,4 +1,4 @@
-import type { Block } from "payload";
+import type { Block, CollectionSlug } from "payload";
 
 /**
  * The page builder.
@@ -22,6 +22,49 @@ const heading: Block["fields"] = [
   { name: "eyebrow", type: "text", admin: { description: "Small label above the heading." } },
   { name: "heading", type: "text" },
   { name: "intro", type: "textarea" },
+];
+
+
+/**
+ * PAGE-OWNED ITEMS.
+ * ────────────────────────────────────────────────────────────────────────
+ * The landing page holds its own cards. A row here is a card ON THIS PAGE:
+ * its picture, its words, its link. Editing one changes the page and nothing
+ * else — the person, brand or film it happens to be about is never written
+ * to. Adding a row adds a card; deleting a row removes it from the page and
+ * from nowhere else.
+ *
+ * `source` is a convenience, not a dependency. Point a row at a record and
+ * any field you leave BLANK inherits from it, so the common case needs no
+ * retyping and stays current when the record changes. Fill a field in and
+ * the page wins permanently. That is the whole contract: inherit by default,
+ * override freely, never write back.
+ *
+ * Leaving the whole array empty keeps the old behaviour — the section shows
+ * the collection — so nothing that already exists breaks by upgrading.
+ */
+const sourceField = (relationTo: CollectionSlug, what: string): NonNullable<Block["fields"]>[number] => ({
+  name: "source",
+  type: "relationship",
+  relationTo,
+  admin: {
+    description: `Optional. Blank fields below fall back to this ${what}. Anything typed here wins, and the ${what} record is never changed.`,
+  },
+});
+
+/** Picture for a page-owned card: an upload, or a URL to something already hosted. */
+const pictureFields: NonNullable<Block["fields"]> = [
+  {
+    name: "image",
+    type: "relationship",
+    relationTo: "media",
+    admin: { description: "Upload or pick an image for this card." },
+  },
+  {
+    name: "imageUrl",
+    type: "text",
+    admin: { description: "Or paste a URL. Used only if no image is picked above." },
+  },
 ];
 
 export const Hero: Block = {
@@ -311,11 +354,45 @@ export const FilmStrip: Block = {
       admin: { description: "Render the section on the near-black band." },
     },
     {
+      name: "items",
+      type: "array",
+      labels: { singular: "Film row", plural: "Film rows" },
+      admin: {
+        description:
+          "The rows on this page, in order. Title, synopsis and key art here belong to the page — editing them never changes the Film record. Leave empty to show the whole slate automatically.",
+      },
+      fields: [
+        sourceField("films", "film"),
+        ...pictureFields,
+        { name: "title", type: "text" },
+        { name: "synopsis", type: "textarea" },
+        {
+          type: "row",
+          fields: [
+            { name: "year", type: "number", admin: { width: "33%" } },
+            { name: "awards", type: "number", admin: { width: "33%" } },
+            { name: "status", type: "text", admin: { width: "34%" } },
+          ],
+        },
+        {
+          name: "watch",
+          type: "array",
+          labels: { singular: "Watch link", plural: "Watch links" },
+          admin: { description: "Overrides the film's own links when any row is present." },
+          fields: [
+            { name: "platform", type: "text", required: true },
+            { name: "url", type: "text", required: true },
+            { name: "free", type: "checkbox" },
+          ],
+        },
+      ],
+    },
+    {
       name: "films",
       type: "relationship",
       relationTo: "films",
       hasMany: true,
-      admin: { description: "Leave empty to show the whole slate." },
+      admin: { description: "Only used when the row list above is empty." },
     },
     {
       /**
@@ -345,11 +422,28 @@ export const PeopleRow: Block = {
   fields: [
     ...heading,
     {
+      name: "cards",
+      type: "array",
+      labels: { singular: "Card", plural: "Cards" },
+      admin: {
+        description:
+          "The people shown here, in order. Each card's picture, name, role and words belong to THIS PAGE — editing one never changes the Person record, and deleting one removes it from this section only. Leave empty to show the family automatically.",
+      },
+      fields: [
+        sourceField("people", "person"),
+        ...pictureFields,
+        { name: "name", type: "text" },
+        { name: "role", type: "text", admin: { description: "The line under the name." } },
+        { name: "bio", type: "textarea", admin: { description: "Overrides the bio from Who & What → People." } },
+        { name: "href", type: "text", admin: { description: "Where the card links." } },
+      ],
+    },
+    {
       name: "people",
       type: "relationship",
       relationTo: "people",
       hasMany: true,
-      admin: { description: "Leave empty to show the whole family." },
+      admin: { description: "Only used when the card list above is empty." },
     },
     {
       /**
@@ -599,7 +693,24 @@ export const PressList: Block = {
       defaultValue: 3,
       admin: { description: "How many of the most-watched appearances lead the page. 0 for none." },
     },
-    { name: "limit", type: "number", admin: { description: "Leave empty for all of them." } },
+    { name: "limit", type: "number", admin: { description: "Only used when the list below is empty. Leave empty for all of them." } },
+    {
+      name: "items",
+      type: "array",
+      labels: { singular: "Appearance", plural: "Appearances" },
+      admin: {
+        description:
+          "The appearances shown here, in order. Page-owned: the still, title and link can be changed without touching the Appearance record. Leave empty to show the log automatically.",
+      },
+      fields: [
+        sourceField("appearances", "appearance"),
+        ...pictureFields,
+        { name: "title", type: "text" },
+        { name: "outlet", type: "text" },
+        { name: "when", type: "text", admin: { description: "Free text, e.g. \"17 May 2026\"." } },
+        { name: "url", type: "text" },
+      ],
+    },
     {
       name: "layout",
       type: "select",
@@ -855,6 +966,23 @@ export const DeckHero: Block = {
       admin: { description: "Removed from this section only. The record itself is untouched." },
     },
     {
+      name: "cards",
+      type: "array",
+      maxRows: 5,
+      labels: { singular: "Card", plural: "Cards" },
+      admin: {
+        description:
+          "The cards in the fan, in order. Add, edit, reorder or delete them freely — this is the page's own content and none of it changes a Person record. Leave the whole list empty to fall back to showing the family automatically.",
+      },
+      fields: [
+        sourceField("people", "person"),
+        ...pictureFields,
+        { name: "name", type: "text", admin: { description: "Caption under the card." } },
+        { name: "caption", type: "text", admin: { description: "Small line beneath the name." } },
+        { name: "href", type: "text", admin: { description: "Where the card links. Defaults to that person's collections." } },
+      ],
+    },
+    {
       name: "people",
       type: "relationship",
       relationTo: "people",
@@ -862,7 +990,7 @@ export const DeckHero: Block = {
       maxDepth: 1,
       admin: {
         description:
-          "Whose portraits fan across the hero. Leave empty to show the family automatically — then adding a family member in the CMS adds a card here with no page edit.",
+          "Only used when the card list above is empty: which people the automatic fallback shows. Leave both empty for the family.",
       },
     },
   ],
@@ -883,11 +1011,25 @@ export const BrandStrip: Block = {
   fields: [
     { name: "label", type: "text", defaultValue: "We\u2019ve helped them grow" },
     {
+      name: "items",
+      type: "array",
+      labels: { singular: "Wordmark", plural: "Wordmarks" },
+      admin: {
+        description:
+          "The wordmarks in the strip, in order. Page-owned: editing or deleting one does not touch the Brand record. Leave empty to show every brand automatically.",
+      },
+      fields: [
+        sourceField("brands", "brand"),
+        { name: "label", type: "text", admin: { description: "The wordmark text." } },
+        { name: "href", type: "text", admin: { description: "Where it links. Defaults to that brand's Library filter." } },
+      ],
+    },
+    {
       name: "brands",
       type: "relationship",
       relationTo: "brands",
       hasMany: true,
-      admin: { description: "Leave empty to show every brand in the CMS, in order." },
+      admin: { description: "Only used when the list above is empty. Leave both empty to show every brand." },
     },
     {
       /**

@@ -779,7 +779,39 @@ export interface Page {
          */
         hidden?: (number | Person)[] | null;
         /**
-         * Whose portraits fan across the hero. Leave empty to show the family automatically — then adding a family member in the CMS adds a card here with no page edit.
+         * The cards in the fan, in order. Add, edit, reorder or delete them freely — this is the page's own content and none of it changes a Person record. Leave the whole list empty to fall back to showing the family automatically.
+         */
+        cards?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this person. Anything typed here wins, and the person record is never changed.
+               */
+              source?: (number | null) | Person;
+              /**
+               * Upload or pick an image for this card.
+               */
+              image?: (number | null) | Media;
+              /**
+               * Or paste a URL. Used only if no image is picked above.
+               */
+              imageUrl?: string | null;
+              /**
+               * Caption under the card.
+               */
+              name?: string | null;
+              /**
+               * Small line beneath the name.
+               */
+              caption?: string | null;
+              /**
+               * Where the card links. Defaults to that person's collections.
+               */
+              href?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the card list above is empty: which people the automatic fallback shows. Leave both empty for the family.
          */
         people?: (number | Person)[] | null;
         id?: string | null;
@@ -789,7 +821,27 @@ export interface Page {
     | {
         label?: string | null;
         /**
-         * Leave empty to show every brand in the CMS, in order.
+         * The wordmarks in the strip, in order. Page-owned: editing or deleting one does not touch the Brand record. Leave empty to show every brand automatically.
+         */
+        items?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this brand. Anything typed here wins, and the brand record is never changed.
+               */
+              source?: (number | null) | Brand;
+              /**
+               * The wordmark text.
+               */
+              label?: string | null;
+              /**
+               * Where it links. Defaults to that brand's Library filter.
+               */
+              href?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the list above is empty. Leave both empty to show every brand.
          */
         brands?: (number | Brand)[] | null;
         /**
@@ -1151,7 +1203,43 @@ export interface Page {
          */
         dark?: boolean | null;
         /**
-         * Leave empty to show the whole slate.
+         * The rows on this page, in order. Title, synopsis and key art here belong to the page — editing them never changes the Film record. Leave empty to show the whole slate automatically.
+         */
+        items?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this film. Anything typed here wins, and the film record is never changed.
+               */
+              source?: (number | null) | Film;
+              /**
+               * Upload or pick an image for this card.
+               */
+              image?: (number | null) | Media;
+              /**
+               * Or paste a URL. Used only if no image is picked above.
+               */
+              imageUrl?: string | null;
+              title?: string | null;
+              synopsis?: string | null;
+              year?: number | null;
+              awards?: number | null;
+              status?: string | null;
+              /**
+               * Overrides the film's own links when any row is present.
+               */
+              watch?:
+                | {
+                    platform: string;
+                    url: string;
+                    free?: boolean | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the row list above is empty.
          */
         films?: (number | Film)[] | null;
         layout?: ('list' | 'grid' | 'profiles' | 'accordion') | null;
@@ -1168,7 +1256,40 @@ export interface Page {
         heading?: string | null;
         intro?: string | null;
         /**
-         * Leave empty to show the whole family.
+         * The people shown here, in order. Each card's picture, name, role and words belong to THIS PAGE — editing one never changes the Person record, and deleting one removes it from this section only. Leave empty to show the family automatically.
+         */
+        cards?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this person. Anything typed here wins, and the person record is never changed.
+               */
+              source?: (number | null) | Person;
+              /**
+               * Upload or pick an image for this card.
+               */
+              image?: (number | null) | Media;
+              /**
+               * Or paste a URL. Used only if no image is picked above.
+               */
+              imageUrl?: string | null;
+              name?: string | null;
+              /**
+               * The line under the name.
+               */
+              role?: string | null;
+              /**
+               * Overrides the bio from Who & What → People.
+               */
+              bio?: string | null;
+              /**
+               * Where the card links.
+               */
+              href?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the card list above is empty.
          */
         people?: (number | Person)[] | null;
         /**
@@ -1235,9 +1356,36 @@ export interface Page {
          */
         featuredCount?: number | null;
         /**
-         * Leave empty for all of them.
+         * Only used when the list below is empty. Leave empty for all of them.
          */
         limit?: number | null;
+        /**
+         * The appearances shown here, in order. Page-owned: the still, title and link can be changed without touching the Appearance record. Leave empty to show the log automatically.
+         */
+        items?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this appearance. Anything typed here wins, and the appearance record is never changed.
+               */
+              source?: (number | null) | Appearance;
+              /**
+               * Upload or pick an image for this card.
+               */
+              image?: (number | null) | Media;
+              /**
+               * Or paste a URL. Used only if no image is picked above.
+               */
+              imageUrl?: string | null;
+              title?: string | null;
+              outlet?: string | null;
+              /**
+               * Free text, e.g. "17 May 2026".
+               */
+              when?: string | null;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         layout?: ('log' | 'progression') | null;
         /**
          * Render the section on the near-black band.
@@ -1876,6 +2024,17 @@ export interface PagesSelect<T extends boolean = true> {
               rail?: T;
               note?: T;
               hidden?: T;
+              cards?:
+                | T
+                | {
+                    source?: T;
+                    image?: T;
+                    imageUrl?: T;
+                    name?: T;
+                    caption?: T;
+                    href?: T;
+                    id?: T;
+                  };
               people?: T;
               id?: T;
               blockName?: T;
@@ -1884,6 +2043,14 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              items?:
+                | T
+                | {
+                    source?: T;
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
               brands?: T;
               hidden?: T;
               marquee?: T;
@@ -2088,6 +2255,27 @@ export interface PagesSelect<T extends boolean = true> {
               intro?: T;
               hidden?: T;
               dark?: T;
+              items?:
+                | T
+                | {
+                    source?: T;
+                    image?: T;
+                    imageUrl?: T;
+                    title?: T;
+                    synopsis?: T;
+                    year?: T;
+                    awards?: T;
+                    status?: T;
+                    watch?:
+                      | T
+                      | {
+                          platform?: T;
+                          url?: T;
+                          free?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
               films?: T;
               layout?: T;
               showWatchLinks?: T;
@@ -2100,6 +2288,18 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              cards?:
+                | T
+                | {
+                    source?: T;
+                    image?: T;
+                    imageUrl?: T;
+                    name?: T;
+                    role?: T;
+                    bio?: T;
+                    href?: T;
+                    id?: T;
+                  };
               people?: T;
               hidden?: T;
               dark?: T;
@@ -2138,6 +2338,18 @@ export interface PagesSelect<T extends boolean = true> {
               intro?: T;
               featuredCount?: T;
               limit?: T;
+              items?:
+                | T
+                | {
+                    source?: T;
+                    image?: T;
+                    imageUrl?: T;
+                    title?: T;
+                    outlet?: T;
+                    when?: T;
+                    url?: T;
+                    id?: T;
+                  };
               layout?: T;
               dark?: T;
               id?: T;

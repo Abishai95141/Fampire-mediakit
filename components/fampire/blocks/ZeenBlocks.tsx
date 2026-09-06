@@ -7,6 +7,7 @@ import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
 import type { ProgressionItem } from "@/components/fampire/blocks/PressProgression";
 import type { SplitPortrait } from "@/components/fampire/blocks/StatementSplit";
 import { applyFacets, facetsFromParams, previewsForSubjects } from "@/lib/fampire/catalog";
+import { pick, picture, refDoc, refId, type Ref } from "@/lib/fampire/page-items";
 import { loadBrands, loadEntries, loadFamily, loadPeople } from "@/lib/fampire/payload-catalog";
 import type { AppearanceRecord, FilmRecord } from "@/lib/fampire/payload-catalog";
 import type { BrandRecord, PersonRecord } from "@/lib/fampire/payload-catalog";
@@ -45,6 +46,7 @@ export async function DeckHeroBlock({
   rail,
   note,
   peopleSlugs,
+  rows,
   signedIn = false,
   pageId,
   blockIndex,
@@ -56,6 +58,8 @@ export async function DeckHeroBlock({
   rail?: string | null;
   note?: string | null;
   peopleSlugs: string[];
+  /** The block's own card list. Present means "the page owns this section". */
+  rows?: Record<string, unknown>[];
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
@@ -69,10 +73,35 @@ export async function DeckHeroBlock({
    * Capped at five — the measured count in the approved layout, and the point
    * past which the fan stops reading as a fan and starts covering the mark.
    */
-  const all = peopleSlugs.length
-    ? (await loadPeople()).filter((p) => peopleSlugs.includes(p.slug))
-    : await loadFamily();
-  const cards = await toCards(all.filter((p) => !hidden?.has(String(p.id))).slice(0, 5));
+  /**
+   * Page-owned cards win outright.
+   *
+   * When the block carries its own list, the hero renders THAT — each row's
+   * picture, name and link, falling back per-field to whatever person the row
+   * points at. Nothing here reads the family unless the list is empty, which
+   * is what keeps "edit a card" from meaning "edit a family member".
+   */
+  let cards: DeckCard[];
+  if (rows?.length) {
+    const shots = previewsForSubjects(await loadEntries(), []);
+    void shots;
+    cards = rows.slice(0, 5).map((r, i) => {
+      const src = refDoc<PersonRecord>(r.source as Ref);
+      return {
+        id: refId(r.source as Ref),
+        slug: pick(src?.slug) ?? `card-${i}`,
+        name: pick(r.name as string, src?.name) ?? "",
+        src: picture(r.image as Ref, r.imageUrl as string, src?.portraitUrl),
+        href: pick(r.href as string) ?? (src?.slug ? `/library?subject=${encodeURIComponent(src.slug)}` : null),
+        caption: pick(r.caption as string),
+      };
+    });
+  } else {
+    const all = peopleSlugs.length
+      ? (await loadPeople()).filter((p) => peopleSlugs.includes(p.slug))
+      : await loadFamily();
+    cards = await toCards(all.filter((p) => !hidden?.has(String(p.id))).slice(0, 5));
+  }
 
   return (
     <section className="relative overflow-hidden pt-14 pb-8 sm:pt-20">
@@ -123,6 +152,7 @@ export async function DeckHeroBlock({
 export async function BrandStripBlock({
   label,
   brandSlugs,
+  rows,
   marquee = true,
   signedIn = false,
   pageId,
@@ -131,6 +161,8 @@ export async function BrandStripBlock({
 }: {
   label?: string | null;
   brandSlugs: string[];
+  /** The block's own wordmark list. */
+  rows?: Record<string, unknown>[];
   marquee?: boolean;
   signedIn?: boolean;
   pageId?: number | string;
@@ -138,15 +170,25 @@ export async function BrandStripBlock({
   hidden?: Set<string>;
 }) {
   const all = await loadBrands();
-  const shown = (brandSlugs.length ? all.filter((b) => brandSlugs.includes(b.slug)) : all).filter(
-    (b) => !hidden?.has(String(b.id)),
-  );
+  // The page's own list wins; the collection is only the fallback.
+  const shown: BrandRecord[] = rows?.length
+    ? rows.map((r, i) => {
+        const src = refDoc<BrandRecord>(r.source as Ref);
+        return {
+          id: refId(r.source as Ref) ?? `row-${i}`,
+          name: pick(r.label as string, src?.name) ?? "",
+          slug: pick(r.href as string, src?.slug) ?? "",
+        } as BrandRecord;
+      }).filter((b) => b.name)
+    : (brandSlugs.length ? all.filter((b) => brandSlugs.includes(b.slug)) : all).filter(
+        (b) => !hidden?.has(String(b.id)),
+      );
   if (!shown.length) return null;
 
   const Wordmark = ({ b, controls = false }: { b: BrandRecord; controls?: boolean }) => (
     <span className={controls && signedIn ? "fam-item shrink-0" : "shrink-0"}>
       <Link
-        href={`/library?brand=${encodeURIComponent(b.slug)}`}
+        href={b.slug.startsWith("/") ? b.slug : `/library?brand=${encodeURIComponent(b.slug)}`}
         className="block px-7 text-[clamp(18px,2.1vw,26px)] font-medium tracking-[-0.02em] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100"
         style={{ color: "var(--z-ink)" }}
       >
@@ -307,4 +349,74 @@ export function progressionItems(list: AppearanceRecord[]): ProgressionItem[] {
     thumbnail: a.thumbnail ?? null,
     url: a.url ?? null,
   }));
+}
+
+
+// ── Page-owned resolvers for the remaining sections ─────────────────────
+
+/**
+ * People cards the page owns.
+ *
+ * Same contract as the hero: what is typed on the row wins, what is left
+ * blank falls back to the person it points at, and the Person record is never
+ * written. `id` is the SOURCE record's id, so the per-item "Edit" link still
+ * takes you to the right place when there is one — a card invented on the
+ * page has no record to edit and correctly offers no link.
+ */
+export async function rowsToRoster(rows: Record<string, unknown>[]): Promise<RosterPerson[]> {
+  const entries = await loadEntries();
+  return rows.map((r, i) => {
+    const src = refDoc<PersonRecord>(r.source as Ref);
+    const shot = src?.slug ? previewsForSubjects(entries, [src.slug])[src.slug] : null;
+    return {
+      id: refId(r.source as Ref),
+      slug: pick(src?.slug) ?? `card-${i}`,
+      name: pick(r.name as string, src?.name) ?? "",
+      role: pick(r.role as string, src?.role),
+      bio: pick(r.bio as string, (src as { bio?: string } | null)?.bio),
+      src: picture(r.image as Ref, r.imageUrl as string, src?.portraitUrl, shot),
+      href: pick(r.href as string),
+    };
+  });
+}
+
+/** Film rows the page owns. */
+export async function rowsToFilms(rows: Record<string, unknown>[]): Promise<AccordionFilm[]> {
+  const entries = await loadEntries();
+  return rows.map((r, i) => {
+    const src = refDoc<FilmRecord>(r.source as Ref);
+    const own = src?.title
+      ? entries.filter((e) => e.film === src.title && e.image).sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0))
+      : [];
+    const watch = (r.watch as { platform: string; url: string; free?: boolean }[]) ?? [];
+    return {
+      id: refId(r.source as Ref),
+      slug: pick(src?.slug) ?? `row-${i}`,
+      title: pick(r.title as string, src?.title) ?? "",
+      synopsis: pick(r.synopsis as string, src?.synopsis),
+      note: pick(src?.note),
+      year: (r.year as number) ?? src?.year ?? null,
+      awards: (r.awards as number) ?? src?.awards ?? null,
+      status: pick(r.status as string, src?.status),
+      poster: picture(r.image as Ref, r.imageUrl as string, src?.posterUrl, own[0]?.image),
+      // An empty array means "no override", not "no links".
+      watch: watch.length ? watch : src?.watch ?? null,
+    };
+  });
+}
+
+/** Press rows the page owns. */
+export function rowsToProgression(rows: Record<string, unknown>[]): ProgressionItem[] {
+  return rows.map((r) => {
+    const src = refDoc<AppearanceRecord>(r.source as Ref);
+    return {
+      title: pick(r.title as string, src?.title) ?? "",
+      outlet: pick(r.outlet as string, src?.outlet),
+      // `when` is free text on the page; the record's own date is a date.
+      aired: pick(r.when as string, src?.aired),
+      views: src?.views ?? null,
+      thumbnail: picture(r.image as Ref, r.imageUrl as string, src?.thumbnail),
+      url: pick(r.url as string, src?.url),
+    };
+  });
 }

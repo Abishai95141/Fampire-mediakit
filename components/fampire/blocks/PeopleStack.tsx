@@ -96,7 +96,7 @@ export default function PeopleStack({
               transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
-                href={`/library?subject=${encodeURIComponent(p.slug)}`}
+                href={p.href ?? `/library?subject=${encodeURIComponent(p.slug)}`}
                 className="block rounded-[34px] p-2 transition-transform duration-500 hover:-translate-y-1"
                 style={{ background: "var(--z-panel, #f4f2ee)" }}
               >
