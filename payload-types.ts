@@ -830,6 +830,44 @@ export interface Page {
         blockType: 'statementSplit';
       }
     | {
+        /**
+         * Small label above the heading.
+         */
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        recaps: {
+          /**
+           * Whose recap this is. Shown as the card's title.
+           */
+          who: string;
+          /**
+           * Optional. Links the recap to People so it can be found by subject later; it does not change what the card shows.
+           */
+          person?: (number | Person)[] | null;
+          /**
+           * One line under the name.
+           */
+          blurb?: string | null;
+          /**
+           * Free text — "This month", "May 2026".
+           */
+          when?: string | null;
+          /**
+           * The Google Drive share link. Any form works — /file/d/<id>/view, open?id=, or the bare id. The file must be shared as 'anyone with the link', or the public site cannot play it.
+           */
+          url: string;
+          /**
+           * Optional override. Left empty, the poster is Drive's own thumbnail for the file.
+           */
+          posterUrl?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'recapRow';
+      }
+    | {
         eyebrow?: string | null;
         /**
          * The paragraph beside the film.
@@ -1839,6 +1877,26 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               dark?: T;
+              id?: T;
+              blockName?: T;
+            };
+        recapRow?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              intro?: T;
+              recaps?:
+                | T
+                | {
+                    who?: T;
+                    person?: T;
+                    blurb?: T;
+                    when?: T;
+                    url?: T;
+                    posterUrl?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

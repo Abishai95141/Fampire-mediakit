@@ -33,9 +33,20 @@
     "buried": []
   },
   {
-    "shot": "04-you-are-not-invisible",
+    "shot": "04-lately",
     "i": 3,
     "top": 2175,
+    "height": 556,
+    "label": "Lately",
+    "wideCount": 0,
+    "wide": [],
+    "broken": 0,
+    "buried": []
+  },
+  {
+    "shot": "05-you-are-not-invisible",
+    "i": 4,
+    "top": 2863,
     "height": 643,
     "label": "You are not invisible.",
     "wideCount": 0,
@@ -44,9 +55,9 @@
     "buried": []
   },
   {
-    "shot": "05-section",
-    "i": 4,
-    "top": 2949,
+    "shot": "06-section",
+    "i": 5,
+    "top": 3637,
     "height": 146,
     "label": "section",
     "wideCount": 0,
@@ -55,9 +66,9 @@
     "buried": []
   },
   {
-    "shot": "06-what-are-you-here-to-do",
-    "i": 5,
-    "top": 3227,
+    "shot": "07-what-are-you-here-to-do",
+    "i": 6,
+    "top": 3915,
     "height": 703,
     "label": "What are you here to do",
     "wideCount": 0,
@@ -66,9 +77,9 @@
     "buried": []
   },
   {
-    "shot": "07-the-films",
-    "i": 6,
-    "top": 4062,
+    "shot": "08-the-films",
+    "i": 7,
+    "top": 4750,
     "height": 922,
     "label": "The films",
     "wideCount": 0,
@@ -77,9 +88,9 @@
     "buried": []
   },
   {
-    "shot": "08-the-people",
-    "i": 7,
-    "top": 5116,
+    "shot": "09-the-people",
+    "i": 8,
+    "top": 5804,
     "height": 3363,
     "label": "The people",
     "wideCount": 0,
@@ -88,9 +99,9 @@
     "buried": []
   },
   {
-    "shot": "09-the-press",
-    "i": 8,
-    "top": 8575,
+    "shot": "10-the-press",
+    "i": 9,
+    "top": 9263,
     "height": 2808,
     "label": "The press",
     "wideCount": 0,
@@ -99,9 +110,9 @@
     "buried": []
   },
   {
-    "shot": "10-the-room",
-    "i": 9,
-    "top": 11515,
+    "shot": "11-the-room",
+    "i": 10,
+    "top": 12203,
     "height": 1260,
     "label": "The room",
     "wideCount": 0,
@@ -110,9 +121,9 @@
     "buried": []
   },
   {
-    "shot": "11-the-magazine",
-    "i": 10,
-    "top": 12907,
+    "shot": "12-the-magazine",
+    "i": 11,
+    "top": 13595,
     "height": 857,
     "label": "The magazine",
     "wideCount": 0,
@@ -121,9 +132,9 @@
     "buried": []
   },
   {
-    "shot": "12-where-to-watch",
-    "i": 11,
-    "top": 13896,
+    "shot": "13-where-to-watch",
+    "i": 12,
+    "top": 14584,
     "height": 496,
     "label": "Where to watch",
     "wideCount": 0,
@@ -132,9 +143,9 @@
     "buried": []
   },
   {
-    "shot": "13-wealth-is-passed",
-    "i": 12,
-    "top": 14524,
+    "shot": "14-wealth-is-passed",
+    "i": 13,
+    "top": 15212,
     "height": 600,
     "label": "Wealth is passed.",
     "wideCount": 0,

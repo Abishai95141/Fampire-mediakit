@@ -890,9 +890,74 @@ export const StatementSplitBlock: Block = {
   ],
 };
 
+/**
+ * "Lately" — recap reels, one per member of the family.
+ *
+ * The landing page could say what the institution is and what it has made,
+ * but nothing on it carried any sense of RECENCY. This is the block that
+ * answers "what have they been up to".
+ *
+ * The video is a LINK, never an upload: paste the Google Drive share URL and
+ * the poster and the player are both derived from it. That is the project's
+ * standing rule — index and link, never copy — applied to video, and it means
+ * re-cutting a recap in Drive updates the site with no upload and no deploy.
+ */
+export const RecapRowBlock: Block = {
+  slug: "recapRow",
+  labels: { singular: "Lately (recap reels)", plural: "Lately rows" },
+  fields: [
+    ...heading,
+    {
+      name: "recaps",
+      type: "array",
+      minRows: 1,
+      maxRows: 6,
+      required: true,
+      labels: { singular: "Recap", plural: "Recaps" },
+      fields: [
+        {
+          name: "who",
+          type: "text",
+          required: true,
+          admin: { description: "Whose recap this is. Shown as the card's title." },
+        },
+        {
+          name: "person",
+          type: "relationship",
+          relationTo: "people",
+          hasMany: true,
+          admin: {
+            description:
+              "Optional. Links the recap to People so it can be found by subject later; it does not change what the card shows.",
+          },
+        },
+        { name: "blurb", type: "textarea", admin: { description: "One line under the name." } },
+        { name: "when", type: "text", admin: { description: "Free text — \"This month\", \"May 2026\"." } },
+        {
+          name: "url",
+          type: "text",
+          required: true,
+          admin: {
+            description:
+              "The Google Drive share link. Any form works — /file/d/<id>/view, open?id=, or the bare id. The file must be shared as 'anyone with the link', or the public site cannot play it.",
+          },
+        },
+        {
+          name: "posterUrl",
+          type: "text",
+          admin: {
+            description:
+              "Optional override. Left empty, the poster is Drive's own thumbnail for the file.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 export const PAGE_BLOCKS: Block[] = [
   // Structure
-  DeckHero, BrandStrip, StatementSplitBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
+  DeckHero, BrandStrip, StatementSplitBlock, RecapRowBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
   // The catalog, seen through different lenses
   LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
   MagazineShelf, WatchGrid, PressList,

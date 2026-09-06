@@ -27,6 +27,7 @@ import {
 import FilmAccordion from "@/components/fampire/blocks/FilmAccordion";
 import PeopleRoster from "@/components/fampire/blocks/PeopleRoster";
 import PeopleStack from "@/components/fampire/blocks/PeopleStack";
+import RecapRow, { type Recap } from "@/components/fampire/blocks/RecapRow";
 import PressProgression from "@/components/fampire/blocks/PressProgression";
 import PhaseLanes from "@/components/fampire/blocks/PhaseLanes";
 import StatementSplit from "@/components/fampire/blocks/StatementSplit";
@@ -220,6 +221,51 @@ export default async function RenderBlocks({
               marquee={block.marquee !== false}
             />
           );
+
+        case "recapRow": {
+          /**
+           * The Drive file id, pulled out of whatever the editor pasted.
+           * Handles /file/d/<id>/view, ?id=<id>, /d/<id>, and a bare id — an
+           * editor should not have to know which of Drive's URL shapes the
+           * Share button happened to give them.
+           */
+          const fileId = (raw: string): string | null => {
+            const u = String(raw ?? "").trim();
+            if (!u) return null;
+            const m =
+              u.match(/\/file\/d\/([A-Za-z0-9_-]{10,})/) ??
+              u.match(/[?&]id=([A-Za-z0-9_-]{10,})/) ??
+              u.match(/\/d\/([A-Za-z0-9_-]{10,})/);
+            if (m) return m[1]!;
+            return /^[A-Za-z0-9_-]{10,}$/.test(u) ? u : null;
+          };
+
+          const rows = ((block.recaps as Record<string, unknown>[]) ?? [])
+            .map((r, i): Recap | null => {
+              const id = fileId(String(r.url ?? ""));
+              if (!id) return null;
+              const poster =
+                (typeof r.posterUrl === "string" && r.posterUrl.trim()
+                  ? r.posterUrl.trim()
+                  : null) ?? `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
+              return {
+                id: `${id}-${i}`,
+                fileId: id,
+                who: String(r.who ?? ""),
+                blurb: (r.blurb as string) ?? null,
+                when: (r.when as string) ?? null,
+                poster,
+              };
+            })
+            .filter(Boolean) as Recap[];
+
+          if (!rows.length) return null;
+          return (
+            <Section key={key} n={n} title={headingText} aside={introText}>
+              <RecapRow recaps={rows} />
+            </Section>
+          );
+        }
 
         case "statementSplit": {
           const lines = ((block.lines as { text: string }[]) ?? []).map((l) => l.text).filter(Boolean);
