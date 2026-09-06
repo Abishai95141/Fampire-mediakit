@@ -188,7 +188,7 @@ export default function RecapCoverflow({
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             >
               <div
-                className="relative overflow-hidden rounded-[10px] bg-black"
+                className={`relative overflow-hidden rounded-[10px] bg-black ${centre ? "z-cover-centre" : "z-cover-side"}`}
                 style={{ width: "min(76vw, 780px)", aspectRatio: "16 / 9" }}
               >
                 {centre && r.videoUrl ? (

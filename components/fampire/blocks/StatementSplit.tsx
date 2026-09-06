@@ -46,6 +46,7 @@ export default function StatementSplit({
          * result depended on DOM order rather than on a decision.
          */
         "z-0",
+        "z-split-portrait",
         overlap ? "absolute top-1/2 -translate-y-1/2" : "relative",
         overlap ? (side === "left" ? "left-0" : "right-0") : "",
       ].join(" ")}
@@ -68,7 +69,7 @@ export default function StatementSplit({
     <div className="relative">
       <div
         className={[
-          "relative flex items-center",
+          "z-split-row relative flex items-center",
           overlap ? "justify-center" : "justify-between gap-4 sm:gap-10",
         ].join(" ")}
         /**

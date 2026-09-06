@@ -575,8 +575,17 @@
   text-wrap: balance;
 }
 .zeen section { max-width: none; }
+/* `:not(.z-wrap)` is load-bearing.
+   ---------------------------------------------------------------------
+   This rule exists to centre the house-style Section component's two
+   children. But `section > div:last-child` also matched `.z-wrap` — the
+   Zeen sections are a <section> whose ONLY child is the wrap — and at
+   (0,2,1) it outranks `.zeen .z-wrap` at (0,2,0). So it silently replaced
+   the wrap's `100% - 32px` with a flat `100%`, and every section built that
+   way lost both gutters: on a 390px phone the copy sat flush against the
+   left edge with nothing between it and the bezel. */
 .zeen section > .fam-section-rule,
-.zeen section > div:last-child {
+.zeen section > div:last-child:not(.z-wrap) {
   width: min(1240px, 100%);
   margin-inline: auto;
 }
@@ -708,4 +717,42 @@
 @media (max-width: 640px) { .fam-block-edit { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   .fam-block-edit { transition: none; }
+}
+
+
+/* Mobile.
+   ---------------------------------------------------------------------
+   `overflow-x: clip`, not `hidden`. Something in the split statement was
+   putting the page 3px wider than the viewport — a rotated portrait's
+   bounding box — and 3px is enough for a touch device to scroll sideways,
+   which is what made the whole page look shifted and clipped at both edges.
+   `clip` stops that; `hidden` would also silently kill `position: sticky`
+   for descendants, and the people stack depends on a sticky heading. */
+.zeen { overflow-x: clip; }
+
+@media (max-width: 700px) {
+  /* The split statement stacks. Two 74px portraits flanking a 30px line
+     left the words about 230px to live in, which is a column, not a
+     statement. The pictures go under the type instead, at a size worth
+     looking at. */
+  .zeen .z-split-row {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .zeen .z-split-row > .z-split-portrait {
+    width: 44% !important;
+    max-width: 190px;
+  }
+  .zeen .z-split-portraits {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+  }
+
+  /* The turntable's flanking panels are decoration on a phone: at 390px they
+     are slivers, and they take the centre panel down to ~296px to make room
+     for slivers. Hidden, the player gets the full width. */
+  .zeen .z-cover-side { display: none; }
+  .zeen .z-cover-centre { width: min(92vw, 560px) !important; }
 }

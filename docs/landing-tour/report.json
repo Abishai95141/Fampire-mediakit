@@ -33,11 +33,11 @@
     "buried": []
   },
   {
-    "shot": "04-lately",
+    "shot": "04-stories-people-a-family-in-motion",
     "i": 3,
     "top": 2175,
-    "height": 556,
-    "label": "Lately",
+    "height": 1172,
+    "label": "STORIES / PEOPLE / A FAMILY IN MOTION",
     "wideCount": 0,
     "wide": [],
     "broken": 0,
@@ -46,7 +46,7 @@
   {
     "shot": "05-you-are-not-invisible",
     "i": 4,
-    "top": 2863,
+    "top": 3479,
     "height": 643,
     "label": "You are not invisible.",
     "wideCount": 0,
@@ -57,7 +57,7 @@
   {
     "shot": "06-section",
     "i": 5,
-    "top": 3637,
+    "top": 4253,
     "height": 146,
     "label": "section",
     "wideCount": 0,
@@ -68,7 +68,7 @@
   {
     "shot": "07-what-are-you-here-to-do",
     "i": 6,
-    "top": 3915,
+    "top": 4531,
     "height": 703,
     "label": "What are you here to do",
     "wideCount": 0,
@@ -79,7 +79,7 @@
   {
     "shot": "08-the-films",
     "i": 7,
-    "top": 4750,
+    "top": 5366,
     "height": 922,
     "label": "The films",
     "wideCount": 0,
@@ -90,7 +90,7 @@
   {
     "shot": "09-the-people",
     "i": 8,
-    "top": 5804,
+    "top": 6420,
     "height": 3363,
     "label": "The people",
     "wideCount": 0,
@@ -101,8 +101,8 @@
   {
     "shot": "10-the-press",
     "i": 9,
-    "top": 9263,
-    "height": 2808,
+    "top": 9879,
+    "height": 2623,
     "label": "The press",
     "wideCount": 0,
     "wide": [],
@@ -112,7 +112,7 @@
   {
     "shot": "11-the-room",
     "i": 10,
-    "top": 12203,
+    "top": 12634,
     "height": 1260,
     "label": "The room",
     "wideCount": 0,
@@ -123,7 +123,7 @@
   {
     "shot": "12-the-magazine",
     "i": 11,
-    "top": 13595,
+    "top": 14026,
     "height": 857,
     "label": "The magazine",
     "wideCount": 0,
@@ -134,7 +134,7 @@
   {
     "shot": "13-where-to-watch",
     "i": 12,
-    "top": 14584,
+    "top": 15015,
     "height": 496,
     "label": "Where to watch",
     "wideCount": 0,
@@ -145,7 +145,7 @@
   {
     "shot": "14-wealth-is-passed",
     "i": 13,
-    "top": 15212,
+    "top": 15643,
     "height": 600,
     "label": "Wealth is passed.",
     "wideCount": 0,
