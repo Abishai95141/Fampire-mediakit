@@ -869,7 +869,31 @@ export interface Page {
          */
         overlap?: boolean | null;
         /**
-         * Two people, left and right. Leave empty to use the first two family members, so the section follows the CMS.
+         * The two pictures, left then right. Page-owned: swap either one for a different image without touching a Person record. Leave empty to fall back to the first two family members.
+         */
+        pictures?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this person. Anything typed here wins, and the person record is never changed.
+               */
+              source?: (number | null) | Person;
+              /**
+               * Upload or pick an image for this card.
+               */
+              image?: (number | null) | Media;
+              /**
+               * Or paste a URL. Used only if no image is picked above.
+               */
+              imageUrl?: string | null;
+              /**
+               * Alt text. Falls back to the person's name.
+               */
+              name?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the picture list above is empty. Leave both empty for the first two family members.
          */
         portraits?: (number | Person)[] | null;
         /**
@@ -2067,6 +2091,15 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               overlap?: T;
+              pictures?:
+                | T
+                | {
+                    source?: T;
+                    image?: T;
+                    imageUrl?: T;
+                    name?: T;
+                    id?: T;
+                  };
               portraits?: T;
               notes?:
                 | T

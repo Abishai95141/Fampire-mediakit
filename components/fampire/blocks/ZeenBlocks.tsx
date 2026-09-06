@@ -420,3 +420,28 @@ export function rowsToProgression(rows: Record<string, unknown>[]): ProgressionI
     };
   });
 }
+
+
+/**
+ * The split statement's two pictures, owned by the page.
+ *
+ * Same contract as every other section: a row's own image wins, a blank field
+ * falls back to the person it points at, and the Person record is never
+ * written. A row with no source at all is a picture that exists on this page
+ * and nowhere else — which is the whole point, because these two are a
+ * composition choice rather than a statement about who the family is.
+ */
+export async function rowsToSplitPortraits(
+  rows: Record<string, unknown>[],
+): Promise<[SplitPortrait | null, SplitPortrait | null]> {
+  const entries = await loadEntries();
+  const out = rows.slice(0, 2).map((r) => {
+    const src = refDoc<PersonRecord>(r.source as Ref);
+    const shot = src?.slug ? previewsForSubjects(entries, [src.slug])[src.slug] : null;
+    return {
+      name: pick(r.name as string, src?.name) ?? "",
+      src: picture(r.image as Ref, r.imageUrl as string, src?.portraitUrl, shot),
+    } as SplitPortrait;
+  });
+  return [out[0] ?? null, out[1] ?? null];
+}

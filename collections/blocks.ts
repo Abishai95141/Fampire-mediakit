@@ -1087,14 +1087,28 @@ export const StatementSplitBlock: Block = {
       admin: { description: "Let the pictures sit behind the words rather than beside them." },
     },
     {
+      name: "pictures",
+      type: "array",
+      maxRows: 2,
+      labels: { singular: "Picture", plural: "Pictures" },
+      admin: {
+        description:
+          "The two pictures, left then right. Page-owned: swap either one for a different image without touching a Person record. Leave empty to fall back to the first two family members.",
+      },
+      fields: [
+        sourceField("people", "person"),
+        ...pictureFields,
+        { name: "name", type: "text", admin: { description: "Alt text. Falls back to the person's name." } },
+      ],
+    },
+    {
       name: "portraits",
       type: "relationship",
       relationTo: "people",
       hasMany: true,
       maxDepth: 1,
       admin: {
-        description:
-          "Two people, left and right. Leave empty to use the first two family members, so the section follows the CMS.",
+        description: "Only used when the picture list above is empty. Leave both empty for the first two family members.",
       },
     },
     {

@@ -25,6 +25,7 @@ import {
   rowsToFilms,
   rowsToProgression,
   rowsToRoster,
+  rowsToSplitPortraits,
   progressionItems,
   rosterPeople,
   splitPortraits,
@@ -328,9 +329,13 @@ export default async function RenderBlocks({
         case "statementSplit": {
           const lines = ((block.lines as { text: string }[]) ?? []).map((l) => l.text).filter(Boolean);
           if (!lines.length) return null;
-          const [pl, pr] = await splitPortraits(
-            ((block.portraits as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[],
-          );
+          /* The page's own pictures win; the relationship is the fallback. */
+          const picRows = (block.pictures as Record<string, unknown>[]) ?? [];
+          const [pl, pr] = picRows.length
+            ? await rowsToSplitPortraits(picRows)
+            : await splitPortraits(
+                ((block.portraits as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[],
+              );
           const inner = (
             <div className="z-wrap">
               <StatementSplit
