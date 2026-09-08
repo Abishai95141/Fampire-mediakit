@@ -1,0 +1,221 @@
+/*
+ * Styled in Payload's own theme variables, not in colours of its own.
+ *
+ * The admin has a light and a dark mode and an editor can switch between them
+ * at any time; anything hardcoded here would be legible in one and not the
+ * other. `--theme-elevation-*` walks from the page ground (0) to the strongest
+ * foreground (1000), so these read correctly in both without a media query.
+ */
+
+.pp-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: var(--spacing-field, 1.5rem);
+}
+
+.pp-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pp-legend {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-elevation-800);
+}
+
+.pp-count {
+  font-size: 12px;
+  color: var(--theme-elevation-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-loading,
+.pp-empty,
+.pp-error {
+  font-size: 13px;
+  color: var(--theme-elevation-500);
+  padding: 12px;
+  border: 1px dashed var(--theme-elevation-150);
+  border-radius: 6px;
+}
+
+.pp-error {
+  color: var(--theme-error-500, #a33);
+  border-color: var(--theme-error-250, #e0b4b4);
+  border-style: solid;
+}
+
+/* The running total of what is tagged, so an editor can see the answer
+   without scrolling back through the grid to look for ticks. */
+.pp-chosen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--theme-elevation-900);
+  background: var(--theme-elevation-100);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.pp-chip:hover:not(:disabled) {
+  background: var(--theme-elevation-150);
+}
+
+.pp-chip:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.pp-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-450);
+  margin-top: 4px;
+}
+
+.pp-search {
+  flex: 0 1 260px;
+  padding: 5px 9px;
+  font-size: 13px;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--theme-elevation-900);
+  background: var(--theme-input-bg, var(--theme-elevation-0));
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 4px;
+}
+
+.pp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 10px;
+}
+
+/* The four are deliberately larger. They are most of the tagging that
+   happens here, and a bigger target is a faster one. */
+.pp-grid--family {
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+}
+
+.pp-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 4px 9px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pp-tile:hover:not(:disabled) {
+  background: var(--theme-elevation-50);
+}
+
+.pp-tile:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.pp-tile.is-on {
+  background: var(--theme-elevation-100);
+  border-color: var(--theme-elevation-400);
+}
+
+.pp-face {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--theme-elevation-100);
+  border: 2px solid transparent;
+}
+
+.pp-tile--big .pp-face {
+  width: 84px;
+  height: 84px;
+}
+
+.pp-tile.is-on .pp-face {
+  border-color: var(--theme-success-500, #2e7d32);
+}
+
+.pp-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Portraits in this archive are red-carpet and event frames, not studio
+     headshots — faces sit high, so a centred crop cuts them off. */
+  object-position: center 22%;
+  display: block;
+}
+
+.pp-initials {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--theme-elevation-500);
+}
+
+.pp-check {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  background: var(--theme-success-500, #2e7d32);
+  border: 2px solid var(--theme-elevation-0);
+  border-radius: 50%;
+}
+
+.pp-name {
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--theme-elevation-800);
+  overflow-wrap: anywhere;
+}
+
+.pp-minor {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--theme-elevation-0);
+  background: var(--theme-elevation-600);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pp-tile,
+  .pp-face {
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+  }
+}

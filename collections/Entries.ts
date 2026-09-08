@@ -374,7 +374,20 @@ export const Entries: CollectionConfig = {
               relationTo: "people",
               hasMany: true,
               index: true,
-              admin: { description: "Everyone who APPEARS in the material. Crew and rights holders go in their own fields." },
+              admin: {
+                description: "Everyone who APPEARS in the material. Crew and rights holders go in their own fields.",
+                /**
+                 * A grid of faces instead of a 153-name dropdown.
+                 *
+                 * Only the INPUT is replaced. The field is the same hasMany
+                 * relationship writing the same person IDs, so nothing about
+                 * the stored data, the API or the read layer changes, and
+                 * deleting these three lines restores the stock control.
+                 */
+                components: {
+                  Field: "@/components/admin/PeoplePicker#PeoplePicker",
+                },
+              },
             },
             {
               /**
@@ -413,10 +426,30 @@ export const Entries: CollectionConfig = {
               ],
             },
             {
+              /**
+               * Kept, and no longer the whole story.
+               *
+               * A bare number cannot say who was on the cover, when the issue
+               * ran, or that #6 and #7 are Bryan Johnson and Zachary Levi — so
+               * the "magazines → cover star → issue" tree the client asked for
+               * had nowhere to live. `issue` below is that tree. This stays as
+               * the number the crawl derived and the public issue facet still
+               * reads, so nothing on the site depends on the backfill landing.
+               */
               name: "magazineIssue",
               type: "number",
               index: true,
-              admin: { description: "1–8, when this is magazine production work." },
+              admin: { description: "Derived from the folder path. The Issue relationship below is the editable one." },
+            },
+            {
+              name: "issue",
+              type: "relationship",
+              relationTo: "magazine-issues",
+              index: true,
+              admin: {
+                description:
+                  "Which issue this belongs to. Group the list by this to get Magazines → issue → collections.",
+              },
             },
             {
               name: "tags",

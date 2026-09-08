@@ -202,7 +202,27 @@ export default buildConfig({
   plugins: [
     s3Storage({
       enabled: Boolean(S3_BUCKET),
-      collections: { media: true },
+      /**
+       * `landing-assets` is here because it was NOT, and that was a live
+       * 500 on the landing page.
+       *
+       * The collection writes to `staticDir: "public/landing"`. Next's
+       * `output: "standalone"` does not copy `public/` into the bundle, so on
+       * the server the directory does not exist, and Payload's file route
+       * threw rather than 404ing — the family photograph behind "You are not
+       * invisible" was a broken image on the live site while every page
+       * returned 200. Exactly the trap `/recaps/` hit, in a route nginx
+       * cannot alias because Payload serves it.
+       *
+       * The `landing` prefix is not decoration: it matches the keys the
+       * mirror already wrote to this bucket, and it keeps these files out of
+       * `media`'s root namespace, where two uploads called `cover.jpg` would
+       * otherwise be one object.
+       */
+      collections: {
+        media: true,
+        "landing-assets": { prefix: "landing" },
+      },
       bucket: S3_BUCKET ?? "unset",
       config: {
         region: process.env.AWS_REGION ?? "ap-south-1",

@@ -303,9 +303,13 @@ export interface Entry {
    */
   dateEnd?: string | null;
   /**
-   * 1–8, when this is magazine production work.
+   * Derived from the folder path. The Issue relationship below is the editable one.
    */
   magazineIssue?: number | null;
+  /**
+   * Which issue this belongs to. Group the list by this to get Magazines → issue → collections.
+   */
+  issue?: (number | null) | MagazineIssue;
   /**
    * Free tags. Never a folder path — tags, so one entry can sit under many lenses.
    */
@@ -586,6 +590,43 @@ export interface Location {
   createdAt: string;
 }
 /**
+ * One record per issue. Cover subject, cover image, and where to read it.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "magazine-issues".
+ */
+export interface MagazineIssue {
+  id: number;
+  issueNumber: number;
+  title: string;
+  /**
+   * URL segment.
+   */
+  slug: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
+  coverSubject?: (number | null) | Person;
+  coverImage?: (number | null) | Media;
+  publishedAt?: string | null;
+  summary?: string | null;
+  /**
+   * Where to read it. Leave empty if the client has not supplied a link — two issues currently have none, and an empty field is more honest than a dead one.
+   */
+  readUrl?: string | null;
+  /**
+   * Cover shoot and production folders for this issue.
+   */
+  relatedCollections?: (number | Entry)[] | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  seoImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * Pictures the landing page composes with — hero cards, section backgrounds, anything that is a page decision rather than a record. Changing one here never changes a Person, Film or Brand.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -687,43 +728,6 @@ export interface Article {
   events?: (number | Event)[] | null;
   /**
    * Catalog collections a reader should be offered alongside — b-roll for the story, photography from the event.
-   */
-  relatedCollections?: (number | Entry)[] | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
-  seoImage?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * One record per issue. Cover subject, cover image, and where to read it.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "magazine-issues".
- */
-export interface MagazineIssue {
-  id: number;
-  issueNumber: number;
-  title: string;
-  /**
-   * URL segment.
-   */
-  slug: string;
-  /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
-   */
-  tenant?: (number | null) | Brand;
-  coverSubject?: (number | null) | Person;
-  coverImage?: (number | null) | Media;
-  publishedAt?: string | null;
-  summary?: string | null;
-  /**
-   * Where to read it. Leave empty if the client has not supplied a link — two issues currently have none, and an empty field is more honest than a dead one.
-   */
-  readUrl?: string | null;
-  /**
-   * Cover shoot and production folders for this issue.
    */
   relatedCollections?: (number | Entry)[] | null;
   seoTitle?: string | null;
@@ -1964,6 +1968,7 @@ export interface EntriesSelect<T extends boolean = true> {
   dateStart?: T;
   dateEnd?: T;
   magazineIssue?: T;
+  issue?: T;
   tags?:
     | T
     | {
