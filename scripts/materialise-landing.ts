@@ -56,7 +56,6 @@ const films = await find("films", {}, "-awards");
  * reordered the section it was supposed to preserve.
  */
 const appearances = (await find("appearances", {}, "_order")).slice(0, 6);
-const entries = await find("entries", { _status: { equals: "published" } });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const layout = ((page.layout ?? []) as any[]).map((b) => {

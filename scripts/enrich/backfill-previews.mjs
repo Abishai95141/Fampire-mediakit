@@ -76,7 +76,7 @@ async function renders(fileId) {
 const found = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : {};
 let hit = 0, miss = 0, done = 0;
 
-for (const [id, folderId] of rows) {
+for (const [, folderId] of rows) {
   if (LIMIT && done >= LIMIT) break;
   if (found[folderId]) continue;
   done++;

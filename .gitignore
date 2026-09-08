@@ -70,3 +70,6 @@ docs/cms-walkthrough/output/
 # kept out of git because it's a 57MB binary. Deployed by rsyncing it onto
 # the box directly; see lib/fampire/media.ts for provenance/how to redo it.
 /public/hero/
+
+# Generated knowledge graph — rebuildable with /graphify, not source.
+graphify-out/

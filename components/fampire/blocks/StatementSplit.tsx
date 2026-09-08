@@ -18,22 +18,28 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export type SplitPortrait = { name: string; src: string | null; tint?: string | null };
 
-export default function StatementSplit({
-  lines,
-  left,
-  right,
-  notes = [],
-  overlap = false,
+/**
+ * Hoisted to module scope deliberately.
+ *
+ * Defined inside StatementSplit's body, this was a NEW component type on every
+ * render — so React unmounted and remounted both portraits whenever the parent
+ * re-rendered, replaying the `whileInView` entrance each time instead of
+ * honouring `viewport={{ once: true }}`. `overlap` and `reduce` were closed
+ * over; they are props now, which is the whole reason it could not be hoisted
+ * before.
+ */
+function Portrait({
+  p,
+  side,
+  overlap,
+  reduce,
 }: {
-  lines: string[];
-  left?: SplitPortrait | null;
-  right?: SplitPortrait | null;
-  notes?: { text: string }[];
-  overlap?: boolean;
+  p: SplitPortrait;
+  side: "left" | "right";
+  overlap: boolean;
+  reduce: boolean | null;
 }) {
-  const reduce = useReducedMotion();
-
-  const Portrait = ({ p, side }: { p: SplitPortrait; side: "left" | "right" }) => (
+  return (
     <motion.div
       className={[
         "pointer-events-none select-none",
@@ -64,6 +70,22 @@ export default function StatementSplit({
       )}
     </motion.div>
   );
+}
+
+export default function StatementSplit({
+  lines,
+  left,
+  right,
+  notes = [],
+  overlap = false,
+}: {
+  lines: string[];
+  left?: SplitPortrait | null;
+  right?: SplitPortrait | null;
+  notes?: { text: string }[];
+  overlap?: boolean;
+}) {
+  const reduce = useReducedMotion();
 
   return (
     <div className="relative">
@@ -81,7 +103,7 @@ export default function StatementSplit({
          */
         style={overlap ? { minHeight: "calc(clamp(104px, 16vw, 260px) * 4 / 3)" } : undefined}
       >
-        {!overlap && left ? <Portrait p={left} side="left" /> : null}
+        {!overlap && left ? <Portrait p={left} side="left" overlap={overlap} reduce={reduce} /> : null}
 
         {/* The type sits above the pictures in the overlap setting — that is
             the whole effect. `break-words` because a 64px line with a long
@@ -102,10 +124,10 @@ export default function StatementSplit({
           ))}
         </div>
 
-        {!overlap && right ? <Portrait p={right} side="right" /> : null}
+        {!overlap && right ? <Portrait p={right} side="right" overlap={overlap} reduce={reduce} /> : null}
 
-        {overlap && left ? <Portrait p={left} side="left" /> : null}
-        {overlap && right ? <Portrait p={right} side="right" /> : null}
+        {overlap && left ? <Portrait p={left} side="left" overlap={overlap} reduce={reduce} /> : null}
+        {overlap && right ? <Portrait p={right} side="right" overlap={overlap} reduce={reduce} /> : null}
       </div>
 
       {notes.length ? (

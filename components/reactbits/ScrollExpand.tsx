@@ -91,10 +91,25 @@ export default function ScrollExpand({
     startWidth, startHeight, startRadius, endRadius, mediaZoom,
     scrollDistance, holdDistance, smoothing, overlayScrim, useWindowScroll, enabled,
   });
-  propsRef.current = {
-    startWidth, startHeight, startRadius, endRadius, mediaZoom,
-    scrollDistance, holdDistance, smoothing, overlayScrim, useWindowScroll, enabled,
-  };
+  /**
+   * Synced in an effect, not during render.
+   *
+   * The upstream component assigns to `propsRef.current` in the render body.
+   * React may render a component without committing it, so a render-phase
+   * mutation can leave the ref describing a render the user never saw. The
+   * effect has no dependency array on purpose — it runs after every commit,
+   * which is exactly "keep this ref on the latest committed props".
+   *
+   * Declared BEFORE the listener effect below so it lands first on mount, and
+   * harmless there regardless: useRef's initialiser already holds the
+   * first-render props.
+   */
+  useEffect(() => {
+    propsRef.current = {
+      startWidth, startHeight, startRadius, endRadius, mediaZoom,
+      scrollDistance, holdDistance, smoothing, overlayScrim, useWindowScroll, enabled,
+    };
+  });
 
   const applyProgress = useCallback((p: number) => {
     const frame = frameRef.current;

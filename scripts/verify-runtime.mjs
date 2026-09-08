@@ -36,9 +36,20 @@ const PATHS = [
   "/login",
 ];
 
-/** Third-party hosts whose failures are not this repo's regressions. */
+/**
+ * Third-party hosts whose failures are not this repo's regressions.
+ *
+ * `googleusercontent.com` is here because `drive.google.com/thumbnail` is a
+ * REDIRECT: the request that actually fails is the one to `lh3.google
+ * usercontent.com`, and the list covered only the URL we write, not the URL
+ * the browser ends up fetching. Every Drive thumbnail on the landing page was
+ * therefore reported as a failure of `/` while the page was fine.
+ *
+ * This suppresses transport noise, not missing pictures — a broken image that
+ * is OURS still fails, because it is served from this origin.
+ */
 const THIRD_PARTY =
-  /drive\.google\.com|player\.vimeo\.com|youtube(-nocookie)?\.com|i\.ytimg\.com|vumbnail|challenges\.cloudflare\.com/;
+  /drive\.google\.com|googleusercontent\.com|player\.vimeo\.com|youtube(-nocookie)?\.com|i\.ytimg\.com|vumbnail|challenges\.cloudflare\.com/;
 
 /**
  * Console noise the dev overlay itself emits while rendering an error, plus

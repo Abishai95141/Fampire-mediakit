@@ -85,7 +85,6 @@ const parent = new Map<number, number>(people.map((p) => [p.id, p.id]));
 const find = (x: number): number => (parent.get(x) === x ? x : (parent.set(x, find(parent.get(x)!)), parent.get(x)!));
 const union = (a: number, b: number) => { const ra = find(a), rb = find(b); if (ra !== rb) parent.set(ra, rb); };
 
-const byId = new Map(people.map((p) => [p.id, p]));
 const declined: string[] = [];
 const coinTosses: string[] = [];
 
