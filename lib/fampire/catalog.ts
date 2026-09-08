@@ -123,6 +123,11 @@ export type Entry = {
   /** The client's own folder ancestry as plain text, for search only. Never
    *  rendered publicly — it is production vocabulary, not a reader's. */
   folder_path_text?: string | null;
+  /** Free tags an editor writes by hand — the one part of the haystack a
+   *  person can add to when the folder name never said the thing. */
+  tags?: string[];
+  /** Other spellings of the people linked to this entry. Search only. */
+  people_aliases?: string[];
   date_start?: string | null;
   date_end?: string | null;
   magazine_issue?: number | null;
@@ -205,8 +210,9 @@ export const SORTS = {
  * matter and offer the nearest one, so a near-miss lands somewhere instead of
  * on an empty page.
  */
-function editDistanceWithin(a: string, b: string, max: number): boolean {
-  if (Math.abs(a.length - b.length) > max) return false;
+/** Edit distance, or `max + 1` once it is certain to exceed `max`. */
+function boundedDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
   let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
   for (let i = 1; i <= a.length; i++) {
     const cur = [i];
@@ -216,31 +222,108 @@ function editDistanceWithin(a: string, b: string, max: number): boolean {
       cur[j] = Math.min(prev[j]! + 1, cur[j - 1]! + 1, prev[j - 1]! + cost);
       best = Math.min(best, cur[j]!);
     }
-    if (best > max) return false;
+    // Every path through this row already costs more than the budget.
+    if (best > max) return max + 1;
     prev = cur;
   }
-  return prev[b.length]! <= max;
+  return prev[b.length]!;
+}
+
+function editDistanceWithin(a: string, b: string, max: number): boolean {
+  return boundedDistance(a, b, max) <= max;
+}
+
+/**
+ * The words worth suggesting, memoised per result set.
+ *
+ * Rebuilt on every keystroke-shaped request this walked all 549 rows; it is
+ * the same vocabulary each time, so it is built once per distinct array and
+ * collected with it — the same bargain `indexFor` makes.
+ */
+const VOCABS = new WeakMap<Entry[], Set<string>>();
+
+function vocabFor(entries: Entry[]): Set<string> {
+  let v = VOCABS.get(entries);
+  if (!v) {
+    v = new Set<string>();
+    for (const e of entries) {
+      for (const w of normalize(
+        [e.title, e.film, e.event, e.location, ...(e.people ?? []), ...(e.people_aliases ?? [])]
+          .filter(Boolean)
+          .join(" "),
+      ).split(/\s+/)) {
+        if (w.length >= 4) v.add(w);
+      }
+    }
+    VOCABS.set(entries, v);
+  }
+  return v;
+}
+
+/** A term the archive already knows — exactly, or as the start of a word,
+ *  because the matcher itself accepts a prefix. */
+function known(term: string, vocab: Set<string>): boolean {
+  if (vocab.has(term)) return true;
+  for (const w of vocab) if (w.startsWith(term)) return true;
+  return false;
 }
 
 export function suggestTerm(entries: Entry[], q: string): string | null {
-  const term = normalize(q).trim();
-  if (!term || term.length < 4) return null;
+  const written = normalize(q).trim();
+  if (!written) return null;
 
-  const vocab = new Set<string>();
-  for (const e of entries) {
-    for (const w of normalize(
-      [e.title, e.film, e.event, e.location, ...(e.people ?? [])].filter(Boolean).join(" "),
-    ).split(/\s+/)) {
-      if (w.length >= 4) vocab.add(w);
+  const terms = written.split(" ").filter(Boolean);
+  if (!terms.length) return null;
+  const vocab = vocabFor(entries);
+
+  /**
+   * Corrected term by term, not as one string.
+   *
+   * The old version compared the WHOLE query against single vocabulary words,
+   * so anything with a space could never match one and never got a
+   * suggestion: "Ashtn" was offered "ashton" while "Ashtn Hall" — the way a
+   * person actually types a name — got nothing at all.
+   */
+  let changed = false;
+  const fixed = terms.map((term) => {
+    // Too short to correct without guessing, and stopwords are not names.
+    if (term.length < 4 || STOPWORDS.has(term)) return term;
+    if (known(term, vocab)) return term;
+
+    const budget = term.length >= 5 ? 2 : 1;
+    let best: string | null = null;
+    let bestDistance = Infinity;
+    let bestGap = Infinity;
+    for (const w of vocab) {
+      const d = boundedDistance(term, w, budget);
+      if (d > budget) continue;
+      const gap = Math.abs(w.length - term.length);
+      // Nearest first, then closest in length — so "terza" prefers "tereza"
+      // over a longer word that happens to sit the same distance away.
+      if (d < bestDistance || (d === bestDistance && gap < bestGap)) {
+        best = w;
+        bestDistance = d;
+        bestGap = gap;
+      }
     }
-  }
-  // Closest first, so "terza" prefers "tereza" over a longer near-match.
-  let best: string | null = null;
-  for (const w of vocab) {
-    if (!editDistanceWithin(term, w, term.length > 6 ? 2 : 1)) continue;
-    if (!best || Math.abs(w.length - term.length) < Math.abs(best.length - term.length)) best = w;
-  }
-  return best;
+    if (!best) return term;
+    changed = true;
+    return best;
+  });
+
+  if (!changed) return null;
+  const phrase = fixed.join(" ");
+  if (phrase === written) return null;
+
+  /**
+   * Never offer a dead end.
+   *
+   * A suggestion that also returns nothing is worse than no suggestion: it
+   * costs a click to learn the same thing twice. Running the corrected phrase
+   * before offering it is also what lets the budget above be generous — a
+   * wrong guess simply returns nothing and is dropped here.
+   */
+  return search(entries, phrase).length ? phrase : null;
 }
 
 export function sortEntries(entries: Entry[], sort: string | undefined, q?: string): Entry[] {
@@ -254,7 +337,10 @@ export function sortEntries(entries: Entry[], sort: string | undefined, q?: stri
       if (!q) return out.sort((a, b) => (b.file_count ?? 0) - (a.file_count ?? 0));
       // Relevance: a title hit beats a description hit beats anything else,
       // then bigger collections first as the tie-break.
-      const terms = normalize(q).split(/\s+/).filter(Boolean);
+      // The same terms the filter used. Left as-is, a stopword scored +10
+      // for any row with "the" in its title and +1 for everything else —
+      // ranking on a word the reader did not mean.
+      const terms = queryTerms(q);
       const score = (e: Entry) => {
         const t = normalize(e.title);
         const d = normalize(e.description);
@@ -416,6 +502,118 @@ function normalize(text: string): string {
     .trim();
 }
 
+/**
+ * The words a person types BETWEEN the words they mean.
+ *
+ * Every term is required, which is right for "tereza 2025" and wrong the
+ * moment someone writes a sentence instead of keywords. Measured on the live
+ * catalog: `Anthony with family` returned 0 while `Anthony family` returned
+ * 14, and `Legend with Brian Johnson` died on the same word. Nothing was
+ * wrong with either query — "with" is simply in no haystack, and a single
+ * unmatched term is enough to reject a row.
+ *
+ * Dropping a required term can only ever WIDEN the result set, so this cannot
+ * lose a hit that used to be found. Kept deliberately short — connectives
+ * only. Nothing here can be a person, a brand, a film or a place, which is
+ * why "love" and "legend" are absent despite being common English words:
+ * they are two of the four family members.
+ */
+const STOPWORDS = new Set([
+  "a", "an", "and", "at", "by", "for", "from", "in", "of", "on", "or",
+  "the", "to", "with",
+]);
+
+/**
+ * Split a query into the terms worth requiring.
+ *
+ * When EVERY word is a stopword the original terms are kept. Stripping them
+ * would leave an empty term list, and an empty term list means "no query" —
+ * so searching literally for "the" would have quietly returned the entire
+ * catalog instead of the little it returns today.
+ */
+/**
+ * Other spellings, normalised, longest phrase first.
+ *
+ * Populated by the read layer from People.aliases — see `setPersonAliases`.
+ * Longest-first because "brian johnson" must be tried before "brian": a
+ * shorter alias replaced first would eat the phrase the longer one needed.
+ */
+let QUERY_ALIASES: [string, string][] = [];
+
+/**
+ * Teach search the other spellings of a name.
+ *
+ * Called once per request by `loadEntries`, which every search path already
+ * goes through. If it is never called the map stays empty and search behaves
+ * exactly as it did before — a missing alias table degrades to no aliases, not
+ * to an error.
+ */
+/**
+ * What one word should expand to.
+ *
+ * A misspelling of a first name must not drag a surname in with it. "Teresa"
+ * against "TereZa Hakobyan-Lolli" expanded to all three words, and since every
+ * term is required that asked for far more than the reader did: 13 rows where
+ * the correct spelling returns 102. The name someone half-remembers is a name,
+ * not a full legal one.
+ *
+ * So a single-word alias maps to the single closest word of the canonical when
+ * one is clearly the same word misspelt, and to the whole name otherwise. Two
+ * words in, two words out — "Brian Johnson" still becomes "bryan johnson".
+ */
+function target(alias: string, canonical: string): string {
+  if (alias.includes(" ")) return canonical;
+  for (const word of canonical.split(" ")) {
+    if (word.length > 3 && editDistanceWithin(alias, word, alias.length > 6 ? 2 : 1)) return word;
+  }
+  return canonical;
+}
+
+export function setPersonAliases(pairs: { alias: string; canonical: string }[]): void {
+  const seen = new Map<string, string>();
+  for (const { alias, canonical } of pairs) {
+    const a = normalize(alias);
+    const c = normalize(canonical);
+    if (!a || !c || a === c) continue;
+    seen.set(a, target(a, c));
+  }
+  QUERY_ALIASES = [...seen.entries()].sort((x, y) => y[0].length - x[0].length);
+}
+
+/**
+ * Rewrite a query into the spellings the archive actually uses.
+ *
+ * This is the half of aliasing that does the work. Putting aliases only in the
+ * haystack would have fixed almost nothing: "Bryan Johnson" is linked as a
+ * PERSON to 1 of the 8 collections that carry his name, and Zachary Levi and
+ * Dr. Shefali to none at all — their names live in the folder titles, not in
+ * the relationship. Expanding the QUERY matches that title text too, so
+ * "Brian Johnson" finds all eight rather than the one.
+ *
+ * Phrase-level, before the split into terms, because an alias is usually two
+ * words and the matcher requires each word separately.
+ */
+function expandQuery(q: string): string {
+  let out = normalize(q);
+  if (!out) return out;
+  for (const [alias, canonical] of QUERY_ALIASES) {
+    if (!out.includes(alias)) continue;
+    // Whole words only: "brian" must not fire inside "brianna".
+    out = out.replace(new RegExp(`\\b${alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g"), canonical);
+  }
+  return out;
+}
+
+function toTerms(text: string): string[] {
+  const all = text.split(" ").filter(Boolean);
+  const meaningful = all.filter((t) => !STOPWORDS.has(t));
+  return meaningful.length ? meaningful : all;
+}
+
+function queryTerms(q: string | undefined): string[] {
+  return toTerms(expandQuery(q ?? ""));
+}
+
 function haystack(e: Entry): string {
   return normalize(
     [
@@ -447,6 +645,19 @@ function haystack(e: Entry): string {
        * returned zero results. The renamed title is for strangers; this keeps
        * the original words findable for the people who own the archive.
        */
+      /**
+       * Tags, reaching search for the first time.
+       *
+       * The field has been on every collection since the import and was
+       * never indexed, so an editor could fill tags in and watch nothing
+       * change. It is the answer to the one failing query that is NOT a bug:
+       * `real estate` matches nothing because no collection is DESCRIBED as
+       * real estate, and no query rewriting invents what nobody wrote down.
+       */
+      ...(e.tags ?? []),
+      // The other half: a person who IS linked is findable by any of their
+      // spellings even when the title uses none of them.
+      ...(e.people_aliases ?? []),
       e.folder_path_text,
     ]
       .filter(Boolean)
@@ -507,13 +718,32 @@ function matches(h: string, term: string): boolean {
 }
 
 function search(entries: Entry[], q: string | undefined): Entry[] {
-  const terms = normalize(q ?? "").split(" ").filter(Boolean);
-  if (!terms.length) return entries;
+  const written = toTerms(normalize(q ?? ""));
+  const expanded = queryTerms(q);
+  if (!expanded.length) return entries;
+
   const index = indexFor(entries);
-  return entries.filter((e) => {
-    const h = index.get(e.id) ?? haystack(e);
-    return terms.every((t) => matches(h, t));
-  });
+  const hits = (terms: string[]) =>
+    entries.filter((e) => {
+      const h = index.get(e.id) ?? haystack(e);
+      return terms.every((t) => matches(h, t));
+    });
+
+  const primary = hits(expanded);
+  if (written.join(" ") === expanded.join(" ")) return primary;
+
+  /**
+   * The UNION of what was typed and what it expands to, never just the
+   * expansion.
+   *
+   * Substitution alone can narrow, because every term is required: an alias of
+   * one word against a canonical of three ("Teresa" → "TereZa Hakobyan-Lolli")
+   * would silently add two more things a row must contain, and a query that
+   * used to work would return less. A union can only ever add rows, so
+   * recording an alias is safe whatever shape the two names are.
+   */
+  const seen = new Set(primary.map((e) => e.id));
+  return [...primary, ...hits(written).filter((e) => !seen.has(e.id))];
 }
 
 export function applyFacets(entries: Entry[], f: Facets): Entry[] {

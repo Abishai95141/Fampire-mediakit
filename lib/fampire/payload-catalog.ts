@@ -2,6 +2,7 @@ import config from "@payload-config";
 import { getPayload, type Where } from "payload";
 
 import type { Access, Entry, Kind, Platform, WatchLink } from "./catalog";
+import { setPersonAliases } from "./catalog";
 
 /**
  * The Payload read layer — the other side of the seam.
@@ -51,11 +52,18 @@ export function toEntry(doc: Record<string, unknown>): Entry {
   // named guest. Both come from the same `people` relationship in the CMS.
   const subjects: string[] = [];
   const guests: string[] = [];
+  const aliases: string[] = [];
   for (const p of people) {
     if (!p || typeof p !== "object") continue;
     const isFamily = (p as { isFamily?: boolean }).isFamily;
     if (isFamily && p.slug) subjects.push(p.slug);
     else if (p.name) guests.push(p.name);
+    // Every spelling of everyone in the frame, family included — the field's
+    // own description promises "search matches these too", and until now
+    // nothing carried them this far.
+    for (const a of ((p as { aliases?: { alias?: string }[] }).aliases ?? [])) {
+      if (a?.alias) aliases.push(a.alias);
+    }
   }
 
   const tenant = doc.tenant as Rel;
@@ -134,6 +142,13 @@ export function toEntry(doc: Record<string, unknown>): Entry {
     // Search-only: the client's own folder vocabulary ("master",
     // "deliverables") which readers never see but the team searches by.
     folder_path_text: (doc.folderPath as string) ?? null,
+    // The seam tags never crossed. The field existed, the admin showed it,
+    // and the value stopped here — which is why writing a tag changed
+    // nothing on the site.
+    people_aliases: aliases,
+    tags: Array.isArray(doc.tags)
+      ? (doc.tags as { tag?: string }[]).map((t) => t?.tag).filter((t): t is string => Boolean(t))
+      : [],
     date_start: (doc.dateStart as string) ?? null,
     date_end: (doc.dateEnd as string) ?? null,
     magazine_issue: (doc.magazineIssue as number) ?? null,
@@ -190,6 +205,35 @@ export const loadEntries = cache(
     overrideAccess: Boolean(opts?.includeDrafts),
     ...(opts?.includeDrafts ? {} : { user: null }),
   });
+
+    /**
+     * Teach search every other spelling on record, once per request.
+     *
+     * Here rather than at a call site because `loadEntries` is the one seam
+     * every search path already crosses, so the table is warm before
+     * `applyFacets` can be reached — and a surface that never loads entries
+     * never pays for a table it would not use.
+     *
+     * A separate query, not the `people` already populated on each row: the
+     * map has to cover people who are linked to NOTHING, because their names
+     * live in the folder titles. That is exactly the case the client hit.
+     */
+    const withAliases = await payload.find({
+      collection: "people",
+      limit: 500,
+      depth: 0,
+      where: { "aliases.alias": { exists: true } },
+      overrideAccess: true,
+    });
+    setPersonAliases(
+      withAliases.docs.flatMap((doc) => {
+        const person = doc as { name?: string; aliases?: { alias?: string }[] };
+        return (person.aliases ?? [])
+          .map((a) => a?.alias)
+          .filter((a): a is string => Boolean(a))
+          .map((alias) => ({ alias, canonical: person.name ?? "" }));
+      }),
+    );
 
     return result.docs.map((d) => toEntry(d as unknown as Record<string, unknown>));
   },
