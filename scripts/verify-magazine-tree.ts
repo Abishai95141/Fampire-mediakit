@@ -68,13 +68,34 @@ const findField = (fields: unknown[], name: string): Record<string, unknown> | n
   }
   return null;
 };
-const peopleField = entries ? findField(entries.fields, "people") : null;
-const component = (peopleField?.admin as { components?: { Field?: unknown } } | undefined)?.components?.Field;
+console.log(`\nPicture pickers\n`);
 
-console.log(`\nPicture picker\n`);
-check("the people field exists on Entries", Boolean(peopleField), peopleField ? "found" : "missing");
-check("it renders the PeoplePicker", typeof component === "string" && component.includes("PeoplePicker"), String(component ?? "none"));
+/** The path may be a bare string or `{ path, clientProps }` — accept both. */
+const pickerPath = (f: Record<string, unknown> | null): string | null => {
+  const c = (f?.admin as { components?: { Field?: unknown } } | undefined)?.components?.Field;
+  if (typeof c === "string") return c;
+  if (c && typeof c === "object") return ((c as { path?: string }).path ?? null);
+  return null;
+};
 
+for (const [name, label] of [
+  ["people", "Featuring"],
+  ["crew", "Crew"],
+  ["rightsHolder", "Rights holder"],
+  ["tenant", "Brand (the client's \"publishers\")"],
+] as const) {
+  const f = entries ? findField(entries.fields, name) : null;
+  const path = pickerPath(f);
+  check(`${label} picks by picture`, Boolean(path?.includes("RecordPicker")), path ?? "stock dropdown");
+}
+
+// The tree is worthless if the collection is not in the sidebar. `group: false`
+// makes groupNavItems skip it entirely, which is where this started.
+const issuesAdmin = (api.collections?.["magazine-issues"]?.config?.admin ?? {}) as { group?: unknown; groupBy?: unknown };
+check("Magazine Issues is visible in the sidebar", issuesAdmin.group !== false, String(issuesAdmin.group));
+check("issues can be grouped by cover star", issuesAdmin.groupBy === true, String(issuesAdmin.groupBy));
+
+console.log("");
 const people = await api.find({ collection: "people", limit: 500, depth: 1, overrideAccess: true });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const docs = people.docs as any[];

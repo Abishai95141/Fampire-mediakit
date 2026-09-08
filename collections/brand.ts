@@ -29,5 +29,26 @@ export const brandField: Field = {
   admin: {
     description:
       "Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.",
+    /**
+     * The client's "publishers", picked the same way as the people.
+     *
+     * Brands carry a name and a tagline and no artwork, so these tiles are
+     * wordmarks rather than pictures — which is how the brands read on the
+     * public site as well, instead of a broken-image placeholder standing in
+     * for a logo that was never uploaded.
+     *
+     * `hasMany: false`: this is one brand per collection, so picking replaces
+     * and picking the chosen one clears it.
+     */
+    components: {
+      Field: {
+        path: "@/components/admin/RecordPicker#RecordPicker",
+        clientProps: {
+          collection: "brands",
+          hasMany: false,
+          heading: "Which brand publishes this",
+        },
+      },
+    },
   },
 };

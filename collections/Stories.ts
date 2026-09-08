@@ -169,14 +169,30 @@ export const MagazineIssues: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     /**
-     * Hidden from the sidebar, same reason as Articles — and this one is the
-     * clearer case: the magazine shelf on the landing page reads ENTRIES
-     * tagged `magazine`, never this collection. Zero rows, nothing reads it.
-     * Set back to "Stories" to bring it out of hiding.
+     * "A parent collection by the name of magazines" — the client's words, and
+     * the top of the hierarchy he asked for.
+     *
+     * This was `group: false`, which does not merely leave a collection
+     * ungrouped: `groupNavItems` skips it outright, so Magazine Issues was
+     * absent from the sidebar altogether. That was defensible when the table
+     * held zero rows and nothing read it. It now holds nine issues carrying
+     * sixty-two collections, and an invisible collection is an unusable one.
      */
-    group: false,
+    group: "Magazines",
+    /**
+     * The middle level: group the issues BY their cover star and the tree
+     * reads Magazines → Bryan Johnson → Issue #6 → its collections.
+     *
+     * `coverSubject` is deliberately NOT added to `defaultColumns`. Payload's
+     * list view hardcodes `depth: 0`, so a relationship column receives a bare
+     * id and renders its empty-state label — a column reading "No Cover
+     * Subject" on rows that all have one. `groupBy` resolves the related title
+     * server-side, which is the feature actually built for this.
+     */
+    groupBy: true,
     defaultColumns: ["issueNumber", "title", "publishedAt", "_status"],
-    description: "One record per issue. Cover subject, cover image, and where to read it.",
+    description:
+      "One record per issue. Group by Cover Subject to see the magazine by who was on the front.",
   },
   versions: { drafts: { autosave: false }, maxPerDoc: 10 },
   access: publishedRead,

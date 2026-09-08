@@ -382,10 +382,20 @@ export const Entries: CollectionConfig = {
                  * Only the INPUT is replaced. The field is the same hasMany
                  * relationship writing the same person IDs, so nothing about
                  * the stored data, the API or the read layer changes, and
-                 * deleting these three lines restores the stock control.
+                 * deleting this block restores the stock control.
                  */
                 components: {
-                  Field: "@/components/admin/PeoplePicker#PeoplePicker",
+                  Field: {
+                    path: "@/components/admin/RecordPicker#RecordPicker",
+                    clientProps: {
+                      collection: "people",
+                      hasMany: true,
+                      heading: "Who is in this collection",
+                      pinField: "isFamily",
+                      pinLabel: "The family",
+                      badgeField: "isMinor",
+                    },
+                  },
                 },
               },
             },
@@ -404,7 +414,22 @@ export const Entries: CollectionConfig = {
               relationTo: "people",
               hasMany: true,
               index: true,
-              admin: { description: "Shot, cut, produced or directed it — not necessarily in frame." },
+              admin: {
+                description: "Shot, cut, produced or directed it — not necessarily in frame.",
+                components: {
+                  Field: {
+                    path: "@/components/admin/RecordPicker#RecordPicker",
+                    clientProps: {
+                      collection: "people",
+                      hasMany: true,
+                      heading: "Who made it",
+                      pinField: "isFamily",
+                      pinLabel: "The family",
+                      badgeField: "isMinor",
+                    },
+                  },
+                },
+              },
             },
             {
               name: "rightsHolder",
@@ -412,7 +437,21 @@ export const Entries: CollectionConfig = {
               relationTo: "people",
               hasMany: true,
               index: true,
-              admin: { description: 'From "owned by X" / "courtesy of X" in the source folder.' },
+              admin: {
+                description: 'From "owned by X" / "courtesy of X" in the source folder.',
+                components: {
+                  Field: {
+                    path: "@/components/admin/RecordPicker#RecordPicker",
+                    clientProps: {
+                      collection: "people",
+                      hasMany: true,
+                      heading: "Who owns it",
+                      pinField: "isFamily",
+                      pinLabel: "The family",
+                    },
+                  },
+                },
+              },
             },
             { name: "film", type: "relationship", relationTo: "films", index: true },
             { name: "event", type: "relationship", relationTo: "events", index: true },
