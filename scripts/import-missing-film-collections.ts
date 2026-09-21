@@ -85,6 +85,32 @@ for (const row of rows) {
     if (p.docs.length) people.push(p.docs[0].id);
   }
 
+  /**
+   * The brand, which this script never set.
+   *
+   * `verify-catalog.ts` asserts that every entry belongs to a brand, and
+   * these three were the only rows in the catalog that did not — on this
+   * database AND on the live one, because the omission shipped with the
+   * script. It went unnoticed because the check is never run against
+   * production.
+   *
+   * Taken from how the other films are filed rather than chosen: every film
+   * but the eponymous Biohack Yourself puts its entries under Lolli Brands
+   * Entertainment — sHEALed 203, Bye Ol' Dentistry 111, The Guru 16, The
+   * Super Lollis 2. These three are documentaries from the same arm.
+   */
+  const brand = await api.find({
+    collection: "brands",
+    where: { slug: { equals: "lolli-brands" } },
+    limit: 1,
+    depth: 0,
+    overrideAccess: true,
+  });
+  if (!brand.docs.length) {
+    console.error(`✗ ${row.slug}: no brand with slug lolli-brands, skipping`);
+    continue;
+  }
+
   const existing = await api.find({
     collection: "entries",
     where: { folderId: { equals: row.folderId } },
@@ -100,6 +126,7 @@ for (const row of rows) {
     kind: "poster",
     url: `https://drive.google.com/drive/folders/${row.folderId}`,
     film: filmId,
+    tenant: brand.docs[0].id,
     people,
     folderId: row.folderId,
     folderPath: row.rawFolderName,
