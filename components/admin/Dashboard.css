@@ -2,29 +2,40 @@
  *
  * Theme variables and the accent theme.css defines, so light and dark both
  * follow without a media query of its own — the rule the other admin
- * components here keep. */
+ * components here keep.
+ *
+ * Sized to fill the pane rather than sit in a column. The first pass used a
+ * 76rem measure with generous padding and left a third of a wide screen
+ * empty, which on a page made of numbers reads as a page with nothing on it. */
 
 .fam-dash {
-  max-width: 76rem;
+  max-width: 108rem;
   margin: 0 auto;
-  padding: 2rem 1.75rem 4rem;
+  padding: 1.75rem 2rem 3rem;
 }
 
 /* ── Masthead ─────────────────────────────────────────────────────────── */
 
 .fam-dash__hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem) auto;
-  align-items: start;
-  gap: 1.5rem;
-  margin-bottom: 2.25rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: stretch;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.fam-dash__heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem 0;
 }
 
 .fam-dash__eyebrow {
-  margin: 0 0 0.5rem;
-  font-size: 10.5px;
+  margin: 0 0 0.7rem;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--theme-elevation-500);
 }
@@ -33,82 +44,107 @@
   margin: 0;
   font-family: var(--font-admin-display), Georgia, "Times New Roman", serif;
   font-weight: 500;
-  font-size: clamp(38px, 5vw, 62px);
-  line-height: 1;
-  letter-spacing: -0.015em;
+  font-size: clamp(44px, 4.6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   color: var(--theme-elevation-1000);
 }
 
 .fam-dash__sub {
-  margin: 0.9rem 0 0;
-  max-width: 34rem;
-  font-size: 15px;
+  margin: 1.1rem 0 0;
+  max-width: 36rem;
+  font-size: 16px;
   line-height: 1.55;
   color: var(--theme-elevation-600);
 }
 
-.fam-dash__who {
-  margin: 0.55rem 0 0;
-  font-size: 12.5px;
+.fam-dash__date {
+  margin: 0.9rem 0 0;
+  font-size: 13.5px;
   color: var(--theme-elevation-500);
 }
 
-/* A gradient panel with the photograph laid ON it. If the file is missing —
-   and `output: standalone` does not copy public/, which is how the landing
-   photograph broke once — this is still a designed surface. */
 .fam-dash__heroArt {
   position: relative;
-  aspect-ratio: 16 / 7;
-  border-radius: 4px;
+  min-height: 19rem;
+  border-radius: 8px;
   overflow: hidden;
   background: linear-gradient(
     135deg,
     var(--theme-elevation-100),
     var(--theme-elevation-50) 55%,
-    var(--fam-brass-soft, rgba(138, 106, 63, 0.12))
+    var(--fam-brass-soft, rgba(138, 106, 63, 0.14))
   );
+  box-shadow: inset 0 0 0 1px var(--theme-elevation-150);
 }
 
 .fam-dash__heroArt img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
-  display: block;
+  object-position: center 32%;
   /* Warmed toward the accent so a full-colour photograph does not shout over
      a page whose job is to be read. */
-  filter: sepia(0.42) saturate(0.85) contrast(1.02);
-  opacity: 0.92;
+  filter: sepia(0.45) saturate(0.9) contrast(1.03);
+}
+
+/* The wash is what makes the words legible over whatever the photograph
+   happens to be, so it is part of the design rather than a fix. */
+.fam-dash__heroOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.25rem;
+  background: linear-gradient(
+    100deg,
+    rgba(12, 11, 9, 0.9) 0%,
+    rgba(12, 11, 9, 0.72) 38%,
+    rgba(12, 11, 9, 0.12) 72%
+  );
+}
+
+.fam-dash__heroLine {
+  margin: 0;
+  max-width: 15ch;
+  font-family: var(--font-admin-display), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  /* Fixed light, not themed: this sits on a dark photographic wash in both
+     modes, so it must not follow the page's ink. */
+  color: #f6f2ea;
 }
 
 .fam-dash__heroRule {
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 0 1px var(--theme-elevation-150);
-  border-radius: 4px;
+  display: block;
+  width: 84px;
+  height: 2px;
+  background: var(--fam-brass, #8a6a3f);
 }
 
-.fam-dash__heroMotto {
+.fam-dash__heroMark {
   margin: 0;
-  padding-top: 0.6rem;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  line-height: 2.1;
-  color: var(--theme-elevation-500);
-  border-bottom: 1px solid var(--fam-brass, #8a6a3f);
-  padding-bottom: 0.9rem;
-  white-space: nowrap;
+  line-height: 1.6;
+  max-width: 14ch;
+  color: rgba(246, 242, 234, 0.82);
 }
 
 @media (max-width: 1100px) {
   .fam-dash__hero {
     grid-template-columns: minmax(0, 1fr);
   }
-  .fam-dash__heroArt,
-  .fam-dash__heroMotto {
-    display: none;
+  .fam-dash__heroArt {
+    min-height: 13rem;
   }
 }
 
@@ -116,39 +152,55 @@
 
 .fam-dash__totals {
   list-style: none;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
 }
 
-/* Hairlines between, not around — three numbers in a row read as one
-   statement, and three boxes read as three things to do. */
-.fam-dash__totals li + li {
-  border-left: 1px solid var(--theme-elevation-150);
-}
-
-.fam-dash__totals a {
+.fam-dash__total {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 20px;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 8px;
+  background: var(--theme-elevation-0);
   text-decoration: none;
   color: inherit;
 }
 
-.fam-dash__totals a:hover b {
-  color: var(--fam-brass, #8a6a3f);
+/* One card is filled, and it is the catalog — the thing this CMS is for. */
+.fam-dash__total.is-lead {
+  background: var(--fam-brass, #8a6a3f);
+  border-color: var(--fam-brass, #8a6a3f);
+  color: #fff;
+}
+
+.fam-dash__total.is-lead .fam-dash__totalText b,
+.fam-dash__total.is-lead .fam-dash__totalText span,
+.fam-dash__total.is-lead .fam-dash__totalIcon {
+  color: #fff;
+}
+
+.fam-dash__total:not(.is-lead):hover {
+  border-color: var(--fam-brass, #8a6a3f);
 }
 
 .fam-dash__totalIcon {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
   color: var(--fam-brass, #8a6a3f);
 }
 
-.fam-dash__totals b {
+.fam-dash__totalText {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fam-dash__totalText b {
   display: block;
   font-size: 34px;
   font-weight: 600;
@@ -158,23 +210,44 @@
   color: var(--theme-elevation-1000);
 }
 
-.fam-dash__totalLabel {
+.fam-dash__totalText span {
   display: block;
   margin-top: 2px;
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--theme-elevation-600);
+}
+
+.fam-dash__totalGo {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-700);
+}
+
+.fam-dash__totalGo svg {
+  width: 17px;
+  height: 17px;
+}
+
+.fam-dash__total.is-lead .fam-dash__totalGo {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
 }
 
 /* ── Cards ────────────────────────────────────────────────────────────── */
 
 .fam-dash__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .fam-dash__grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -182,9 +255,9 @@
 
 .fam-dash__card {
   border: 1px solid var(--theme-elevation-150);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--theme-elevation-0);
-  padding: 20px;
+  padding: 22px 24px;
 }
 
 .fam-dash__cardHead,
@@ -192,7 +265,7 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .fam-dash__cardHead > div,
@@ -202,25 +275,24 @@
 }
 
 .fam-dash__cardIcon {
-  width: 26px;
-  height: 26px;
+  width: 27px;
+  height: 27px;
   flex: 0 0 auto;
   color: var(--fam-brass, #8a6a3f);
 }
 
 .fam-dash__card h2 {
   margin: 0;
-  font-family: var(--font-admin-display), Georgia, serif;
+  font-size: 21px;
   font-weight: 600;
-  font-size: 23px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   color: var(--theme-elevation-1000);
 }
 
 .fam-dash__card h2 + p {
   margin: 4px 0 0;
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--theme-elevation-550);
 }
 
@@ -229,7 +301,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 13.5px;
   text-decoration: none;
   color: var(--fam-brass, #8a6a3f);
 }
@@ -251,43 +323,42 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .fam-dash__item {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
+  gap: 18px;
+  padding: 18px 20px;
   border: 1px solid var(--theme-elevation-150);
-  border-radius: 5px;
+  border-radius: 7px;
+  background: var(--theme-elevation-50);
 }
 
 .fam-dash__itemN {
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
   color: var(--fam-brass, #8a6a3f);
-  /* A rule between the number and its label, so the pair reads as one item
-     even when the numbers differ in width. */
-  padding-right: 16px;
-  border-right: 1px solid var(--theme-elevation-150);
-  min-width: 2.6rem;
+  padding-right: 18px;
+  border-right: 1px solid var(--theme-elevation-200);
+  min-width: 2.9rem;
 }
 
 .fam-dash__itemLabel {
   display: block;
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--theme-elevation-900);
 }
 
 .fam-dash__itemHint {
   display: block;
-  margin-top: 3px;
-  font-size: 12.5px;
+  margin-top: 4px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--theme-elevation-550);
 }
@@ -295,12 +366,12 @@
 .fam-dash__pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   white-space: nowrap;
-  font-size: 12.5px;
-  padding: 6px 13px;
+  font-size: 13px;
+  padding: 7px 14px;
   border-radius: 999px;
-  border: 1px solid var(--theme-elevation-150);
+  border: 1px solid var(--theme-elevation-200);
   color: var(--theme-elevation-700);
 }
 
@@ -315,6 +386,7 @@
 .fam-dash__pill--urgent {
   color: var(--fam-brass, #8a6a3f);
   border-color: var(--fam-brass-soft, rgba(138, 106, 63, 0.4));
+  background: var(--fam-brass-soft, rgba(138, 106, 63, 0.1));
 }
 
 .fam-dash__pill--quiet {
@@ -326,10 +398,10 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  padding: 9px 16px;
-  border-radius: 5px;
+  padding: 10px 18px;
+  border-radius: 6px;
   border: 1px solid var(--theme-elevation-200);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   color: var(--theme-elevation-900);
@@ -339,8 +411,8 @@
   border-color: var(--fam-brass, #8a6a3f);
 }
 
-/* Filled, once. The child-safety queue is the only thing on this page that
-   somebody is required to act on. */
+/* Filled once, on the child-safety queue, because it is the only item on this
+   page anyone is required to act on. */
 .fam-dash__btn--primary {
   background: var(--fam-brass, #8a6a3f);
   border-color: var(--fam-brass, #8a6a3f);
@@ -352,7 +424,7 @@
   border-color: var(--fam-brass-hover, #6f5432);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 820px) {
   .fam-dash__item {
     grid-template-columns: auto minmax(0, 1fr);
   }
@@ -365,52 +437,101 @@
 
 /* ── System health ────────────────────────────────────────────────────── */
 
-.fam-dash__alert {
-  display: flex;
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid var(--fam-brass-soft, rgba(138, 106, 63, 0.4));
-  border-radius: 5px;
-  background: var(--fam-brass-soft, rgba(138, 106, 63, 0.06));
+.fam-dash__health {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 7px;
+  border: 1px solid var(--theme-elevation-150);
+  background: var(--theme-elevation-50);
 }
 
-.fam-dash__alertIcon {
-  width: 22px;
-  height: 22px;
-  flex: 0 0 auto;
-  color: var(--fam-brass, #8a6a3f);
+/* Three states, because "unchecked" is not "fine". Green is reserved for a
+   catalog that has actually been swept. */
+.fam-dash__health--good {
+  border-color: rgba(58, 138, 86, 0.45);
+  background: rgba(58, 138, 86, 0.09);
 }
 
-.fam-dash__alertTitle {
+.fam-dash__health--warn {
+  border-color: var(--fam-brass-soft, rgba(138, 106, 63, 0.45));
+  background: var(--fam-brass-soft, rgba(138, 106, 63, 0.08));
+}
+
+.fam-dash__health--bad {
+  border-color: var(--theme-error-250, rgba(170, 60, 60, 0.5));
+  background: rgba(170, 60, 60, 0.08);
+}
+
+.fam-dash__healthMark {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.fam-dash__health--good .fam-dash__healthMark {
+  background: #3a8a56;
+}
+
+.fam-dash__health--warn .fam-dash__healthMark {
+  background: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__health--bad .fam-dash__healthMark {
+  background: var(--theme-error-500, #a33);
+}
+
+.fam-dash__healthMark svg {
+  width: 17px;
+  height: 17px;
+}
+
+.fam-dash__healthTitle {
   margin: 0;
-  font-size: 14.5px;
-  line-height: 1.45;
-  color: var(--fam-brass, #8a6a3f);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--theme-elevation-1000);
 }
 
-.fam-dash__alertBody {
-  margin: 8px 0 0;
+.fam-dash__healthBody {
+  margin: 5px 0 0;
   font-size: 13px;
   line-height: 1.55;
   color: var(--theme-elevation-600);
 }
 
-.fam-dash__alertBody code {
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 3px;
-  background: var(--theme-elevation-100);
-  color: var(--theme-elevation-800);
+.fam-dash__healthStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 2px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--theme-elevation-150);
 }
 
-/* An empty queue is the good outcome and should read as one, not as a blank
-   area that looks like something failed to load. */
+.fam-dash__healthStats dt {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__healthStats dd {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--theme-elevation-550);
+}
+
 .fam-dash__clear {
   margin: 0;
-  padding: 16px;
+  padding: 18px;
   border: 1px dashed var(--theme-elevation-200);
-  border-radius: 5px;
-  font-size: 13.5px;
+  border-radius: 7px;
+  font-size: 14px;
   color: var(--theme-elevation-600);
 }
 
@@ -418,12 +539,12 @@
 
 .fam-dash__quick {
   display: grid;
-  grid-template-columns: minmax(0, 15rem) minmax(0, 3fr);
-  gap: 20px;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 4fr);
+  gap: 1.25rem;
   align-items: start;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .fam-dash__quick {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -436,34 +557,38 @@
 .fam-dash__quickList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-}
-
-.fam-dash__quickList > * + * {
-  border-left: 1px solid var(--theme-elevation-150);
+  gap: 0.9rem;
 }
 
 .fam-dash__quickItem {
   display: flex;
   gap: 14px;
-  padding: 4px 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 7px;
+  background: var(--theme-elevation-50);
   text-decoration: none;
   color: inherit;
 }
 
+.fam-dash__quickItem:hover {
+  border-color: var(--fam-brass, #8a6a3f);
+}
+
 .fam-dash__quickIcon {
   flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
   border: 1px solid var(--theme-elevation-200);
-  border-radius: 5px;
+  border-radius: 6px;
   color: var(--theme-elevation-700);
 }
 
 .fam-dash__quickIcon svg {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 
 .fam-dash__quickItem:hover .fam-dash__quickIcon {
@@ -480,14 +605,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--theme-elevation-1000);
 }
 
 .fam-dash__quickArrow {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   flex: 0 0 auto;
   color: var(--theme-elevation-450);
 }
@@ -498,15 +623,46 @@
 
 .fam-dash__quickText > span {
   display: block;
-  margin-top: 5px;
-  font-size: 12.5px;
+  margin-top: 6px;
+  font-size: 13px;
   line-height: 1.55;
   color: var(--theme-elevation-550);
 }
 
+/* ── Foot ─────────────────────────────────────────────────────────────── */
+
+.fam-dash__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-elevation-150);
+}
+
+.fam-dash__quote {
+  margin: 0;
+  font-family: var(--font-admin-display), Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--theme-elevation-700);
+}
+
+.fam-dash__mark {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-450);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .fam-dash__totals a,
+  .fam-dash__total,
   .fam-dash__btn,
+  .fam-dash__quickItem,
   .fam-dash__quickIcon,
   .fam-dash__quickArrow,
   .fam-dash__viewall {
