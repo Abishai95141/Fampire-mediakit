@@ -3,11 +3,35 @@
  * Theme variables only, so light and dark both follow without a media query —
  * the rule RecordPicker.css sets out and the rest of these components keep. */
 
+/* The cell IS the row's link, so it has to fill the cell and carry no styling
+   of its own from the browser's anchor or button defaults. */
 .fam-cell {
   display: flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.fam-cell--button {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Only the title underlines on hover — the frame and the pills are not the
+   link's label and underlining them reads as noise. */
+a.fam-cell:hover .fam-cell__title,
+.fam-cell--button:hover .fam-cell__title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* A fixed frame whether or not there is a picture, so six hundred rows keep a

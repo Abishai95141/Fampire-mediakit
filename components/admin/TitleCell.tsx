@@ -2,6 +2,8 @@
 
 import type { DefaultCellComponentProps } from "payload";
 
+import { useConfig } from "@payloadcms/ui";
+import Link from "next/link";
 import React from "react";
 
 import "./TitleCell.css";
@@ -14,13 +16,27 @@ import "./TitleCell.css";
  * from "A4M Red Carpet — BTS" meant reading to the end of both, and whether
  * either was actually published meant looking across at another column.
  *
+ * ── This cell has to carry the row's link, and that is not optional ────
+ *
+ * The first version of this rendered a plain `<span>` and made the entire
+ * list unclickable. Payload's own cell is what wraps a row in its link: the
+ * table hands every cell `link`, `linkURL` and `onClick`, and the default
+ * implementation turns those into a `<Link>`, or a `<button>` when the list
+ * is being used to PICK something rather than to browse it — which is what a
+ * relationship drawer does.
+ *
+ * So all three are honoured here, in the same order and with the same
+ * fallbacks as `DefaultCell`. Replacing a cell means taking on the wrapping
+ * it was doing; nothing warns you, because a span renders perfectly and just
+ * does nothing when clicked.
+ *
  * ── Why a Cell and not a custom list view ─────────────────────────────
  *
  * Replacing `views.list` means reimplementing search, filters, sorting,
  * pagination, selection and bulk actions — and then maintaining all of it
- * against Payload's own. This changes one column. Everything else in that
- * list keeps working because nothing else was touched, including the search
- * across `rawFolderName` that the media team actually relies on.
+ * against Payload's own. This changes one column, so everything else in that
+ * list keeps working, including the search across `rawFolderName` that the
+ * media team actually relies on.
  *
  * ── The picture ───────────────────────────────────────────────────────
  *
@@ -36,6 +52,7 @@ import "./TitleCell.css";
  */
 
 type Row = {
+  id?: number | string;
   _status?: string;
   previewUrl?: string | null;
   previewFileId?: string | null;
@@ -52,6 +69,7 @@ const thumb = (row: Row): string | null => {
 };
 
 export function TitleCell(props: DefaultCellComponentProps) {
+  const { config } = useConfig();
   const row = (props.rowData ?? {}) as Row;
   const title = typeof props.cellData === "string" && props.cellData.trim() ? props.cellData : "Untitled";
   const src = thumb(row);
@@ -67,8 +85,8 @@ export function TitleCell(props: DefaultCellComponentProps) {
   const held = Boolean(row.containsMinor) && !row.containsMinorConfirmed;
   const published = row._status === "published";
 
-  return (
-    <span className="fam-cell">
+  const body = (
+    <>
       <span className="fam-cell__frame" aria-hidden="true">
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -88,8 +106,45 @@ export function TitleCell(props: DefaultCellComponentProps) {
           {row.kind ? <span className="fam-cell__kind">{row.kind}</span> : null}
         </span>
       </span>
-    </span>
+    </>
   );
+
+  /**
+   * Picking, not browsing. A relationship drawer lists the same collection
+   * and expects a click to CHOOSE the row rather than navigate away from the
+   * form — so when the table supplies an onClick it wins over the link, which
+   * is the precedence DefaultCell uses.
+   */
+  if (typeof props.onClick === "function") {
+    const onClick = props.onClick;
+    return (
+      <button
+        type="button"
+        className="fam-cell fam-cell--button"
+        onClick={() =>
+          onClick({ cellData: props.cellData, collectionSlug: props.collectionSlug, rowData: props.rowData })
+        }
+      >
+        {body}
+      </button>
+    );
+  }
+
+  if (props.link) {
+    const adminRoute = config?.routes?.admin ?? "/admin";
+    const href =
+      props.linkURL ??
+      (row.id != null
+        ? `${adminRoute}/collections/${props.collectionSlug}/${encodeURIComponent(String(row.id))}`
+        : "");
+    return (
+      <Link href={href} prefetch={false} className="fam-cell">
+        {body}
+      </Link>
+    );
+  }
+
+  return <span className="fam-cell">{body}</span>;
 }
 
 export default TitleCell;
