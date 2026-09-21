@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import ItemControls from "@/components/fampire/ItemControls";
+
 import { ImageWell } from "@/components/fampire/Preview";
 
 import {
@@ -86,11 +88,25 @@ export async function FilmProfiles({
   layout = "list",
   showWatchLinks = true,
   signedIn = false,
+  pageId,
+  blockIndex,
+  blockId,
 }: {
   films: FilmRecord[];
   layout?: string;
   showWatchLinks?: boolean;
   signedIn?: boolean;
+  /**
+   * Where this section lives, so a card can be edited or taken off the page.
+   *
+   * These layouts had no per-item controls at all, which meant the one page
+   * in the product that is ABOUT the films offered no way to reorder them,
+   * swap one out or drop one — the accordion layout had the controls and the
+   * three layouts actually in use did not.
+   */
+  pageId?: number | string;
+  blockIndex?: number;
+  blockId?: string | null;
 }) {
   const entries = await loadEntries();
   const watchLinks = await loadWatchLinks();
@@ -102,7 +118,16 @@ export async function FilmProfiles({
           const art = previewForFilm(entries, f.title);
           const src = chosen(f.posterUrl, f.posterImage) ?? art?.image ?? null;
           return (
-            <li key={f.slug}>
+            <li key={f.slug} className="fam-item relative">
+              <ItemControls
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                blockId={blockId}
+                collection="films"
+                id={f.id ?? null}
+                label={f.title}
+              />
               <Link href={`/library?film=${encodeURIComponent(f.title)}`} className="group block">
                 <ImageWell
                   src={src}
@@ -134,7 +159,16 @@ export async function FilmProfiles({
           const heroSrc = chosen(f.posterUrl, f.posterImage) ?? hero?.image ?? null;
 
           return (
-            <article key={f.slug} className="fam-section-rule pt-10">
+            <article key={f.slug} className="fam-item fam-section-rule relative pt-10">
+              <ItemControls
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                blockId={blockId}
+                collection="films"
+                id={f.id ?? null}
+                label={f.title}
+              />
               <div className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
                 <div>
                   <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">

@@ -30,10 +30,31 @@ const admin = (
   await api.find({ collection: "users", where: { role: { equals: "admin" } }, limit: 1, depth: 0, overrideAccess: true })
 ).docs[0];
 
-const page = (
-  await api.find({ collection: "pages", where: { slug: { equals: "/" } }, limit: 1, depth: 0, overrideAccess: true, draft: true })
-).docs[0];
-if (!page) throw new Error("no page with slug '/'");
+/**
+ * ANY page, not just the landing one.
+ *
+ * This was hardcoded to `/`, which left every other surface unable to be
+ * curated at all: /films rendered `loadFilms()` in the collection's own order
+ * with an empty `items` array, so there was no row to drag, nothing to
+ * replace, and no card to take off the page. The section looked editable —
+ * the block is right there in the CMS — and was not.
+ *
+ *   PAGE=/films npx payload run scripts/materialise-landing.ts
+ *   PAGE=all    npx payload run scripts/materialise-landing.ts
+ */
+const WANT = (process.env.PAGE ?? "/").trim();
+
+const pages = (
+  await api.find({
+    collection: "pages",
+    where: WANT === "all" ? {} : { slug: { equals: WANT } },
+    limit: 50,
+    depth: 0,
+    overrideAccess: true,
+    draft: true,
+  })
+).docs;
+if (!pages.length) throw new Error(`no page matching '${WANT}'`);
 
 const find = async (collection: string, where: Record<string, unknown> = {}, sort?: string) =>
   (await api.find({ collection, where, limit: 500, depth: 0, overrideAccess: true, ...(sort ? { sort } : {}) })).docs;
@@ -57,6 +78,9 @@ const films = await find("films", {}, "-awards");
  */
 const appearances = (await find("appearances", {}, "_order")).slice(0, 6);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+for (const page of pages as any[]) {
+console.log(`\n${page.slug}`);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const layout = ((page.layout ?? []) as any[]).map((b) => {
   switch (b.blockType) {
@@ -158,14 +182,20 @@ for (const b of layout as any[]) {
   console.log(`  ${String(b.blockType).padEnd(16)} ${n ? `${n} editable row(s)` : "—"}`);
 }
 
-if (DRY) {
-  console.log("\n[DRY RUN] nothing written");
-  process.exit(0);
-}
+if (DRY) continue;
 
 await api.update({ collection: "pages", id: page.id, data: { layout }, depth: 0, overrideAccess: true, user: admin });
+/* `update` on a drafts-enabled collection writes a DRAFT. Without this the
+   rows exist and the live page still renders the old fallback, which reads
+   as "the script did nothing". */
 if (page._status === "published") {
   await api.update({ collection: "pages", id: page.id, data: { _status: "published" }, depth: 0, overrideAccess: true, user: admin });
 }
-console.log("\npage '/' materialised — every element is now an editable row");
+}
+
+console.log(
+  DRY
+    ? "\n[DRY RUN] nothing written"
+    : `\n${pages.length} page(s) materialised — every element is now a row you can drag, edit or delete`,
+);
 process.exit(0);

@@ -739,6 +739,9 @@ export default async function RenderBlocks({
                 layout={String(block.layout ?? "list")}
                 showWatchLinks={block.showWatchLinks !== false}
                 signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={i}
+                blockId={block.id ? String(block.id) : null}
               />
             </Section>
           );
