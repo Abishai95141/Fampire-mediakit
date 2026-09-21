@@ -2,7 +2,7 @@ import type { ServerFunctionClient } from "payload";
 
 import config from "@payload-config";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import React from "react";
 
 import { importMap } from "./admin/importMap.js";
@@ -34,6 +34,20 @@ const adminFont = Plus_Jakarta_Sans({
 });
 
 /**
+ * The display face, for the dashboard's headings only.
+ *
+ * Everything else in the admin stays in Jakarta — a serif in a form label or
+ * a table header is harder to scan, and this CMS is mostly forms and tables.
+ * It earns its place on the one screen that is read rather than worked in.
+ */
+const displayFont = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600"],
+  variable: "--font-admin-display",
+});
+
+/**
  * Payload's admin owns its own <html> and <body>, which is why the FAMPIRE
  * front end had to move into a sibling (frontend) route group. Route groups do
  * not appear in URLs, so every public path is byte-identical to before.
@@ -52,7 +66,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       /* Payload renders <html> itself, so the font variable has to be handed
          to it rather than set on a wrapper — `htmlProps` is the seam it
          provides for exactly this. */
-      htmlProps={{ className: adminFont.variable }}
+      htmlProps={{ className: `${adminFont.variable} ${displayFont.variable}` }}
     >
       {children}
     </RootLayout>

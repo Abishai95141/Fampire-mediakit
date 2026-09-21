@@ -1,107 +1,290 @@
 /* The dashboard.
  *
- * Styled in Payload's theme variables and the accent theme.css defines, so it
- * follows light and dark without a media query of its own — the same rule the
- * other admin components here follow. */
+ * Theme variables and the accent theme.css defines, so light and dark both
+ * follow without a media query of its own — the rule the other admin
+ * components here keep. */
 
 .fam-dash {
-  max-width: 62rem;
+  max-width: 76rem;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  padding: 2rem 1.75rem 4rem;
 }
 
-.fam-dash__head {
-  margin-bottom: 2.5rem;
+/* ── Masthead ─────────────────────────────────────────────────────────── */
+
+.fam-dash__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem) auto;
+  align-items: start;
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
 }
 
-.fam-dash__title {
-  margin: 0;
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+.fam-dash__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 10.5px;
   font-weight: 600;
-  color: var(--theme-elevation-1000);
-}
-
-.fam-dash__sub {
-  margin: 0.6rem 0 0;
-  max-width: 44rem;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--theme-elevation-600);
-}
-
-.fam-dash__section {
-  margin-bottom: 2.75rem;
-}
-
-.fam-dash__h2 {
-  margin: 0 0 0.9rem;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--theme-elevation-500);
 }
 
-/* ── Waiting on you ──────────────────────────────────────────────────── */
-
-.fam-dash__rows {
-  list-style: none;
+.fam-dash__greeting {
   margin: 0;
+  font-family: var(--font-admin-display), Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__sub {
+  margin: 0.9rem 0 0;
+  max-width: 34rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--theme-elevation-600);
+}
+
+.fam-dash__who {
+  margin: 0.55rem 0 0;
+  font-size: 12.5px;
+  color: var(--theme-elevation-500);
+}
+
+/* A gradient panel with the photograph laid ON it. If the file is missing —
+   and `output: standalone` does not copy public/, which is how the landing
+   photograph broke once — this is still a designed surface. */
+.fam-dash__heroArt {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--theme-elevation-100),
+    var(--theme-elevation-50) 55%,
+    var(--fam-brass-soft, rgba(138, 106, 63, 0.12))
+  );
+}
+
+.fam-dash__heroArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  /* Warmed toward the accent so a full-colour photograph does not shout over
+     a page whose job is to be read. */
+  filter: sepia(0.42) saturate(0.85) contrast(1.02);
+  opacity: 0.92;
+}
+
+.fam-dash__heroRule {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px var(--theme-elevation-150);
+  border-radius: 4px;
+}
+
+.fam-dash__heroMotto {
+  margin: 0;
+  padding-top: 0.6rem;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  line-height: 2.1;
+  color: var(--theme-elevation-500);
+  border-bottom: 1px solid var(--fam-brass, #8a6a3f);
+  padding-bottom: 0.9rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .fam-dash__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fam-dash__heroArt,
+  .fam-dash__heroMotto {
+    display: none;
+  }
+}
+
+/* ── Totals ───────────────────────────────────────────────────────────── */
+
+.fam-dash__totals {
+  list-style: none;
+  margin: 0 0 1.5rem;
   padding: 0;
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
 }
 
-.fam-dash__row {
-  border: 1px solid var(--theme-elevation-150);
-  border-radius: 5px;
-  background: var(--theme-elevation-0);
+/* Hairlines between, not around — three numbers in a row read as one
+   statement, and three boxes read as three things to do. */
+.fam-dash__totals li + li {
+  border-left: 1px solid var(--theme-elevation-150);
 }
 
-/* The accent marks the rows that are somebody's job, and only those. A
-   coloured edge rather than a coloured panel: this sits above a form all day
-   and must not compete with it. */
-.fam-dash__row.is-urgent {
-  border-left: 3px solid var(--fam-brass);
-}
-
-.fam-dash__rowlink {
+.fam-dash__totals a {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 14px 16px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
   text-decoration: none;
   color: inherit;
 }
 
-.fam-dash__rowlink:hover {
-  background: var(--theme-elevation-50);
+.fam-dash__totals a:hover b {
+  color: var(--fam-brass, #8a6a3f);
 }
 
-.fam-dash__n {
+.fam-dash__totalIcon {
+  width: 30px;
+  height: 30px;
   flex: 0 0 auto;
-  min-width: 2.5rem;
-  font-size: 26px;
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__totals b {
+  display: block;
+  font-size: 34px;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
   color: var(--theme-elevation-1000);
 }
 
-.fam-dash__rowtext {
+.fam-dash__totalLabel {
   display: block;
+  margin-top: 2px;
+  font-size: 13.5px;
+  color: var(--theme-elevation-600);
 }
 
-.fam-dash__rowlabel {
+/* ── Cards ────────────────────────────────────────────────────────────── */
+
+.fam-dash__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1000px) {
+  .fam-dash__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.fam-dash__card {
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 6px;
+  background: var(--theme-elevation-0);
+  padding: 20px;
+}
+
+.fam-dash__cardHead,
+.fam-dash__quickHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.fam-dash__cardHead > div,
+.fam-dash__quickHead > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fam-dash__cardIcon {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__card h2 {
+  margin: 0;
+  font-family: var(--font-admin-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__card h2 + p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--theme-elevation-550);
+}
+
+.fam-dash__viewall {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__viewall:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fam-dash__inlineArrow {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── The queue ────────────────────────────────────────────────────────── */
+
+.fam-dash__queue {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.fam-dash__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 5px;
+}
+
+.fam-dash__itemN {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fam-brass, #8a6a3f);
+  /* A rule between the number and its label, so the pair reads as one item
+     even when the numbers differ in width. */
+  padding-right: 16px;
+  border-right: 1px solid var(--theme-elevation-150);
+  min-width: 2.6rem;
+}
+
+.fam-dash__itemLabel {
   display: block;
   font-size: 14.5px;
   color: var(--theme-elevation-900);
 }
 
-.fam-dash__rowhint {
+.fam-dash__itemHint {
   display: block;
   margin-top: 3px;
   font-size: 12.5px;
@@ -109,122 +292,224 @@
   color: var(--theme-elevation-550);
 }
 
-/* An empty queue is the good outcome and should read as one, not as a blank
-   area that looks like something failed to load. */
-.fam-dash__clear {
-  margin: 0;
-  padding: 14px 16px;
-  border: 1px dashed var(--theme-elevation-200);
+.fam-dash__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  font-size: 12.5px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--theme-elevation-150);
+  color: var(--theme-elevation-700);
+}
+
+.fam-dash__pill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.fam-dash__pill--urgent {
+  color: var(--fam-brass, #8a6a3f);
+  border-color: var(--fam-brass-soft, rgba(138, 106, 63, 0.4));
+}
+
+.fam-dash__pill--quiet {
+  color: var(--theme-elevation-500);
+}
+
+.fam-dash__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  padding: 9px 16px;
   border-radius: 5px;
-  font-size: 14px;
+  border: 1px solid var(--theme-elevation-200);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--theme-elevation-900);
+}
+
+.fam-dash__btn:hover {
+  border-color: var(--fam-brass, #8a6a3f);
+}
+
+/* Filled, once. The child-safety queue is the only thing on this page that
+   somebody is required to act on. */
+.fam-dash__btn--primary {
+  background: var(--fam-brass, #8a6a3f);
+  border-color: var(--fam-brass, #8a6a3f);
+  color: #fff;
+}
+
+.fam-dash__btn--primary:hover {
+  background: var(--fam-brass-hover, #6f5432);
+  border-color: var(--fam-brass-hover, #6f5432);
+}
+
+@media (max-width: 720px) {
+  .fam-dash__item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .fam-dash__pill,
+  .fam-dash__btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+/* ── System health ────────────────────────────────────────────────────── */
+
+.fam-dash__alert {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--fam-brass-soft, rgba(138, 106, 63, 0.4));
+  border-radius: 5px;
+  background: var(--fam-brass-soft, rgba(138, 106, 63, 0.06));
+}
+
+.fam-dash__alertIcon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__alertTitle {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__alertBody {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--theme-elevation-600);
 }
 
-.fam-dash__note {
-  margin: 12px 0 0;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: var(--theme-elevation-550);
-}
-
-.fam-dash__note code {
+.fam-dash__alertBody code {
   font-size: 12px;
-  padding: 1px 5px;
+  padding: 2px 6px;
   border-radius: 3px;
   background: var(--theme-elevation-100);
   color: var(--theme-elevation-800);
 }
 
-/* ── Start here ──────────────────────────────────────────────────────── */
-
-.fam-dash__actions {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+/* An empty queue is the good outcome and should read as one, not as a blank
+   area that looks like something failed to load. */
+.fam-dash__clear {
+  margin: 0;
+  padding: 16px;
+  border: 1px dashed var(--theme-elevation-200);
+  border-radius: 5px;
+  font-size: 13.5px;
+  color: var(--theme-elevation-600);
 }
 
-.fam-dash__action {
-  display: block;
-  padding: 14px 16px;
-  border: 1px solid var(--theme-elevation-150);
-  border-radius: 5px;
-  background: var(--theme-elevation-0);
+/* ── Quick actions ────────────────────────────────────────────────────── */
+
+.fam-dash__quick {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 3fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .fam-dash__quick {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.fam-dash__quickHead {
+  margin-bottom: 0;
+}
+
+.fam-dash__quickList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.fam-dash__quickList > * + * {
+  border-left: 1px solid var(--theme-elevation-150);
+}
+
+.fam-dash__quickItem {
+  display: flex;
+  gap: 14px;
+  padding: 4px 18px;
   text-decoration: none;
   color: inherit;
 }
 
-.fam-dash__action:hover {
-  border-color: var(--fam-brass);
-  background: var(--theme-elevation-50);
+.fam-dash__quickIcon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--theme-elevation-200);
+  border-radius: 5px;
+  color: var(--theme-elevation-700);
 }
 
-.fam-dash__action b {
-  display: block;
+.fam-dash__quickIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fam-dash__quickItem:hover .fam-dash__quickIcon {
+  border-color: var(--fam-brass, #8a6a3f);
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__quickText {
+  min-width: 0;
+}
+
+.fam-dash__quickText b {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   font-size: 14.5px;
   font-weight: 600;
   color: var(--theme-elevation-1000);
 }
 
-.fam-dash__action span {
+.fam-dash__quickArrow {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: var(--theme-elevation-450);
+}
+
+.fam-dash__quickItem:hover .fam-dash__quickArrow {
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-dash__quickText > span {
   display: block;
-  margin-top: 4px;
+  margin-top: 5px;
   font-size: 12.5px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--theme-elevation-550);
 }
 
-/* ── Counts ──────────────────────────────────────────────────────────── */
-
-.fam-dash__stats {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 28px;
-}
-
-.fam-dash__stats a {
-  text-decoration: none;
-  font-size: 14px;
-  color: var(--theme-elevation-600);
-}
-
-.fam-dash__stats a:hover {
-  color: var(--theme-elevation-1000);
-}
-
-.fam-dash__stats b {
-  font-size: 18px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  color: var(--theme-elevation-1000);
-}
-
-/* ── The rules ───────────────────────────────────────────────────────── */
-
-.fam-dash__rules ol {
-  margin: 0;
-  padding-left: 1.2rem;
-  display: grid;
-  gap: 10px;
-}
-
-.fam-dash__rules li {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--theme-elevation-700);
-  max-width: 48rem;
-}
-
-.fam-dash__rules b {
-  color: var(--theme-elevation-1000);
-  font-weight: 600;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  .fam-dash__rowlink,
-  .fam-dash__action {
-    transition: background-color 0.12s ease, border-color 0.12s ease;
+  .fam-dash__totals a,
+  .fam-dash__btn,
+  .fam-dash__quickIcon,
+  .fam-dash__quickArrow,
+  .fam-dash__viewall {
+    transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
   }
 }
