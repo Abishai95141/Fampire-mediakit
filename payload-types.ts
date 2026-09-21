@@ -67,20 +67,20 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
-    brands: Brand;
     entries: Entry;
     media: Media;
-    'landing-assets': LandingAsset;
-    articles: Article;
+    pages: Page;
     'magazine-issues': MagazineIssue;
     appearances: Appearance;
-    pages: Page;
-    'site-settings': SiteSetting;
+    articles: Article;
     people: Person;
     films: Film;
     events: Event;
     locations: Location;
+    brands: Brand;
+    'landing-assets': LandingAsset;
+    'site-settings': SiteSetting;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,20 +88,20 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    brands: BrandsSelect<false> | BrandsSelect<true>;
     entries: EntriesSelect<false> | EntriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'landing-assets': LandingAssetsSelect<false> | LandingAssetsSelect<true>;
-    articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'magazine-issues': MagazineIssuesSelect<false> | MagazineIssuesSelect<true>;
     appearances: AppearancesSelect<false> | AppearancesSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     films: FilmsSelect<false> | FilmsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    'landing-assets': LandingAssetsSelect<false> | LandingAssetsSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -142,57 +142,6 @@ export interface UserAuthOperations {
   };
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  name?: string | null;
-  role: 'admin' | 'approver' | 'contributor';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
-}
-/**
- * A lens on the one library, not a separate site. Brands appear as a filter in the Library and decide which collections a contributor can edit — they are not pages and have no URL of their own.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "brands".
- */
-export interface Brand {
-  id: number;
-  name: string;
-  /**
-   * URL segment, e.g. `fampire` → /fampire
-   */
-  slug: string;
-  /**
-   * One line, shown on the brand card.
-   */
-  tagline?: string | null;
-  /**
-   * Five of the eight worlds shipped with zero assets. Unchecked keeps the card visible but the surface shallow.
-   */
-  hasAssets?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Every collection in the library. Search by title, description or the original folder name; filter by any facet; edit or delete any row. New Collection needs four things — a title, a one-line description, the link, and what kind it is. Everything else can be filled in later. Never migrate, copy or host the client's files; links plus metadata only.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -200,6 +149,24 @@ export interface Brand {
  */
 export interface Entry {
   id: number;
+  /**
+   * Read off the URL when left blank.
+   */
+  sourcePlatform: 'drive' | 'dropbox' | 'pictime' | 'vimeo' | 'youtube' | 'streaming' | 'site' | 'unknown';
+  /**
+   * Whether a stranger with the link can open it.
+   */
+  access: 'public' | 'password' | 'request' | 'broken';
+  /**
+   * Internal only. Passwords live here and are NEVER rendered on a public surface.
+   */
+  accessNote?: string | null;
+  /**
+   * Written by the nightly sweep. 'unchecked' means it has not run, NOT that the link is fine — a Drive folder that returns 200 but redirects to sign-in is not healthy.
+   */
+  linkStatus?: ('unchecked' | 'ok' | 'gone' | 'login-required' | 'password' | 'timeout' | 'blocked') | null;
+  linkStatusDetail?: string | null;
+  lastChecked?: string | null;
   /**
    * Renamed for strangers. '6. 6/26/2025 - UFC/ Aires Tech RoundTable - Vegas' becomes 'UFC × Aires Tech Roundtable — Las Vegas, June 2025'. This renaming IS the product.
    */
@@ -335,18 +302,6 @@ export interface Entry {
    * Internal. Who confirmed, and what they checked.
    */
   safetyNote?: string | null;
-  sourcePlatform: 'drive' | 'dropbox' | 'pictime' | 'vimeo' | 'youtube' | 'streaming' | 'site' | 'unknown';
-  access: 'public' | 'password' | 'request' | 'broken';
-  /**
-   * Internal only. Passwords live here and are NEVER rendered on a public surface.
-   */
-  accessNote?: string | null;
-  /**
-   * 'unchecked' means the sweep has not run, NOT that the link is fine. A Drive folder that returns 200 but redirects to sign-in is not healthy.
-   */
-  linkStatus?: ('unchecked' | 'ok' | 'gone' | 'login-required' | 'password' | 'timeout' | 'blocked') | null;
-  linkStatusDetail?: string | null;
-  lastChecked?: string | null;
   fileCount?: number | null;
   dominantMedia?: ('image' | 'video' | 'document' | 'audio' | 'vector' | 'other') | null;
   mediaMix?: {
@@ -462,6 +417,30 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * A lens on the one library, not a separate site. Brands appear as a filter in the Library and decide which collections a contributor can edit — they are not pages and have no URL of their own.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: number;
+  name: string;
+  /**
+   * URL segment, e.g. `fampire` → /fampire
+   */
+  slug: string;
+  /**
+   * One line, shown on the brand card.
+   */
+  tagline?: string | null;
+  /**
+   * Five of the eight worlds shipped with zero assets. Unchecked keeps the card visible but the surface shallow.
+   */
+  hasAssets?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -622,172 +601,6 @@ export interface MagazineIssue {
   seoTitle?: string | null;
   seoDescription?: string | null;
   seoImage?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * Pictures the landing page composes with — hero cards, section backgrounds, anything that is a page decision rather than a record. Changing one here never changes a Person, Film or Brand.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "landing-assets".
- */
-export interface LandingAsset {
-  id: number;
-  /**
-   * What this picture is, in plain words. Shown in the picker.
-   */
-  title?: string | null;
-  /**
-   * Which section this was uploaded for. Only a label — nothing enforces it.
-   */
-  usedFor?: ('hero' | 'statement' | 'people' | 'films' | 'press' | 'lately' | 'other') | null;
-  /**
-   * Describe the picture for someone who cannot see it. Left empty, the card's own name is used.
-   */
-  alt?: string | null;
-  /**
-   * Photographer or source, where one is owed.
-   */
-  credit?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    card?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    wide?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * Press releases, announcements and features written by the team.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles".
- */
-export interface Article {
-  id: number;
-  title: string;
-  /**
-   * URL segment.
-   */
-  slug: string;
-  /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
-   */
-  tenant?: (number | null) | Brand;
-  type?: ('press-release' | 'announcement' | 'feature' | 'statement' | 'coverage') | null;
-  publishedAt?: string | null;
-  /**
-   * One or two sentences. Used on cards and in link previews.
-   */
-  excerpt?: string | null;
-  heroImage?: (number | null) | Media;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * For 'coverage elsewhere' — where it was published. Storing the URL is the correct treatment; we never rehost someone else's article.
-   */
-  externalUrl?: string | null;
-  people?: (number | Person)[] | null;
-  films?: (number | Film)[] | null;
-  events?: (number | Event)[] | null;
-  /**
-   * Catalog collections a reader should be offered alongside — b-roll for the story, photography from the event.
-   */
-  relatedCollections?: (number | Entry)[] | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
-  seoImage?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * Podcasts, panels, keynotes and broadcast. Log one in under two minutes.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "appearances".
- */
-export interface Appearance {
-  id: number;
-  _order?: string | null;
-  title: string;
-  /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
-   */
-  tenant?: (number | null) | Brand;
-  /**
-   * Show, publication or venue.
-   */
-  outlet?: string | null;
-  /**
-   * Leave empty if the air date is unknown.
-   */
-  date?: string | null;
-  /**
-   * Who appeared. Leave empty if the log does not record it.
-   */
-  people?: (number | Person)[] | null;
-  type?: ('podcast' | 'panel' | 'keynote' | 'broadcast' | 'print' | 'conference') | null;
-  /**
-   * Where to watch or listen.
-   */
-  url?: string | null;
-  summary?: string | null;
-  /**
-   * Audience figure as the client recorded it. Reproduced verbatim, never estimated.
-   */
-  views?: number | null;
-  /**
-   * When that figure was captured, if known.
-   */
-  viewsAsOf?: string | null;
-  /**
-   * Still for the log row. An absolute URL from the platform's own thumbnail service — nothing is hosted here.
-   */
-  thumbnail?: string | null;
-  parts?:
-    | {
-        label: string;
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1223,6 +1036,42 @@ export interface Page {
         showSort?: boolean | null;
         showCount?: boolean | null;
         /**
+         * Which filters show down the left, in the order you pick them. Leave empty for all of them.
+         */
+        facets?:
+          | (
+              | 'media'
+              | 'kind'
+              | 'orientation'
+              | 'occasion'
+              | 'brand'
+              | 'subject'
+              | 'person'
+              | 'location'
+              | 'issue'
+              | 'year'
+              | 'film'
+              | 'event'
+            )[]
+          | null;
+        /**
+         * How the pool is ordered before anyone chooses. Blank keeps today's behaviour — best match once something is typed, most material otherwise.
+         */
+        defaultSort?: ('relevance' | 'largest' | 'newest' | 'oldest' | 'az') | null;
+        /**
+         * The words a reader sees on a dead end. This is the moment they decide the library is not worth using, and it was hardcoded.
+         */
+        empty?: {
+          /**
+           * Blank uses "Nothing matches that."
+           */
+          heading?: string | null;
+          /**
+           * The line underneath. Blank keeps the current one, which tells them this is a few hundred described collections rather than a file browser.
+           */
+          body?: string | null;
+        };
+        /**
          * Always applied and not removable by the reader. Leave empty for the whole pool.
          */
         locked?: {
@@ -1467,6 +1316,37 @@ export interface Page {
          * The fact on the right of the heading.
          */
         aside?: string | null;
+        /**
+         * Leave empty to show the newest magazine collections automatically.
+         */
+        issues?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this collection. Anything typed here wins, and the collection record is never changed.
+               */
+              source?: (number | null) | Entry;
+              /**
+               * Shown on the shelf. Blank inherits the collection's.
+               */
+              title?: string | null;
+              /**
+               * The line under the title.
+               */
+              description?: string | null;
+              /**
+               * Where "Read the issue" goes. Blank inherits the collection's preview.
+               */
+              readUrl?: string | null;
+              /**
+               * Where "Assets" goes. Blank inherits the collection's own link.
+               */
+              assetsUrl?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Only used when the list above is empty.
+         */
         limit?: number | null;
         id?: string | null;
         blockName?: string | null;
@@ -1479,6 +1359,33 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         intro?: string | null;
+        /**
+         * Leave empty to show every film that has a watch link.
+         */
+        films?:
+          | {
+              /**
+               * Optional. Blank fields below fall back to this film. Anything typed here wins, and the film record is never changed.
+               */
+              source?: (number | null) | Film;
+              /**
+               * Blank inherits the film's title.
+               */
+              title?: string | null;
+              /**
+               * Overrides the film's own links when any row is present.
+               */
+              watch?:
+                | {
+                    platform: string;
+                    url: string;
+                    free?: boolean | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
         /**
          * The closing note under the matrix. Optional.
          */
@@ -1734,6 +1641,172 @@ export interface Page {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Pictures the landing page composes with — hero cards, section backgrounds, anything that is a page decision rather than a record. Changing one here never changes a Person, Film or Brand.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-assets".
+ */
+export interface LandingAsset {
+  id: number;
+  /**
+   * What this picture is, in plain words. Shown in the picker.
+   */
+  title?: string | null;
+  /**
+   * Which section this was uploaded for. Only a label — nothing enforces it.
+   */
+  usedFor?: ('hero' | 'statement' | 'people' | 'films' | 'press' | 'lately' | 'other') | null;
+  /**
+   * Describe the picture for someone who cannot see it. Left empty, the card's own name is used.
+   */
+  alt?: string | null;
+  /**
+   * Photographer or source, where one is owed.
+   */
+  credit?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    wide?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * Podcasts, panels, keynotes and broadcast. Log one in under two minutes.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appearances".
+ */
+export interface Appearance {
+  id: number;
+  _order?: string | null;
+  title: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
+  /**
+   * Show, publication or venue.
+   */
+  outlet?: string | null;
+  /**
+   * Leave empty if the air date is unknown.
+   */
+  date?: string | null;
+  /**
+   * Who appeared. Leave empty if the log does not record it.
+   */
+  people?: (number | Person)[] | null;
+  type?: ('podcast' | 'panel' | 'keynote' | 'broadcast' | 'print' | 'conference') | null;
+  /**
+   * Where to watch or listen.
+   */
+  url?: string | null;
+  summary?: string | null;
+  /**
+   * Audience figure as the client recorded it. Reproduced verbatim, never estimated.
+   */
+  views?: number | null;
+  /**
+   * When that figure was captured, if known.
+   */
+  viewsAsOf?: string | null;
+  /**
+   * Still for the log row. An absolute URL from the platform's own thumbnail service — nothing is hosted here.
+   */
+  thumbnail?: string | null;
+  parts?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Press releases, announcements and features written by the team. Nothing on the public site renders these yet — the Press page shows Appearances. Drafts kept here are safe and private until that changes.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: number;
+  title: string;
+  /**
+   * URL segment.
+   */
+  slug: string;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
+  type?: ('press-release' | 'announcement' | 'feature' | 'statement' | 'coverage') | null;
+  publishedAt?: string | null;
+  /**
+   * One or two sentences. Used on cards and in link previews.
+   */
+  excerpt?: string | null;
+  heroImage?: (number | null) | Media;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * For 'coverage elsewhere' — where it was published. Storing the URL is the correct treatment; we never rehost someone else's article.
+   */
+  externalUrl?: string | null;
+  people?: (number | Person)[] | null;
+  films?: (number | Film)[] | null;
+  events?: (number | Event)[] | null;
+  /**
+   * Catalog collections a reader should be offered alongside — b-roll for the story, photography from the event.
+   */
+  relatedCollections?: (number | Entry)[] | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  seoImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * The links in the masthead and the footer, plus the search placeholder.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1780,6 +1853,33 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  name?: string | null;
+  role: 'admin' | 'approver' | 'contributor';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1803,14 +1903,6 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'brands';
-        value: number | Brand;
-      } | null)
-    | ({
         relationTo: 'entries';
         value: number | Entry;
       } | null)
@@ -1819,12 +1911,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'landing-assets';
-        value: number | LandingAsset;
-      } | null)
-    | ({
-        relationTo: 'articles';
-        value: number | Article;
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'magazine-issues';
@@ -1835,12 +1923,8 @@ export interface PayloadLockedDocument {
         value: number | Appearance;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'site-settings';
-        value: number | SiteSetting;
+        relationTo: 'articles';
+        value: number | Article;
       } | null)
     | ({
         relationTo: 'people';
@@ -1857,6 +1941,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'locations';
         value: number | Location;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: number | Brand;
+      } | null)
+    | ({
+        relationTo: 'landing-assets';
+        value: number | LandingAsset;
+      } | null)
+    | ({
+        relationTo: 'site-settings';
+        value: number | SiteSetting;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1902,45 +2002,15 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "brands_select".
- */
-export interface BrandsSelect<T extends boolean = true> {
-  name?: T;
-  slug?: T;
-  tagline?: T;
-  hasAssets?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "entries_select".
  */
 export interface EntriesSelect<T extends boolean = true> {
+  sourcePlatform?: T;
+  access?: T;
+  accessNote?: T;
+  linkStatus?: T;
+  linkStatusDetail?: T;
+  lastChecked?: T;
   title?: T;
   slug?: T;
   description?: T;
@@ -1979,12 +2049,6 @@ export interface EntriesSelect<T extends boolean = true> {
   containsMinor?: T;
   containsMinorConfirmed?: T;
   safetyNote?: T;
-  sourcePlatform?: T;
-  access?: T;
-  accessNote?: T;
-  linkStatus?: T;
-  linkStatusDetail?: T;
-  lastChecked?: T;
   fileCount?: T;
   dominantMedia?: T;
   mediaMix?:
@@ -2076,126 +2140,6 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "landing-assets_select".
- */
-export interface LandingAssetsSelect<T extends boolean = true> {
-  title?: T;
-  usedFor?: T;
-  alt?: T;
-  credit?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        card?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        wide?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles_select".
- */
-export interface ArticlesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  tenant?: T;
-  type?: T;
-  publishedAt?: T;
-  excerpt?: T;
-  heroImage?: T;
-  body?: T;
-  externalUrl?: T;
-  people?: T;
-  films?: T;
-  events?: T;
-  relatedCollections?: T;
-  seoTitle?: T;
-  seoDescription?: T;
-  seoImage?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "magazine-issues_select".
- */
-export interface MagazineIssuesSelect<T extends boolean = true> {
-  issueNumber?: T;
-  title?: T;
-  slug?: T;
-  tenant?: T;
-  coverSubject?: T;
-  coverImage?: T;
-  publishedAt?: T;
-  summary?: T;
-  readUrl?: T;
-  relatedCollections?: T;
-  seoTitle?: T;
-  seoDescription?: T;
-  seoImage?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "appearances_select".
- */
-export interface AppearancesSelect<T extends boolean = true> {
-  _order?: T;
-  title?: T;
-  tenant?: T;
-  outlet?: T;
-  date?: T;
-  people?: T;
-  type?: T;
-  url?: T;
-  summary?: T;
-  views?: T;
-  viewsAsOf?: T;
-  thumbnail?: T;
-  parts?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2428,6 +2372,14 @@ export interface PagesSelect<T extends boolean = true> {
               showSearch?: T;
               showSort?: T;
               showCount?: T;
+              facets?: T;
+              defaultSort?: T;
+              empty?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                  };
               locked?:
                 | T
                 | {
@@ -2545,6 +2497,16 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               intro?: T;
               aside?: T;
+              issues?:
+                | T
+                | {
+                    source?: T;
+                    title?: T;
+                    description?: T;
+                    readUrl?: T;
+                    assetsUrl?: T;
+                    id?: T;
+                  };
               limit?: T;
               id?: T;
               blockName?: T;
@@ -2555,6 +2517,21 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              films?:
+                | T
+                | {
+                    source?: T;
+                    title?: T;
+                    watch?:
+                      | T
+                      | {
+                          platform?: T;
+                          url?: T;
+                          free?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
               note?: T;
               id?: T;
               blockName?: T;
@@ -2715,41 +2692,78 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-settings_select".
+ * via the `definition` "magazine-issues_select".
  */
-export interface SiteSettingsSelect<T extends boolean = true> {
-  label?: T;
+export interface MagazineIssuesSelect<T extends boolean = true> {
+  issueNumber?: T;
+  title?: T;
+  slug?: T;
   tenant?: T;
-  nav?:
+  coverSubject?: T;
+  coverImage?: T;
+  publishedAt?: T;
+  summary?: T;
+  readUrl?: T;
+  relatedCollections?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  seoImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appearances_select".
+ */
+export interface AppearancesSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  tenant?: T;
+  outlet?: T;
+  date?: T;
+  people?: T;
+  type?: T;
+  url?: T;
+  summary?: T;
+  views?: T;
+  viewsAsOf?: T;
+  thumbnail?: T;
+  parts?:
     | T
     | {
         label?: T;
-        href?: T;
-        children?:
-          | T
-          | {
-              label?: T;
-              href?: T;
-              id?: T;
-            };
+        url?: T;
         id?: T;
       };
-  footer?:
-    | T
-    | {
-        blurb?: T;
-        links?:
-          | T
-          | {
-              label?: T;
-              href?: T;
-              id?: T;
-            };
-        trademarkNote?: T;
-      };
-  searchPlaceholder?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  tenant?: T;
+  type?: T;
+  publishedAt?: T;
+  excerpt?: T;
+  heroImage?: T;
+  body?: T;
+  externalUrl?: T;
+  people?: T;
+  films?: T;
+  events?: T;
+  relatedCollections?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  seoImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2821,6 +2835,125 @@ export interface LocationsSelect<T extends boolean = true> {
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  tagline?: T;
+  hasAssets?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-assets_select".
+ */
+export interface LandingAssetsSelect<T extends boolean = true> {
+  title?: T;
+  usedFor?: T;
+  alt?: T;
+  credit?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        wide?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  label?: T;
+  tenant?: T;
+  nav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  footer?:
+    | T
+    | {
+        blurb?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        trademarkNote?: T;
+      };
+  searchPlaceholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

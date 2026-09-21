@@ -427,17 +427,28 @@ export function MagazineShelf({ issues }: { issues: Entry[] }) {
 
 // ── Where to watch ──────────────────────────────────────────────────────
 
-export async function WatchGrid() {
+export async function WatchGrid({
+  rows,
+}: {
+  /** Rows the page owns. Undefined means "show every film that has a link",
+   *  which is what this block did before it could be curated at all. */
+  rows?: { title: string; links: { platform: string; url: string; free?: boolean }[] }[];
+} = {}) {
   const films = await loadFilms();
   const links = await loadWatchLinks();
 
+  const matrix = rows?.length
+    ? rows.filter((r) => r.links.length)
+    : films
+        .map((f) => ({ title: f.title, links: links.filter((w) => w.film === f.title) }))
+        .filter((r) => r.links.length);
+
   return (
     <div className="grid gap-x-14 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
-      {films.map((f) => {
-        const forFilm = links.filter((w) => w.film === f.title);
-        if (!forFilm.length) return null;
+      {matrix.map((f) => {
+        const forFilm = f.links;
         return (
-          <div key={f.slug} className="border-t border-fam-rule pt-5">
+          <div key={f.title} className="border-t border-fam-rule pt-5">
             <h3 className="fam-display-sm text-[17px]">{f.title}</h3>
             <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
               {forFilm.map((w) => (

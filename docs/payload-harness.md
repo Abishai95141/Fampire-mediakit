@@ -1,4 +1,4 @@
-# The Payload harness — three things that will confuse you
+# The Payload harness — four things that will confuse you
 
 Setup notes for stage 2 of `BUILD-PLAN.md`. Everything here is a deviation from
 a stock `create-payload-app` install, forced by the app Payload landed inside.
@@ -70,6 +70,39 @@ being replaced — which keeps the hard-coded string true.
   `app/(payload)/admin/importMap.js`. They are regenerated, not hand-edited.
 - **HNN keeps its own Drizzle schema and studio.** Payload's tables sit
   alongside; the two are never merged (§2.3).
+
+## Deviation 4 — generate migrations with `S3_BUCKET` set, or one will delete a column
+
+`payload migrate:create` diffs the config against the **previous migration's
+`.json` snapshot**, and the S3 storage plugin only declares
+`landing_assets.prefix` when a bucket is configured. So generating a migration
+on a laptop, where `S3_BUCKET` is unset, produces this in `up()`:
+
+```sql
+ALTER TABLE "landing_assets" DROP COLUMN "prefix";
+```
+
+Applied to a deployment, that drops the column the landing images are served
+through — the outage `payload.config.ts` already documents once, arriving a
+second time by a different route. Nothing warns you; the migration looks
+ordinary and its name says nothing about S3.
+
+So:
+
+```bash
+S3_BUCKET=migration-shape-only npx payload migrate:create <name>
+```
+
+The value is never connected to. It exists only to make the config the same
+shape as the one production runs, which is the shape the migration has to be
+diffed against.
+
+**Two more things about `migrate:create`.** It writes a `.ts` **and** a
+`.json` snapshot, and the snapshot is what the next generation compares with —
+so deleting a bad migration means deleting BOTH files, or the next one is
+diffed against changes you thought you had thrown away. And it never touches
+the database, so a generated migration is not an applied one.
+
 
 ## Commands
 

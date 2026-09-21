@@ -341,7 +341,7 @@ export const Stats: Block = {
 
 export const FilmStrip: Block = {
   slug: "filmStrip",
-  labels: { singular: "Films", plural: "Films" },
+  labels: { singular: "The film slate", plural: "Film slates" },
   fields: [
     ...heading,
     {
@@ -434,7 +434,7 @@ export const FilmStrip: Block = {
 
 export const PeopleRow: Block = {
   slug: "peopleRow",
-  labels: { singular: "People", plural: "People" },
+  labels: { singular: "A row of people", plural: "People rows" },
   fields: [
     ...heading,
     {
@@ -611,7 +611,44 @@ export const MagazineShelf: Block = {
   fields: [
     ...heading,
     { name: "aside", type: "text", admin: { description: "The fact on the right of the heading." } },
-    { name: "limit", type: "number", defaultValue: 12 },
+    {
+      /**
+       * The issues this page shows, as rows it owns.
+       *
+       * Until now the shelf had no item authoring at all: it queried every
+       * published collection whose kind is magazine and showed the first
+       * twelve, so correcting one issue's title on the landing page meant
+       * editing the catalog record — which changes it in the Library, in
+       * search and on its own page too.
+       *
+       * Same contract as every other section: leave the list empty and the
+       * query still runs, so nothing that exists today changes.
+       *
+       * NO PICTURE FIELD. The shelf renders a title, a description and two
+       * links and draws no image, and a field that cannot appear on screen is
+       * the exact thing this pass is removing elsewhere.
+       */
+      name: "issues",
+      type: "array",
+      labels: { singular: "Issue", plural: "Issues" },
+      admin: { description: "Leave empty to show the newest magazine collections automatically." },
+      fields: [
+        sourceField("entries", "collection"),
+        { name: "title", type: "text", admin: { description: "Shown on the shelf. Blank inherits the collection's." } },
+        { name: "description", type: "textarea", admin: { description: "The line under the title." } },
+        {
+          name: "readUrl",
+          type: "text",
+          admin: { description: 'Where "Read the issue" goes. Blank inherits the collection\'s preview.' },
+        },
+        {
+          name: "assetsUrl",
+          type: "text",
+          admin: { description: 'Where "Assets" goes. Blank inherits the collection\'s own link.' },
+        },
+      ],
+    },
+    { name: "limit", type: "number", defaultValue: 12, admin: { description: "Only used when the list above is empty." } },
   ],
 };
 
@@ -621,6 +658,39 @@ export const WatchGrid: Block = {
   labels: { singular: "Where to watch", plural: "Where to watch" },
   fields: [
     ...heading,
+    {
+      /**
+       * The matrix as rows this page owns.
+       *
+       * It had none: the block rendered every film with at least one watch
+       * link, in the order the Films collection returned them, and a platform
+       * dropped from a deal could only be removed by editing the film. Same
+       * shape as filmStrip's rows, deliberately — an editor who has met one
+       * has met both.
+       *
+       * No picture field here either; the matrix is a title and a row of
+       * platform links.
+       */
+      name: "films",
+      type: "array",
+      labels: { singular: "Film", plural: "Films" },
+      admin: { description: "Leave empty to show every film that has a watch link." },
+      fields: [
+        sourceField("films", "film"),
+        { name: "title", type: "text", admin: { description: "Blank inherits the film's title." } },
+        {
+          name: "watch",
+          type: "array",
+          labels: { singular: "Watch link", plural: "Watch links" },
+          admin: { description: "Overrides the film's own links when any row is present." },
+          fields: [
+            { name: "platform", type: "text", required: true },
+            { name: "url", type: "text", required: true },
+            { name: "free", type: "checkbox" },
+          ],
+        },
+      ],
+    },
     {
       name: "note",
       type: "textarea",
@@ -660,6 +730,72 @@ export const LibraryBrowser: Block = {
         { name: "showSearch", type: "checkbox", defaultValue: true, admin: { width: "33%" } },
         { name: "showSort", type: "checkbox", defaultValue: true, admin: { width: "33%" } },
         { name: "showCount", type: "checkbox", defaultValue: true, admin: { width: "33%" } },
+      ],
+    },
+    {
+      /**
+       * Which filter rails appear, and in what order.
+       *
+       * The eleven axes were fixed in the component, so the one page in the
+       * product that is entirely about finding things had no say in how
+       * finding worked. Leave this empty and all eleven show in their current
+       * order, which is what happens today.
+       */
+      name: "facets",
+      type: "select",
+      hasMany: true,
+      options: [
+        { label: "Photos or video", value: "media" },
+        { label: "Kind", value: "kind" },
+        { label: "Orientation", value: "orientation" },
+        { label: "Occasion", value: "occasion" },
+        { label: "Brand", value: "brand" },
+        { label: "Person", value: "subject" },
+        { label: "Featuring", value: "person" },
+        { label: "Place", value: "location" },
+        { label: "Magazine issue", value: "issue" },
+        { label: "Year", value: "year" },
+        { label: "Film", value: "film" },
+        { label: "Event", value: "event" },
+      ],
+      admin: {
+        description:
+          "Which filters show down the left, in the order you pick them. Leave empty for all of them.",
+      },
+    },
+    {
+      name: "defaultSort",
+      type: "select",
+      options: [
+        { label: "Best match", value: "relevance" },
+        { label: "Most material", value: "largest" },
+        { label: "Newest first", value: "newest" },
+        { label: "Oldest first", value: "oldest" },
+        { label: "A–Z", value: "az" },
+      ],
+      admin: {
+        description:
+          "How the pool is ordered before anyone chooses. Blank keeps today's behaviour — best match once something is typed, most material otherwise.",
+      },
+    },
+    {
+      name: "empty",
+      type: "group",
+      label: "When nothing matches",
+      admin: {
+        description:
+          "The words a reader sees on a dead end. This is the moment they decide the library is not worth using, and it was hardcoded.",
+      },
+      fields: [
+        { name: "heading", type: "text", admin: { description: 'Blank uses "Nothing matches that."' } },
+        {
+          name: "body",
+          type: "textarea",
+          admin: {
+            description:
+              "The line underneath. Blank keeps the current one, which tells them this is a few hundred described collections rather than a file browser.",
+          },
+        },
       ],
     },
     {
@@ -750,6 +886,7 @@ export const PressList: Block = {
 
 export const Quote: Block = {
   slug: "quote",
+  labels: { singular: "Quote", plural: "Quotes" },
   fields: [
     { name: "quote", type: "textarea", required: true },
     { name: "attribution", type: "text" },
@@ -796,6 +933,7 @@ export const CopyBlock: Block = {
 
 export const Embed: Block = {
   slug: "embed",
+  labels: { singular: "Embed", plural: "Embeds" },
   fields: [
     ...heading,
     { name: "url", type: "text", required: true, admin: { description: "Trailer or reel. Never a gated asset." } },
@@ -882,6 +1020,7 @@ export const SearchBar: Block = {
 
 export const Divider: Block = {
   slug: "divider",
+  labels: { singular: "Divider", plural: "Dividers" },
   fields: [
     {
       name: "spacing",
@@ -900,6 +1039,7 @@ export const Divider: Block = {
  *  structure the original design never anticipated. */
 export const Columns: Block = {
   slug: "columns",
+  labels: { singular: "Columns", plural: "Column sets" },
   fields: [
     {
       name: "columns",
@@ -1300,12 +1440,30 @@ export const ScrollExpandBlock: Block = {
   ],
 };
 
+/**
+ * The picker an editor actually sees, in three named groups.
+ *
+ * These three buckets have existed since the blocks did — as `//` comments in
+ * this array, and as headings in `docs/editing-guide.md`. Neither is visible
+ * at runtime, so what the picker showed was twenty-seven undivided entries and
+ * a scroll. `Block.admin.group` has been supported all along and was set on
+ * none of them.
+ *
+ * The groups are applied here rather than on each block's own declaration so
+ * that this array stays the single statement of what the picker looks like:
+ * one place to read, one place to reorder.
+ */
+const grouped = (group: string, blocks: Block[]): Block[] =>
+  blocks.map((b) => ({ ...b, admin: { ...b.admin, group } }));
+
 export const PAGE_BLOCKS: Block[] = [
-  // Structure
-  DeckHero, BrandStrip, StatementSplitBlock, ScrollExpandBlock, RecapRowBlock, HeroFeature, Hero, Statement, RichText, Columns, Divider,
-  // The catalog, seen through different lenses
-  LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
-  MagazineShelf, WatchGrid, PressList,
-  // Editorial furniture
-  Lanes, Stats, Quote, Faq, CopyBlock, Embed, Cta, SearchBar,
+  ...grouped("Structure", [
+    DeckHero, BrandStrip, StatementSplitBlock, ScrollExpandBlock, RecapRowBlock,
+    HeroFeature, Hero, Statement, RichText, Columns, Divider,
+  ]),
+  ...grouped("The catalog, seen different ways", [
+    LibraryBrowser, EntryQuery, EntryPicks, FilmStrip, PeopleRow,
+    MagazineShelf, WatchGrid, PressList,
+  ]),
+  ...grouped("Editorial", [Lanes, Stats, Quote, Faq, CopyBlock, Embed, Cta, SearchBar]),
 ];

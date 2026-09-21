@@ -29,6 +29,8 @@ import {
   rowsToPersonRecords,
   rowsToProgression,
   rowsToRoster,
+  rowsToShelfEntries,
+  rowsToWatchRows,
   rowsToSplitPortraits,
   progressionItems,
   rosterPeople,
@@ -569,6 +571,9 @@ export default async function RenderBlocks({
               showSearch={block.showSearch !== false}
               showSort={block.showSort !== false}
               showCount={block.showCount !== false}
+              facetKeys={(block.facets as string[]) ?? undefined}
+              defaultSort={(block.defaultSort as string) ?? undefined}
+              empty={(block.empty as { heading?: string; body?: string }) ?? undefined}
               locked={{
                 brand: relSlug(locked.brand as Rel),
                 kind: (locked.kind as string[]) ?? undefined,
@@ -799,10 +804,14 @@ export default async function RenderBlocks({
         }
 
         case "magazineShelf": {
-          const all = await loadEntries();
-          const issues = all
-            .filter((e) => e.kind === "magazine" && e.preview)
-            .slice(0, Number(block.limit ?? 12));
+          /* Rows the page owns win; an empty list keeps the automatic query,
+             so nothing that exists today changes by upgrading. */
+          const ownRows = (block.issues as Record<string, unknown>[]) ?? [];
+          const issues = ownRows.length
+            ? rowsToShelfEntries(ownRows)
+            : (await loadEntries())
+                .filter((e) => e.kind === "magazine" && e.preview)
+                .slice(0, Number(block.limit ?? 12));
           if (!issues.length) return null;
           return (
             <Section
@@ -826,7 +835,10 @@ export default async function RenderBlocks({
               title={headingText}
               aside={introText ?? `${free} of ${links.length} are free to stream`}
             >
-              <WatchGrid />
+              <WatchGrid rows={((block.films as Record<string, unknown>[]) ?? []).length
+                ? rowsToWatchRows(block.films as Record<string, unknown>[])
+                : undefined}
+              />
               {block.note ? (
                 <p className="mt-14 max-w-2xl border-t border-fam-rule pt-6 text-[13px] leading-relaxed text-fam-muted">
                   {String(block.note)}

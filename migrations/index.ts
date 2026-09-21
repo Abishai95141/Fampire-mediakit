@@ -25,6 +25,7 @@ import * as migration_20260906_075641_landing_assets from './20260906_075641_lan
 import * as migration_20260906_075922_scroll_expand from './20260906_075922_scroll_expand';
 import * as migration_20260908_072627_add_entry_issue_relationship from './20260908_072627_add_entry_issue_relationship';
 import * as migration_20260908_073800_add_landing_assets_s3_prefix from './20260908_073800_add_landing_assets_s3_prefix';
+import * as migration_20260921_153152_add_page_owned_shelf_watch_library from './20260921_153152_add_page_owned_shelf_watch_library';
 
 export const migrations = [
   {
@@ -160,6 +161,11 @@ export const migrations = [
   {
     up: migration_20260908_073800_add_landing_assets_s3_prefix.up,
     down: migration_20260908_073800_add_landing_assets_s3_prefix.down,
-    name: '20260908_073800_add_landing_assets_s3_prefix'
+    name: '20260908_073800_add_landing_assets_s3_prefix',
+  },
+  {
+    up: migration_20260921_153152_add_page_owned_shelf_watch_library.up,
+    down: migration_20260921_153152_add_page_owned_shelf_watch_library.down,
+    name: '20260921_153152_add_page_owned_shelf_watch_library'
   },
 ];

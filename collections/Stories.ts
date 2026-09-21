@@ -71,20 +71,23 @@ export const Articles: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     /**
-     * Hidden from the sidebar: empty AND unread.
+     * Visible again, under Press.
      *
-     * Zero rows, and no block renders it — the Press page's `pressList`
-     * reads Appearances, not this. It was sitting in the nav next to
-     * collections that hold 634 and 153 rows, making the admin look busier
-     * than the work actually is.
+     * It was `group: false` for a defensible reason — zero rows, and no block
+     * renders it, so it sat in the nav next to collections holding 634 and
+     * 153 and made the admin look busier than the work was. What that missed
+     * is that the client's own printed guide tells the team to go to
+     * "Stories → Articles". A documented destination that does not exist is
+     * worse than one more line in a sidebar: the first thing it teaches a new
+     * editor is that the instructions are wrong.
      *
-     * `false` hides it from the sidebar and dashboard only; the routes still
-     * work, nothing is deleted, and restoring it is changing this one line
-     * back to "Stories" the day someone starts writing press releases.
+     * The description says plainly that nothing on the site reads these yet,
+     * so finding it empty is expected rather than alarming.
      */
-    group: false,
+    group: "Press",
     defaultColumns: ["title", "type", "publishedAt", "_status"],
-    description: "Press releases, announcements and features written by the team.",
+    description:
+      "Press releases, announcements and features written by the team. Nothing on the public site renders these yet — the Press page shows Appearances. Drafts kept here are safe and private until that changes.",
   },
   versions: { drafts: { autosave: false }, maxPerDoc: 20 },
   access: publishedRead,
@@ -271,7 +274,7 @@ export const Appearances: CollectionConfig = {
   orderable: true,
   admin: {
     useAsTitle: "title",
-    group: "Stories",
+    group: "Press",
     defaultColumns: ["title", "outlet", "date", "type", "_status"],
     description: "Podcasts, panels, keynotes and broadcast. Log one in under two minutes.",
   },

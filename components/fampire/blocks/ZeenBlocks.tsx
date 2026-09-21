@@ -7,6 +7,7 @@ import type { RosterPerson } from "@/components/fampire/blocks/PeopleRoster";
 import type { ProgressionItem } from "@/components/fampire/blocks/PressProgression";
 import type { SplitPortrait } from "@/components/fampire/blocks/StatementSplit";
 import { applyFacets, facetsFromParams, previewsForSubjects } from "@/lib/fampire/catalog";
+import type { Entry } from "@/lib/fampire/catalog";
 import { pick, picture, refDoc, refId, type Ref } from "@/lib/fampire/page-items";
 import { loadBrands, loadEntries, loadFamily, loadPeople } from "@/lib/fampire/payload-catalog";
 import type { AppearanceRecord, FilmRecord } from "@/lib/fampire/payload-catalog";
@@ -522,4 +523,47 @@ export function rowsToAppearanceRecords(rows: Record<string, unknown>[]): Appear
     views: a.views,
     thumbnail: a.thumbnail,
   }));
+}
+
+/**
+ * Magazine shelf rows the page owns.
+ *
+ * Returns the `Entry` shape the shelf already reads, so the component is
+ * untouched: `preview` is the "Read the issue" link and `url` the "Assets"
+ * one, which is why the block calls them readUrl and assetsUrl — the field
+ * names say what they do on screen, and this maps them back.
+ */
+export function rowsToShelfEntries(rows: Record<string, unknown>[]): Entry[] {
+  return rows.map((r, i) => {
+    const src = refDoc<Entry>(r.source as Ref);
+    return {
+      ...(src ?? {}),
+      id: src?.id ?? `shelf-${i}`,
+      title: pick(r.title as string, src?.title) ?? "",
+      description: pick(r.description as string, src?.description) ?? "",
+      preview: pick(r.readUrl as string, src?.preview) ?? null,
+      url: pick(r.assetsUrl as string, src?.url) ?? "",
+    } as Entry;
+  });
+}
+
+/**
+ * Where-to-watch rows the page owns.
+ *
+ * The matrix is a film and its platforms, so a row resolves to both: the
+ * title the grid heads each column with, and the links under it. An empty
+ * `watch` array means "inherit", exactly as it does on filmStrip — it is not
+ * a claim that a film is unavailable everywhere.
+ */
+export function rowsToWatchRows(
+  rows: Record<string, unknown>[],
+): { title: string; links: { platform: string; url: string; free?: boolean }[] }[] {
+  return rows.map((r, i) => {
+    const src = refDoc<FilmRecord>(r.source as Ref);
+    const own = (r.watch as { platform: string; url: string; free?: boolean }[]) ?? [];
+    return {
+      title: pick(r.title as string, src?.title) ?? `Film ${i + 1}`,
+      links: own.length ? own : (src?.watch ?? []),
+    };
+  });
 }

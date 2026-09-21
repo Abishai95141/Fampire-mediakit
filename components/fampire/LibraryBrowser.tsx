@@ -101,6 +101,9 @@ export default async function LibraryBrowser({
   showSort = true,
   showCount = true,
   locked,
+  facetKeys,
+  defaultSort,
+  empty,
 }: {
   facets: Facets;
   signedIn: boolean;
@@ -113,6 +116,15 @@ export default async function LibraryBrowser({
   showSort?: boolean;
   showCount?: boolean;
   locked?: LockedFilters;
+  /** Which filter rails to show, in this order. Empty means all of them, in
+   *  the order AXES declares — which is what this did before it could be
+   *  configured at all. */
+  facetKeys?: string[];
+  /** How the pool is ordered before a reader chooses. */
+  defaultSort?: string;
+  /** The dead end. Hardcoded until now, and it is the moment a reader decides
+   *  whether the library is worth another try. */
+  empty?: { heading?: string | null; body?: string | null };
 }) {
   const requestedPage = Math.max(1, Number(facets.page ?? 1) || 1);
   const size = perPage > 0 ? perPage : 60;
@@ -185,7 +197,7 @@ export default async function LibraryBrowser({
         <div className="mt-5 flex flex-wrap items-center gap-2">
           <span className="fam-eyebrow mr-1">Sort</span>
           {(Object.entries(SORTS) as [string, string][]).map(([value, label]) => {
-            const on = (facets.sort ?? (facets.q ? "relevance" : "largest")) === value;
+            const on = (facets.sort ?? defaultSort ?? (facets.q ? "relevance" : "largest")) === value;
             return (
               <Link
                 key={value}
@@ -277,7 +289,15 @@ export default async function LibraryBrowser({
               data-lenis-prevent
               className="space-y-8 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:pr-2"
             >
-              {AXES.map((axis) => {
+              {/* The page decides which rails appear and in what order; an
+                  empty choice keeps all of them in the order declared above,
+                  which is what this did before it was configurable. */}
+              {(facetKeys?.length
+                ? facetKeys
+                    .map((k) => AXES.find((a) => a.key === k))
+                    .filter((a): a is (typeof AXES)[number] => Boolean(a))
+                : AXES
+              ).map((axis) => {
                 // A locked axis is not a choice, so it is not offered.
                 if (locked?.brand && axis.key === "brand") return null;
                 if (locked?.kind?.length && axis.key === "kind") return null;
@@ -325,10 +345,12 @@ export default async function LibraryBrowser({
         <section className={showFacets ? "mt-12 lg:mt-0" : ""}>
           {results.length === 0 ? (
             <div className="border-t border-fam-rule py-16">
-              <p className="fam-display text-3xl">Nothing matches that.</p>
+              <p className="fam-display text-3xl">
+                {empty?.heading?.trim() || "Nothing matches that."}
+              </p>
               <p className="mt-3 max-w-md text-[15px] leading-relaxed text-fam-body">
-                The catalog is a few hundred described collections, not a file
-                browser — try a person, a film title, an event or a year.
+                {empty?.body?.trim() ||
+                  "The catalog is a few hundred described collections, not a file browser — try a person, a film title, an event or a year."}
               </p>
               {suggestion ? (
                 <p className="mt-5 text-[15px] text-fam-body">

@@ -108,13 +108,26 @@ export default buildConfig({
    * If per-brand editing permissions are ever genuinely needed, the honest
    * shape is access control on the role — not a UI filter that hides records
    * from the person looking straight at them.
+   *
+   * ── This list IS the navigation ────────────────────────────────────────
+   *
+   * Payload builds the sidebar groups in the order the collections are
+   * declared, so the order here is what an editor reads top to bottom. It is
+   * ordered by how often each is reached for rather than by how the schema
+   * grew: the library first because it is the product, settings last because
+   * they are set once.
+   *
+   * `docs/architecture-review.md` recorded the problem the old order and the
+   * old names created — "an editor sees a CMS whose vocabulary is ours" — and
+   * "Who & What" was the clearest case of it.
    */
   collections: [
-    Users, Brands,
-    Entries, Media, LandingAssets,
-    Articles, MagazineIssues, Appearances,
-    Pages, SiteSettings,
-    People, Films, Events, Locations,
+    Entries, Media,                        // Library
+    Pages,                                 // Pages
+    MagazineIssues,                        // Magazines
+    Appearances, Articles,                 // Press
+    People, Films, Events, Locations,      // People & Films
+    Brands, LandingAssets, SiteSettings, Users, // Settings
   ],
 
   editor: lexicalEditor(),

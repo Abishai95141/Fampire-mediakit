@@ -47,7 +47,7 @@ const slug = {
  */
 export const People: CollectionConfig = {
   slug: "people",
-  admin: { useAsTitle: "name", defaultColumns: ["name", "role", "isMinor", "isFamily"], group: "Who & What" },
+  admin: { useAsTitle: "name", defaultColumns: ["name", "role", "isMinor", "isFamily"], group: "People & Films" },
   access: publicRead,
   fields: [
     {
@@ -129,7 +129,7 @@ export const People: CollectionConfig = {
 /** The slate. Seven released plus what is in production, with award counts. */
 export const Films: CollectionConfig = {
   slug: "films",
-  admin: { useAsTitle: "title", defaultColumns: ["title", "year", "awards", "status"], group: "Who & What" },
+  admin: { useAsTitle: "title", defaultColumns: ["title", "year", "awards", "status"], group: "People & Films" },
   access: publicRead,
   fields: [
     { name: "title", type: "text", required: true },
@@ -195,7 +195,7 @@ export const Films: CollectionConfig = {
 /** Named events across 2024–2026. */
 export const Events: CollectionConfig = {
   slug: "events",
-  admin: { useAsTitle: "title", defaultColumns: ["title", "startDate", "location"], group: "Who & What" },
+  admin: { useAsTitle: "title", defaultColumns: ["title", "startDate", "location"], group: "People & Films" },
   access: publicRead,
   fields: [
     { name: "title", type: "text", required: true },
@@ -212,7 +212,7 @@ export const Locations: CollectionConfig = {
   slug: "locations",
   // "Places" to an editor; `locations` in the database and the API.
   labels: { singular: "Place", plural: "Places" },
-  admin: { useAsTitle: "label", defaultColumns: ["label", "slug"], group: "Who & What" },
+  admin: { useAsTitle: "label", defaultColumns: ["label", "slug"], group: "People & Films" },
   access: publicRead,
   fields: [
     { name: "label", type: "text", required: true },

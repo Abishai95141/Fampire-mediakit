@@ -217,6 +217,92 @@ export const Entries: CollectionConfig = {
   },
 
   fields: [
+    /**
+     * ── The document sidebar ──────────────────────────────────────────────
+     *
+     * Where the source lives, who may open it, and whether the link still
+     * resolves. These were a tab called "Health": out of sight while you
+     * edited the words, and five clicks from anything you would check them
+     * against.
+     *
+     * `position: "sidebar"` was used by ZERO of this CMS's 279 fields, so
+     * every form was one long column with Payload's second column standing
+     * empty. These have to sit at the TOP level to reach it — `DocumentFields`
+     * partitions the top-level array only, so a field inside `tabs` can never
+     * be a sidebar field however it is marked.
+     *
+     * The tabs here are UNNAMED, so every path was already flat and lifting
+     * these out changes no stored value. Verified by regenerating
+     * payload-types.ts and diffing with comments stripped.
+     */
+    {
+      name: "sourcePlatform",
+      type: "select",
+      required: true,
+      defaultValue: "drive",
+      index: true,
+      admin: {
+        position: "sidebar",
+        description: "Read off the URL when left blank.",
+      },
+      options: ["drive", "dropbox", "pictime", "vimeo", "youtube", "streaming", "site", "unknown"]
+        .map((v) => ({ label: v, value: v })),
+    },
+    {
+      name: "access",
+      type: "select",
+      required: true,
+      defaultValue: "public",
+      index: true,
+      admin: {
+        position: "sidebar",
+        description: "Whether a stranger with the link can open it.",
+      },
+      options: [
+        { label: "Public", value: "public" },
+        { label: "Password", value: "password" },
+        { label: "Request", value: "request" },
+        { label: "Broken", value: "broken" },
+      ],
+    },
+    {
+      name: "accessNote",
+      type: "text",
+      admin: {
+        position: "sidebar",
+        description:
+          "Internal only. Passwords live here and are NEVER rendered on a public surface.",
+        condition: (data) => data?.access === "password" || data?.access === "request",
+      },
+    },
+    {
+      /**
+       * NOT `status`. Payload's drafts feature owns `_status`, and both names
+       * generate the Postgres enum type `enum_entries_status` — so a plain
+       * `status` field silently produced a migration that declared the column
+       * with the DRAFT enum ('draft','published') and a default of
+       * 'unchecked', which Postgres rejects.
+       */
+      name: "linkStatus",
+      type: "select",
+      defaultValue: "unchecked",
+      index: true,
+      admin: {
+        position: "sidebar",
+        readOnly: true,
+        description:
+          "Written by the nightly sweep. 'unchecked' means it has not run, NOT that the link is fine — a Drive folder that returns 200 but redirects to sign-in is not healthy.",
+      },
+      options: ["unchecked", "ok", "gone", "login-required", "password", "timeout", "blocked"]
+        .map((v) => ({ label: v, value: v })),
+    },
+    {
+      name: "linkStatusDetail",
+      type: "text",
+      admin: { position: "sidebar", readOnly: true, condition: (data) => Boolean(data?.linkStatusDetail) },
+    },
+    { name: "lastChecked", type: "date", admin: { position: "sidebar", readOnly: true } },
+
     // ── What a reader sees ──────────────────────────────────────────────
     {
       type: "tabs",
@@ -535,114 +621,85 @@ export const Entries: CollectionConfig = {
                   "Confirmed by a person. An entry flagged and not confirmed CANNOT be published — the save will be refused.",
               },
             },
-            { name: "safetyNote", type: "textarea", admin: { description: "Internal. Who confirmed, and what they checked." } },
+            {
+              name: "safetyNote",
+              type: "textarea",
+              admin: {
+                description: "Internal. Who confirmed, and what they checked.",
+                /* Only once something is actually flagged. An empty "who
+                   confirmed, and what they checked" box on the hundreds of
+                   collections with no child in them is a question with no
+                   answer, and a form full of those teaches people to scroll
+                   past the tab that matters most. */
+                condition: (data) =>
+                  Boolean(data?.containsMinor) ||
+                  Boolean(data?.containsMinorConfirmed) ||
+                  Boolean(data?.safetyNote),
+              },
+            },
           ],
         },
 
         // ── Link health ───────────────────────────────────────────────────
-        {
-          label: "Health",
-          description:
-            "Link rot is the primary technical risk of a catalog architecture. Written nightly by the monitor.",
-          fields: [
-            {
-              type: "row",
-              fields: [
-                {
-                  name: "sourcePlatform",
-                  type: "select",
-                  required: true,
-                  defaultValue: "drive",
-                  index: true,
-                  admin: { width: "50%" },
-                  options: ["drive", "dropbox", "pictime", "vimeo", "youtube", "streaming", "site", "unknown"]
-                    .map((v) => ({ label: v, value: v })),
-                },
-                {
-                  name: "access",
-                  type: "select",
-                  required: true,
-                  defaultValue: "public",
-                  index: true,
-                  admin: { width: "50%" },
-                  options: [
-                    { label: "Public", value: "public" },
-                    { label: "Password", value: "password" },
-                    { label: "Request", value: "request" },
-                    { label: "Broken", value: "broken" },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "accessNote",
-              type: "text",
-              admin: {
-                description:
-                  "Internal only. Passwords live here and are NEVER rendered on a public surface.",
-                condition: (data) => data?.access === "password" || data?.access === "request",
-              },
-            },
-            {
-              /**
-               * NOT `status`. Payload's drafts feature owns `_status`, and both
-               * names generate the Postgres enum type `enum_entries_status` —
-               * so a plain `status` field silently produced a migration that
-               * declared the column with the DRAFT enum ('draft','published')
-               * and a default of 'unchecked', which Postgres rejects.
-               */
-              name: "linkStatus",
-              type: "select",
-              defaultValue: "unchecked",
-              index: true,
-              admin: {
-                readOnly: true,
-                description:
-                  "'unchecked' means the sweep has not run, NOT that the link is fine. A Drive folder that returns 200 but redirects to sign-in is not healthy.",
-              },
-              options: ["unchecked", "ok", "gone", "login-required", "password", "timeout", "blocked"]
-                .map((v) => ({ label: v, value: v })),
-            },
-            { name: "linkStatusDetail", type: "text", admin: { readOnly: true } },
-            { name: "lastChecked", type: "date", admin: { readOnly: true } },
-          ],
-        },
-
         // ── Shape and provenance ──────────────────────────────────────────
         {
           label: "Provenance",
-          description: "Where this came from in the client's Drive. Internal.",
+          description:
+            "What the crawler found in the client's Drive. Counted, not typed — everything in the first section is read-only.",
           fields: [
             {
-              type: "row",
-              fields: [
-                { name: "fileCount", type: "number", admin: { width: "50%" } },
-                {
-                  name: "dominantMedia",
-                  type: "select",
-                  admin: { width: "50%" },
-                  options: ["image", "video", "document", "audio", "vector", "other"].map((v) => ({ label: v, value: v })),
-                },
-              ],
-            },
-            {
-              name: "mediaMix",
-              type: "group",
+              /**
+               * What the crawl counted, folded away and read-only.
+               *
+               * Nineteen fields of import machinery opened expanded on every
+               * collection, and eight of them were editable by accident: a
+               * file count, the dominant medium and the six numbers of the
+               * media mix. A hand-typed file count is not a correction, it is
+               * a second number that disagrees with the folder, and nothing
+               * downstream would know which to believe.
+               *
+               * `orientation` and `resolutionClass` stay EDITABLE on purpose —
+               * their own descriptions say the sampler fails on folders Drive
+               * will not render a frame for, so a person has to be able to say
+               * what it is.
+               */
+              type: "collapsible",
+              label: "What the crawl counted",
+              admin: { initCollapsed: true },
               fields: [
                 {
                   type: "row",
                   fields: [
-                    { name: "image", type: "number", admin: { width: "33%" } },
-                    { name: "video", type: "number", admin: { width: "33%" } },
-                    { name: "document", type: "number", admin: { width: "33%" } },
+                    { name: "fileCount", type: "number", admin: { width: "50%", readOnly: true } },
+                    {
+                      name: "dominantMedia",
+                      type: "select",
+                      admin: { width: "50%", readOnly: true },
+                      options: ["image", "video", "document", "audio", "vector", "other"].map((v) => ({ label: v, value: v })),
+                    },
                   ],
                 },
                 {
-                  type: "row",
+                  name: "mediaMix",
+                  type: "group",
+                  admin: { readOnly: true },
                   fields: [
-                    { name: "audio", type: "number", admin: { width: "33%" } },
-                    { name: "vector", type: "number", admin: { width: "33%" } },
-                    { name: "other", type: "number", admin: { width: "33%" } },
+                    {
+                      type: "row",
+                      fields: [
+                        { name: "image", type: "number", admin: { width: "33%" } },
+                        { name: "video", type: "number", admin: { width: "33%" } },
+                        { name: "document", type: "number", admin: { width: "33%" } },
+                      ],
+                    },
+                    {
+                      type: "row",
+                      fields: [
+                        { name: "audio", type: "number", admin: { width: "33%" } },
+                        { name: "vector", type: "number", admin: { width: "33%" } },
+                        { name: "other", type: "number", admin: { width: "33%" } },
+                      ],
+                    },
                   ],
                 },
               ],
