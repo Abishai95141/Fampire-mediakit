@@ -158,19 +158,22 @@ More of these, with the incidents behind them, in `docs/payload-harness.md`.
 
 ---
 
-## Deploying
+## Beyond localhost
 
-Deployment is the client's, on their own accounts — this repository supplies
-guides, not hosting.
+**This repository targets a laptop.** Deployment is the client's, on their own
+accounts, and the host-specific runbooks are not kept here — they named real
+infrastructure, and a source repository is the wrong place for that.
 
-- `docs/deploy-ec2.md` — the current production stack
-- `docs/deploy-aws.md` — the container route
-- `Dockerfile` — builds standalone; applies its own migrations on boot
+Everything needed to run it elsewhere is still in the code. `Dockerfile` builds
+the standalone server and applies its own migrations on boot. Two environment
+variables exist for hosted setups and are ignored locally:
 
-Two variables matter in production and nowhere else: `DATABASE_SSL=true`,
-because managed Postgres refuses unencrypted connections, and `S3_BUCKET`,
-because a container's filesystem is ephemeral and an upload written to disk is
-gone at the next deploy. `.env.example` explains both.
+| | |
+|---|---|
+| `DATABASE_SSL=true` | Managed Postgres refuses unencrypted connections; a local one has no TLS at all. Declared, never guessed from the hostname |
+| `S3_BUCKET` | Uploads go to disk by default, which is right on a laptop and silently destructive on a container with an ephemeral filesystem. Any S3-compatible store works; credentials come from the instance role, never from `.env` |
+
+`.env.example` covers both. Nothing else changes between a laptop and a server.
 
 ---
 
