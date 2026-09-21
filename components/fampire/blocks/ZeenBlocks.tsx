@@ -445,3 +445,71 @@ export async function rowsToSplitPortraits(
   });
   return [out[0] ?? null, out[1] ?? null];
 }
+
+/**
+ * ── The same rows, in the shape the DEFAULT layouts read ────────────────
+ *
+ * Every one of these three sections already resolved its page-owned rows —
+ * and then only in a layout nobody had selected. `filmStrip` read `items`
+ * under `accordion` while shipping `list`; `peopleRow` read `cards` under
+ * `roster` and `stack` while shipping `portraits`; `pressList` read `items`
+ * under `progression` while shipping `log`. So an editor could change a
+ * card's picture on the landing page, save, reload, and watch the old one
+ * come back: the override was written to the database and then discarded at
+ * render time, silently, which is indistinguishable from the CMS being
+ * broken.
+ *
+ * The cause was a shape mismatch rather than an oversight. The override
+ * resolvers return the compact types the newer layouts take
+ * (`AccordionFilm`, `RosterPerson`, `ProgressionItem`), and the older layouts
+ * take the CMS record types. So these adapt one to the other rather than
+ * resolving a second time — `pick` and `picture` are applied in exactly one
+ * place per section, and these three functions only rename the result.
+ */
+
+/** Page-owned film rows, as the list, grid and profile layouts read them. */
+export async function rowsToFilmRecords(rows: Record<string, unknown>[]): Promise<FilmRecord[]> {
+  return (await rowsToFilms(rows)).map((f) => ({
+    id: f.id ?? undefined,
+    slug: f.slug,
+    title: f.title,
+    // The resolver has already picked between the row's upload, the row's
+    // URL and the film's own key art; `posterUrl` is simply where the record
+    // shape keeps that answer.
+    posterUrl: f.poster,
+    awards: f.awards,
+    note: f.note,
+    year: f.year,
+    synopsis: f.synopsis,
+    status: f.status,
+    watch: f.watch,
+  }));
+}
+
+/** Page-owned people rows, as the portrait and grid layouts read them. */
+export async function rowsToPersonRecords(rows: Record<string, unknown>[]): Promise<PersonRecord[]> {
+  return (await rowsToRoster(rows)).map((p) => ({
+    id: p.id ?? undefined,
+    slug: p.slug,
+    name: p.name,
+    portraitUrl: p.src,
+    role: p.role,
+    bio: p.bio,
+  }));
+}
+
+/** Page-owned press rows, as the log reads them. */
+export function rowsToAppearanceRecords(rows: Record<string, unknown>[]): AppearanceRecord[] {
+  const items = rowsToProgression(rows);
+  return items.map((a, i) => ({
+    // Carried separately: the progression shape drops it, and the log needs
+    // it for the per-item "Edit this appearance" link.
+    record_id: refId(rows[i]?.source as Ref),
+    title: a.title,
+    url: a.url,
+    outlet: a.outlet,
+    aired: a.aired,
+    views: a.views,
+    thumbnail: a.thumbnail,
+  }));
+}

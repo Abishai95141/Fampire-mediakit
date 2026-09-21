@@ -23,7 +23,10 @@ import {
   DeckHeroBlock,
   accordionFilms,
   laneCounts,
+  rowsToAppearanceRecords,
+  rowsToFilmRecords,
   rowsToFilms,
+  rowsToPersonRecords,
   rowsToProgression,
   rowsToRoster,
   rowsToSplitPortraits,
@@ -671,7 +674,21 @@ export default async function RenderBlocks({
         case "filmStrip": {
           const films = await loadFilms();
           const picked = ((block.films as Rel[]) ?? []).map(relSlug).filter(Boolean) as string[];
-          const shown = picked.length ? films.filter((f) => picked.includes(f.slug)) : films;
+          const drop = hiddenIds(block);
+          /**
+           * Page-owned rows win in EVERY layout, not just the accordion.
+           *
+           * `items` was read under `accordion` only, while the block ships
+           * `list` — so a picture swapped on the page was written and then
+           * thrown away at render. The hide list had the same fault: the ✕
+           * on a film wrote to `hidden` and only the accordion ever read it.
+           */
+          const ownRows = (block.items as Record<string, unknown>[]) ?? [];
+          const shown = ownRows.length
+            ? await rowsToFilmRecords(ownRows)
+            : (picked.length ? films.filter((f) => picked.includes(f.slug)) : films).filter(
+                (f) => !drop.has(String(f.id)),
+              );
           const awards = shown.reduce((sum, f) => sum + (f.awards ?? 0), 0);
           if (block.layout === "accordion") {
             const body = (
@@ -683,11 +700,7 @@ export default async function RenderBlocks({
                 hrefLabel={signedIn ? "Add a film" : undefined}
               >
                 <FilmAccordion
-                  films={
-                    ((block.items as Record<string, unknown>[]) ?? []).length
-                      ? await rowsToFilms(block.items as Record<string, unknown>[])
-                      : await accordionFilms(shown.filter((f) => !hiddenIds(block).has(String(f.id))))
-                  }
+                  films={ownRows.length ? await rowsToFilms(ownRows) : await accordionFilms(shown)}
                   signedIn={signedIn}
                   pageId={pageId}
                   blockIndex={i}
@@ -769,7 +782,9 @@ export default async function RenderBlocks({
                 <PeopleRoster people={ownRows.length ? await rowsToRoster(ownRows) : await rosterPeople(shown)} />
               ) : (
               <PeopleProfiles
-                people={shown}
+                /* Same rows the roster and stack layouts already honoured —
+                   `portraits` is the default and was reading past them. */
+                people={ownRows.length ? await rowsToPersonRecords(ownRows) : shown}
                 layout={String(block.layout ?? "portraits")}
                 showBios={block.showBios !== false}
                 signedIn={signedIn}
@@ -819,7 +834,12 @@ export default async function RenderBlocks({
 
         case "pressList": {
           const appearances = await loadAppearances();
-          const limited = block.limit ? appearances.slice(0, Number(block.limit)) : appearances;
+          /* `items` was honoured under `progression` only, while the block
+             ships `log`. An outlet or a thumbnail corrected on the page was
+             written and then ignored. */
+          const ownRows = (block.items as Record<string, unknown>[]) ?? [];
+          const base = ownRows.length ? rowsToAppearanceRecords(ownRows) : appearances;
+          const limited = block.limit ? base.slice(0, Number(block.limit)) : base;
           if (block.layout === "progression") {
             const body = (
               <Section
@@ -830,11 +850,7 @@ export default async function RenderBlocks({
                 hrefLabel={signedIn ? "Add an appearance" : undefined}
               >
                 <PressProgression
-                  items={
-                    ((block.items as Record<string, unknown>[]) ?? []).length
-                      ? rowsToProgression(block.items as Record<string, unknown>[])
-                      : progressionItems(limited as AppearanceRecord[])
-                  }
+                  items={ownRows.length ? rowsToProgression(ownRows) : progressionItems(limited as AppearanceRecord[])}
                 />
               </Section>
             );

@@ -63,8 +63,12 @@ function Portrait({
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       {p.src ? (
+        /* `name` is documented on the block as "Alt text. Falls back to the
+           person's name", and was resolved and then dropped into a hardcoded
+           empty alt — a dead field and a screen-reader gap in one. Decorative
+           only when nobody has named the picture. */
         // eslint-disable-next-line @next/next/no-img-element
-        <img className="z-portrait" src={p.src} alt="" />
+        <img className="z-portrait" src={p.src} alt={p.name ? `${p.name}, portrait` : ""} />
       ) : (
         <div className="z-portrait" />
       )}

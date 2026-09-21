@@ -118,6 +118,16 @@ export default function PortraitDeck({
                   <span className="z-label">{c.name}</span>
                 </div>
               )}
+              {/**
+               * The card's caption.
+               *
+               * `caption` has been a field on the block, resolved into
+               * `DeckCard` and declared on this type — and never rendered.
+               * An editor typed one, saved, and nothing appeared, which
+               * teaches them the form is decorative. It is a page-owned
+               * line: blank on every card until somebody writes one.
+               */}
+              {c.caption ? <span className="z-deck-caption">{c.caption}</span> : null}
             </Link>
           </motion.div>
         );

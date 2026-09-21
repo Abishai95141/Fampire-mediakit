@@ -30,7 +30,16 @@ const SOURCE: Record<string, { label: string; slug: string } | null> = {
   peopleRow: { label: "People", slug: "people" },
   filmStrip: { label: "Films", slug: "films" },
   pressList: { label: "Appearances", slug: "appearances" },
-  magazineShelf: { label: "Magazine issues", slug: "magazine-issues" },
+  /**
+   * Collections, NOT magazine-issues.
+   *
+   * The shelf renders entries where `kind === "magazine"` — see the
+   * `magazineShelf` case in RenderBlocks — so an editor sent to Magazine
+   * Issues arrived at a table of nine issue records and none of the covers
+   * they had just clicked on. The issue records are the tree the client asked
+   * for; the shelf is a lens over the catalog, and they are different things.
+   */
+  magazineShelf: { label: "Collections", slug: "entries" },
   watchGrid: { label: "Films", slug: "films" },
   entryQuery: { label: "Collections", slug: "entries" },
   entryPicks: { label: "Collections", slug: "entries" },

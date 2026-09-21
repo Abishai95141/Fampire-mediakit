@@ -532,6 +532,18 @@
   background: #ece9e4;
 }
 
+/* The deck card's caption. A page-owned line under a portrait, blank on every
+   card until an editor writes one — so this styles the exception, not the
+   rule, and must not reserve space when there is nothing to show. */
+.zeen .z-deck-caption {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--z-muted);
+}
+
 /* Marquee for the brand strip. Duplicated track, translated by exactly half,
    so the loop has no seam. */
 @keyframes z-marquee {
