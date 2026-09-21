@@ -317,6 +317,23 @@ export const Entries: CollectionConfig = {
               admin: {
                 description:
                   "Renamed for strangers. '6. 6/26/2025 - UFC/ Aires Tech RoundTable - Vegas' becomes 'UFC × Aires Tech Roundtable — Las Vegas, June 2025'. This renaming IS the product.",
+                components: {
+                  /**
+                   * The list row, rendered as something recognisable.
+                   *
+                   * Six hundred collections read as one flat crowd of text:
+                   * this column carried a link and nothing else, so "A4M Red
+                   * Carpet — Interviews" and "A4M Red Carpet — BTS" were told
+                   * apart by reading to the end of both, and whether either
+                   * was public meant looking across at another column.
+                   *
+                   * Only the CELL is replaced. Search, filters, sorting,
+                   * pagination and bulk actions stay Payload's and untouched
+                   * — including the search across `rawFolderName`, which is
+                   * the one the media team actually uses.
+                   */
+                  Cell: "@/components/admin/TitleCell#TitleCell",
+                },
               },
             },
             {

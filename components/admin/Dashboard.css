@@ -1,0 +1,230 @@
+/* The dashboard.
+ *
+ * Styled in Payload's theme variables and the accent theme.css defines, so it
+ * follows light and dark without a media query of its own — the same rule the
+ * other admin components here follow. */
+
+.fam-dash {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.fam-dash__head {
+  margin-bottom: 2.5rem;
+}
+
+.fam-dash__title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__sub {
+  margin: 0.6rem 0 0;
+  max-width: 44rem;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--theme-elevation-600);
+}
+
+.fam-dash__section {
+  margin-bottom: 2.75rem;
+}
+
+.fam-dash__h2 {
+  margin: 0 0 0.9rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-500);
+}
+
+/* ── Waiting on you ──────────────────────────────────────────────────── */
+
+.fam-dash__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.fam-dash__row {
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 5px;
+  background: var(--theme-elevation-0);
+}
+
+/* The accent marks the rows that are somebody's job, and only those. A
+   coloured edge rather than a coloured panel: this sits above a form all day
+   and must not compete with it. */
+.fam-dash__row.is-urgent {
+  border-left: 3px solid var(--fam-brass);
+}
+
+.fam-dash__rowlink {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.fam-dash__rowlink:hover {
+  background: var(--theme-elevation-50);
+}
+
+.fam-dash__n {
+  flex: 0 0 auto;
+  min-width: 2.5rem;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__rowtext {
+  display: block;
+}
+
+.fam-dash__rowlabel {
+  display: block;
+  font-size: 14.5px;
+  color: var(--theme-elevation-900);
+}
+
+.fam-dash__rowhint {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--theme-elevation-550);
+}
+
+/* An empty queue is the good outcome and should read as one, not as a blank
+   area that looks like something failed to load. */
+.fam-dash__clear {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--theme-elevation-200);
+  border-radius: 5px;
+  font-size: 14px;
+  color: var(--theme-elevation-600);
+}
+
+.fam-dash__note {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--theme-elevation-550);
+}
+
+.fam-dash__note code {
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-800);
+}
+
+/* ── Start here ──────────────────────────────────────────────────────── */
+
+.fam-dash__actions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.fam-dash__action {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 5px;
+  background: var(--theme-elevation-0);
+  text-decoration: none;
+  color: inherit;
+}
+
+.fam-dash__action:hover {
+  border-color: var(--fam-brass);
+  background: var(--theme-elevation-50);
+}
+
+.fam-dash__action b {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__action span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--theme-elevation-550);
+}
+
+/* ── Counts ──────────────────────────────────────────────────────────── */
+
+.fam-dash__stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+}
+
+.fam-dash__stats a {
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--theme-elevation-600);
+}
+
+.fam-dash__stats a:hover {
+  color: var(--theme-elevation-1000);
+}
+
+.fam-dash__stats b {
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--theme-elevation-1000);
+}
+
+/* ── The rules ───────────────────────────────────────────────────────── */
+
+.fam-dash__rules ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 10px;
+}
+
+.fam-dash__rules li {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--theme-elevation-700);
+  max-width: 48rem;
+}
+
+.fam-dash__rules b {
+  color: var(--theme-elevation-1000);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fam-dash__rowlink,
+  .fam-dash__action {
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+  }
+}

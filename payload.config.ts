@@ -72,6 +72,21 @@ export default buildConfig({
         Logo: "/components/admin/Logo.tsx#Logo",
         Icon: "/components/admin/Icon.tsx#Icon",
       },
+      views: {
+        /**
+         * "Is anything waiting on me", instead of a grid of table names.
+         *
+         * Payload's dashboard lists every collection as a card — a directory,
+         * which answers "where is X" for somebody who already knows what they
+         * came to do. The child-safety queue in particular had no surface
+         * anywhere: the one rule this system enforces absolutely was visible
+         * only by knowing to filter the Collections list on two fields.
+         *
+         * Every number is counted at request time. Nothing is cached, because
+         * a dashboard that can be stale is worse than none — it is believed.
+         */
+        dashboard: { Component: "/components/admin/Dashboard.tsx#Dashboard" },
+      },
     },
   },
 

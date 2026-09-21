@@ -1,0 +1,90 @@
+/* The title column of the Collections list.
+ *
+ * Theme variables only, so light and dark both follow without a media query —
+ * the rule RecordPicker.css sets out and the rest of these components keep. */
+
+.fam-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* A fixed frame whether or not there is a picture, so six hundred rows keep a
+   single left edge. A column that shifts by 46px on every row without art is
+   harder to scan than one with no art at all. */
+.fam-cell__frame {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 34px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--theme-elevation-100);
+  border: 1px solid var(--theme-elevation-150);
+}
+
+.fam-cell__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fam-cell__text {
+  min-width: 0;
+}
+
+.fam-cell__title {
+  display: block;
+  font-weight: 500;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--theme-elevation-1000);
+}
+
+.fam-cell__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.fam-cell__pill {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Public is stated quietly. It is the expected state for most of the catalog,
+   and a loud badge on five hundred rows is noise. */
+.fam-cell__pill--live {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-600);
+}
+
+.fam-cell__pill--draft {
+  background: transparent;
+  color: var(--theme-elevation-450);
+  border: 1px solid var(--theme-elevation-200);
+}
+
+/* Held carries the accent, because it is the only one of the three that means
+   somebody has to do something. */
+.fam-cell__pill--held {
+  background: var(--fam-brass-soft, rgba(138, 106, 63, 0.12));
+  color: var(--fam-brass, #8a6a3f);
+}
+
+.fam-cell__kind {
+  font-size: 11px;
+  color: var(--theme-elevation-500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

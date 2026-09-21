@@ -1,3 +1,4 @@
+import { TitleCell as TitleCell_c1cdc7588b26bfe8d469c2ecd6ea0504 } from '@/components/admin/TitleCell'
 import { RecordPicker as RecordPicker_c02777adb50e9fba27df396ba473d0de } from '@/components/admin/RecordPicker'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -26,10 +27,12 @@ import { BlockFocus as BlockFocus_bd2a7db88397c5589a9a3a15de07d077 } from '@/com
 import { Icon as Icon_22ecfa0add6ea3a2202bd7524740e10d } from '../../../components/admin/Icon.tsx'
 import { Logo as Logo_f6725385e1c85d4569908fa222b1f780 } from '../../../components/admin/Logo.tsx'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { Dashboard as Dashboard_ae47d15fe4bb4ed9e4fd943278750679 } from '../../../components/admin/Dashboard.tsx'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "@/components/admin/TitleCell#TitleCell": TitleCell_c1cdc7588b26bfe8d469c2ecd6ea0504,
   "@/components/admin/RecordPicker#RecordPicker": RecordPicker_c02777adb50e9fba27df396ba473d0de,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -58,5 +61,6 @@ export const importMap = {
   "/components/admin/Icon.tsx#Icon": Icon_22ecfa0add6ea3a2202bd7524740e10d,
   "/components/admin/Logo.tsx#Logo": Logo_f6725385e1c85d4569908fa222b1f780,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "/components/admin/Dashboard.tsx#Dashboard": Dashboard_ae47d15fe4bb4ed9e4fd943278750679,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
