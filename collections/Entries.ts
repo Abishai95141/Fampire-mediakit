@@ -5,12 +5,14 @@ import { brandField } from "./brand";
 /** Which storage service a link points at, read off the URL. */
 function platformOf(url: string): string {
   const u = url.toLowerCase();
-  if (u.includes("drive.google.com") || u.includes("docs.google.com")) return "drive";
+  if (u.includes("drive.google.com") || u.includes("docs.google.com"))
+    return "drive";
   if (u.includes("dropbox.com")) return "dropbox";
   if (u.includes("pic-time.com") || u.includes("pictime.com")) return "pictime";
   if (u.includes("vimeo.com")) return "vimeo";
   if (u.includes("youtube.com") || u.includes("youtu.be")) return "youtube";
-  if (/(netflix|primevideo|amazon|appletv|tubi|plex|roku|hulu)\./.test(u)) return "streaming";
+  if (/(netflix|primevideo|amazon|appletv|tubi|plex|roku|hulu)\./.test(u))
+    return "streaming";
   if (/^https?:\/\//.test(u)) return "site";
   return "unknown";
 }
@@ -53,7 +55,14 @@ export const Entries: CollectionConfig = {
      * related titles server-side and is the feature actually designed for
      * this.
      */
-    defaultColumns: ["title", "kind", "year", "fileCount", "minorRisk", "_status"],
+    defaultColumns: [
+      "title",
+      "kind",
+      "year",
+      "fileCount",
+      "minorRisk",
+      "_status",
+    ],
     /**
      * The hierarchy, without inventing one.
      *
@@ -62,7 +71,7 @@ export const Entries: CollectionConfig = {
      * maintaining a second tree that can disagree with Film and Event —
      * which already describe exactly this grouping and are already filled
      * in. `groupBy` uses them directly: pick Film in the list view and
-     * sHEALed's 222 collections collect under one heading.
+     * sHEALed's 224 collections collect under one heading.
      *
      * Marked experimental by Payload (3.88). It is one boolean, it changes
      * no data, and turning it off restores the plain list — but it is worth
@@ -115,7 +124,9 @@ export const Entries: CollectionConfig = {
         // the admin cannot reintroduce it.
         for (const f of ["title", "description", "altText"] as const) {
           if (typeof data[f] === "string") {
-            data[f] = data[f].replace(/\bTereza\b/g, "TereZa").replace(/\bTEREZA\b/g, "TereZa");
+            data[f] = data[f]
+              .replace(/\bTereza\b/g, "TereZa")
+              .replace(/\bTEREZA\b/g, "TereZa");
           }
         }
 
@@ -167,9 +178,14 @@ export const Entries: CollectionConfig = {
        * is not evidence of absence.
        */
       async ({ data, req }) => {
-        const ids = (data?.people ?? []) as (number | string | { id?: number | string })[];
-        if (!Array.isArray(ids) || ids.length === 0 || data?.containsMinor) return data;
-        const norm = ids.map((p) => (typeof p === "object" && p ? p.id : p)).filter(Boolean);
+        const ids = (data?.people ?? []) as (
+          number | string | { id?: number | string }
+        )[];
+        if (!Array.isArray(ids) || ids.length === 0 || data?.containsMinor)
+          return data;
+        const norm = ids
+          .map((p) => (typeof p === "object" && p ? p.id : p))
+          .filter(Boolean);
         if (!norm.length) return data;
         const found = await req.payload.find({
           collection: "people",
@@ -188,7 +204,11 @@ export const Entries: CollectionConfig = {
          * unflagged and is not recoverable — so an entry that is flagged and
          * not yet confirmed simply cannot reach `published`, whoever asks.
          */
-        if (data?._status === "published" && data?.containsMinor && !data?.containsMinorConfirmed) {
+        if (
+          data?._status === "published" &&
+          data?.containsMinor &&
+          !data?.containsMinorConfirmed
+        ) {
           throw new Error(
             "This entry is flagged as containing a minor. A person must confirm it (Contains minor → confirmed) before it can be published.",
           );
@@ -207,9 +227,15 @@ export const Entries: CollectionConfig = {
          * being read. Comparing against `originalDoc` restricts exactly the
          * transition that matters and nothing else.
          */
-        const confirming = data?.containsMinorConfirmed && !originalDoc?.containsMinorConfirmed;
-        if (confirming && !["admin", "approver"].includes(req.user?.role ?? "")) {
-          throw new Error("Only an approver or admin may confirm a contains-minor flag.");
+        const confirming =
+          data?.containsMinorConfirmed && !originalDoc?.containsMinorConfirmed;
+        if (
+          confirming &&
+          !["admin", "approver"].includes(req.user?.role ?? "")
+        ) {
+          throw new Error(
+            "Only an approver or admin may confirm a contains-minor flag.",
+          );
         }
         return data;
       },
@@ -245,8 +271,16 @@ export const Entries: CollectionConfig = {
         position: "sidebar",
         description: "Read off the URL when left blank.",
       },
-      options: ["drive", "dropbox", "pictime", "vimeo", "youtube", "streaming", "site", "unknown"]
-        .map((v) => ({ label: v, value: v })),
+      options: [
+        "drive",
+        "dropbox",
+        "pictime",
+        "vimeo",
+        "youtube",
+        "streaming",
+        "site",
+        "unknown",
+      ].map((v) => ({ label: v, value: v })),
     },
     {
       name: "access",
@@ -272,7 +306,8 @@ export const Entries: CollectionConfig = {
         position: "sidebar",
         description:
           "Internal only. Passwords live here and are NEVER rendered on a public surface.",
-        condition: (data) => data?.access === "password" || data?.access === "request",
+        condition: (data) =>
+          data?.access === "password" || data?.access === "request",
       },
     },
     {
@@ -293,15 +328,30 @@ export const Entries: CollectionConfig = {
         description:
           "Written by the nightly sweep. 'unchecked' means it has not run, NOT that the link is fine — a Drive folder that returns 200 but redirects to sign-in is not healthy.",
       },
-      options: ["unchecked", "ok", "gone", "login-required", "password", "timeout", "blocked"]
-        .map((v) => ({ label: v, value: v })),
+      options: [
+        "unchecked",
+        "ok",
+        "gone",
+        "login-required",
+        "password",
+        "timeout",
+        "blocked",
+      ].map((v) => ({ label: v, value: v })),
     },
     {
       name: "linkStatusDetail",
       type: "text",
-      admin: { position: "sidebar", readOnly: true, condition: (data) => Boolean(data?.linkStatusDetail) },
+      admin: {
+        position: "sidebar",
+        readOnly: true,
+        condition: (data) => Boolean(data?.linkStatusDetail),
+      },
     },
-    { name: "lastChecked", type: "date", admin: { position: "sidebar", readOnly: true } },
+    {
+      name: "lastChecked",
+      type: "date",
+      admin: { position: "sidebar", readOnly: true },
+    },
 
     // ── What a reader sees ──────────────────────────────────────────────
     {
@@ -364,7 +414,10 @@ export const Entries: CollectionConfig = {
               name: "description",
               type: "textarea",
               required: true,
-              admin: { description: "One line, human. What is inside and where it came from." },
+              admin: {
+                description:
+                  "One line, human. What is inside and where it came from.",
+              },
             },
             {
               /**
@@ -382,9 +435,19 @@ export const Entries: CollectionConfig = {
               index: true,
               admin: { description: "What the asset IS. Required." },
               options: [
-                "b-roll", "event photography", "headshots", "poster", "logo",
-                "trailer", "BTS", "podcast", "press", "magazine", "document",
-                "interview", "audio",
+                "b-roll",
+                "event photography",
+                "headshots",
+                "poster",
+                "logo",
+                "trailer",
+                "BTS",
+                "podcast",
+                "press",
+                "magazine",
+                "document",
+                "interview",
+                "audio",
               ].map((v) => ({ label: v, value: v })),
             },
             {
@@ -400,7 +463,10 @@ export const Entries: CollectionConfig = {
             {
               name: "rewrittenFrom",
               type: "text",
-              admin: { readOnly: true, description: "The original URL, when we canonicalised it." },
+              admin: {
+                readOnly: true,
+                description: "The original URL, when we canonicalised it.",
+              },
             },
             {
               name: "alternates",
@@ -440,16 +506,240 @@ export const Entries: CollectionConfig = {
                   "Or upload one. Page furniture only — never the client's library files, which always stay in their own storage.",
               },
             },
-            { name: "altText", type: "text", admin: { description: "For the preview image." } },
+            {
+              name: "altText",
+              type: "text",
+              admin: { description: "For the preview image." },
+            },
           ],
         },
 
-        // ── Filter axes ───────────────────────────────────────────────────
+        // ── How it is filed ───────────────────────────────────────────────
         {
-          label: "Facets",
-          description: "Two axes must filter simultaneously, and every filter state is URL-addressable.",
+          label: "Tagging",
+          description:
+            "Who is in it, what it belongs to, and when. There is no separate parent field — a collection is filed under a film, an event or a magazine issue by being tagged with one here, and that is also what the Library filters on.",
           fields: [
+            /**
+             * ── How a collection is filed ─────────────────────────────────
+             *
+             * There is no `parent` field and there should not be. The parent
+             * of a collection is its Film, its Event or its Magazine issue,
+             * and those are relationships an editor already fills in — so the
+             * tree is a VIEW of this tab (list view → Group by), not a second
+             * structure that can drift out of step with it.
+             *
+             * This tab used to be called "Facets" and described as "two axes
+             * must filter simultaneously". Both are true and neither is a
+             * sentence anyone reading it needs: the person here is trying to
+             * say who is in a photograph and which film it came from. They
+             * reported not being able to find any way to tag a person or a
+             * film on a new collection — the controls were all here, behind a
+             * word that named the search machinery rather than the task.
+             */
             {
+              type: "collapsible",
+              label: "Who is in it",
+              admin: {
+                initCollapsed: false,
+                description:
+                  "Three different roles. Someone can hold more than one.",
+              },
+              fields: [
+                {
+                  name: "people",
+                  type: "relationship",
+                  relationTo: "people",
+                  hasMany: true,
+                  index: true,
+                  admin: {
+                    description:
+                      "Everyone who APPEARS in the material. Crew and rights holders go in their own fields.",
+                    /**
+                     * A grid of faces instead of a 153-name dropdown.
+                     *
+                     * Only the INPUT is replaced. The field is the same hasMany
+                     * relationship writing the same person IDs, so nothing about
+                     * the stored data, the API or the read layer changes, and
+                     * deleting this block restores the stock control.
+                     */
+                    components: {
+                      Field: {
+                        path: "@/components/admin/RecordPicker#RecordPicker",
+                        clientProps: {
+                          collection: "people",
+                          hasMany: true,
+                          heading: "Who is in this collection",
+                          pinField: "isFamily",
+                          pinLabel: "The family",
+                          badgeField: "isMinor",
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  /**
+                   * Who MADE it, as distinct from who is in it.
+                   *
+                   * 85 collections credited the BTS cinematographer under
+                   * "Featuring" because the folder is named `sHEALed BTS Adam
+                   * Chani Master` — a name that records who shot it. Separating
+                   * the roles keeps a caption from claiming someone was on camera
+                   * when the archive only says they held it.
+                   */
+                  name: "crew",
+                  type: "relationship",
+                  relationTo: "people",
+                  hasMany: true,
+                  index: true,
+                  admin: {
+                    description:
+                      "Shot, cut, produced or directed it — not necessarily in frame.",
+                    components: {
+                      Field: {
+                        path: "@/components/admin/RecordPicker#RecordPicker",
+                        clientProps: {
+                          collection: "people",
+                          hasMany: true,
+                          heading: "Who made it",
+                          pinField: "isFamily",
+                          pinLabel: "The family",
+                          badgeField: "isMinor",
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  name: "rightsHolder",
+                  type: "relationship",
+                  relationTo: "people",
+                  hasMany: true,
+                  index: true,
+                  admin: {
+                    description:
+                      'From "owned by X" / "courtesy of X" in the source folder.',
+                    components: {
+                      Field: {
+                        path: "@/components/admin/RecordPicker#RecordPicker",
+                        clientProps: {
+                          collection: "people",
+                          hasMany: true,
+                          heading: "Who owns it",
+                          pinField: "isFamily",
+                          pinLabel: "The family",
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              type: "collapsible",
+              label: "What it belongs to",
+              admin: {
+                initCollapsed: false,
+                description:
+                  "The parents. Tagging one of these is what puts the collection inside a film, an event or an issue — group the Collections list by any of them to see that tree.",
+              },
+              fields: [
+                {
+                  name: "film",
+                  type: "relationship",
+                  relationTo: "films",
+                  index: true,
+                  admin: {
+                    description:
+                      "Which film this came from. The main parent — pick one and this collection files itself under that title wherever the library is grouped by film.",
+                  },
+                },
+                {
+                  name: "event",
+                  type: "relationship",
+                  relationTo: "events",
+                  index: true,
+                  admin: {
+                    description:
+                      "Which event this came from — a premiere, a conference, a shoot. The parent for anything not tied to a film.",
+                  },
+                },
+                {
+                  name: "issue",
+                  type: "relationship",
+                  relationTo: "magazine-issues",
+                  index: true,
+                  admin: {
+                    description:
+                      "Which issue this belongs to. Group the list by this to get Magazines → issue → collections.",
+                  },
+                },
+                {
+                  /**
+                   * Kept, and no longer the whole story.
+                   *
+                   * A bare number cannot say who was on the cover, when the issue
+                   * ran, or that #6 and #7 are Bryan Johnson and Zachary Levi — so
+                   * the "magazines → cover star → issue" tree the client asked for
+                   * had nowhere to live. `issue` below is that tree. This stays as
+                   * the number the crawl derived and the public issue facet still
+                   * reads, so nothing on the site depends on the backfill landing.
+                   */
+                  name: "magazineIssue",
+                  type: "number",
+                  index: true,
+                  admin: {
+                    description:
+                      "Derived from the folder path. The Issue relationship above is the editable one.",
+                  },
+                },
+                {
+                  name: "location",
+                  type: "relationship",
+                  relationTo: "locations",
+                  index: true,
+                  admin: {
+                    description:
+                      "Where it happened. A filter in the Library, not a parent.",
+                  },
+                },
+                brandField,
+              ],
+            },
+            {
+              type: "collapsible",
+              label: "When, and what kind",
+              admin: {
+                initCollapsed: false,
+                description: "Everything else the Library filters on.",
+              },
+              fields: [
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      name: "year",
+                      type: "number",
+                      index: true,
+                      admin: { width: "33%" },
+                    },
+                    {
+                      name: "dateStart",
+                      type: "date",
+                      admin: { width: "33%" },
+                    },
+                    {
+                      name: "dateEnd",
+                      type: "date",
+                      admin: {
+                        width: "33%",
+                        description: "Multi-day events only.",
+                      },
+                    },
+                  ],
+                },
+                {
                   name: "occasion",
                   type: "select",
                   index: true,
@@ -469,135 +759,17 @@ export const Entries: CollectionConfig = {
                     // Explicit rather than NULL — see derive.mjs.
                     { label: "Unspecified", value: "unspecified" },
                   ],
-            },
-            brandField,
-            {
-              name: "people",
-              type: "relationship",
-              relationTo: "people",
-              hasMany: true,
-              index: true,
-              admin: {
-                description: "Everyone who APPEARS in the material. Crew and rights holders go in their own fields.",
-                /**
-                 * A grid of faces instead of a 153-name dropdown.
-                 *
-                 * Only the INPUT is replaced. The field is the same hasMany
-                 * relationship writing the same person IDs, so nothing about
-                 * the stored data, the API or the read layer changes, and
-                 * deleting this block restores the stock control.
-                 */
-                components: {
-                  Field: {
-                    path: "@/components/admin/RecordPicker#RecordPicker",
-                    clientProps: {
-                      collection: "people",
-                      hasMany: true,
-                      heading: "Who is in this collection",
-                      pinField: "isFamily",
-                      pinLabel: "The family",
-                      badgeField: "isMinor",
-                    },
+                },
+                {
+                  name: "tags",
+                  type: "array",
+                  fields: [{ name: "tag", type: "text", required: true }],
+                  admin: {
+                    description:
+                      "Free tags. Never a folder path — tags, so one entry can sit under many lenses.",
                   },
                 },
-              },
-            },
-            {
-              /**
-               * Who MADE it, as distinct from who is in it.
-               *
-               * 85 collections credited the BTS cinematographer under
-               * "Featuring" because the folder is named `sHEALed BTS Adam
-               * Chani Master` — a name that records who shot it. Separating
-               * the roles keeps a caption from claiming someone was on camera
-               * when the archive only says they held it.
-               */
-              name: "crew",
-              type: "relationship",
-              relationTo: "people",
-              hasMany: true,
-              index: true,
-              admin: {
-                description: "Shot, cut, produced or directed it — not necessarily in frame.",
-                components: {
-                  Field: {
-                    path: "@/components/admin/RecordPicker#RecordPicker",
-                    clientProps: {
-                      collection: "people",
-                      hasMany: true,
-                      heading: "Who made it",
-                      pinField: "isFamily",
-                      pinLabel: "The family",
-                      badgeField: "isMinor",
-                    },
-                  },
-                },
-              },
-            },
-            {
-              name: "rightsHolder",
-              type: "relationship",
-              relationTo: "people",
-              hasMany: true,
-              index: true,
-              admin: {
-                description: 'From "owned by X" / "courtesy of X" in the source folder.',
-                components: {
-                  Field: {
-                    path: "@/components/admin/RecordPicker#RecordPicker",
-                    clientProps: {
-                      collection: "people",
-                      hasMany: true,
-                      heading: "Who owns it",
-                      pinField: "isFamily",
-                      pinLabel: "The family",
-                    },
-                  },
-                },
-              },
-            },
-            { name: "film", type: "relationship", relationTo: "films", index: true },
-            { name: "event", type: "relationship", relationTo: "events", index: true },
-            { name: "location", type: "relationship", relationTo: "locations", index: true },
-            {
-              type: "row",
-              fields: [
-                { name: "year", type: "number", index: true, admin: { width: "33%" } },
-                { name: "dateStart", type: "date", admin: { width: "33%" } },
-                { name: "dateEnd", type: "date", admin: { width: "33%", description: "Multi-day events only." } },
               ],
-            },
-            {
-              /**
-               * Kept, and no longer the whole story.
-               *
-               * A bare number cannot say who was on the cover, when the issue
-               * ran, or that #6 and #7 are Bryan Johnson and Zachary Levi — so
-               * the "magazines → cover star → issue" tree the client asked for
-               * had nowhere to live. `issue` below is that tree. This stays as
-               * the number the crawl derived and the public issue facet still
-               * reads, so nothing on the site depends on the backfill landing.
-               */
-              name: "magazineIssue",
-              type: "number",
-              index: true,
-              admin: { description: "Derived from the folder path. The Issue relationship below is the editable one." },
-            },
-            {
-              name: "issue",
-              type: "relationship",
-              relationTo: "magazine-issues",
-              index: true,
-              admin: {
-                description:
-                  "Which issue this belongs to. Group the list by this to get Magazines → issue → collections.",
-              },
-            },
-            {
-              name: "tags",
-              type: "array",
-              fields: [{ name: "tag", type: "text", required: true }],
-              admin: { description: "Free tags. Never a folder path — tags, so one entry can sit under many lenses." },
             },
           ],
         },
@@ -605,7 +777,8 @@ export const Entries: CollectionConfig = {
         // ── Child safety ──────────────────────────────────────────────────
         {
           label: "Safety",
-          description: "Nothing on this tab may be automated away. A person decides.",
+          description:
+            "Nothing on this tab may be automated away. A person decides.",
           fields: [
             {
               name: "minorRisk",
@@ -617,8 +790,14 @@ export const Entries: CollectionConfig = {
                   "Review priority, drafted from the folder path. 'none' means the path told us nothing — it is NOT a clearance.",
               },
               options: [
-                { label: "Named — a child is named or a kids/family hint fired", value: "named" },
-                { label: "Context — a setting the family attends together", value: "context" },
+                {
+                  label: "Named — a child is named or a kids/family hint fired",
+                  value: "named",
+                },
+                {
+                  label: "Context — a setting the family attends together",
+                  value: "context",
+                },
                 { label: "None — no signal either way", value: "none" },
               ],
             },
@@ -687,12 +866,23 @@ export const Entries: CollectionConfig = {
                 {
                   type: "row",
                   fields: [
-                    { name: "fileCount", type: "number", admin: { width: "50%", readOnly: true } },
+                    {
+                      name: "fileCount",
+                      type: "number",
+                      admin: { width: "50%", readOnly: true },
+                    },
                     {
                       name: "dominantMedia",
                       type: "select",
                       admin: { width: "50%", readOnly: true },
-                      options: ["image", "video", "document", "audio", "vector", "other"].map((v) => ({ label: v, value: v })),
+                      options: [
+                        "image",
+                        "video",
+                        "document",
+                        "audio",
+                        "vector",
+                        "other",
+                      ].map((v) => ({ label: v, value: v })),
                     },
                   ],
                 },
@@ -704,17 +894,41 @@ export const Entries: CollectionConfig = {
                     {
                       type: "row",
                       fields: [
-                        { name: "image", type: "number", admin: { width: "33%" } },
-                        { name: "video", type: "number", admin: { width: "33%" } },
-                        { name: "document", type: "number", admin: { width: "33%" } },
+                        {
+                          name: "image",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
+                        {
+                          name: "video",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
+                        {
+                          name: "document",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
                       ],
                     },
                     {
                       type: "row",
                       fields: [
-                        { name: "audio", type: "number", admin: { width: "33%" } },
-                        { name: "vector", type: "number", admin: { width: "33%" } },
-                        { name: "other", type: "number", admin: { width: "33%" } },
+                        {
+                          name: "audio",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
+                        {
+                          name: "vector",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
+                        {
+                          name: "other",
+                          type: "number",
+                          admin: { width: "33%" },
+                        },
                       ],
                     },
                   ],
@@ -764,7 +978,8 @@ export const Entries: CollectionConfig = {
                   admin: {
                     width: "50%",
                     readOnly: true,
-                    description: "Share of sampled frames agreeing. 1 = unanimous.",
+                    description:
+                      "Share of sampled frames agreeing. 1 = unanimous.",
                   },
                 },
                 {
@@ -773,7 +988,8 @@ export const Entries: CollectionConfig = {
                   admin: {
                     width: "50%",
                     readOnly: true,
-                    description: "Frames actually read. Under 3 is provisional.",
+                    description:
+                      "Frames actually read. Under 3 is provisional.",
                   },
                 },
               ],
@@ -787,7 +1003,10 @@ export const Entries: CollectionConfig = {
                */
               name: "previewFileId",
               type: "text",
-              admin: { readOnly: true, description: "Drives the link-unfurl image." },
+              admin: {
+                readOnly: true,
+                description: "Drives the link-unfurl image.",
+              },
             },
             { name: "folderId", type: "text", admin: { readOnly: true } },
             {
@@ -804,18 +1023,25 @@ export const Entries: CollectionConfig = {
               name: "duplicateFolders",
               type: "number",
               defaultValue: 1,
-              admin: { readOnly: true, description: "How many copies of this subject the crawl found." },
+              admin: {
+                readOnly: true,
+                description: "How many copies of this subject the crawl found.",
+              },
             },
             {
               name: "importDisposition",
               type: "select",
               admin: {
                 readOnly: true,
-                description: "Why the importer did or did not put this forward for review.",
+                description:
+                  "Why the importer did or did not put this forward for review.",
               },
               options: [
                 { label: "Publish — qualifies for review", value: "publish" },
-                { label: "Merge — real content, wrong granularity", value: "merge" },
+                {
+                  label: "Merge — real content, wrong granularity",
+                  value: "merge",
+                },
                 { label: "Reject — machine output", value: "reject" },
               ],
             },

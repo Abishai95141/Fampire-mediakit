@@ -226,6 +226,48 @@ export interface Entry {
    */
   altText?: string | null;
   /**
+   * Everyone who APPEARS in the material. Crew and rights holders go in their own fields.
+   */
+  people?: (number | Person)[] | null;
+  /**
+   * Shot, cut, produced or directed it — not necessarily in frame.
+   */
+  crew?: (number | Person)[] | null;
+  /**
+   * From "owned by X" / "courtesy of X" in the source folder.
+   */
+  rightsHolder?: (number | Person)[] | null;
+  /**
+   * Which film this came from. The main parent — pick one and this collection files itself under that title wherever the library is grouped by film.
+   */
+  film?: (number | null) | Film;
+  /**
+   * Which event this came from — a premiere, a conference, a shoot. The parent for anything not tied to a film.
+   */
+  event?: (number | null) | Event;
+  /**
+   * Which issue this belongs to. Group the list by this to get Magazines → issue → collections.
+   */
+  issue?: (number | null) | MagazineIssue;
+  /**
+   * Derived from the folder path. The Issue relationship above is the editable one.
+   */
+  magazineIssue?: number | null;
+  /**
+   * Where it happened. A filter in the Library, not a parent.
+   */
+  location?: (number | null) | Location;
+  /**
+   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   */
+  tenant?: (number | null) | Brand;
+  year?: number | null;
+  dateStart?: string | null;
+  /**
+   * Multi-day events only.
+   */
+  dateEnd?: string | null;
+  /**
    * What it came FROM. The second axis.
    */
   occasion?:
@@ -244,39 +286,6 @@ export interface Entry {
         | 'unspecified'
       )
     | null;
-  /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
-   */
-  tenant?: (number | null) | Brand;
-  /**
-   * Everyone who APPEARS in the material. Crew and rights holders go in their own fields.
-   */
-  people?: (number | Person)[] | null;
-  /**
-   * Shot, cut, produced or directed it — not necessarily in frame.
-   */
-  crew?: (number | Person)[] | null;
-  /**
-   * From "owned by X" / "courtesy of X" in the source folder.
-   */
-  rightsHolder?: (number | Person)[] | null;
-  film?: (number | null) | Film;
-  event?: (number | null) | Event;
-  location?: (number | null) | Location;
-  year?: number | null;
-  dateStart?: string | null;
-  /**
-   * Multi-day events only.
-   */
-  dateEnd?: string | null;
-  /**
-   * Derived from the folder path. The Issue relationship below is the editable one.
-   */
-  magazineIssue?: number | null;
-  /**
-   * Which issue this belongs to. Group the list by this to get Magazines → issue → collections.
-   */
-  issue?: (number | null) | MagazineIssue;
   /**
    * Free tags. Never a folder path — tags, so one entry can sit under many lenses.
    */
@@ -417,30 +426,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * A lens on the one library, not a separate site. Brands appear as a filter in the Library and decide which collections a contributor can edit — they are not pages and have no URL of their own.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "brands".
- */
-export interface Brand {
-  id: number;
-  name: string;
-  /**
-   * URL segment, e.g. `fampire` → /fampire
-   */
-  slug: string;
-  /**
-   * One line, shown on the brand card.
-   */
-  tagline?: string | null;
-  /**
-   * Five of the eight worlds shipped with zero assets. Unchecked keeps the card visible but the surface shallow.
-   */
-  hasAssets?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -604,6 +589,30 @@ export interface MagazineIssue {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * A lens on the one library, not a separate site. Brands appear as a filter in the Library and decide which collections a contributor can edit — they are not pages and have no URL of their own.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: number;
+  name: string;
+  /**
+   * URL segment, e.g. `fampire` → /fampire
+   */
+  slug: string;
+  /**
+   * One line, shown on the brand card.
+   */
+  tagline?: string | null;
+  /**
+   * Five of the eight worlds shipped with zero assets. Unchecked keeps the card visible but the surface shallow.
+   */
+  hasAssets?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * The site is five pages: the landing page, the Library, Films, People and Press. Open one, and everything on it is a block you can edit, reorder or remove — add a new one with “Add Layout” at the bottom.
@@ -2026,19 +2035,19 @@ export interface EntriesSelect<T extends boolean = true> {
   previewUrl?: T;
   previewImage?: T;
   altText?: T;
-  occasion?: T;
-  tenant?: T;
   people?: T;
   crew?: T;
   rightsHolder?: T;
   film?: T;
   event?: T;
+  issue?: T;
+  magazineIssue?: T;
   location?: T;
+  tenant?: T;
   year?: T;
   dateStart?: T;
   dateEnd?: T;
-  magazineIssue?: T;
-  issue?: T;
+  occasion?: T;
   tags?:
     | T
     | {

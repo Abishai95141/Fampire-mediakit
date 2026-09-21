@@ -63,12 +63,26 @@ the client's own storage. We never host their files.
   the **link**, and the **kind**. The URL slug and the platform are filled in
   for you. Everything else can wait.
 
-### Tags and filters
+### Tagging — and where the hierarchy comes from
 
-On the **Facets** tab: kind, occasion, people, crew, rights holder, film, event,
-place, year, magazine issue, and free tags. Films, People, Events and Places are
-records under **Who & What** — create one there and it becomes a filter value
-the moment a collection points at it.
+On the **Tagging** tab, in three groups:
+
+| Group | Fields |
+|---|---|
+| **Who is in it** | People, Crew, Rights holder |
+| **What it belongs to** | Film, Event, Magazine issue, Place, Brand |
+| **When, and what kind** | Year, dates, Occasion, free tags |
+
+**There is no "parent" field, and that is deliberate.** A collection's parent
+*is* its Film, its Event or its Magazine issue. Tag one of those and the
+collection files itself underneath it — open the Collections list, choose
+**Group by**, and the tree appears: *sHEALed → its 224 collections*,
+*Magazines → Issue #5 → its collections*. Nothing is typed twice, and there is
+no second hierarchy that can disagree with the tags.
+
+Films, People, Events and Places are records under **Who & What** — create one
+there and it becomes both a parent and a filter value the moment a collection
+points at it.
 
 Three attribution fields, deliberately separate, because the archive often
 records who *shot* something rather than who is *in* it:
