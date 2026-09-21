@@ -590,7 +590,7 @@ export interface Location {
   createdAt: string;
 }
 /**
- * One record per issue. Cover subject, cover image, and where to read it.
+ * One record per issue. Group by Cover Subject to see the magazine by who was on the front.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "magazine-issues".
@@ -806,7 +806,7 @@ export interface Page {
    */
   slug: string;
   /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   * Which world this belongs to. On a page this is a label for your own reference only — it does not change what readers see, and it does not filter anything. The brand set on a COLLECTION is the one that drives the Library's Brand filter.
    */
   tenant?: (number | null) | Brand;
   /**
@@ -1743,7 +1743,7 @@ export interface SiteSetting {
   id: number;
   label: string;
   /**
-   * Which world this belongs to. A label and a filter on the one shared library — it does not hide anything from anyone.
+   * Which world this belongs to. On a page this is a label for your own reference only — it does not change what readers see, and it does not filter anything. The brand set on a COLLECTION is the one that drives the Library's Brand filter.
    */
   tenant?: (number | null) | Brand;
   nav?:

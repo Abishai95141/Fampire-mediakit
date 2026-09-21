@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 import { PAGE_BLOCKS } from "./blocks";
-import { brandField } from "./brand";
+import { brandFieldLabelOnly } from "./brand";
 
 /**
  * Every page on the site, including the ones that used to be code.
@@ -80,7 +80,7 @@ export const Pages: CollectionConfig = {
               index: true,
               admin: { description: "The URL path, e.g. /fampire/press. Leading slash is added for you." },
             },
-            brandField,
+            brandFieldLabelOnly,
             {
               name: "layout",
               type: "blocks",
@@ -150,7 +150,7 @@ export const SiteSettings: CollectionConfig = {
   },
   fields: [
     { name: "label", type: "text", required: true },
-    brandField,
+    brandFieldLabelOnly,
     {
       name: "nav",
       type: "array",

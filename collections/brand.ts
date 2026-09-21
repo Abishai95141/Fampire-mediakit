@@ -52,3 +52,31 @@ export const brandField: Field = {
     },
   },
 };
+
+/**
+ * The same control, told the truth about what it does here.
+ *
+ * On an ENTRY the brand is load-bearing: it becomes the `brands` value the
+ * front end reads, which is the Brand filter in the Library sidebar, a term in
+ * the search haystack, and the label on the card.
+ *
+ * On a PAGE it is inert. `findPage` looks a page up by slug alone and nothing
+ * in the rendering reads `page.tenant`, so changing it here alters nothing a
+ * reader can see. Same for site settings, which is loaded with `limit: 1` and
+ * no brand filter at all.
+ *
+ * The field stays because it is the same `tenant_id` column the multi-tenant
+ * plugin left behind, holding real values, and dropping it would be a
+ * migration that destroys them for no gain. What was wrong was the
+ * description: it promised "a label and a filter on the one shared library",
+ * which is true of a collection and misleading on a page — it invites an
+ * editor to think the choice does something, then quietly does nothing.
+ */
+export const brandFieldLabelOnly: Field = {
+  ...brandField,
+  admin: {
+    ...brandField.admin,
+    description:
+      "Which world this belongs to. On a page this is a label for your own reference only — it does not change what readers see, and it does not filter anything. The brand set on a COLLECTION is the one that drives the Library's Brand filter.",
+  },
+};
