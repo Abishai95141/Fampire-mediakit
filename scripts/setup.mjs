@@ -225,11 +225,18 @@ note("migrations are the only thing that changes this schema — dev push is off
 /**
  * Ask the database, rather than trusting the exit code.
  *
- * `payload migrate` has been observed exiting 0 on a freshly created database
- * having applied nothing — the run then failed three steps later with
- * `relation "users" does not exist`, which reads as a broken seed rather than
- * a skipped migration. So the check is "is the schema there", not "did the
- * command succeed", and a miss retries once before giving up loudly.
+ * Against a brand-new database, `payload migrate` sometimes exits 0 having
+ * applied nothing — reproduced twice here, on a database Postgres had just
+ * created. Run it a second time and all eighty-one migrations apply normally,
+ * so the first invocation appears to spend itself establishing the migrations
+ * bookkeeping and then stop.
+ *
+ * Left alone, that surfaces three steps later as `relation "users" does not
+ * exist` during a seed, which reads as a broken seed rather than a skipped
+ * migration and sends you looking in the wrong file entirely.
+ *
+ * So the question asked is "is the schema there", not "did the command exit
+ * 0". One retry, then a loud failure with the command to run by hand.
  */
 async function schemaPresent() {
   const client = new pg.Client({ connectionString: env.DATABASE_URI, ssl });
