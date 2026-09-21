@@ -278,11 +278,20 @@ export async function PeopleProfiles({
   layout = "portraits",
   showBios = true,
   signedIn = false,
+  pageId,
+  blockIndex,
+  blockId,
 }: {
   people: PersonRecord[];
   layout?: string;
   showBios?: boolean;
   signedIn?: boolean;
+  /** Where this section lives, so a card can be edited or taken off the page.
+   *  The roster and stack layouts already had these controls; `portraits` and
+   *  `profiles` — the two actually in use — had none. */
+  pageId?: number | string;
+  blockIndex?: number;
+  blockId?: string | null;
 }) {
   const publicEntries = await loadEntries();
   const shots = previewsForSubjects(publicEntries, people.map((p) => p.slug));
@@ -291,7 +300,16 @@ export async function PeopleProfiles({
     return (
       <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {people.map((p) => (
-          <li key={p.slug}>
+          <li key={p.slug} className="fam-item relative">
+            <ItemControls
+              signedIn={signedIn}
+              pageId={pageId}
+              blockIndex={blockIndex}
+              blockId={blockId}
+              collection="people"
+              id={p.id ?? null}
+              label={p.name}
+            />
             <Link href={`/library?subject=${p.slug}`} className="fam-display text-[1.2rem]">
               {p.name}
             </Link>
@@ -346,8 +364,17 @@ export async function PeopleProfiles({
           return (
             <article
               key={p.slug}
-              className="fam-section-rule grid gap-x-14 gap-y-7 pt-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,20rem)_1fr]"
+              className="fam-item fam-section-rule relative grid gap-x-14 gap-y-7 pt-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,20rem)_1fr]"
             >
+              <ItemControls
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                blockId={blockId}
+                collection="people"
+                id={p.id ?? null}
+                label={p.name}
+              />
               <ImageWell
                 src={chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null}
                 alt={SUBJECT_LABEL[p.slug] ?? p.name}
@@ -397,7 +424,16 @@ export async function PeopleProfiles({
   return (
     <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
       {people.map((p) => (
-        <li key={p.slug}>
+        <li key={p.slug} className="fam-item relative">
+          <ItemControls
+            signedIn={signedIn}
+            pageId={pageId}
+            blockIndex={blockIndex}
+            blockId={blockId}
+            collection="people"
+            id={p.id ?? null}
+            label={p.name}
+          />
           <Link href={`/library?subject=${p.slug}`} className="group block">
             <ImageWell
               src={chosen(p.portraitUrl, p.portraitImage) ?? shots[p.slug] ?? null}
@@ -531,10 +567,19 @@ export function PressLog({
   appearances,
   featuredCount = 3,
   signedIn = false,
+  pageId,
+  blockIndex,
+  blockId,
 }: {
   appearances: AppearanceRecord[];
   featuredCount?: number;
   signedIn?: boolean;
+  /** Where this section lives. The log offered an "Edit this appearance"
+   *  pill, which opens the RECORD and changes it everywhere; it had no way to
+   *  reorder the log or drop one entry from this page. */
+  pageId?: number | string;
+  blockIndex?: number;
+  blockId?: string | null;
 }) {
   /**
    * The full log renders in the order it is GIVEN.
@@ -569,7 +614,16 @@ export function PressLog({
           <h2 className="fam-eyebrow">Most watched</h2>
           <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-3">
             {featured.map((a) => (
-              <li key={a.url ?? a.title}>
+              <li key={a.url ?? a.title} className="fam-item relative">
+                <ItemControls
+                  signedIn={signedIn}
+                  pageId={pageId}
+                  blockIndex={blockIndex}
+                  blockId={blockId}
+                  collection="appearances"
+                  id={a.record_id ?? null}
+                  label={a.title}
+                />
                 <a
                   href={a.url ?? "#"}
                   target="_blank"
@@ -607,7 +661,16 @@ export function PressLog({
         <h2 className="fam-eyebrow">The full log</h2>
         <ul className="mt-6">
           {sorted.map((a) => (
-            <li key={a.url ?? a.title}>
+            <li key={a.url ?? a.title} className="fam-item relative">
+              <ItemControls
+                signedIn={signedIn}
+                pageId={pageId}
+                blockIndex={blockIndex}
+                blockId={blockId}
+                collection="appearances"
+                id={a.record_id ?? null}
+                label={a.title}
+              />
               <a
                 href={a.url ?? "#"}
                 target="_blank"
