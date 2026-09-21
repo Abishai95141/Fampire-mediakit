@@ -334,6 +334,20 @@ if (hasAdmin && !adminEmail) {
 const SEEDS = [
   ["scripts/seed-brands.ts", "the brands the catalog is filed under", {}],
   ["scripts/import-entries.ts", "the catalog — 600 collections, taxonomy first", { PUBLISH_CLEAN: "1" }],
+  /**
+   * Three films the crawler dropped.
+   *
+   * The New Woo, Skin Deep and From Fat Lolli to 6 Pack Lolli reached
+   * data/fampire/entries.json with nothing attached, for two reasons the
+   * script itself documents — a subject-length rule that rejected "WOO" at
+   * three letters, and a tier filter that silently skipped two folders. So
+   * every fresh install rendered "No collections indexed yet" on three of the
+   * eight films while production showed them correctly, because this had been
+   * run there by hand and never added here.
+   *
+   * Idempotent on folderId: updates if present, creates if not.
+   */
+  ["scripts/import-missing-film-collections.ts", "three films the crawler missed", {}],
   ["scripts/seed-surfaces.ts", "the five public pages, as CMS records", {}],
   ["scripts/seed-content.ts", "film slate, family bios, navigation and footer", {}],
   ["scripts/import-editorial.ts", "film synopses and the press log", {}],
