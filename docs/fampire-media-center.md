@@ -1,8 +1,21 @@
-# FAMPIRE Media Center
+# FAMPIRE Media Center — design notes
 
-FAMPIRE is **appended to** the HNN app, not merged into it. It lives in its own
-route group, has its own typeface, palette, chrome and access model, and shares
-exactly one thing with the portal: the session cookie.
+> ## ⚠ Written during the first pass. The architecture below is superseded.
+>
+> Keep reading it for the **design system** — the typography, the numbered
+> section rule, the preview-harvesting rules, the renaming policy — which is
+> still exactly what the site does. Do **not** take its architecture from here.
+> Four things in it are now wrong:
+>
+> | It says | It is |
+> |---|---|
+> | Routes live under `/fampire/*` | They live at the root — `/`, `/library`, `/films`, `/people`, `/press` |
+> | FAMPIRE is appended to HNN, sharing a session cookie and a `proxy.ts` allowlist | They are two separate applications sharing nothing at runtime. See `docs/running-both-apps.md` |
+> | The catalog is 94 collections in a JSON file | It is 600 in Postgres, through Payload. See `lib/fampire/payload-catalog.ts` |
+> | Pages are React files | Every page is composed of blocks in the CMS. See `docs/editing-guide.md` |
+>
+> Current architecture: **`README.md`**, then `docs/payload-harness.md`.
+> Current numbers: `docs/CORPUS-AUDIT.md` and `docs/AUDIT-FIXES.md`.
 
 ---
 

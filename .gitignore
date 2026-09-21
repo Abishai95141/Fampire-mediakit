@@ -32,6 +32,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# …except the template, which is the only record of what the app reads and is
+# what `npm run setup` copies. `.env*` had been quietly excluding it since the
+# first commit, so no clone has ever carried it — and setup cannot run without
+# it. It holds names and comments, never a value.
+!.env.example
 
 # vercel
 .vercel

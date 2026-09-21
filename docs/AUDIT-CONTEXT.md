@@ -1,7 +1,19 @@
-# Audit context — read this first
+# Audit context — internal briefing
 
-Shared briefing for the end-to-end audit. Every agent should read this before
-investigating, and should VERIFY rather than trust it.
+> **Not setup documentation, and not current.** This was written to brief an
+> audit of the August corpus. It points at absolute paths on the machine that
+> ran it (`/Users/abishaikc/…`) and at a `~/Fampire` directory that is **not
+> part of this repository**, so none of its commands will work on a clone.
+> Its counts have also moved on — 600 entries now, not 559.
+>
+> To get the project running, read `README.md`. For the corpus numbers that
+> are current, read `docs/CORPUS-AUDIT.md` and `docs/AUDIT-FIXES.md`.
+>
+> It is kept because the pipeline diagram below is the clearest record of how
+> the catalog was actually derived, and that lineage has not changed.
+
+Shared briefing for the end-to-end audit. Every reader should VERIFY rather
+than trust it.
 
 ## Where things are
 

@@ -1,5 +1,6 @@
 /* ScrollExpand — React Bits (JavaScript + CSS variant), vendored unmodified
-   except where noted in ScrollExpand.tsx. */
+   except where noted in ScrollExpand.tsx.
+   Copyright (c) 2026 David Haz. MIT with the Commons Clause — see NOTICE.md. */
 .scroll-expand { position: relative; width: 100%; height: 100%; }
 
 .scroll-expand--scroller {

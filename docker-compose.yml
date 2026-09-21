@@ -1,0 +1,38 @@
+# Postgres for local development — nothing else.
+#
+# The app itself is NOT in here on purpose. `npm run dev` on the host gives you
+# fast refresh and a debugger; a container gives you neither, and the only thing
+# this project genuinely cannot provide for itself is a database. So this file
+# supplies exactly that and stays out of the way.
+#
+#   docker compose up -d        start Postgres
+#   docker compose down         stop it, keep the data
+#   docker compose down -v      stop it and DELETE the data
+#
+# Port 5433, not 5432: a developer who already runs Postgres should not have to
+# stop it to work on this. If you would rather use your own server, skip this
+# file entirely and point DATABASE_URI at it — see .env.example.
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: fampire-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: fampire
+      POSTGRES_PASSWORD: fampire
+      POSTGRES_DB: fampire_media_center
+    ports:
+      - "5433:5432"
+    volumes:
+      - fampire-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # `npm run setup` waits on this, so it has to mean "accepting queries",
+      # not merely "process started".
+      test: ["CMD-SHELL", "pg_isready -U fampire -d fampire_media_center"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  fampire-pgdata:

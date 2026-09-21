@@ -7,6 +7,12 @@ import "./ScrollExpand.css";
 /**
  * ScrollExpand — React Bits (JavaScript + CSS variant), vendored.
  *
+ * Copyright (c) 2026 David Haz. Licensed MIT with the Commons Clause:
+ * free to use in this application, including commercially, but the component
+ * itself may not be sold, sublicensed or redistributed as a component. The
+ * notice is reproduced here because the licence requires it to travel with
+ * the code; see NOTICE.md and https://github.com/DavidHDev/react-bits.
+ *
  * Two deliberate departures from the published source, both required here:
  *
  *  1. "use client" and TypeScript prop types. This app is the Next App Router,

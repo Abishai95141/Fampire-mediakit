@@ -24,6 +24,16 @@ const check = (label: string, ok: boolean, detail: string) => {
   console.log(`  ${ok ? "PASS" : "FAIL"}  ${label.padEnd(52)} ${detail}`);
 };
 
+/**
+ * Something true of the DATA, not of the code — reported, never failed.
+ *
+ * A check that cannot pass on a clean install is not a check, it is a false
+ * alarm that teaches people to ignore the runner. Portraits are uploads: a
+ * database nobody has uploaded to correctly has none.
+ */
+const observe = (label: string, detail: string) =>
+  console.log(`  ----  ${label.padEnd(52)} ${detail}`);
+
 // ── the tree ─────────────────────────────────────────────────────────────
 const issues = (
   await api.find({ collection: "magazine-issues", limit: 100, depth: 1, sort: "issueNumber", overrideAccess: true })
@@ -103,7 +113,12 @@ const family = docs.filter((p) => p.isFamily);
 const withPortrait = docs.filter((p) => (p.portraitImage && p.portraitImage.url) || p.portraitUrl);
 check("the picker's one request returns every person", docs.length === people.totalDocs, `${docs.length} of ${people.totalDocs}`);
 check("the four family members are flagged", family.length === 4, family.map((p) => p.name).join(", "));
-check("someone has a portrait to show", withPortrait.length > 0, `${withPortrait.length} with a picture, ${docs.length - withPortrait.length} fall back to initials`);
+observe(
+  "portraits uploaded",
+  withPortrait.length
+    ? `${withPortrait.length} with a picture, ${docs.length - withPortrait.length} fall back to initials`
+    : `none yet — all ${docs.length} render as initials, which is the designed fallback`,
+);
 
 console.log(failed ? `\n${failed} check(s) FAILED\n` : "\nall checks passed\n");
 process.exit(failed ? 1 : 0);
