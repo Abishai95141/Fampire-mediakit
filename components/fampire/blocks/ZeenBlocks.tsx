@@ -50,6 +50,7 @@ export async function DeckHeroBlock({
   signedIn = false,
   pageId,
   blockIndex,
+  blockId,
   hidden,
 }: {
   wordmark: string;
@@ -63,6 +64,9 @@ export async function DeckHeroBlock({
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
+  /** The section's row id, passed straight to ItemControls so "Edit card"
+   *  opens this section of the page rather than the whole document. */
+  blockId?: string | null;
   hidden?: Set<string>;
 }) {
   /**
@@ -129,6 +133,7 @@ export async function DeckHeroBlock({
                 signedIn={signedIn}
                 pageId={pageId}
                 blockIndex={blockIndex}
+                blockId={blockId}
               />
             </div>
 
@@ -157,6 +162,7 @@ export async function BrandStripBlock({
   signedIn = false,
   pageId,
   blockIndex,
+  blockId,
   hidden,
 }: {
   label?: string | null;
@@ -167,6 +173,9 @@ export async function BrandStripBlock({
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
+  /** The section's row id, passed straight to ItemControls so "Edit card"
+   *  opens this section of the page rather than the whole document. */
+  blockId?: string | null;
   hidden?: Set<string>;
 }) {
   const all = await loadBrands();
@@ -199,6 +208,7 @@ export async function BrandStripBlock({
           signedIn={signedIn}
           pageId={pageId}
           blockIndex={blockIndex}
+          blockId={blockId}
           collection="brands"
           id={b.id}
           label={b.name}

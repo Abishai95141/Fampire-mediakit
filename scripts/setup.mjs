@@ -348,16 +348,79 @@ const SEEDS = [
 say("Content");
 note("every seed is idempotent — it upserts, so running setup again is safe");
 
-for (const [script, what, extra] of SEEDS) {
-  console.log(`\n    ${c.bold("·")} ${what}  ${c.dim(script)}`);
+async function runSeeds() {
+  for (const [script, what, extra] of SEEDS) {
+    console.log(`\n    ${c.bold("·")} ${what}  ${c.dim(script)}`);
+    try {
+      await payloadRun(script, extra);
+      ok("done");
+    } catch (e) {
+      die(
+        `${script} failed.\n${e.message}`,
+        `  The database is left as it is. Fix the cause and run ${c.bold("npm run setup")} again —\n  the steps above this one will skip themselves.`,
+      );
+    }
+  }
+}
+
+/**
+ * Ask the database what landed, rather than trusting eleven exit codes.
+ *
+ * A seed has been observed writing nothing against a BRAND-NEW database while
+ * printing its whole success report and exiting 0 — `seed-magazine-tree` said
+ * "linked 28 collection(s)" and left `magazine_issues` empty. `payload migrate`
+ * does the same thing on a fresh schema, which is why the schema step above
+ * already checks instead of trusting. Two different steps, one behaviour: the
+ * first operation against freshly created tables can quietly do nothing.
+ *
+ * Every seed is idempotent, so the repair is simply to run the list again.
+ * A second pass on an already-correct database is a few seconds of no-ops.
+ */
+const EXPECTED = [
+  ["brands", "select count(*)::int n from brands"],
+  ["catalog entries", "select count(*)::int n from entries"],
+  ["people", "select count(*)::int n from people"],
+  ["films", "select count(*)::int n from films"],
+  ["press appearances", "select count(*)::int n from appearances"],
+  ["pages", "select count(*)::int n from pages"],
+  ["magazine issues", "select count(*)::int n from magazine_issues"],
+];
+
+async function missing() {
+  const client = new pg.Client({ connectionString: env.DATABASE_URI, ssl });
+  await client.connect();
+  const empty = [];
   try {
-    await payloadRun(script, extra);
-    ok("done");
-  } catch (e) {
-    die(
-      `${script} failed.\n${e.message}`,
-      `  The database is left as it is. Fix the cause and run ${c.bold("npm run setup")} again —\n  the steps above this one will skip themselves.`,
-    );
+    for (const [label, sql] of EXPECTED) {
+      try {
+        const { rows } = await client.query(sql);
+        if (!rows[0]?.n) empty.push(label);
+      } catch {
+        empty.push(label);
+      }
+    }
+  } finally {
+    await client.end();
+  }
+  return empty;
+}
+
+await runSeeds();
+
+{
+  const empty = await missing();
+  if (empty.length) {
+    console.log(`\n    ${c.yellow("·")} ${empty.join(", ")} came back empty — running the seeds once more`);
+    note("every seed upserts, so a second pass is safe");
+    await runSeeds();
+    const still = await missing();
+    if (still.length) {
+      die(
+        `These are still empty after two passes: ${still.join(", ")}.`,
+        `  Run the seed for one of them by hand and read its output:\n    npx payload run scripts/seed-magazine-tree.ts`,
+      );
+    }
+    ok("second pass filled them");
   }
 }
 

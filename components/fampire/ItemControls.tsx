@@ -24,6 +24,7 @@ export default function ItemControls({
   signedIn,
   pageId,
   blockIndex,
+  blockId,
   collection,
   id,
   label,
@@ -32,6 +33,10 @@ export default function ItemControls({
   signedIn: boolean;
   pageId?: number | string;
   blockIndex?: number;
+  /** The section's row id, so "Edit card" opens THIS section of the page
+   *  rather than all fourteen. Optional: without it the link still works and
+   *  simply lands on the whole document, as it did before. */
+  blockId?: string | null;
   /** The record this card happens to be about, if any. */
   collection: string;
   id?: number | string | null;
@@ -92,7 +97,11 @@ export default function ItemControls({
        */}
       {onPage ? (
         <a
-          href={`/admin/collections/pages/${pageId}`}
+          href={
+            blockId
+              ? `/admin/collections/pages/${pageId}?block=${encodeURIComponent(blockId)}`
+              : `/admin/collections/pages/${pageId}`
+          }
           onClick={(e) => e.stopPropagation()}
           aria-label={`Edit the ${label} card on this page`}
           title="Edit this card — picture, words, link, order"

@@ -242,6 +242,7 @@ export default async function RenderBlocks({
               signedIn={signedIn}
               pageId={pageId}
               blockIndex={i}
+              blockId={block.id ? String(block.id) : null}
               hidden={hiddenIds(block)}
               rows={(block.cards as Record<string, unknown>[]) ?? undefined}
               wordmark={String(block.wordmark ?? "FAMPIRE")}
@@ -260,6 +261,7 @@ export default async function RenderBlocks({
               signedIn={signedIn}
               pageId={pageId}
               blockIndex={i}
+              blockId={block.id ? String(block.id) : null}
               hidden={hiddenIds(block)}
               rows={(block.items as Record<string, unknown>[]) ?? undefined}
               label={block.label as string | null}
@@ -704,6 +706,7 @@ export default async function RenderBlocks({
                   signedIn={signedIn}
                   pageId={pageId}
                   blockIndex={i}
+              blockId={block.id ? String(block.id) : null}
                 />
               </Section>
             );
@@ -760,6 +763,7 @@ export default async function RenderBlocks({
                 signedIn={signedIn}
                 pageId={pageId}
                 blockIndex={i}
+              blockId={block.id ? String(block.id) : null}
               />
             );
             return block.dark ? (
@@ -1058,7 +1062,14 @@ export default async function RenderBlocks({
       return (
         <div key={`edit-${block.blockType}-${i}`} className="fam-editable">
           {node}
-          <BlockEdit signedIn={signedIn} pageId={pageId} blockType={String(block.blockType)} />
+          <BlockEdit
+            signedIn={signedIn}
+            pageId={pageId}
+            blockType={String(block.blockType)}
+            /* Payload's row uuid. Present in every page query since the
+               blocks were introduced, and read here for the first time. */
+            blockId={block.id ? String(block.id) : null}
+          />
         </div>
       );
     }),

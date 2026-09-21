@@ -72,14 +72,28 @@ export default function BlockEdit({
   signedIn,
   pageId,
   blockType,
+  blockId,
 }: {
   signedIn: boolean;
   pageId: number | string;
   blockType: string;
+  /**
+   * This row's id, so the link opens THIS section rather than the page.
+   *
+   * Payload gives every block row a uuid primary key, and it has always been
+   * in the data and never read — which is why two blocks of the same type on
+   * one page were indistinguishable to this handle. Optional, so a caller
+   * that cannot supply one still gets the old whole-page link instead of a
+   * broken one.
+   */
+  blockId?: string | null;
 }) {
   if (!signedIn) return null;
   const src = SOURCE[blockType];
   const name = TITLE[blockType] ?? blockType;
+  const section = blockId
+    ? `/admin/collections/pages/${pageId}?block=${encodeURIComponent(blockId)}`
+    : `/admin/collections/pages/${pageId}`;
 
   return (
     <div
@@ -89,10 +103,11 @@ export default function BlockEdit({
       data-block={blockType}
     >
       <span className="fam-block-edit-tag">{name}</span>
-      {/* The page record: where this section's own cards are added, edited,
-          reordered and deleted. That is the primary door now — the section's
-          content belongs to the page, not to a collection. */}
-      <Link href={`/admin/collections/pages/${pageId}`} prefetch={false}>
+      {/* The page record, narrowed to this section: where its own cards are
+          added, edited, reordered and deleted. That is the primary door —
+          the content belongs to the page, not to a collection — and with a
+          row id the form opens folded down to this one row. */}
+      <Link href={section} prefetch={false}>
         Edit section
       </Link>
       {/* The page's own picture bucket, so "attach a new image" has an

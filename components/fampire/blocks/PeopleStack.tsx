@@ -28,6 +28,7 @@ export default function PeopleStack({
   signedIn = false,
   pageId,
   blockIndex,
+  blockId,
 }: {
   heading?: string | null;
   intro?: string | null;
@@ -36,6 +37,9 @@ export default function PeopleStack({
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
+  /** The section's row id, passed straight to ItemControls so "Edit card"
+   *  opens this section of the page rather than the whole document. */
+  blockId?: string | null;
 }) {
   const reduce = useReducedMotion();
   if (!people.length) return null;
@@ -64,6 +68,7 @@ export default function PeopleStack({
               signedIn={signedIn}
               pageId={pageId}
               blockIndex={blockIndex}
+              blockId={blockId}
               collection="people"
               id={p.id}
               label={p.name}

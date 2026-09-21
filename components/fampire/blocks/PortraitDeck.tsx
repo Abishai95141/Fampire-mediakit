@@ -43,11 +43,15 @@ export default function PortraitDeck({
   signedIn = false,
   pageId,
   blockIndex,
+  blockId,
 }: {
   cards: DeckCard[];
   signedIn?: boolean;
   pageId?: number | string;
   blockIndex?: number;
+  /** The section's row id, passed straight to ItemControls so "Edit card"
+   *  opens this section of the page rather than the whole document. */
+  blockId?: string | null;
 }) {
   const reduce = useReducedMotion();
   const n = cards.length;
@@ -99,6 +103,7 @@ export default function PortraitDeck({
               signedIn={signedIn}
               pageId={pageId}
               blockIndex={blockIndex}
+              blockId={blockId}
               collection="people"
               id={c.id ?? null}
               label={c.name}

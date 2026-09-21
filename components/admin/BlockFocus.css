@@ -1,0 +1,66 @@
+/* Focused block editing.
+ *
+ * Styled in Payload's own theme variables rather than colours of its own, the
+ * same rule RecordPicker.css sets out: the admin has a light and a dark mode
+ * and an editor switches between them at will, so anything hardcoded here
+ * would be legible in one and not the other. `--theme-elevation-*` walks from
+ * the page ground (0) to the strongest foreground (1000). */
+
+/* A row that is not the one being edited.
+ *
+ * `display: none` rather than an opacity fade, for two reasons: a half-visible
+ * form invites you to type into it, and the rows left on screen would still be
+ * tabbable, so a keyboard user would walk into fields that are meant to be put
+ * away. This is a filter on attention, not a decoration. */
+.fam-block-away {
+  display: none !important;
+}
+
+.fam-focus-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-field, 1.5rem);
+  padding: 10px 14px;
+  border: 1px solid var(--theme-elevation-150);
+  border-left: 3px solid var(--theme-elevation-500);
+  border-radius: 4px;
+  background: var(--theme-elevation-50);
+}
+
+.fam-focus-bar__what {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--theme-elevation-800);
+}
+
+.fam-focus-bar__what b {
+  color: var(--theme-elevation-1000);
+  font-weight: 600;
+}
+
+/* A link, not a button: it undoes a view state, it saves nothing, and it must
+   not read as an action with consequences next to Save and Publish. */
+.fam-focus-bar__all {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--theme-elevation-800);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.fam-focus-bar__all:hover {
+  color: var(--theme-elevation-1000);
+}
+
+.fam-focus-bar__all:focus-visible {
+  outline: 2px solid var(--theme-elevation-600);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

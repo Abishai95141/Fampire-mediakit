@@ -27,6 +27,26 @@ export const Pages: CollectionConfig = {
     group: "Pages",
     description:
       "The site is five pages: the landing page, the Library, Films, People and Press. Open one, and everything on it is a block you can edit, reorder or remove — add a new one with “Add Layout” at the bottom.",
+    components: {
+      edit: {
+        /**
+         * Narrows this form to one section when the URL names one.
+         *
+         * The site's per-section "Edit" handles now carry `?block=<row id>`.
+         * Mounted here rather than as its own document view because a custom
+         * view is not wrapped in a `Form` — only the default edit view builds
+         * one — so a focused view would have to rebuild the form, its
+         * validation and its save controls, and drift from Payload's on every
+         * upgrade. Publishing, drafts and the child-safety rules all hang off
+         * that form.
+         *
+         * Must also appear in app/(payload)/admin/importMap.js. See the
+         * warning in payload.config.ts: a component missing from that map
+         * renders the entire admin blank, with the only clue in the log.
+         */
+        beforeDocumentControls: ["@/components/admin/BlockFocus#BlockFocus"],
+      },
+    },
     livePreview: {
       url: ({ data }) => {
         const path = String(data?.slug ?? "").replace(/^\/?/, "/");
