@@ -54,10 +54,56 @@ export async function POST(request: Request) {
       user: { email: result.user.email, role: (result.user as { role?: string }).role ?? null },
     });
 
+    /**
+     * `Secure` when the connection can carry it, not merely when NODE_ENV
+     * says production.
+     *
+     * This was `secure: process.env.NODE_ENV === "production"`, and
+     * `next start` sets NODE_ENV=production — so a production build served
+     * over plain HTTP marked the cookie Secure, the browser silently dropped
+     * it, and the sign-in "failed". Server-side it had succeeded: the login
+     * returned 200 and issued a token. The only thing the person saw was
+     * "Email or password is incorrect", which is the one explanation that
+     * was not true.
+     *
+     * Decided from the REQUEST. A deployment behind a TLS-terminating proxy
+     * says so in `x-forwarded-proto`; a direct HTTPS server says so in the
+     * URL. Anything that is not plain-HTTP localhost keeps the flag, so a
+     * spoofed header cannot strip it from a real host — the only case this
+     * relaxes is the one where the cookie could never have worked anyway.
+     */
+    /**
+     * `Secure` when the connection can actually carry it, not merely when
+     * NODE_ENV says production.
+     *
+     * This was `secure: process.env.NODE_ENV === "production"`, and
+     * `next start` sets NODE_ENV=production — so a production build served
+     * over plain HTTP marked the cookie Secure, the browser silently dropped
+     * it, and signing in "failed". Server-side it had SUCCEEDED: the login
+     * returned 200 and issued a token. The only thing the person saw was
+     * "Email or password is incorrect", which is the one explanation that
+     * was not true.
+     *
+     * DECLARED, not sniffed — the same rule `DATABASE_SSL` follows in
+     * payload.config.ts, and for the same reason. `SITE_URL` is the origin
+     * this deployment says it serves from, so an HTTPS deployment keeps the
+     * flag even behind a proxy that forgets `x-forwarded-proto`, and no
+     * spoofed header can strip it. The forwarded header and the request's own
+     * protocol are accepted as well, so a deployment that never set SITE_URL
+     * still gets it right.
+     *
+     * The only case this relaxes is plain HTTP, where a Secure cookie could
+     * never have reached the browser in the first place.
+     */
+    const declared = (process.env.SITE_URL ?? "").trim().toLowerCase();
+    const forwarded = (request.headers.get("x-forwarded-proto") ?? "").split(",")[0].trim().toLowerCase();
+    const own = new URL(request.url).protocol.replace(":", "").toLowerCase();
+    const overHttps = declared.startsWith("https://") || forwarded === "https" || own === "https";
+
     response.cookies.set(COOKIE, result.token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: overHttps,
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });
