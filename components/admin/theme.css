@@ -1,0 +1,248 @@
+/* ══════════════════════════════════════════════════════════════════════
+   THE ADMIN SKIN
+   ══════════════════════════════════════════════════════════════════════
+
+   Payload has no `admin.css` option in 3.88 — the config type has no such
+   key. A stylesheet imported into app/(payload)/layout.tsx AFTER
+   `@payloadcms/next/css` is the supported route, and that is how this loads.
+
+   ── Why this changes a colour RAMP and not a hundred selectors ────────
+
+   Payload builds its whole interface from one greyscale: `--color-base-0`
+   through `--color-base-1000`. Everything else is derived. `--theme-elevation-*`
+   points at that ramp, `--theme-bg` and `--theme-text` point at elevation,
+   the primary button is `--theme-elevation-800` on `--theme-elevation-0`,
+   borders are `--theme-elevation-150`.
+
+   And dark mode does not define new colours at all — it REMAPS the same ramp
+   backwards, so `--theme-elevation-0` becomes `--color-base-900`.
+
+   So overriding twenty-one variables reskins every surface in both themes at
+   once, with no media query and no `[data-theme]` rule of our own. It also
+   means `RecordPicker.css` and `BlockFocus.css`, which were already written
+   in elevation variables, pick up the new palette for free.
+
+   The alternative — restyling Payload's components one by one — would break
+   on their next release and would have to be redone for dark mode.
+
+   ── The ramp is the site's, not a new one ────────────────────────────
+
+   Interpolated through colours already in app/(frontend)/globals.css:
+   `--z-panel` #f4f2ee, `--z-rule` #e7e5e0, `--fam-faint` #8b877f,
+   `--fam-muted` #57544e, `--fam-body` #26251f, `--fam-ink` #0a0a0a. Payload
+   ships a neutral grey; these are the warm greys the public pages use, so the
+   CMS and the site it edits stop looking like two products.
+
+   ── No `!important` anywhere ─────────────────────────────────────────
+
+   Payload wraps its own rules in `@layer payload-default`. Unlayered styles
+   beat layered ones in the cascade whatever their specificity, so everything
+   here wins by being outside that layer. If a rule below ever stops applying,
+   the cause is Payload moving it OUT of its layer — not specificity.
+   ────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* The one ramp everything else is derived from. */
+  --color-base-0: rgb(255, 255, 255);
+  --color-base-50: rgb(250, 248, 246);
+  --color-base-100: rgb(244, 242, 238);
+  --color-base-150: rgb(231, 229, 224);
+  --color-base-200: rgb(218, 216, 210);
+  --color-base-250: rgb(205, 202, 196);
+  --color-base-300: rgb(192, 189, 182);
+  --color-base-350: rgb(178, 175, 169);
+  --color-base-400: rgb(165, 162, 155);
+  --color-base-450: rgb(152, 148, 141);
+  --color-base-500: rgb(139, 135, 127);
+  --color-base-550: rgb(122, 118, 111);
+  --color-base-600: rgb(104, 101, 94);
+  --color-base-650: rgb(87, 84, 78);
+  --color-base-700: rgb(71, 68, 62);
+  --color-base-750: rgb(54, 53, 47);
+  --color-base-800: rgb(38, 37, 31);
+  --color-base-850: rgb(29, 28, 24);
+  --color-base-900: rgb(19, 19, 17);
+  --color-base-950: rgb(10, 10, 10);
+  --color-base-1000: rgb(0, 0, 0);
+
+  /* The house accent. One colour, used where the interface asks "which of
+     these do I press" — and nowhere else, so it keeps meaning that. */
+  --fam-brass: #8a6a3f;
+  --fam-brass-hover: #6f5432;
+  --fam-brass-soft: rgba(138, 106, 63, 0.12);
+}
+
+/* Dark mode inverts the ramp but keeps the accent legible: bronze on a warm
+   near-black needs to come up, not stay put. */
+html[data-theme="dark"] {
+  --fam-brass: #c39a5e;
+  --fam-brass-hover: #d8b478;
+  --fam-brass-soft: rgba(195, 154, 94, 0.16);
+}
+
+/* ── Type ───────────────────────────────────────────────────────────────
+   The site's own face, applied through the variable next/font generates in
+   app/(payload)/layout.tsx. The fallback is the system stack rather than a
+   web font, so a failed font load degrades to something legible instead of
+   to a serif. */
+html,
+body,
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-admin), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* Payload's headings are set at the browser default scale. The site runs a
+   tighter one with negative tracking; matching it is most of what makes the
+   two read as one product. */
+.doc-header__title,
+.collection-list__header h1,
+.dashboard h1,
+.list-header h1 {
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* ── Primary actions ────────────────────────────────────────────────────
+   Save and Publish were elevation-800: the same near-black as body text, so
+   the one control that commits a change looked like a paragraph. */
+.btn--style-primary {
+  --bg-color: var(--fam-brass);
+  --hover-bg: var(--fam-brass-hover);
+  --color: #fff;
+  --hover-color: #fff;
+}
+
+.btn--style-primary.btn--disabled {
+  --bg-color: var(--theme-elevation-200);
+  --color: var(--theme-elevation-500);
+  --hover-bg: var(--theme-elevation-200);
+  --hover-color: var(--theme-elevation-500);
+}
+
+/* ── Focus ──────────────────────────────────────────────────────────────
+   One ring, in the accent, everywhere. An admin is a keyboard tool and this
+   is the only thing that says where you are. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--fam-brass);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Navigation ─────────────────────────────────────────────────────────
+   Six groups now carry the sidebar, so the group headings have to read as
+   headings rather than as more links. */
+.nav__label,
+.nav-group__label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-500);
+  font-weight: 600;
+}
+
+.nav__link {
+  border-radius: 3px;
+}
+
+.nav__link:hover {
+  background: var(--theme-elevation-100);
+}
+
+/* The page you are on, marked with the accent rather than a heavier weight —
+   weight moves the text and makes the list jump. */
+.nav__link--active {
+  background: var(--fam-brass-soft);
+  box-shadow: inset 2px 0 0 var(--fam-brass);
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────
+   Six hundred rows. The header has to stay distinct from the body and the
+   row under the cursor has to be obvious, or you lose your place mid-scan. */
+.table thead th {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-600);
+  font-weight: 600;
+  border-bottom: 1px solid var(--theme-elevation-200);
+}
+
+.table tbody tr:hover {
+  background: var(--theme-elevation-50);
+}
+
+/* ── Fields ─────────────────────────────────────────────────────────────
+   A description under a field is guidance, and this CMS leans on it heavily
+   — most fields carry a sentence explaining what the value means. It was the
+   same size and weight as the label above it. */
+.field-description {
+  color: var(--theme-elevation-600);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.field-label {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Required, in the accent rather than the error colour — a field you have not
+   filled in yet is not a field in error. */
+.required {
+  color: var(--fam-brass);
+}
+
+/* ── Collapsibles ───────────────────────────────────────────────────────
+   Blocks and the folded provenance section. A row you can open should look
+   like a surface, not like a gap between two rules. */
+.collapsible__toggle-wrap {
+  border-radius: 4px;
+}
+
+.collapsible--collapsed .collapsible__header-wrap {
+  background: var(--theme-elevation-50);
+}
+
+/* ── The block picker ───────────────────────────────────────────────────
+   Twenty-seven blocks in three groups. The group heading is the thing that
+   makes it scannable, so it has to hold. */
+.blocks-drawer__block-group-title,
+.drawer__header h2 {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-500);
+}
+
+/* The number on a block row, which is how an editor refers to a section out
+   loud — "the fourth one down". */
+.blocks-field__block-number {
+  color: var(--theme-elevation-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Login ──────────────────────────────────────────────────────────────
+   The first screen anyone sees, and stock Payload centres a form in an
+   otherwise empty page. */
+.login__form {
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 6px;
+  padding: 28px;
+  background: var(--theme-elevation-0);
+}
+
+/* ── Motion ─────────────────────────────────────────────────────────────
+   Opt-in only, and short. Nothing here is decorative — each one is feedback
+   for something the pointer just did. */
+@media (prefers-reduced-motion: no-preference) {
+  .nav__link,
+  .table tbody tr,
+  .btn {
+    transition: background-color 0.12s ease, color 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+}
