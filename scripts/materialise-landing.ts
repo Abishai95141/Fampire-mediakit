@@ -76,7 +76,7 @@ const films = await find("films", {}, "-awards");
  * jumped from the end of the list to second, and materialising silently
  * reordered the section it was supposed to preserve.
  */
-const appearances = (await find("appearances", {}, "_order")).slice(0, 6);
+const appearances = await find("appearances", {}, "_order");
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 for (const page of pages as any[]) {
@@ -145,9 +145,22 @@ const layout = ((page.layout ?? []) as any[]).map((b) => {
 
     case "pressList":
       if (b.items?.length) return b;
+      /**
+       * The block's OWN limit, not a number baked in here.
+       *
+       * This used to materialise a fixed six, because that is what the
+       * landing page's teaser shows. Running it on /press — the FULL press
+       * log, which sets no limit — therefore cut fifty-eight appearances down
+       * to six and called it curation. The page had been right precisely
+       * because it had no rows and fell back to the whole collection.
+       *
+       * The rule for every section is the same: materialise what the block
+       * WOULD have rendered, so the page looks identical the moment before
+       * and the moment after.
+       */
       return {
         ...b,
-        items: (appearances as {
+        items: ((b.limit ? appearances.slice(0, Number(b.limit)) : appearances) as {
           id: number; title: string; outlet?: string; date?: string; thumbnail?: string; url?: string;
         }[]).map((a) => ({
           source: a.id,
